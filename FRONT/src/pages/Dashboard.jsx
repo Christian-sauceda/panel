@@ -4,7 +4,6 @@ import Chart from 'react-apexcharts'
 import { useSelector } from 'react-redux'
 import StatusCard from '../components/status-card/StatusCard'
 import Table from '../components/table/Table'
-import Badge from '../components/badge/Badge'
 import statusCards from '../assets/JsonData/status-card-data.json'
 
 const chartOptions = {
@@ -38,105 +37,86 @@ const chartOptions = {
     }
 }
 
-const topCustomers = {
+const peliculas = {
     head: [
-        'user',
-        'total orders',
-        'total spending'
+        'No.',
+        'Nombre',
+        'Fecha'
     ],
     body: [
         {
-            "username": "john doe",
-            "order": "490",
-            "price": "$15,870"
+            "id": "1",
+            "nombre": "Spider-Man: Lejos de casa",
+            "fecha": "15/02/2022"
         },
         {
-            "username": "frank iva",
-            "order": "250",
-            "price": "$12,251"
+            "id": "2",
+            "nombre": " Plan de escape",
+            "fecha": "15/02/2022"
         },
         {
-            "username": "anthony baker",
-            "order": "120",
-            "price": "$10,840"
+            "id": "3",
+            "nombre": "Jack Reacher: Never Go Back",
+            "fecha": "15/02/2022"
         },
         {
-            "username": "frank iva",
-            "order": "110",
-            "price": "$9,251"
+            "id": "4",
+            "nombre": "Anne+: La película",
+            "fecha": "15/02/2022"
         },
         {
-            "username": "anthony baker",
-            "order": "80",
-            "price": "$8,840"
+            "id": "5",
+            "nombre": "Hasta el último hombre",
+            "fecha": "15/02/2022"
         }
     ]
 }
 
-const renderCusomerHead = (item, index) => (
+const rendermovieHead = (item, index) => (
     <th key={index}>{item}</th>
 )
 
-const renderCusomerBody = (item, index) => (
+const rendermovieBody = (item, index) => (
     <tr key={index}>
-        <td>{item.username}</td>
-        <td>{item.order}</td>
-        <td>{item.price}</td>
+        <td>{item.id}</td>
+        <td>{item.nombre}</td>
+        <td>{item.fecha}</td>
     </tr>
 )
 
 const latestOrders = {
     header: [
-        "order id",
-        "user",
-        "total price",
-        "date",
-        "status"
+        "No.",
+        "Nombre",
+        "Fecha",
     ],
     body: [
         {
-            id: "#OD1711",
-            user: "john doe",
-            date: "17 Jun 2021",
-            price: "$900",
-            status: "shipping"
+            id: "1",
+            nombre: "Being the Ricardos",
+            date: "15/02/2022"
         },
         {
-            id: "#OD1712",
-            user: "frank iva",
-            date: "1 Jun 2021",
-            price: "$400",
-            status: "paid"
+            id: "2",
+            nombre: "Snake Eyes: G.I. Joe Origins",
+            date: "15/02/2022"
         },
         {
-            id: "#OD1713",
-            user: "anthony baker",
-            date: "27 Jun 2021",
-            price: "$200",
-            status: "pending"
+            id: "3",
+            nombre: "Scream",
+            date: "15/02/2022"
         },
         {
-            id: "#OD1712",
-            user: "frank iva",
-            date: "1 Jun 2021",
-            price: "$400",
-            status: "paid"
+            id: "4",
+            nombre: "Don't Look Up",
+            date: "15/02/2022"
         },
         {
-            id: "#OD1713",
-            user: "anthony baker",
-            date: "27 Jun 2021",
-            price: "$200",
-            status: "refund"
+            id: "5",
+            nombre: "American History X",
+            date: "15/02/2022"
         }
     ]
-}
-
-const orderStatus = {
-    "shipping": "primary",
-    "pending": "warning",
-    "paid": "success",
-    "refund": "danger"
 }
 
 const renderOrderHead = (item, index) => (
@@ -146,12 +126,8 @@ const renderOrderHead = (item, index) => (
 const renderOrderBody = (item, index) => (
     <tr key={index}>
         <td>{item.id}</td>
-        <td>{item.user}</td>
-        <td>{item.price}</td>
+        <td>{item.nombre}</td>
         <td>{item.date}</td>
-        <td>
-            <Badge type={orderStatus[item.status]} content={item.status} />
-        </td>
     </tr>
 )
 
@@ -161,11 +137,11 @@ const Dashboard = () => {
         <div>
             <h2 className="page-header">Inicio</h2>
             <div className="row">
-                <div className="col-6">
+                <div className="col-20">
                     <div className="row">
                         {
                             statusCards.map((item, index) => (
-                                <div className="col-6" key={index}>
+                                <div className="col-4" key={index}>
                                     <StatusCard
                                         icon={item.icon}
                                         count={item.count}
@@ -176,22 +152,8 @@ const Dashboard = () => {
                         }
                     </div>
                 </div>
-                <div className="col-6">
-                    <div className="row">
-                        {
-                            statusCards.map((item, index) => (
-                                <div className="col-6" key={index}>
-                                    <StatusCard
-                                        icon={item.icon}
-                                        count={item.count}
-                                        title={item.title}
-                                    />
-                                </div>
-                            ))
-                        }
-                    </div>
-                </div>
-{/*                 
+
+                {/*                 
                 <div className="col-6">
                     <div className="card full-height">
                         <Chart
@@ -209,6 +171,8 @@ const Dashboard = () => {
                     </div>
                 </div>
                  */}
+
+
                 <div className="col-6">
                     <div className="card">
                         <div className="card__header">
@@ -216,10 +180,10 @@ const Dashboard = () => {
                         </div>
                         <div className="card__body">
                             <Table
-                                headData={topCustomers.head}
-                                renderHead={(item, index) => renderCusomerHead(item, index)}
-                                bodyData={topCustomers.body}
-                                renderBody={(item, index) => renderCusomerBody(item, index)}
+                                headData={peliculas.head}
+                                renderHead={(item, index) => rendermovieHead(item, index)}
+                                bodyData={peliculas.body}
+                                renderBody={(item, index) => rendermovieBody(item, index)}
                             />
                         </div>
                         <div className="card__footer">
@@ -227,6 +191,8 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
+
+
                 <div className="col-6">
                     <div className="card">
                         <div className="card__header">

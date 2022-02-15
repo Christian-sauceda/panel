@@ -6,12 +6,12 @@
     },
     {
         "display_name": "Peliculas",
-        "route": "/customers",
+        "route": "/peliculas",
         "icon": "bx bx-movie  "
     },
     {
         "display_name": "Movies",
-        "route": "/products",
+        "route": "/mmovie",
         "icon": "bx bx-camera-movie"
     },
     {
@@ -38,10 +38,5 @@
         "display_name": "inventory",
         "route": "/inventory",
         "icon": "bx bx-store-alt"
-    },
-    {
-        "display_name": "settings",
-        "route": "/settings",
-        "icon": "bx bx-cog"
     }
 ]

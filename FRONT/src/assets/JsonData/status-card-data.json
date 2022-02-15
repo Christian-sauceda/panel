@@ -1,22 +1,27 @@
 [
     {
         "icon": "bx bx-movie",
-        "count": "1,995",
-        "title": "Total Peliculas en Español"
+        "count": "1995",
+        "title": "Peliculas en Español"
     },
     {
         "icon": "bx bx-camera-movie",
-        "count": "2,001",
-        "title": "Daily visits"
+        "count": "2001",
+        "title": "Peliculas en Ingles"
+    },
+    {
+        "icon": "bx bx-female-sign",
+        "count": "1,711",
+        "title": "Peliculas Adultos"
     },
     {
         "icon": "bx bx-tv",
-        "count": "$2,632",
-        "title": "Total income"
+        "count": "632",
+        "title": "Series en Español"
     },
     {
-        "icon": "bx bx-receipt",
-        "count": "1,711",
-        "title": "Total orders"
+        "icon": "bx bx-slideshow",
+        "count": "711",
+        "title": "Series en Ingles"
     }
 ]

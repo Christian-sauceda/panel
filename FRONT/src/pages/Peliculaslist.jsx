@@ -2,7 +2,7 @@ import React from 'react'
 
 import Table from '../components/table/Table'
 
-import customerList from '../assets/JsonData/customers-list.json'
+import peliculasList from '../assets/JsonData/peliculas-list.json'
 
 const customerTableHead = [
     '',
@@ -28,11 +28,11 @@ const renderBody = (item, index) => (
     </tr>
 )
 
-const Customers = () => {
+const Peliculas = () => {
     return (
         <div>
             <h2 className="page-header">
-                customers
+                Listado películas en español
             </h2>
             <div className="row">
                 <div className="col-12">
@@ -42,7 +42,7 @@ const Customers = () => {
                                 limit='10'
                                 headData={customerTableHead}
                                 renderHead={(item, index) => renderHead(item, index)}
-                                bodyData={customerList}
+                                bodyData={peliculasList}
                                 renderBody={(item, index) => renderBody(item, index)}
                             />
                         </div>
@@ -53,4 +53,4 @@ const Customers = () => {
     )
 }
 
-export default Customers
+export default Peliculas

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Chart from 'react-apexcharts'
 import { useSelector } from 'react-redux'
@@ -10,7 +10,7 @@ import statusCards from '../assets/JsonData/status-card-data.json'
 const chartOptions = {
     series: [{
         name: 'Online Customers',
-        data: [40,70,20,90,36,80,30,91,60]
+        data: [40, 70, 20, 90, 36, 80, 30, 91, 60]
     }, {
         name: 'Store Customers',
         data: [40, 30, 70, 80, 40, 16, 40, 20, 51, 10]
@@ -150,18 +150,16 @@ const renderOrderBody = (item, index) => (
         <td>{item.price}</td>
         <td>{item.date}</td>
         <td>
-            <Badge type={orderStatus[item.status]} content={item.status}/>
+            <Badge type={orderStatus[item.status]} content={item.status} />
         </td>
     </tr>
 )
 
 const Dashboard = () => {
-
     const themeReducer = useSelector(state => state.ThemeReducer.mode)
-
     return (
         <div>
-            <h2 className="page-header">Dashboard</h2>
+            <h2 className="page-header">Inicio</h2>
             <div className="row">
                 <div className="col-6">
                     <div className="row">
@@ -179,8 +177,23 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="col-6">
+                    <div className="row">
+                        {
+                            statusCards.map((item, index) => (
+                                <div className="col-6" key={index}>
+                                    <StatusCard
+                                        icon={item.icon}
+                                        count={item.count}
+                                        title={item.title}
+                                    />
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+{/*                 
+                <div className="col-6">
                     <div className="card full-height">
-                        {/* chart */}
                         <Chart
                             options={themeReducer === 'theme-mode-dark' ? {
                                 ...chartOptions.options,
@@ -195,10 +208,11 @@ const Dashboard = () => {
                         />
                     </div>
                 </div>
-                <div className="col-4">
+                 */}
+                <div className="col-6">
                     <div className="card">
                         <div className="card__header">
-                            <h3>top customers</h3>
+                            <h3>Peliculas español recien añadidas</h3>
                         </div>
                         <div className="card__body">
                             <Table
@@ -209,14 +223,14 @@ const Dashboard = () => {
                             />
                         </div>
                         <div className="card__footer">
-                            <Link to='/'>view all</Link>
+                            <Link to='/'>Ver todas</Link>
                         </div>
                     </div>
                 </div>
-                <div className="col-8">
+                <div className="col-6">
                     <div className="card">
                         <div className="card__header">
-                            <h3>latest orders</h3>
+                            <h3>Peliculas ingles recien añadidas</h3>
                         </div>
                         <div className="card__body">
                             <Table
@@ -227,7 +241,7 @@ const Dashboard = () => {
                             />
                         </div>
                         <div className="card__footer">
-                            <Link to='/'>view all</Link>
+                            <Link to='/'>Ver todas</Link>
                         </div>
                     </div>
                 </div>

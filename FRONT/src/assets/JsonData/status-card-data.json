@@ -1,16 +1,16 @@
 [
     {
-        "icon": "bx bx-shopping-bag",
+        "icon": "bx bx-movie",
         "count": "1,995",
         "title": "Total Peliculas en Español"
     },
     {
-        "icon": "bx bx-cart",
+        "icon": "bx bx-camera-movie",
         "count": "2,001",
         "title": "Daily visits"
     },
     {
-        "icon": "bx bx-dollar-circle",
+        "icon": "bx bx-tv",
         "count": "$2,632",
         "title": "Total income"
     },

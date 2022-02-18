@@ -19,6 +19,7 @@ import Index from "views/Index.js";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
+      {/* si la ruta no existe */}
       {/* add routes with layouts */}
       <Route path="/admin" component={Admin} />
       <Route path="/auth" component={Auth} />

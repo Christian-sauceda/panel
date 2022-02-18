@@ -44,25 +44,25 @@ const IndexDropdown = () => {
           Admin Layout
         </span>
         <Link
-          to="/admin/dashboard"
+          to="/admin/inicio"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Dashboard
         </Link>
         <Link
-          to="/admin/settings"
+          to="/admin/movie-es"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Settings
         </Link>
         <Link
-          to="/admin/tables"
+          to="/admin/movie-en"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Tables
         </Link>
         <Link
-          to="/admin/maps"
+          to="/admin/movie-adults"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Maps
@@ -82,7 +82,7 @@ const IndexDropdown = () => {
           Login
         </Link>
         <Link
-          to="/auth/register"
+          to="/auth/recuperar-password"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Register

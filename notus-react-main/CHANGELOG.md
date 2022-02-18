@@ -15,7 +15,7 @@
     - Then, you search in your whole project for `blueGray-700` and replace it with `blueGray-600`
     - Then, you search in your whole project for `blueGray-800` and replace it with `blueGray-700`
     - Then, you search in your whole project for `blueGray-900` and replace it with `blueGray-800`
-  - For the colors, the only change that we made, is the fact that we've added all Tailwind CSS colors to our `tailwind.config.js` files, and inside our product, all `{type}-blue-{number}` classes were renamed to `{type}-lightBlue-{number}`
+  - For the colors, the only change that we made, is the fact that we've added all Tailwind CSS colors to our `tailwind.config.js` files, and inside our product, all `{type}-blue-{number}` classes were renamed to `{type}-sky-800-{number}`
   - For the colors, the only change that we made, is the fact that we've added all Tailwind CSS colors to our `tailwind.config.js` files, and inside our product, all `{type}-green-{number}` classes were renamed to `{type}-emerald-{number}`
 - `lg:bg-transparent` is not working anymore, so we've changed it with `lg:bg-opacity-0`
 - https://github.com/creativetimofficial/notus-angular/issues/4
@@ -62,5 +62,5 @@ _On a clean install there may be some warnings from request, chokidar, fsevents 
 
 ## [1.0.0] 2020-09-29
 ### Original Release
-- Started project from [Tailwind Starter Kit by Creative Tim](https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation?ref=nr-changelog)
-- Added design from Tailwind Starter Kit by Creative Tim
+- Started project from [Tailwind Starter Kit by Cristian Sauceda](https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation?ref=nr-changelog)
+- Added design from Tailwind Starter Kit by Cristian Sauceda

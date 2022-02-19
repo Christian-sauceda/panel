@@ -2,8 +2,8 @@ import React from "react";
 
 // components
 
-import CardPageVisits from "components/Cards/CardPageVisits.js";
-import CardSocialTraffic from "components/Cards/CardSocialTraffic.js";
+import CardUltimasPelisEs from "components/Cards/CardUltimasPelisEs.js";
+import CardUltimasSeriesEs from "components/Cards/CardUltimasSeriesEs.js";
 import CardStats from "components/Cards/CardStats";
 
 export default function Dashboard() {
@@ -11,17 +11,19 @@ export default function Dashboard() {
     <>
     
 
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap pb-10">
+        
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="Total Peliculas en Español"
-                  statTitle="2501"
-                  statIconColor="bg-red-500"
+                  statSubtitle="Total Peliculas Español"
+                  statTitle="2356"
+                  statIconName="fas fa-chart-pie"
+                  statIconColor="bg-orange-500"
                 />
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="Total Peliculas en Ingles"
+                  statSubtitle="Total Peliculas Ingles"
                   statTitle="2356"
                   statIconName="fas fa-chart-pie"
                   statIconColor="bg-orange-500"
@@ -43,15 +45,15 @@ export default function Dashboard() {
                   statIconColor="bg-sky-800"
                 />
               </div>
-            </div>
+      </div>
 
-      <div className="flex flex-wrap mt-4">
+      <div className="flex flex-wrap mt-4 pt-6 ">
         <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
-          <CardPageVisits />
+          <CardUltimasPelisEs />
         </div>
 
         <div className="w-full xl:w-4/12 px-4">
-          <CardSocialTraffic />
+          <CardUltimasSeriesEs />
         </div>
       </div>
     </>

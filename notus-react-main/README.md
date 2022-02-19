@@ -138,10 +138,10 @@ notus-react
 │   │   ├── Cards
 │   │   │   ├── CardBarChart.js
 │   │   │   ├── CardLineChart.js
-│   │   │   ├── CardPageVisits.js
+│   │   │   ├── CardUltimasPelisEs.js
 │   │   │   ├── CardProfile.js
 │   │   │   ├── CardSettings.js
-│   │   │   ├── CardSocialTraffic.js
+│   │   │   ├── CardUltimasSeriesEs.js
 │   │   │   ├── CardStats.js
 │   │   │   └── CardTable.js
 │   │   ├── Dropdowns

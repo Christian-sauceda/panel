@@ -96,7 +96,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-tv mr-2 text-sm " +
+                      "fas fa-home mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/inicio") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
@@ -118,7 +118,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-tools mr-2 text-sm " +
+                      "fas fa-film mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/movie-es") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
@@ -140,7 +140,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-table mr-2 text-sm " +
+                      "fas fa-ticket-alt mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/movie-en") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
@@ -162,7 +162,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-map-marked mr-2 text-sm " +
+                      "fas fa-female mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/movie-adults") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
@@ -184,7 +184,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-tv mr-2 text-sm " +
+                      "fas fa-tv  mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/series-es") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")

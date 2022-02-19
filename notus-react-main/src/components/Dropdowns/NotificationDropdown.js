@@ -27,7 +27,6 @@ const NotificationDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        <i className="fas fa-bell"></i>
       </a>
       <div
         ref={popoverDropdownRef}

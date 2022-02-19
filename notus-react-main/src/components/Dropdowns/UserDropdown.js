@@ -26,8 +26,8 @@ const UserDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        <div className="items-center flex">
-          <span className="text-lg text-black hover:text-red-800 inline-flex items-center justify-center">
+        <div className="items-center flex bg-sky-800 rounded-lg">
+          <span className="text-sm font-bold text-white hover:text-red-800 inline-flex items-center justify-center m-2">
             Hola, Cristian
           </span>
         </div>
@@ -41,7 +41,7 @@ const UserDropdown = () => {
       >
         <a
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap text-sky-800"
           }
           href="/auth/login"
         >

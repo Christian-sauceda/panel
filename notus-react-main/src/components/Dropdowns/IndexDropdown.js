@@ -47,25 +47,31 @@ const IndexDropdown = () => {
           to="/admin/inicio"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
-          movie-es
+          inicio
         </Link>
         <Link
           to="/admin/movie-es"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
-          movie-en
+          movie-es
         </Link>
         <Link
           to="/admin/movie-en"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
-          movie-adults
+          movie-en
         </Link>
         <Link
           to="/admin/movie-adults"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
-          series-es
+          movie-adults
+        </Link>
+        <Link
+          to="/admin/serie-es"
+          className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+        >
+          serie-es
         </Link>
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
         <span

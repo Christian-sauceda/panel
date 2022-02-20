@@ -1135,7 +1135,7 @@ select {
   background-color: rgba(2, 132, 199, var(--tw-bg-opacity));
 }
 
-.bg-sky-800-800 {
+.bg-sky-800 {
   --tw-bg-opacity: 1;
   background-color: rgba(7, 89, 133, var(--tw-bg-opacity));
 }

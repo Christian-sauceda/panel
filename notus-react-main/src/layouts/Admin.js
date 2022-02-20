@@ -10,10 +10,11 @@ import FooterAdmin from "components/Footers/FooterAdmin.js";
 
 // views
 
-import Dashboard from "views/admin/inicio.js";
-import Maps from "views/admin/movie-adults.js";
-import Settings from "views/admin/movie-es.js";
-import Tables from "views/admin/movie-en.js";
+import Inicio from "views/admin/inicio.js";
+import MovieAdult from "views/admin/menuadult.js";
+import MovieEsp from "views/admin/movie-es.js";
+import MovieEng from "views/admin/movie-en.js";
+import SerieEsp from "views/admin/movie-es.js"
 
 export default function Admin() {
   return (
@@ -25,10 +26,11 @@ export default function Admin() {
         <HeaderStats />
         <div className="px-4 md:px-10 mx-auto w-full -m-24 mb-11">
           <Switch>
-            <Route path="/admin/inicio" exact component={Dashboard} />
-            <Route path="/admin/movie-adults" exact component={Maps} />
-            <Route path="/admin/movie-es" exact component={Settings} />
-            <Route path="/admin/movie-en" exact component={Tables} />
+            <Route path="/admin/inicio" exact component={Inicio} />
+            <Route path="/admin/movie-adults" exact component={MovieAdult} />
+            <Route path="/admin/movie-es" exact component={MovieEsp} />
+            <Route path="/admin/movie-en" exact component={MovieEng} />
+            <Route path="/admin/series-es" exact component={SerieEsp} />
             <Redirect from="/admin" to="/admin/inicio" />
           </Switch>
           <FooterAdmin />

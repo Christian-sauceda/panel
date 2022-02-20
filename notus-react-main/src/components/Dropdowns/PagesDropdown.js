@@ -49,7 +49,7 @@ const PagesDropdown = () => {
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
         >
-          Dashboard
+          inicio
         </Link>
         <Link
           to="/admin/movie-es"
@@ -57,7 +57,7 @@ const PagesDropdown = () => {
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
         >
-          Settings
+          Movie Español
         </Link>
         <Link
           to="/admin/movie-en"
@@ -65,7 +65,7 @@ const PagesDropdown = () => {
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
         >
-          Tables
+          Movie Ingles
         </Link>
         <Link
           to="/admin/movie-adults"
@@ -73,7 +73,15 @@ const PagesDropdown = () => {
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
         >
-          Maps
+          Peliculas Adultos
+        </Link>
+        <Link
+          to="/admin/serie-es"
+          className={
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+          }
+        >
+          Serie español
         </Link>
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
         <span

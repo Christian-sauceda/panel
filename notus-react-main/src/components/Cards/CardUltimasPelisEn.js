@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 // components
 
-export default function CardUltimasPelisEs() {
+export default function CardUltimasPelisEn() {
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-9 mb-6 shadow-lg rounded">
@@ -10,7 +10,7 @@ export default function CardUltimasPelisEs() {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <h3 className="font-semibold text-base text-blueGray-700">
-                Ultimas Peliculas en Español
+                Ultimas Peliculas en Ingles
               </h3>
             </div>
             <div className="relative w-full px-4 max-w-16 flex-grow flex-1 text-right">

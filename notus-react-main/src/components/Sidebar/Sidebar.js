@@ -23,7 +23,7 @@ export default function Sidebar() {
           </button>
           {/* Brand */}
           <Link
-            className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+            className="md:block text-left md:pb-2 text-sky-800 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             to="/admin/inicio"
           >
             <div className="sidebar__logo">
@@ -47,11 +47,11 @@ export default function Sidebar() {
             }
           >
             {/* Collapse header */}
-            <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
+            <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-sky-200">
               <div className="flex flex-wrap">
                 <div className="w-6/12">
                   <Link
-                    className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+                    className="md:block text-left md:pb-2 text-sky-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                     to="/"
                   >
             <div className="sidebar__logo_text">
@@ -77,7 +77,7 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+            <h6 className="md:min-w-full text-sky-800 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               Contenido en Multimedia
             </h6>
             {/* Navigation */}
@@ -89,8 +89,8 @@ export default function Sidebar() {
                   className={
                     "text-xs uppercase py-3 font-bold block " +
                     (window.location.href.indexOf("/admin/inicio") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
+                      ? "text-bg-sky-800 hover:text-sky-800"
+                      : "text-sky-700 hover:text-sky-800")
                   }
                   to="/admin/inicio"
                 >
@@ -99,7 +99,7 @@ export default function Sidebar() {
                       "fas fa-home mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/inicio") !== -1
                         ? "opacity-75"
-                        : "text-blueGray-300")
+                        : "text-sky-300")
                     }
                   ></i>{" "}
                   Inicio
@@ -111,8 +111,8 @@ export default function Sidebar() {
                   className={
                     "text-xs uppercase py-3 font-bold block " +
                     (window.location.href.indexOf("/admin/movie-es") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
+                      ? "text-bg-sky-800 hover:text-sky-800"
+                      : "text-sky-700 hover:text-sky-800")
                   }
                   to="/admin/movie-es"
                 >
@@ -121,7 +121,7 @@ export default function Sidebar() {
                       "fas fa-film mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/movie-es") !== -1
                         ? "opacity-75"
-                        : "text-blueGray-300")
+                        : "text-sky-300")
                     }
                   ></i>{" "}
                   Peliculas en Español
@@ -133,8 +133,8 @@ export default function Sidebar() {
                   className={
                     "text-xs uppercase py-3 font-bold block " +
                     (window.location.href.indexOf("/admin/movie-en") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
+                      ? "text-bg-sky-800 hover:text-sky-800"
+                      : "text-sky-700 hover:text-sky-500")
                   }
                   to="/admin/movie-en"
                 >
@@ -143,7 +143,7 @@ export default function Sidebar() {
                       "fas fa-ticket-alt mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/movie-en") !== -1
                         ? "opacity-75"
-                        : "text-blueGray-300")
+                        : "text-sky-300")
                     }
                   ></i>{" "}
                   Peliculas en Ingles
@@ -155,8 +155,8 @@ export default function Sidebar() {
                   className={
                     "text-xs uppercase py-3 font-bold block " +
                     (window.location.href.indexOf("/admin/movie-adults") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
+                      ? "text-bg-sky-800 hover:text-sky-800"
+                      : "text-sky-700 hover:text-sky-500")
                   }
                   to="/admin/movie-adults"
                 >
@@ -165,7 +165,7 @@ export default function Sidebar() {
                       "fas fa-female mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/movie-adults") !== -1
                         ? "opacity-75"
-                        : "text-blueGray-300")
+                        : "text-sky-300")
                     }
                   ></i>{" "}
                   Peliculas Adultos
@@ -177,8 +177,8 @@ export default function Sidebar() {
                   className={
                     "text-xs uppercase py-3 font-bold block " +
                     (window.location.href.indexOf("/admin/series-es") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
+                      ? "text-bg-sky-800 hover:text-sky-800"
+                      : "text-sky-700 hover:text-sky-500")
                   }
                   to="/admin/series-es"
                 >
@@ -187,7 +187,7 @@ export default function Sidebar() {
                       "fas fa-tv  mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/series-es") !== -1
                         ? "opacity-75"
-                        : "text-blueGray-300")
+                        : "text-sky-300")
                     }
                   ></i>{" "}
                   Series en Español
@@ -198,7 +198,7 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+            <h6 className="md:min-w-full text-sky-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               Auth Layout Pages
             </h6>
             {/* Navigation */}
@@ -206,20 +206,20 @@ export default function Sidebar() {
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
                   to="/auth/login"
                 >
-                  <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{" "}
+                  <i className="fas fa-fingerprint text-sky-400 mr-2 text-sm"></i>{" "}
                   Login
                 </Link>
               </li>
 
               <li className="items-center">
                 <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
                   to="/auth/recuperar-password"
                 >
-                  <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i>{" "}
+                  <i className="fas fa-clipboard-list text-sky-300 mr-2 text-sm"></i>{" "}
                   Register
                 </Link>
               </li>
@@ -228,7 +228,7 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+            <h6 className="md:min-w-full text-sky-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               No Layout Pages
             </h6>
             {/* Navigation */}
@@ -236,20 +236,20 @@ export default function Sidebar() {
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
                   to="/landing"
                 >
-                  <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>{" "}
+                  <i className="fas fa-newspaper text-sky-400 mr-2 text-sm"></i>{" "}
                   Landing Page
                 </Link>
               </li>
 
               <li className="items-center">
                 <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
                   to="/profile"
                 >
-                  <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{" "}
+                  <i className="fas fa-user-circle text-sky-400 mr-2 text-sm"></i>{" "}
                   Profile Page
                 </Link>
               </li>

@@ -62,7 +62,7 @@ export default function Login() {
 
               </div>
               <div className="w-1/2 text-right">
-                <Link to="/auth/recuperar-password" className="text-blueGray-200">
+                <Link to="/recuperar-password" className="text-blueGray-200">
                   <small>¿Se te olvidó tu contraseña?</small>
                 </Link>
               </div>

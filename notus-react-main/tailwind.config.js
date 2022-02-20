@@ -8,6 +8,7 @@ module.exports = {
       "./public/**/*.html",
       "./public/*.html",
       "./src/**/*.js",
+      "./src/**/**/*.js",
       "./src/*.js",
       "./src/**/*.html",
       "./src/*.html",

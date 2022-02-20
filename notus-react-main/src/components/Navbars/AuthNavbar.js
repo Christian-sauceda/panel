@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 
 // components
 
-import PagesDropdown from "components/Dropdowns/PagesDropdown.js";
-
 export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
@@ -14,18 +12,11 @@ export default function Navbar(props) {
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link
-              className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+              className="text-white font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-lx"
               to="/"
             >
               TopMedia+
             </Link>
-            <button
-              className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
-              type="button"
-              onClick={() => setNavbarOpen(!navbarOpen)}
-            >
-              <i className="text-white fas fa-bars"></i>
-            </button>
           </div>
           <div
             className={
@@ -34,8 +25,6 @@ export default function Navbar(props) {
             }
             id="example-navbar-warning"
           >
-
-
           </div>
         </div>
       </nav>

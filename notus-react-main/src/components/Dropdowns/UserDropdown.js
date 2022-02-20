@@ -43,7 +43,7 @@ const UserDropdown = () => {
           className={
             "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap text-sky-800"
           }
-          href="/auth/login"
+          href="/login"
         >
           Cerrar Sesión
         </a>

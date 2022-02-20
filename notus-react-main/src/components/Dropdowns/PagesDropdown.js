@@ -92,7 +92,7 @@ const PagesDropdown = () => {
           Auth Layout
         </span>
         <Link
-          to="/auth/login"
+          to="/login"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
@@ -100,7 +100,7 @@ const PagesDropdown = () => {
           Login
         </Link>
         <Link
-          to="/auth/recuperar-password"
+          to="/recuperar-password"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }

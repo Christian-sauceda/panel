@@ -58,7 +58,7 @@ export default function Register() {
 
               </div>
               <div className="w-1/2 text-right">
-                <Link to="/auth/login" className="text-blueGray-200">
+                <Link to="/login" className="text-blueGray-200">
                   <small>Regresar</small>
                 </Link>
               </div>

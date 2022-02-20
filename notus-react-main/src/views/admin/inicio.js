@@ -20,15 +20,15 @@ export default function Dashboard() {
           <CardStats
             statSubtitle="Total Peliculas Español"
             statTitle="2356"
-            statIconName="fas fa-chart-pie"
-            statIconColor="bg-orange-500"
+            statIconName="fas fa-film"
+            statIconColor="bg-indigo-500"
           />
         </div>
         <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Total Peliculas Ingles"
             statTitle="2356"
-            statIconName="fas fa-chart-pie"
+            statIconName="fas fa-video"
             statIconColor="bg-orange-500"
           />
         </div>
@@ -37,15 +37,15 @@ export default function Dashboard() {
             statSubtitle="Total Series en Español"
             statTitle="924"
             statIconName="fas fa-tv"
-            statIconColor="bg-pink-500"
+            statIconColor="bg-sky-800"
           />
         </div>
         <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Total Series en Ingles"
             statTitle="485"
-            statIconName="fas fa-tv"
-            statIconColor="bg-sky-800"
+            statIconName="fas fa-file-video"
+            statIconColor="bg-red-700"
           />
         </div>
       </div>

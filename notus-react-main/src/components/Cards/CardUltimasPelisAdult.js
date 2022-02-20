@@ -30,7 +30,7 @@ export default function CardUltimasPelisAdult() {
                   Titulo
                 </th>
                 <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                  Categorias
+                  Tipo
                 </th>
                 <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
                   Fecha
@@ -43,7 +43,7 @@ export default function CardUltimasPelisAdult() {
                   La casa
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  Animación, Drama, Comedia, Terror
+                  Pelicula Adulto
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   14/1/2022
@@ -54,7 +54,7 @@ export default function CardUltimasPelisAdult() {
                 Scream 4
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                Terror, Misterio
+                Pelicula Adulto
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   14/1/2022
@@ -65,7 +65,7 @@ export default function CardUltimasPelisAdult() {
                 Spider-Man: No Way Home
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                Acción, Aventura, Ciencia ficción
+                Pelicula Adulto
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   14/1/2022
@@ -76,7 +76,7 @@ export default function CardUltimasPelisAdult() {
                 The King's Man: La Primera Misión
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                Acción, Aventura, Suspense, Bélica
+                Pelicula Adulto
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   14/1/2022
@@ -87,7 +87,7 @@ export default function CardUltimasPelisAdult() {
                 Cásate conmigo
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                Comedia, Romance, Música
+                Pelicula Adulto
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   14/1/2022

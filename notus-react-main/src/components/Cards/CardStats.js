@@ -55,10 +55,13 @@ export default function CardStats({
 }
 
 CardStats.defaultProps = {
-  statSubtitle: "Traffic",
-  statTitle: "350,897",
-  statIconName: "fas fa-film",
-  statIconColor: "bg-red-500",
+  statSubtitle: "",
+  statTitle: "",
+  statArrow: "",
+  statPercentColor: "",
+  statDescripiron: "",
+  statIconName: "",
+  statIconColor: "",
 };
 
 CardStats.propTypes = {

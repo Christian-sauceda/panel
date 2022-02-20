@@ -207,7 +207,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link
                   className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
-                  to="/auth/login"
+                  to="/login"
                 >
                   <i className="fas fa-fingerprint text-sky-400 mr-2 text-sm"></i>{" "}
                   Login
@@ -217,7 +217,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link
                   className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
-                  to="/auth/recuperar-password"
+                  to="/recuperar-password"
                 >
                   <i className="fas fa-clipboard-list text-sky-300 mr-2 text-sm"></i>{" "}
                   Register

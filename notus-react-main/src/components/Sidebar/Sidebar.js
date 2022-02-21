@@ -154,16 +154,16 @@ export default function Sidebar() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/movie-adults") !== -1
+                    (window.location.href.indexOf("/admin/menumovie/adults") !== -1
                       ? "text-bg-sky-800 hover:text-sky-800"
                       : "text-sky-700 hover:text-sky-500")
                   }
-                  to="/admin/movie-adults"
+                  to="/admin/menumovie/adults"
                 >
                   <i
                     className={
                       "fas fa-female mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/movie-adults") !== -1
+                      (window.location.href.indexOf("/admin/menumovie/adults") !== -1
                         ? "opacity-75"
                         : "text-sky-300")
                     }
@@ -191,6 +191,28 @@ export default function Sidebar() {
                     }
                   ></i>{" "}
                   Series en Español
+                </Link>
+              </li>
+              {/* SERIES ESP */}
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/series-es") !== -1
+                      ? "text-bg-sky-800 hover:text-sky-800"
+                      : "text-sky-700 hover:text-sky-500")
+                  }
+                  to="/admin/series-en"
+                >
+                  <i
+                    className={
+                      "fas fa-tv  mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/series-en") !== -1
+                        ? "opacity-75"
+                        : "text-sky-300")
+                    }
+                  ></i>{" "}
+                  Series en ingles
                 </Link>
               </li>
             </ul>

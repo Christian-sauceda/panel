@@ -22,39 +22,43 @@ export default function Login() {
                   <small>Inicia Sesión con tus Credenciales</small>
                 </div>
                 <form>
-          <div className="my-8">
-            <label
-              className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-              Username:
-            </label>
-            <input type="text"
-              autoComplete="off"
-              name="user"
-              placeholder="Tu Username"
-              className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              required
-            />
-          </div>
+                  <div className="my-8">
+                    <label
+                      for="user"
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                      Username:
+                    </label>
+                    <input type="text"
+                      autoComplete="off"
+                      id="user"
+                      name="user"
+                      placeholder="Tu Username"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      required
+                    />
+                  </div>
 
-          <div className="my-5 mt-4">
-            <label
-              className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-              Password:
-            </label>
-            <input type="password"
-              name="pass"
-              placeholder="Tu Password"
-              className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              required
+                  <div className="my-5 mt-4">
+                    <label
+                      for="pass"
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                      Password:
+                    </label>
+                    <input type="password"
+                      name="pass"
+                      id="pass"
+                      placeholder="Tu Password"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      required
 
-            />
-          </div>
-          <input type="submit"
-            value="Ingresar"
-            className="bg-blueGray-800 mt-4 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-            href="/admin"
-            />
-        </form>
+                    />
+                  </div>
+                  <input type="submit"
+                    value="Ingresar"
+                    className="bg-blueGray-800 mt-4 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                    href="/admin"
+                  />
+                </form>
               </div>
             </div>
             <div className="flex flex-wrap mt-6 relative">

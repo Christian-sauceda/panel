@@ -16,6 +16,7 @@ import MovieEsp from "views/admin/movie-es.js";
 import MovieEng from "views/admin/movie-en.js";
 import SerieEsp from "views/admin/movie-es.js";
 import AddMovieAdult from "views/admin/add-movie-adult.js";
+import ListMovieAdult from "views/admin/list-movieadult.js";
 
 export default function Admin() {
   return (
@@ -30,6 +31,7 @@ export default function Admin() {
             <Route path="/admin/inicio" exact component={Inicio} />
             <Route path="/admin/menumovie/adults" exact component={MenuMovieAdult} />
             <Route path="/admin/menumovie/adults/add-movieadult" exact component={AddMovieAdult} />
+            <Route path="/admin/menumovie/adults/list-movieadult" exact component={ListMovieAdult} />
             <Route path="/admin/movie-es" exact component={MovieEsp} />
             <Route path="/admin/movie-en" exact component={MovieEng} />
             <Route path="/admin/series-es" exact component={SerieEsp} />

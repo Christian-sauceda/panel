@@ -78,7 +78,7 @@ export default function Sidebar() {
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
             <h6 className="md:min-w-full text-sky-800 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Contenido en Multimedia
+              Contenido Multimedia
             </h6>
             {/* Navigation */}
 
@@ -206,7 +206,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-tv  mr-2 text-sm " +
+                      "fas fa-fire  mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/series-en") !== -1
                         ? "opacity-75"
                         : "text-sky-300")
@@ -221,7 +221,7 @@ export default function Sidebar() {
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
             <h6 className="md:min-w-full text-sky-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Auth Layout Pages
+              contenido Live
             </h6>
             {/* Navigation */}
 
@@ -231,8 +231,8 @@ export default function Sidebar() {
                   className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
                   to="/login"
                 >
-                  <i className="fas fa-fingerprint text-sky-400 mr-2 text-sm"></i>{" "}
-                  Login
+                  <i className="fas fa-headset text-sky-400 mr-2 text-sm"></i>{" "}
+                  TV en Español
                 </Link>
               </li>
 
@@ -241,8 +241,28 @@ export default function Sidebar() {
                   className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
                   to="/recuperar-password"
                 >
-                  <i className="fas fa-clipboard-list text-sky-300 mr-2 text-sm"></i>{" "}
-                  Register
+                  <i className="fas fa-language text-sky-300 mr-2 text-sm"></i>{" "}
+                  TV en Ingles
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link
+                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
+                  to="/recuperar-password"
+                >
+                  <i className="fas fa-globe text-sky-300 mr-2 text-sm"></i>{" "}
+                  TV Internacional
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link
+                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
+                  to="/recuperar-password"
+                >
+                  <i className="fas fa-futbol text-sky-300 mr-2 text-sm"></i>{" "}
+                  Eventos deportivos
                 </Link>
               </li>
             </ul>
@@ -251,7 +271,7 @@ export default function Sidebar() {
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
             <h6 className="md:min-w-full text-sky-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              No Layout Pages
+              Mantenimientos
             </h6>
             {/* Navigation */}
 

@@ -1,4 +1,5 @@
 import React from "react";
+import "./card.css";
 
 // components
 
@@ -32,6 +33,7 @@ export default function CardAddMovieAdult() {
                         Titulo:
                       </label>
                       <input
+                        required
                         type="text"
                         id="title"
                         name="title"
@@ -50,6 +52,7 @@ export default function CardAddMovieAdult() {
                         Año:
                       </label>
                       <input
+                        required
                         name="year"
                         id="year"
                         placeholder="Año de la Pelicula"
@@ -70,6 +73,7 @@ export default function CardAddMovieAdult() {
                         Duración:
                       </label>
                       <input
+                        required
                         name="duration"
                         id="duration"
                         type="number"
@@ -89,6 +93,7 @@ export default function CardAddMovieAdult() {
                         Sinopsis
                       </label>
                       <textarea
+                        required
                         type="text"
                         className="border-0 px-3 py-3 placeholder-sky- text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         name="sinopsis"
@@ -108,6 +113,7 @@ export default function CardAddMovieAdult() {
                         Link del video:
                       </label>
                       <input
+                        required
                         type="text"
                         id="link"
                         name="link"
@@ -186,6 +192,13 @@ export default function CardAddMovieAdult() {
           <div className="w-full lg:w-4/12 px-4">
             <CardFileAddMovieAdult />
           </div>
+        </div>
+        <div className="">
+          <input type="submit"
+            value="añadir"
+            className="cla"
+            to="#"
+          />
         </div>
       </form>
     </>

@@ -1,0 +1,58 @@
+/* From cssbuttons.io */
+.cla {
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 700;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #1e293b;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.cla:hover {
+    background-color: #1e293b;
+    box-shadow: 0px 15px 20px #606161;
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.cla:active {
+    transform: translateY(-1px);
+}
+
+/* boton editar */
+
+
+.edit {
+    position: relative;
+    display: inline-block;
+    margin: 0px;
+    padding: 8px 10px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    color: #27752e;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border-radius: 30px;
+    border: 2px solid #27752e;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #27752e;
+}
+
+.edit:hover {
+    color: white;
+    box-shadow: inset 0 -100px 0 0 #27752e;
+}
+
+.edit:active {
+    transform: scale(0.9);
+}

@@ -52,7 +52,7 @@ const PagesDropdown = () => {
           inicio
         </Link>
         <Link
-          to="/admin/movie-es"
+          to="/admin/menumovie/es"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
@@ -60,7 +60,7 @@ const PagesDropdown = () => {
           Movie Español
         </Link>
         <Link
-          to="/admin/movie-en"
+          to="/admin/menumovie/en"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
@@ -68,7 +68,7 @@ const PagesDropdown = () => {
           Movie Ingles
         </Link>
         <Link
-          to="/admin/menumovie-adults"
+          to="/admin/menumovie/adults"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }

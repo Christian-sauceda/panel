@@ -72,16 +72,8 @@ export default function Sidebar() {
               </div>
             </div>
             {/* Form */}
-
-
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
-            <h6 className="md:min-w-full text-sky-800 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Contenido en Multimedia
-            </h6>
-            {/* Navigation */}
-
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
             {/* INICIO */}
               <li className="items-center">
@@ -105,21 +97,30 @@ export default function Sidebar() {
                   Inicio
                 </Link>
               </li>
+            {/* Divider */}
+            <hr className="my-4 md:min-w-full" />
+            {/* Heading */}
+            <h6 className="md:min-w-full text-sky-800 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+              Contenido Multimedia
+            </h6>
+            {/* Navigation */}
+
+
             {/* PELICULA ESP */}
               <li className="items-center">
                 <Link
                   className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/movie-es") !== -1
+                    "text-xs uppercase py-3 font-normal block " +
+                    (window.location.href.indexOf("/admin/menumovie/es") !== -1
                       ? "text-bg-sky-800 hover:text-sky-800"
                       : "text-sky-700 hover:text-sky-800")
                   }
-                  to="/admin/movie-es"
+                  to="/admin/menumovie/es"
                 >
                   <i
                     className={
                       "fas fa-film mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/movie-es") !== -1
+                      (window.location.href.indexOf("/admin/menumovie/es") !== -1
                         ? "opacity-75"
                         : "text-sky-300")
                     }
@@ -131,17 +132,17 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link
                   className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/movie-en") !== -1
+                    "text-xs uppercase py-3 font-normal block " +
+                    (window.location.href.indexOf("/admin/menumovie/en") !== -1
                       ? "text-bg-sky-800 hover:text-sky-800"
                       : "text-sky-700 hover:text-sky-500")
                   }
-                  to="/admin/movie-en"
+                  to="/admin/menumovie/en"
                 >
                   <i
                     className={
                       "fas fa-ticket-alt mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/movie-en") !== -1
+                      (window.location.href.indexOf("/admin/menumovie/en") !== -1
                         ? "opacity-75"
                         : "text-sky-300")
                     }
@@ -153,7 +154,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link
                   className={
-                    "text-xs uppercase py-3 font-bold block " +
+                    "text-xs uppercase py-3 font-normal block " +
                     (window.location.href.indexOf("/admin/menumovie/adults") !== -1
                       ? "text-bg-sky-800 hover:text-sky-800"
                       : "text-sky-700 hover:text-sky-500")
@@ -175,17 +176,17 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link
                   className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/series-es") !== -1
+                    "text-xs uppercase py-3 font-normal block " +
+                    (window.location.href.indexOf("/admin/menuserie/es") !== -1
                       ? "text-bg-sky-800 hover:text-sky-800"
                       : "text-sky-700 hover:text-sky-500")
                   }
-                  to="/admin/series-es"
+                  to="/admin/menuserie/es"
                 >
                   <i
                     className={
                       "fas fa-tv  mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/series-es") !== -1
+                      (window.location.href.indexOf("/admin/menuserie/es") !== -1
                         ? "opacity-75"
                         : "text-sky-300")
                     }
@@ -197,17 +198,17 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link
                   className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/series-es") !== -1
+                    "text-xs uppercase py-3 font-normal block " +
+                    (window.location.href.indexOf("/admin/menuserie/en") !== -1
                       ? "text-bg-sky-800 hover:text-sky-800"
                       : "text-sky-700 hover:text-sky-500")
                   }
-                  to="/admin/series-en"
+                  to="/admin/menuserie/en"
                 >
                   <i
                     className={
-                      "fas fa-tv  mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/series-en") !== -1
+                      "fas fa-fire  mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/menuserie/en") !== -1
                         ? "opacity-75"
                         : "text-sky-300")
                     }
@@ -220,29 +221,49 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="md:min-w-full text-sky-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Auth Layout Pages
+            <h6 className="md:min-w-full text-sky-800 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+              contenido Live
             </h6>
             {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link
-                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
-                  to="/login"
+                  className="text-sky-800 hover:text-sky-800 text-xs uppercase py-3 font-normal block"
+                  to="/admin/menutv/es"
                 >
-                  <i className="fas fa-fingerprint text-sky-400 mr-2 text-sm"></i>{" "}
-                  Login
+                  <i className="fas fa-headset text-sky-800 mr-2 text-sm"></i>{" "}
+                  TV en Español
                 </Link>
               </li>
 
               <li className="items-center">
                 <Link
-                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
-                  to="/recuperar-password"
+                  className="text-sky-800 hover:text-sky-800 text-xs uppercase py-3 font-normal block"
+                  to="/admin/menutv/en"
                 >
-                  <i className="fas fa-clipboard-list text-sky-300 mr-2 text-sm"></i>{" "}
-                  Register
+                  <i className="fas fa-language text-sky-800 mr-2 text-sm"></i>{" "}
+                  TV en Ingles
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link
+                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-normal block"
+                  to="/admin/menutv/inter"
+                >
+                  <i className="fas fa-globe text-sky-300 mr-2 text-sm"></i>{" "}
+                  TV Internacional
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link
+                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-normal block"
+                  to="/admin/menueventos/ppv"
+                >
+                  <i className="fas fa-futbol text-sky-300 mr-2 text-sm"></i>{" "}
+                  Eventos deportivos
                 </Link>
               </li>
             </ul>
@@ -251,30 +272,22 @@ export default function Sidebar() {
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
             <h6 className="md:min-w-full text-sky-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              No Layout Pages
+              Mantenimientos
             </h6>
             {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link
-                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
-                  to="/landing"
+                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-normal block"
+                  to="/admin/menumantenimiento"
                 >
-                  <i className="fas fa-newspaper text-sky-400 mr-2 text-sm"></i>{" "}
-                  Landing Page
+                  <i className="fas fa-cog text-sky-400 mr-2 text-sm"></i>{" "}
+                  Categorias
                 </Link>
               </li>
 
-              <li className="items-center">
-                <Link
-                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-bold block"
-                  to="/profile"
-                >
-                  <i className="fas fa-user-circle text-sky-400 mr-2 text-sm"></i>{" "}
-                  Profile Page
-                </Link>
-              </li>
+
             </ul>
 
             {/* Divider */}

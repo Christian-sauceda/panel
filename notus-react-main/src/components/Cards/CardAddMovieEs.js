@@ -15,7 +15,7 @@ export default function CardAddMovieAdult() {
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
               <div className="rounded-t bg-white mb-0 px-6 py-6">
                 <div className="text-center flex justify-between">
-                  <h6 className="text-blueGray-700 text-xl font-bold">Agregar Pelicula Para Adulto</h6>
+                  <h6 className="text-blueGray-700 text-xl font-bold">Agregar Pelicula En Español</h6>
                 </div>
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -43,7 +43,7 @@ export default function CardAddMovieAdult() {
                     </div>
                   </div>
 
-                  <div className="w-full lg:w-6/12 px-4">
+                  <div className="w-full lg:w-4/12 px-4">
                     <div className="relative w-full mb-3">
                       <label
                         for="year"
@@ -64,7 +64,7 @@ export default function CardAddMovieAdult() {
                     </div>
                   </div>
 
-                  <div className="w-full lg:w-6/12 px-4">
+                  <div className="w-full lg:w-4/12 px-4">
                     <div className="relative w-full mb-3">
                       <label
                         for="duration"
@@ -80,6 +80,84 @@ export default function CardAddMovieAdult() {
                         placeholder="Duración en minutos"
                         min={10}
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="w-full lg:w-4/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        for="clasificacion"
+                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      >
+                        Clasificacion:
+                      </label>
+                      <input
+                        required
+                        name="clasificacion"
+                        id="clasificacion"
+                        type="text"
+                        placeholder="Clasificacion de la Pelicula"
+                        min={10}
+                        className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="w-full lg:w-12/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        for="director"
+                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      >
+                        Director:
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        id="director"
+                        name="director"
+                        className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Director de la Pelicula"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="w-full lg:w-12/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        for="reparto"
+                      >
+                        Reparto
+                      </label>
+                      <textarea
+                        required
+                        type="text"
+                        className="border-0 px-3 py-3 placeholder-sky- text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        name="reparto"
+                        id="reparto"
+                        placeholder="Reparto de la Pelicula"
+                        rows="4"
+                      ></textarea>
+                    </div>
+                  </div>
+
+                  <div className="w-full lg:w-12/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        for="pais"
+                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      >
+                        Pais:
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        id="pais"
+                        name="pais"
+                        className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Pais donde filmo la Pelicula"
                       />
                     </div>
                   </div>
@@ -107,10 +185,29 @@ export default function CardAddMovieAdult() {
                   <div className="w-full lg:w-12/12 px-4">
                     <div className="relative w-full mb-3">
                       <label
+                        for="back"
+                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      >
+                        Backgorund:
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        id="back"
+                        name="back"
+                        className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Background de la Pelicula"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="w-full lg:w-12/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
                         for="link"
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       >
-                        Link del video:
+                        Link de la Pelicula:
                       </label>
                       <input
                         required
@@ -123,7 +220,7 @@ export default function CardAddMovieAdult() {
                     </div>
                   </div>
 
-                  <div className="w-full lg:w-4/12 px-4">
+                  <div className="w-full lg:w-3/12 px-4">
                     <div className="relative w-full mb-3">
                       <label
                         for="calidad"
@@ -143,7 +240,7 @@ export default function CardAddMovieAdult() {
                     </div>
                   </div>
 
-                  <div className="w-full lg:w-4/12 px-4">
+                  <div className="w-full lg:w-3/12 px-4">
                     <div className="relative w-full mb-3">
                       <label
                         for="audio"
@@ -156,13 +253,13 @@ export default function CardAddMovieAdult() {
                         id="audio"
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       >
-                        <option value="1">Ingles</option>
-                        <option value="2">Español</option>
+                        <option value="1">Español</option>
+                        <option value="2">Ingles</option>
                       </select>
                     </div>
                   </div>
 
-                  <div className="w-full lg:w-4/12 px-4">
+                  <div className="w-full lg:w-3/12 px-4">
                     <div className="relative w-full mb-3">
                       <label
                         for="formato"
@@ -175,9 +272,29 @@ export default function CardAddMovieAdult() {
                         id="formato"
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       >
-                        <option value="1">SD</option>
-                        <option value="2">HD</option>
-                        <option value="3">FULL HD</option>
+                        <option value="1">SD (480p)</option>
+                        <option value="2">HD (720p)</option>
+                        <option value="3">FULLHD (1080p)</option>
+                        <option value="3">4K (2160p)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="w-full lg:w-3/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        for="seguridad"
+                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      >
+                        Pin de Seguridad:
+                      </label>
+                      <select
+                        name="seguridad"
+                        id="seguridad"
+                        className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      >
+                        <option value="1">No</option>
+                        <option value="2">Si</option>
                       </select>
                     </div>
                   </div>
@@ -185,6 +302,9 @@ export default function CardAddMovieAdult() {
                 </div>
                 <div className="flex flex-wrap">
                   {/* checkboxes */}
+                  <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                    Generos:
+                  </label>
                 </div>
               </div>
             </div>

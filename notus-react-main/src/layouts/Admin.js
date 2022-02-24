@@ -12,10 +12,13 @@ import FooterAdmin from "components/Footers/FooterAdmin.js";
 
 import Inicio from "views/admin/inicio.js";
 import MenuMovieAdult from "views/admin/menuadult.js";
-import MovieEsp from "views/admin/movie-es.js";
-import MovieEng from "views/admin/movie-en.js";
-import SerieEsp from "views/admin/movie-es.js";
+import MenuMovieEs from "views/admin/menumovie-es.js";
+import MenuMovieEn from "views/admin/menumovie-en.js";
+import MenuSerieEs from "views/admin/menuserie-es.js";
+import MenuSerieEn from "views/admin/menuserie-en.js";
 import AddMovieAdult from "views/admin/add-movie-adult.js";
+import AddMovieEs from "views/admin/add-movie-es.js";
+import ListMovieAdult from "views/admin/list-movieadult.js";
 
 export default function Admin() {
   return (
@@ -28,11 +31,22 @@ export default function Admin() {
         <div className="px-4 md:px-10 mx-auto w-full -m-24 mb-11">
           <Switch>
             <Route path="/admin/inicio" exact component={Inicio} />
+            {/* menus */}
             <Route path="/admin/menumovie/adults" exact component={MenuMovieAdult} />
+            <Route path="/admin/menumovie/es" exact component={MenuMovieEs} />
+            <Route path="/admin/menumovie/en" exact component={MenuMovieEn} />
+            <Route path="/admin/menuserie/es" exact component={MenuSerieEs} />
+            <Route path="/admin/menuserie/en" exact component={MenuSerieEn} />
+
+
+            {/* add */}
             <Route path="/admin/menumovie/adults/add-movieadult" exact component={AddMovieAdult} />
-            <Route path="/admin/movie-es" exact component={MovieEsp} />
-            <Route path="/admin/movie-en" exact component={MovieEng} />
-            <Route path="/admin/series-es" exact component={SerieEsp} />
+            <Route path="/admin/menumovie/es/add-moviees" exact component={AddMovieEs} />
+
+            {/* list */}
+            <Route path="/admin/menumovie/adults/list-movieadult" exact component={ListMovieAdult} />
+            <Route path="/admin/menumovie/es/list-moviees" exact component={ListMovieAdult} />
+            
             <Redirect from="/admin" to="/admin/inicio" />
           </Switch>
           <FooterAdmin />

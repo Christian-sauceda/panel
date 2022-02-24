@@ -8,21 +8,21 @@ export default function MenuSerieEs() {
     return (
         <>
             <div className="flex flex-wrap mt-32">
-                <Link to="/admin/menumovie/adults/add-movieadult" className="w-full lg:w-6/12 xl:w-3/12 px-4">
+                <Link to="/admin/menuserie/es/add-seriees" className="w-full lg:w-6/12 xl:w-3/12 px-4">
                     <CardMenuAdult
                         statSubtitle="Agregar Serie en Español"
                         statIconName="fas fa-plus"
                         statIconColor="bg-sky-800"
                     />
                 </Link>
-                <Link to="/admin/menumovie/adults/list-movieadult" className="w-full lg:w-6/12 xl:w-3/12 px-4">
+                <Link to="/admin/menuserie/es/addcap-seriees" className="w-full lg:w-6/12 xl:w-3/12 px-4">
                     <CardMenuAdult
                         statSubtitle="Agregar Capitulo Español"
                         statIconName="fas fa-list"
                         statIconColor="bg-sky-800"
                     />
                 </Link>
-                <Link to="/admin/menumovie/adults/list-movieadult" className="w-full lg:w-6/12 xl:w-3/12 px-4">
+                <Link to="/admin/menuserie/es/list-seriees" className="w-full lg:w-6/12 xl:w-3/12 px-4">
                     <CardMenuAdult
                         statSubtitle="Listar Series Español"
                         statIconName="fas fa-list"

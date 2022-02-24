@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 // components
 
-export default function CardTable({ color }) {
+export default function CardTableMovieES({ color }) {
   return (
     <>
       <div
@@ -21,7 +21,7 @@ export default function CardTable({ color }) {
                   (color === "light" ? "text-blueGray-700" : "text-white")
                 }
               >
-                Listado Completo
+                Listado Pelicula en Español
               </h3>
             </div>
           </div>
@@ -352,10 +352,10 @@ export default function CardTable({ color }) {
   );
 }
 
-CardTable.defaultProps = {
+CardTableMovieES.defaultProps = {
   color: "light",
 };
 
-CardTable.propTypes = {
+CardTableMovieES.propTypes = {
   color: PropTypes.oneOf(["light", "dark"]),
 };

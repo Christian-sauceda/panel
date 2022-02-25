@@ -85,6 +85,7 @@
 .delete:active {
     transform: scale(0.9);
 }
+
 /* boton */
 .back {
     background-color: #27752e;
@@ -93,3 +94,15 @@
 .back:hover {
     background-color: #008f0c;
 }
+
+.eye {
+    position: absolute;
+    height: 200px;
+    width: 130px;
+    top: 45px;
+    left: 10px;
+    z-index: 1;
+    border: #fff solid 5px;
+}
+
+

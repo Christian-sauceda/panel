@@ -18,6 +18,7 @@ import AddMovieAdult from "views/admin/add-movie-adult.js";
 import AddMovieEs from "views/admin/add-movie-es.js";
 import AddMovieEn from "views/admin/add-movie-en.js";
 import AddSerieEs from "views/admin/add-serie-es.js";
+import AddCapSerieEs from "views/admin/add-capserie-es.js";
 import AddSerieEn from "views/admin/add-serie-en.js";
 //list
 import ListMovieAdult from "views/admin/list-movieadult.js";
@@ -47,6 +48,7 @@ export default function Admin() {
             <Route path="/admin/menumovie/es/add-moviees" exact component={AddMovieEs} />
             <Route path="/admin/menumovie/en/add-movieen" exact component={AddMovieEn} />
             <Route path="/admin/menuserie/es/add-seriees" exact component={AddSerieEs} />
+            <Route path="/admin/menuserie/es/add-capseriees" exact component={AddCapSerieEs} />
             <Route path="/admin/menuserie/en/add-serieen" exact component={AddSerieEn} />
 
             {/* list */}

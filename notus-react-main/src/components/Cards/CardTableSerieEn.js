@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 // components
 
-export default function CardTableMovieEN({ color }) {
+export default function CardTableSerieES({ color }) {
   return (
     <>
       <div
@@ -21,7 +21,7 @@ export default function CardTableMovieEN({ color }) {
                   (color === "light" ? "text-blueGray-700" : "text-white")
                 }
               >
-                Listado Película en Inglés
+                Listado Series en Inglés
               </h3>
             </div>
           </div>
@@ -39,7 +39,7 @@ export default function CardTableMovieEN({ color }) {
                       : "bg-sky-800 text-sky-800 border-sky-800")
                   }
                 >
-                  Título
+                  Title
                 </th>
                 <th
                   className={
@@ -49,7 +49,7 @@ export default function CardTableMovieEN({ color }) {
                       : "bg-sky-800 text-sky-300 border-sky-700")
                   }
                 >
-                  Tipo
+                  Type
                 </th>
                 <th
                   className={
@@ -59,7 +59,7 @@ export default function CardTableMovieEN({ color }) {
                       : "bg-sky-800 text-sky-300 border-sky-700")
                   }
                 >
-                  Categoria
+                  Category
                 </th>
                 <th
                   className={
@@ -69,7 +69,7 @@ export default function CardTableMovieEN({ color }) {
                       : "bg-sky-800 text-sky-300 border-sky-700")
                   }
                 >
-                  Fecha
+                  Date
                 </th>
                 <th
                   className={
@@ -79,7 +79,7 @@ export default function CardTableMovieEN({ color }) {
                       : "bg-sky-800 text-sky-300 border-sky-700")
                   }
                 >
-                  Acciones
+                  Actions
                 </th>
                 <th
                   className={
@@ -99,7 +99,7 @@ export default function CardTableMovieEN({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Película En Inglés
+                  Serie En Inglés
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -127,7 +127,7 @@ export default function CardTableMovieEN({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                Película En Inglés
+                  Serie En Inglés
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -155,7 +155,7 @@ export default function CardTableMovieEN({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                Película En Inglés
+                  Serie En Inglés
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -183,7 +183,7 @@ export default function CardTableMovieEN({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                Película En Inglés
+                  Serie En Inglés
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -211,7 +211,7 @@ export default function CardTableMovieEN({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                Película En Inglés
+                  Serie En Inglés
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -239,7 +239,7 @@ export default function CardTableMovieEN({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                Película En Inglés
+                  Serie En Inglés
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -267,7 +267,7 @@ export default function CardTableMovieEN({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                Película En Inglés
+                  Serie En Inglés
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -295,7 +295,7 @@ export default function CardTableMovieEN({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                Película En Inglés
+                  Serie En Inglés
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -323,7 +323,7 @@ export default function CardTableMovieEN({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                Película En Inglés
+                  Serie En Inglés
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -351,7 +351,7 @@ export default function CardTableMovieEN({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                Película En Inglés
+                  Serie En Inglés
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -379,7 +379,7 @@ export default function CardTableMovieEN({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                Película En Inglés
+                  Serie En Inglés
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -408,10 +408,13 @@ export default function CardTableMovieEN({ color }) {
   );
 }
 
-CardTableMovieEN.defaultProps = {
+CardTableSerieES.defaultProps = {
   color: "light",
 };
 
-CardTableMovieEN.propTypes = {
+CardTableSerieES.propTypes = {
   color: PropTypes.oneOf(["light", "dark"]),
+
 };
+
+

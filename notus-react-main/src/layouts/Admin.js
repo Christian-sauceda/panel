@@ -26,6 +26,7 @@ import ListMovieAdult from "views/admin/list-movieadult.js";
 import ListMovieEs from "views/admin/list-movie-es.js";
 import ListMovieEn from "views/admin/list-movie-en.js";
 import ListSerieEs from "views/admin/list-serie-es.js";
+import ListSerieEn from "views/admin/list-serie-en.js";
 
 export default function Admin() {
   return (
@@ -59,6 +60,7 @@ export default function Admin() {
             <Route path="/admin/menumovie/es/list-moviees" exact component={ListMovieEs} />
             <Route path="/admin/menumovie/en/list-movieen" exact component={ListMovieEn} />
             <Route path="/admin/menuserie/es/list-seriees" exact component={ListSerieEs} />
+            <Route path="/admin/menuserie/en/list-serieen" exact component={ListSerieEn} />
             
             <Redirect from="/admin" to="/admin/inicio" />
           </Switch>

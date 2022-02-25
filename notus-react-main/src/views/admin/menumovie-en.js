@@ -10,14 +10,14 @@ export default function MenuMovieES() {
             <div className="flex flex-wrap mt-32">
                 <Link to="/admin/menumovie/en/add-movieen" className="w-full lg:w-6/12 xl:w-3/12 px-4">
                     <CardMenuAdult
-                        statSubtitle="Agregar Película En Ingles"
+                        statSubtitle="Agregar Película En Inglés"
                         statIconName="fas fa-plus"
                         statIconColor="bg-sky-800"
                     />
                 </Link>
                 <Link to="/admin/menumovie/en/list-movieen" className="w-full lg:w-6/12 xl:w-3/12 px-4">
                     <CardMenuAdult
-                        statSubtitle="Listar Películas En Ingles"
+                        statSubtitle="Listar Películas En Inglés"
                         statIconName="fas fa-list"
                         statIconColor="bg-sky-800"
                     />

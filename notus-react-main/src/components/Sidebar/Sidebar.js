@@ -147,7 +147,7 @@ export default function Sidebar() {
                         : "text-sky-300")
                     }
                   ></i>{" "}
-                  Películas en Ingles
+                  Películas en Inglés
                 </Link>
               </li>
             {/* PELICULAS ADULT */}
@@ -213,7 +213,7 @@ export default function Sidebar() {
                         : "text-sky-300")
                     }
                   ></i>{" "}
-                  Series en ingles
+                  Series en Inglés
                 </Link>
               </li>
             </ul>
@@ -243,7 +243,7 @@ export default function Sidebar() {
                   to="/admin/menutv/en"
                 >
                   <i className="fas fa-language text-sky-800 mr-2 text-sm"></i>{" "}
-                  TV en Ingles
+                  TV en Inglés
                 </Link>
               </li>
 

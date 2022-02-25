@@ -156,7 +156,7 @@ export default function CardAddMovieAdult() {
                         id="audio"
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       >
-                        <option value="1">Ingles</option>
+                        <option value="1">Inglés</option>
                         <option value="2">Español</option>
                       </select>
                     </div>

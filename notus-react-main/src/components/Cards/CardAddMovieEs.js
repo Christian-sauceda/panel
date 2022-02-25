@@ -15,7 +15,7 @@ export default function CardAddMovieAdult() {
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
               <div className="rounded-t bg-white mb-0 px-6 py-6">
                 <div className="text-center flex justify-between">
-                  <h6 className="text-blueGray-700 text-xl font-bold">Agregar Pelicula En Español</h6>
+                  <h6 className="text-blueGray-700 text-xl font-bold">Agregar Película En Español</h6>
                 </div>
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -30,7 +30,7 @@ export default function CardAddMovieAdult() {
                         for="title"
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       >
-                        Titulo:
+                        Título:
                       </label>
                       <input
                         required
@@ -38,7 +38,7 @@ export default function CardAddMovieAdult() {
                         id="title"
                         name="title"
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Titulo de la Pelicula"
+                        placeholder="Título de la Película"
                       />
                     </div>
                   </div>
@@ -55,7 +55,7 @@ export default function CardAddMovieAdult() {
                         required
                         name="year"
                         id="year"
-                        placeholder="Año de la Pelicula"
+                        placeholder="Año de la Película"
                         min={1970}
                         max={2030}
                         type="number"
@@ -97,7 +97,7 @@ export default function CardAddMovieAdult() {
                         name="clasificacion"
                         id="clasificacion"
                         type="text"
-                        placeholder="Clasificacion de la Pelicula"
+                        placeholder="Clasificacion de la Película"
                         min={10}
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       />
@@ -118,7 +118,7 @@ export default function CardAddMovieAdult() {
                         id="director"
                         name="director"
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Director de la Pelicula"
+                        placeholder="Director de la Película"
                       />
                     </div>
                   </div>
@@ -137,7 +137,7 @@ export default function CardAddMovieAdult() {
                         className="border-0 px-3 py-3 placeholder-sky- text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         name="reparto"
                         id="reparto"
-                        placeholder="Reparto de la Pelicula"
+                        placeholder="Reparto de la Película"
                         rows="4"
                       ></textarea>
                     </div>
@@ -157,7 +157,7 @@ export default function CardAddMovieAdult() {
                         id="pais"
                         name="pais"
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Pais donde filmo la Pelicula"
+                        placeholder="Pais donde filmo la Película"
                       />
                     </div>
                   </div>
@@ -176,7 +176,7 @@ export default function CardAddMovieAdult() {
                         className="border-0 px-3 py-3 placeholder-sky- text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         name="sinopsis"
                         id="sinopsis"
-                        placeholder="Sinopsis de la Pelicula"
+                        placeholder="Sinopsis de la Película"
                         rows="4"
                       ></textarea>
                     </div>
@@ -196,7 +196,7 @@ export default function CardAddMovieAdult() {
                         id="back"
                         name="back"
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Background de la Pelicula"
+                        placeholder="Background de la Película"
                       />
                     </div>
                   </div>
@@ -207,7 +207,7 @@ export default function CardAddMovieAdult() {
                         for="link"
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       >
-                        Link de la Pelicula:
+                        Link de la Película:
                       </label>
                       <input
                         required

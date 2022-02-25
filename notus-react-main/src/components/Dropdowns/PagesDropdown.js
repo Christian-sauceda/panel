@@ -73,7 +73,7 @@ const PagesDropdown = () => {
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
         >
-          Peliculas Adultos
+          Películas Adultos
         </Link>
         <Link
           to="/admin/serie-es"

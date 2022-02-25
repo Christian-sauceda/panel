@@ -10,7 +10,7 @@ export default function CardUltimasPelisEn() {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <h3 className="font-semibold text-base text-blueGray-700">
-                Ultimas Peliculas en Ingles
+                Ultimas Películas en Ingles
               </h3>
             </div>
             <div className="relative w-full px-4 max-w-16 flex-grow flex-1 text-right">
@@ -27,7 +27,7 @@ export default function CardUltimasPelisEn() {
             <thead className="thead-light">
               <tr>
                 <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                  Titulo
+                  Título
                 </th>
                 <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                   Categorias

@@ -17,7 +17,7 @@ export default function MenuSerieEs() {
                 </Link>
                 <Link to="/admin/menuserie/en/add-capserieen" className="w-full lg:w-6/12 xl:w-3/12 px-4">
                     <CardMenuAdult
-                        statSubtitle="Agregar Capitulo Ingles"
+                        statSubtitle="Agregar Capítulo Ingles"
                         statIconName="fas fa-list"
                         statIconColor="bg-sky-800"
                     />

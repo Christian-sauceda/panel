@@ -4,7 +4,7 @@ import "./card.css";
 // components
 import CardListCapSerieEs from "components/Cards/CardListSerieEs.js";
 
-export default function CardAddCapSerieEs() {
+export default function CardAddCapSerieEn() {
   return (
     <>
       <div className="flex flex-wrap">
@@ -15,12 +15,12 @@ export default function CardAddCapSerieEs() {
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
               <div className="rounded-t bg-white mb-0 px-6 py-6">
                 <div className="text-center flex justify-between">
-                  <h6 className="text-blueGray-700 text-xl font-bold">Agregar Capítulo En Español</h6>
+                  <h6 className="text-blueGray-700 text-xl font-bold">Agregar Capítulo En Ingles</h6>
                 </div>
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                  Información Del Capítulo
+                  Information of chapter
                 </h6>
 
                 <div className="flex flex-wrap">
@@ -31,14 +31,14 @@ export default function CardAddCapSerieEs() {
                         for="serie"
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       >
-                        Serie:
+                        Tv show:
                       </label>
                       <select
                         name="serie"
                         id="serie"
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       >
-                        <option value="">Seleccione una Serie</option>
+                        <option value="">Select Tv Show</option>
                         <option value="1">Dark</option>
                         <option value="2">La Casa de Papel</option>
                         <option value="3">The Walking Dead</option>
@@ -58,14 +58,14 @@ export default function CardAddCapSerieEs() {
                         for="temp"
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       >
-                        Temporada:
+                        Season:
                       </label>
                       <select
                         name="temp"
                         id="temp"
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       >
-                        <option value="">Seleccione una Temporada</option>
+                        <option value="">Select Season</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -81,14 +81,14 @@ export default function CardAddCapSerieEs() {
                         for="ncapitulo"
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       >
-                        Numero de Capitulo:
+                        Number of Chapter:
                       </label>
                       <input
                         required
                         name="ncapitulo"
                         id="ncapitulo"
                         type="number"
-                        placeholder="Numero del Capítulo"
+                        placeholder="Number of Chapter"
                         min={1}
                         max={300}
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -102,13 +102,13 @@ export default function CardAddCapSerieEs() {
                         for="year"
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       >
-                        Título del Capítulo:
+                        Title of Chapter:
                       </label>
                       <input
                         required
                         name="year"
                         id="year"
-                        placeholder="Título del Capítulo"
+                        placeholder="Title of Chapter"
                         type="text"
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-slate-400 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       />
@@ -121,7 +121,7 @@ export default function CardAddCapSerieEs() {
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                         for="reparto"
                       >
-                        Sinopsis
+                        Sinopsys
                       </label>
                       <textarea
                         required
@@ -129,7 +129,7 @@ export default function CardAddCapSerieEs() {
                         className="border-0 px-3 py-3 placeholder-sky- text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         name="sinopsis"
                         id="sinopsis"
-                        placeholder="Sinopsis del Capítulo"
+                        placeholder="Sinopsys of Chapter"
                         rows="4"
                       ></textarea>
                     </div>
@@ -141,7 +141,7 @@ export default function CardAddCapSerieEs() {
                         for="enlace"
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       >
-                        Enlace del Capítulo:
+                        Link of Chapter:
                       </label>
                       <input
                         required
@@ -149,7 +149,7 @@ export default function CardAddCapSerieEs() {
                         id="enlace"
                         name="enlace"
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Enlace del Capítulo"
+                        placeholder="Link of Chapter"
                       />
                     </div>
                   </div>
@@ -160,7 +160,7 @@ export default function CardAddCapSerieEs() {
                         for="temp"
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       >
-                        Formato:
+                        Format:
                       </label>
                       <select
                         name="format"

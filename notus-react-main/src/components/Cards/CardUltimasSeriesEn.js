@@ -27,7 +27,7 @@ export default function CardUltimasSeriesEs() {
             <thead className="thead-light">
               <tr>
                 <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left hover:bg-sky-800 hover:text-white">
-                  Titulo
+                  Título
                 </th>
                 <th className="px-6 text-white align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left bg-sky-800">
                   Fecha

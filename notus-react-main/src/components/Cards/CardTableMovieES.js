@@ -21,7 +21,7 @@ export default function CardTableMovieES({ color }) {
                   (color === "light" ? "text-blueGray-700" : "text-white")
                 }
               >
-                Listado Pelicula en Español
+                Listado Película en Español
               </h3>
             </div>
           </div>
@@ -39,7 +39,7 @@ export default function CardTableMovieES({ color }) {
                       : "bg-sky-800 text-sky-800 border-sky-800")
                   }
                 >
-                  Titulo
+                  Título
                 </th>
                 <th
                   className={
@@ -93,11 +93,13 @@ export default function CardTableMovieES({ color }) {
             </thead>
             <tbody>
               <tr>
-                <th>
+                <th
+                  className="text-left px-6"
+                >
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Pelicula Adulto
+                Película En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -111,14 +113,21 @@ export default function CardTableMovieES({ color }) {
                     className="edit"
                     href="/admin"
                   />
+                  <input type="submit"
+                    value="Eliminar"
+                    className="delete mx-1"
+                    href="/admin"
+                  />
                 </td>
               </tr>
               <tr>
-                <th>
+                <th
+                  className="text-left px-6"
+                >
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Pelicula Adulto
+                Película En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -132,14 +141,21 @@ export default function CardTableMovieES({ color }) {
                     className="edit"
                     href="/admin"
                   />
+                  <input type="submit"
+                    value="Eliminar"
+                    className="delete mx-1"
+                    href="/admin"
+                  />
                 </td>
               </tr>
               <tr>
-                <th>
+                <th
+                  className="text-left px-6"
+                >
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Pelicula Adulto
+                Película En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -153,14 +169,21 @@ export default function CardTableMovieES({ color }) {
                     className="edit"
                     href="/admin"
                   />
+                  <input type="submit"
+                    value="Eliminar"
+                    className="delete mx-1"
+                    href="/admin"
+                  />
                 </td>
               </tr>
               <tr>
-                <th>
+                <th
+                  className="text-left px-6"
+                >
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Pelicula Adulto
+                Película En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -174,14 +197,21 @@ export default function CardTableMovieES({ color }) {
                     className="edit"
                     href="/admin"
                   />
+                  <input type="submit"
+                    value="Eliminar"
+                    className="delete mx-1"
+                    href="/admin"
+                  />
                 </td>
               </tr>
               <tr>
-                <th>
+                <th
+                  className="text-left px-6"
+                >
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Pelicula Adulto
+                Película En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -195,14 +225,21 @@ export default function CardTableMovieES({ color }) {
                     className="edit"
                     href="/admin"
                   />
+                  <input type="submit"
+                    value="Eliminar"
+                    className="delete mx-1"
+                    href="/admin"
+                  />
                 </td>
               </tr>
               <tr>
-                <th>
+                <th
+                  className="text-left px-6"
+                >
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Pelicula Adulto
+                Película En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -216,14 +253,21 @@ export default function CardTableMovieES({ color }) {
                     className="edit"
                     href="/admin"
                   />
+                  <input type="submit"
+                    value="Eliminar"
+                    className="delete mx-1"
+                    href="/admin"
+                  />
                 </td>
               </tr>
               <tr>
-                <th>
+                <th
+                  className="text-left px-6"
+                >
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Pelicula Adulto
+                Película En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -237,14 +281,21 @@ export default function CardTableMovieES({ color }) {
                     className="edit"
                     href="/admin"
                   />
+                  <input type="submit"
+                    value="Eliminar"
+                    className="delete mx-1"
+                    href="/admin"
+                  />
                 </td>
               </tr>
               <tr>
-                <th>
+                <th
+                  className="text-left px-6"
+                >
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Pelicula Adulto
+                Película En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -258,14 +309,21 @@ export default function CardTableMovieES({ color }) {
                     className="edit"
                     href="/admin"
                   />
+                  <input type="submit"
+                    value="Eliminar"
+                    className="delete mx-1"
+                    href="/admin"
+                  />
                 </td>
               </tr>
               <tr>
-                <th>
+                <th
+                  className="text-left px-6"
+                >
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Pelicula Adulto
+                Película En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -279,14 +337,21 @@ export default function CardTableMovieES({ color }) {
                     className="edit"
                     href="/admin"
                   />
+                  <input type="submit"
+                    value="Eliminar"
+                    className="delete mx-1"
+                    href="/admin"
+                  />
                 </td>
               </tr>
               <tr>
-                <th>
+                <th
+                  className="text-left px-6"
+                >
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Pelicula Adulto
+                Película En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -300,14 +365,21 @@ export default function CardTableMovieES({ color }) {
                     className="edit"
                     href="/admin"
                   />
+                  <input type="submit"
+                    value="Eliminar"
+                    className="delete mx-1"
+                    href="/admin"
+                  />
                 </td>
               </tr>
               <tr>
-                <th>
-                  EJEMPLO EJEMPLO
+                <th
+                  className="text-left px-6"
+                >
+                  EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Pelicula Adulto
+                Película En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -321,25 +393,9 @@ export default function CardTableMovieES({ color }) {
                     className="edit"
                     href="/admin"
                   />
-                </td>
-              </tr>
-              <tr>
-                <th>
-                  EJEMPLO EJEMPLO
-                </th>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Pelicula Adulto
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Añadido recientemente
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  26/07/2021
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   <input type="submit"
-                    value="Editar"
-                    className="edit"
+                    value="Eliminar"
+                    className="delete mx-1"
                     href="/admin"
                   />
                 </td>

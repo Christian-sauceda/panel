@@ -21,7 +21,7 @@ export default function CardListSerieEs() {
                                             <th
                                                 className="border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                             >
-                                                Titulo
+                                                Título
                                             </th>
                                             <th
                                                 className="border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -42,7 +42,7 @@ export default function CardListSerieEs() {
                                             <th
                                                 className="text-left"
                                             >
-                                                Capitulo 1x1
+                                                Capítulo 1x1
                                             </th>
                                             <th
                                                 className="text-left"
@@ -52,20 +52,23 @@ export default function CardListSerieEs() {
                                             <th
                                                 className="text-left"
                                             >
-                                                <button
-                                                    className="back text-white font-bold py-2 px-4 rounded"
-                                                    id="1"
-                                                    name="1"
-                                                >
-                                                    Editar
-                                                </button>
+                                                <input type="submit"
+                                                    value="Editar"
+                                                    className="edit"
+                                                    href="/admin"
+                                                />
+                                                <input type="submit"
+                                                    value="Eliminar"
+                                                    className="delete mx-1"
+                                                    href="/admin"
+                                                />
                                             </th>
                                         </tr>
                                         <tr>
                                             <th
                                                 className="text-left"
                                             >
-                                                Capitulo 1x2
+                                                Capítulo 1x2
                                             </th>
                                             <th
                                                 className="text-left"
@@ -75,20 +78,23 @@ export default function CardListSerieEs() {
                                             <th
                                                 className="text-left"
                                             >
-                                                <button
-                                                    className="back text-white font-bold py-2 px-4 rounded"
-                                                    id="1"
-                                                    name="1"
-                                                >
-                                                    Editar
-                                                </button>
+                                                <input type="submit"
+                                                    value="Editar"
+                                                    className="edit"
+                                                    href="/admin"
+                                                />
+                                                <input type="submit"
+                                                    value="Eliminar"
+                                                    className="delete mx-1"
+                                                    href="/admin"
+                                                />
                                             </th>
                                         </tr>
                                         <tr>
                                             <th
                                                 className="text-left"
                                             >
-                                                Capitulo 1x3
+                                                Capítulo 1x3
                                             </th>
                                             <th
                                                 className="text-left"
@@ -98,20 +104,23 @@ export default function CardListSerieEs() {
                                             <th
                                                 className="text-left"
                                             >
-                                                <button
-                                                    className="back text-white font-bold py-2 px-4 rounded"
-                                                    id="1"
-                                                    name="1"
-                                                >
-                                                    Editar
-                                                </button>
+                                                <input type="submit"
+                                                    value="Editar"
+                                                    className="edit"
+                                                    href="/admin"
+                                                />
+                                                <input type="submit"
+                                                    value="Eliminar"
+                                                    className="delete mx-1"
+                                                    href="/admin"
+                                                />
                                             </th>
                                         </tr>
                                         <tr>
                                             <th
                                                 className="text-left"
                                             >
-                                                Capitulo 2x1
+                                                Capítulo 2x1
                                             </th>
                                             <th
                                                 className="text-left"
@@ -121,20 +130,23 @@ export default function CardListSerieEs() {
                                             <th
                                                 className="text-left"
                                             >
-                                                <button
-                                                    className="back text-white font-bold py-2 px-4 rounded"
-                                                    id="1"
-                                                    name="1"
-                                                >
-                                                    Editar
-                                                </button>
+                                                <input type="submit"
+                                                    value="Editar"
+                                                    className="edit"
+                                                    href="/admin"
+                                                />
+                                                <input type="submit"
+                                                    value="Eliminar"
+                                                    className="delete mx-1"
+                                                    href="/admin"
+                                                />
                                             </th>
                                         </tr>
                                         <tr>
                                             <th
                                                 className="text-left"
                                             >
-                                                Capitulo 2x2
+                                                Capítulo 2x2
                                             </th>
                                             <th
                                                 className="text-left"
@@ -144,13 +156,16 @@ export default function CardListSerieEs() {
                                             <th
                                                 className="text-left"
                                             >
-                                                <button
-                                                    className="back text-white font-bold py-2 px-4 rounded"
-                                                    id="1"
-                                                    name="1"
-                                                >
-                                                    Editar
-                                                </button>
+                                                <input type="submit"
+                                                    value="Editar"
+                                                    className="edit"
+                                                    href="/admin"
+                                                />
+                                                <input type="submit"
+                                                    value="Eliminar"
+                                                    className="delete mx-1"
+                                                    href="/admin"
+                                                />
                                             </th>
                                         </tr>
 

@@ -10,7 +10,7 @@ export default function CardUltimasPelisAdult() {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <h3 className="font-semibold text-base text-blueGray-700">
-                Ultimas Peliculas Para Adultos Añadidas 
+                Ultimas Películas Para Adultos Añadidas 
               </h3>
             </div>
             <div className="relative w-full px-4 max-w-16 flex-grow flex-1 text-right">
@@ -27,7 +27,7 @@ export default function CardUltimasPelisAdult() {
             <thead className="thead-light">
               <tr>
                 <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                  Titulo
+                  Título
                 </th>
                 <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                   Tipo
@@ -43,7 +43,7 @@ export default function CardUltimasPelisAdult() {
                   La casa
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  Pelicula Adulto
+                  Película Adulto
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   14/1/2022
@@ -54,7 +54,7 @@ export default function CardUltimasPelisAdult() {
                 Scream 4
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                Pelicula Adulto
+                Película Adulto
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   14/1/2022
@@ -65,7 +65,7 @@ export default function CardUltimasPelisAdult() {
                 Spider-Man: No Way Home
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                Pelicula Adulto
+                Película Adulto
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   14/1/2022
@@ -76,7 +76,7 @@ export default function CardUltimasPelisAdult() {
                 The King's Man: La Primera Misión
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                Pelicula Adulto
+                Película Adulto
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   14/1/2022
@@ -87,7 +87,7 @@ export default function CardUltimasPelisAdult() {
                 Cásate conmigo
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                Pelicula Adulto
+                Película Adulto
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   14/1/2022

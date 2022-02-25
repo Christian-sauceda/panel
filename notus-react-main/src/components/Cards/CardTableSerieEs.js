@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 // components
 
-export default function CardTable({ color }) {
+export default function CardTableSerieES({ color }) {
   return (
     <>
       <div
@@ -21,7 +21,7 @@ export default function CardTable({ color }) {
                   (color === "light" ? "text-blueGray-700" : "text-white")
                 }
               >
-                Listado de Película Para Adultos
+                Listado Series en Español
               </h3>
             </div>
           </div>
@@ -99,7 +99,7 @@ export default function CardTable({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Película Adulto
+                Serie En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -127,7 +127,7 @@ export default function CardTable({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Película Adulto
+                Serie En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -155,7 +155,7 @@ export default function CardTable({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Película Adulto
+                Serie En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -183,7 +183,7 @@ export default function CardTable({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Película Adulto
+                Serie En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -211,7 +211,7 @@ export default function CardTable({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Película Adulto
+                Serie En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -239,7 +239,7 @@ export default function CardTable({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Película Adulto
+                Serie En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -267,7 +267,7 @@ export default function CardTable({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Película Adulto
+                Serie En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -295,7 +295,7 @@ export default function CardTable({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Película Adulto
+                Serie En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -323,7 +323,7 @@ export default function CardTable({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Película Adulto
+                Serie En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -351,7 +351,7 @@ export default function CardTable({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Película Adulto
+                Serie En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -379,7 +379,7 @@ export default function CardTable({ color }) {
                   EJEMPLO
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                  Película Adulto
+                Serie En Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente
@@ -408,10 +408,13 @@ export default function CardTable({ color }) {
   );
 }
 
-CardTable.defaultProps = {
+CardTableSerieES.defaultProps = {
   color: "light",
 };
 
-CardTable.propTypes = {
+CardTableSerieES.propTypes = {
   color: PropTypes.oneOf(["light", "dark"]),
+  
 };
+
+

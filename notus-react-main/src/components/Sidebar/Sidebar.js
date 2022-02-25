@@ -125,7 +125,7 @@ export default function Sidebar() {
                         : "text-sky-300")
                     }
                   ></i>{" "}
-                  Peliculas en Español
+                  Películas en Español
                 </Link>
               </li>
             {/* PELICULA ENG */}
@@ -147,7 +147,7 @@ export default function Sidebar() {
                         : "text-sky-300")
                     }
                   ></i>{" "}
-                  Peliculas en Ingles
+                  Películas en Ingles
                 </Link>
               </li>
             {/* PELICULAS ADULT */}
@@ -169,7 +169,7 @@ export default function Sidebar() {
                         : "text-sky-300")
                     }
                   ></i>{" "}
-                  Peliculas Adultos
+                  Películas Adultos
                 </Link>
               </li>
             {/* SERIES ESP */}

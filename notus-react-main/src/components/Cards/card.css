@@ -29,10 +29,11 @@
 .edit {
     position: relative;
     display: inline-block;
-    margin: 0px;
+    margin: 5px;
     padding: 8px 10px;
     text-align: center;
-    font-size: 18px;
+    font-weight: 700;
+    font-size: 12px;
     letter-spacing: 2px;
     text-decoration: none;
     color: #27752e;
@@ -43,6 +44,7 @@
     border: 2px solid #27752e;
     border-radius: 10px;
     box-shadow: inset 0 0 0 0 #27752e;
+    margin-right: 6px;
 }
 
 .edit:hover {
@@ -54,6 +56,36 @@
     transform: scale(0.9);
 }
 
+/* boton eliminar */
+.delete {
+    position: relative;
+    display: inline-block;
+    margin: 5px;
+    padding: 8px 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    color: #ff0000;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border-radius: 30px;
+    border: 2px solid #ff0000;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #ff0000;
+}
+
+.delete:hover {
+    color: white;
+    box-shadow: inset 0 -100px 0 0 #ff0000;
+}
+
+.delete:active {
+    transform: scale(0.9);
+}
+/* boton */
 .back {
     background-color: #27752e;
 }

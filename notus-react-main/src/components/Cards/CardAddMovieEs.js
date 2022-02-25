@@ -305,6 +305,96 @@ export default function CardAddMovieAdult() {
                   <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                     Generos:
                   </label>
+                  <div class="max-w-xs p-2 mx-auto">
+                    <label class="inline-flex items-start p-2">
+                      <input 
+                      className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded" 
+                      type="checkbox" 
+                      name="genero"
+                      />
+                      Accion
+                    </label>
+                    <label class="inline-flex items-start p-2">
+                      <input 
+                      className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded" 
+                      type="checkbox" 
+                      name="genero"
+                      />
+                      Aventura
+                    </label>
+                    <label class="inline-flex items-start p-2">
+                      <input 
+                      className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded" 
+                      type="checkbox" 
+                      name="genero"
+                      />
+                      Comedia
+                    </label>
+                    <label class="inline-flex items-start p-2">
+                      <input 
+                      className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded" 
+                      type="checkbox" 
+                      name="genero"
+                      />
+                      Drama
+                    </label>
+                    <label class="inline-flex items-start p-2">
+                      <input 
+                      className="text-sky-800 w-8 h-8 mr-2 focus:ring-sky-800 focus:ring-opacity-25 border border-gray-300 rounded" 
+                      type="checkbox" 
+                      name="genero"
+                      />
+                      Fantasia
+                    </label>
+                    <label class="inline-flex items-start p-2">
+                      <input 
+                      className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded" 
+                      type="checkbox" 
+                      name="genero"
+                      />
+                      Horror
+                    </label>
+                    <label class="inline-flex items-start p-2">
+                      <input 
+                      className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded" 
+                      type="checkbox" 
+                      name="genero"
+                      />
+                      Misterio
+                    </label>
+                    <label class="inline-flex items-start p-2">
+                      <input 
+                      className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded" 
+                      type="checkbox" 
+                      name="genero"
+                      />
+                      Romance
+                    </label>
+                    <label class="inline-flex items-start p-2">
+                      <input 
+                      className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded" 
+                      type="checkbox" 
+                      name="genero"
+                      />
+                      Terror
+                    </label>
+                    <label class="inline-flex items-start p-2">
+                      <input 
+                      className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded" 
+                      type="checkbox" 
+                      name="genero"
+                      />
+                      Suspenso
+                    </label>
+                    <label class="inline-flex items-start p-2">
+                      <input 
+                      className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded" 
+                      type="checkbox" 
+                      name="genero"
+                      />
+                      Ciencia Ficcion
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>

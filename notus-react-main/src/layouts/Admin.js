@@ -26,6 +26,10 @@ import AddSerieEs from "views/admin/add-serie-es.js";
 import AddCapSerieEs from "views/admin/add-capserie-es.js";
 import AddCapSerieEn from "views/admin/add-capserie-en.js";
 import AddSerieEn from "views/admin/add-serie-en.js";
+import AddTvEs from "views/admin/add-tv-es.js";
+import AddTvEn from "views/admin/add-tv-en.js";
+import AddTvInter from "views/admin/add-tv-inter.js";
+import AddEvent from "views/admin/add-event.js";
 //list
 import ListMovieAdult from "views/admin/list-movieadult.js";
 import ListMovieEs from "views/admin/list-movie-es.js";
@@ -64,6 +68,10 @@ export default function Admin() {
             <Route path="/admin/menuserie/es/add-capseriees" exact component={AddCapSerieEs} />
             <Route path="/admin/menuserie/en/add-serieen" exact component={AddSerieEn} />
             <Route path="/admin/menuserie/en/add-capserieen" exact component={AddCapSerieEn} />
+            <Route path="/admin/menutv/es/add-tves" exact component={AddTvEs} />
+            <Route path="/admin/menutv/en/add-tven" exact component={AddTvEn} />
+            <Route path="/admin/menutv/inter/add-tvinter" exact component={AddTvInter} />
+            <Route path="/admin/menueventos/ppv/add-event" exact component={AddEvent} />
 
             {/* list */}
             <Route path="/admin/menumovie/adults/list-movieadult" exact component={ListMovieAdult} />

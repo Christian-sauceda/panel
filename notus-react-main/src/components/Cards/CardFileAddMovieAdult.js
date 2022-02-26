@@ -26,6 +26,7 @@ export default function CardFileAddMovieAdult() {
                         </h3>
                         <div className="mb-2 text-blueGray-600 mt-10">
                             <input
+                                required
                                 type="file"
                                 id="file"
                                 name="file"

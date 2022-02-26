@@ -12,4 +12,5 @@ router.post("/signup", useMiddleware.validateRegister, userCtrl.sign_up);
 // login
 router.post("/login", userCtrl.login);
 
+
 export default router;

@@ -4,45 +4,53 @@ require("dotenv").config();
 const bcryptjs = require("bcryptjs");
 const mysqlconnection = require("../../database");
 const jwt = require("jsonwebtoken");
-const { verify } = require("jsonwebtoken");
-const { hash, compare } = require("bcryptjs");
 
+
+//registro de usuario
+
+        
 
 //signup
-export const sign_up = (req, res, next) => {
-    mysqlconnection.query(
-        `SELECT COD_USER FROM SYS_USER WHERE USER_NAME = LOWER('${req.body.USER_NAME}')`,
-        (err, result) => {
-            if (result.length) {
-                // error 
-                return res.status(409).send({
-                    message: "THIS USERNAME ALREADY EXIST",
-                });
-            } else { // username not in use
-                bcrypt.hash(req.body.PASSWORD, 10, (err, hash) => {
-                    if (err) {
-                        throw err;
-                        return res.status(500).send({
-                            message: err,
-                        });
-                    } else {
-                        mysqlconnection.query(`CALL PROC_INS_SYS_USER(?,?,?,?)`,
-                            [req.body.USER_NAME, hash, req.body.TYPE, req.body.IND],
-                            (err, result) => {
-                                if (err) {
-                                    throw err;
-                                    return res.status(400).send({
-                                        message: err,
-                                    });
-                                }
-                                return res.status(201).send({
-                                    message: "USER CREATED SUCCESSFULLY",
-                                });
+export const sign_up = async (req, res, next) => {
+    try {
+        mysqlconnection.query(
+            `SELECT COD_USER FROM SYS_USER WHERE EMAIL_USER = LOWER('${req.body.EMAIL_USER}')`,
+            (err, result) => {
+                if (result.length) {
+                    // error 
+                    return res.status(409).send({
+                        message: "THIS EMAIL ALREADY EXISTS",
+                    });
+                } else { // username not in use
+                    bcrypt.hash(req.body.PASSWORD, 10, (err, hash) => {
+                        if (err) {
+                            throw err;
+                            return res.status(500).send({
+                                message: err,
                             });
-                    }
-                });
-            };
+                        } else {
+                            mysqlconnection.query(`CALL PROC_INS_SYS_USER(?,?,?,?,?)`,
+                                [req.body.USER_NAME, hash, req.body.TYPE, req.body.IND, req.body.EMAIL_USER],
+                                (err, result) => {
+                                    if (err) {
+                                        throw err;
+                                        return res.status(400).send({
+                                            message: err,
+                                        });
+                                    }
+                                    return res.status(201).send({
+                                        message: "USER CREATED SUCCESSFULLY",
+                                    });
+                                });
+                        }
+                    });
+                };
+            });
+    } catch (error) {
+        res.status(500).send({
+            message: error.message,
         });
+    }
 };
 
 //login

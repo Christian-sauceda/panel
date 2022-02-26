@@ -229,45 +229,93 @@ export default function Sidebar() {
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link
-                  className="text-sky-800 hover:text-sky-800 text-xs uppercase py-3 font-normal block"
+                  className={
+                    "text-xs uppercase py-3 font-normal block " +
+                    (window.location.href.indexOf("/admin/menutv/es") !== -1
+                      ? "text-bg-sky-800 hover:text-sky-800"
+                      : "text-sky-700 hover:text-sky-500")
+                  }
                   to="/admin/menutv/es"
                 >
-                  <i className="fas fa-headset text-sky-800 mr-2 text-sm"></i>{" "}
-                  TV en Español
+                  <i
+                    className={
+                      "fas fa-headset  mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/menutv/es") !== -1
+                        ? "opacity-75"
+                        : "text-sky-300")
+                    }
+                  ></i>{" "}
+                  Tv en Español
                 </Link>
               </li>
 
               <li className="items-center">
                 <Link
-                  className="text-sky-800 hover:text-sky-800 text-xs uppercase py-3 font-normal block"
+                  className={
+                    "text-xs uppercase py-3 font-normal block " +
+                    (window.location.href.indexOf("/admin/menutv/en") !== -1
+                      ? "text-bg-sky-800 hover:text-sky-800"
+                      : "text-sky-700 hover:text-sky-500")
+                  }
                   to="/admin/menutv/en"
                 >
-                  <i className="fas fa-language text-sky-800 mr-2 text-sm"></i>{" "}
-                  TV en Inglés
+                  <i
+                    className={
+                      "fas fa-language  mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/menutv/en") !== -1
+                        ? "opacity-75"
+                        : "text-sky-300")
+                    }
+                  ></i>{" "}
+                  Tv en Ingles
                 </Link>
               </li>
 
               <li className="items-center">
                 <Link
-                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-normal block"
+                  className={
+                    "text-xs uppercase py-3 font-normal block " +
+                    (window.location.href.indexOf("/admin/menutv/inter") !== -1
+                      ? "text-bg-sky-800 hover:text-sky-800"
+                      : "text-sky-700 hover:text-sky-500")
+                  }
                   to="/admin/menutv/inter"
                 >
-                  <i className="fas fa-globe text-sky-300 mr-2 text-sm"></i>{" "}
-                  TV Internacional
+                  <i
+                    className={
+                      "fas fa-globe  mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/menutv/inter") !== -1
+                        ? "opacity-75"
+                        : "text-sky-300")
+                    }
+                  ></i>{" "}
+                  Tv Internacional
                 </Link>
               </li>
 
               <li className="items-center">
                 <Link
-                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-normal block"
+                  className={
+                    "text-xs uppercase py-3 font-normal block " +
+                    (window.location.href.indexOf("/admin/menueventos/ppv") !== -1
+                      ? "text-bg-sky-800 hover:text-sky-800"
+                      : "text-sky-700 hover:text-sky-500")
+                  }
                   to="/admin/menueventos/ppv"
                 >
-                  <i className="fas fa-futbol text-sky-300 mr-2 text-sm"></i>{" "}
-                  Eventos deportivos
+                  <i
+                    className={
+                      "fas fa-futbol  mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/menueventos/ppv") !== -1
+                        ? "opacity-75"
+                        : "text-sky-300")
+                    }
+                  ></i>{" "}
+                  Eventos Deportivos
                 </Link>
               </li>
             </ul>
-
+            
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
@@ -277,17 +325,29 @@ export default function Sidebar() {
             {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-              <li className="items-center">
+            <li className="items-center">
                 <Link
-                  className="text-sky-700 hover:text-sky-500 text-xs uppercase py-3 font-normal block"
+                  className={
+                    "text-xs uppercase py-3 font-normal block " +
+                    (window.location.href.indexOf("/admin/menumantenimiento") !== -1
+                      ? "text-bg-sky-800 hover:text-sky-800"
+                      : "text-sky-700 hover:text-sky-500")
+                  }
                   to="/admin/menumantenimiento"
                 >
-                  <i className="fas fa-cog text-sky-400 mr-2 text-sm"></i>{" "}
-                  Categorias
+                  <i
+                    className={
+                      "fas fa-cog  mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/menumantenimiento") !== -1
+                        ? "opacity-75"
+                        : "text-sky-300")
+                    }
+                  ></i>{" "}
+                  Mantenimientos
                 </Link>
               </li>
 
-
+              
             </ul>
 
             {/* Divider */}

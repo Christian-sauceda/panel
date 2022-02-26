@@ -82,16 +82,16 @@ const IndexDropdown = () => {
           Auth Layout
         </span>
         <Link
-          to="/login"
+          to="/admin/menutv/es"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
-          Login
+          Tv Español
         </Link>
         <Link
-          to="/recuperar-password"
+          to="/admin/menutv/en"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
-          Register
+          Tv Inglés
         </Link>
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
         <span
@@ -99,10 +99,10 @@ const IndexDropdown = () => {
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          No Layout
+          Tv Internacional
         </span>
         <Link
-          to="/landing"
+          to="/admin/menutv/inter"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Landing

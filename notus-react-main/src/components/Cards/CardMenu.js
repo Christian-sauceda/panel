@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function CardMenuAdult({
+export default function CardMenu({
   statSubtitle,
   statTitle,
   statArrow,
@@ -12,7 +12,7 @@ export default function CardMenuAdult({
 }) {
   return (
     <>
-      <div className="relative flex flex-col min-w-0 break-words bg-sky-800 rounded mb-6 xl:mb-0 shadow-2xl">
+      <div className="relative flex flex-col min-w-0 break-words bg-sky-800 rounded mb-6 xl:mb-0 shadow-2xl mt-6">
         <div className="flex-auto p-4">
           <div className="flex flex-wrap">
             <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
@@ -40,10 +40,10 @@ export default function CardMenuAdult({
   );
 }
 
-CardMenuAdult.defaultProps = {
+CardMenu.defaultProps = {
 };
 
-CardMenuAdult.propTypes = {
+CardMenu.propTypes = {
   statSubtitle: PropTypes.string,
   statTitle: PropTypes.string,
   statArrow: PropTypes.oneOf(["up", "down"]),

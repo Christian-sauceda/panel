@@ -13,6 +13,11 @@ import MenuMovieEs from "views/admin/menumovie-es.js";
 import MenuMovieEn from "views/admin/menumovie-en.js";
 import MenuSerieEs from "views/admin/menuserie-es.js";
 import MenuSerieEn from "views/admin/menuserie-en.js";
+import MenuTvEs from "views/admin/menutv-es.js";
+import MenuTvEn from "views/admin/menutv-en.js";
+import MenuTvInter from "views/admin/menutv-inter.js";
+import MenuEventDeportivo from "views/admin/menueventos.js";
+import MenuMantenimientos from "views/admin/menumantenimientos.js";
 //add
 import AddMovieAdult from "views/admin/add-movie-adult.js";
 import AddMovieEs from "views/admin/add-movie-es.js";
@@ -45,6 +50,11 @@ export default function Admin() {
             <Route path="/admin/menumovie/en" exact component={MenuMovieEn} />
             <Route path="/admin/menuserie/es" exact component={MenuSerieEs} />
             <Route path="/admin/menuserie/en" exact component={MenuSerieEn} />
+            <Route path="/admin/menutv/es" exact component={MenuTvEs} />
+            <Route path="/admin/menutv/en" exact component={MenuTvEn} />
+            <Route path="/admin/menutv/inter" exact component={MenuTvInter} />
+            <Route path="/admin/menueventos/ppv" exact component={MenuEventDeportivo} />
+            <Route path="/admin/menumantenimiento" exact component={MenuMantenimientos} />
 
             {/* add */}
             <Route path="/admin/menumovie/adults/add-movieadult" exact component={AddMovieAdult} />

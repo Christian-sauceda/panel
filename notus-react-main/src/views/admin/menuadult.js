@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // components
-import CardMenuAdult from "components/Cards/CardMenuAdult";
+import CardMenuAdult from "components/Cards/CardMenu";
 
 export default function MenuAdult() {
   return (

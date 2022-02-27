@@ -7,7 +7,6 @@ const jwt = require("jsonwebtoken");
 import generarId from "../../helpers/generarId";
 
 //registro de usuario
-
 export const registro = async (req, res) => {
     try {
         const {
@@ -101,23 +100,20 @@ export const login = (req, res, next) => {
         `SELECT * FROM SYS_USER WHERE CONFIRMED = '1' AND USER_NAME = ${mysqlconnection.escape(req.body.USER_NAME)};`,
         (err, result) => {
             if (err) {
-                throw err;
                 return res.status(400).send({
                     message: err
                 });
             }
             if (!result.length) {
                 return res.status(400).send({
-                    message: "USERNAME OR PASSWORD INCORRECT!",
+                    message: "El usuario no existe o sin confirmar",
                 });
             }
-
             bcryptjs.compare(
                 req.body.PASSWORD,
                 result[0].PASSWORD,
                 (bErr, bresult) => {
                     if (bErr) {
-                        throw bErr;
                         return res.status(400).send({
                             message: "USERNAME OR PASSWORD INCORRECT!",
                         });
@@ -149,32 +145,31 @@ export const login = (req, res, next) => {
     );
 };
 
-//get a new accss token with a refresh token
-export const refreshToken = (req, res, next) => {
-    const token = req.body.token;
-    if (!token) {
-        return res.status(401).send({
-            message: "UNAUTHORIZED",
-        });
-    }
-    jwt.verify(token, "secret", (err, decoded) => {
-        if (err) {
-            return res.status(401).send({
-                message: "UNAUTHORIZED",
-            });
-        }
-        const newToken = jwt.sign({
-            COD: decoded.COD,
-            NAME: decoded.NAME,
-            TYPE: decoded.TYPE,
-        },
-            "secret", {
-            expiresIn: "1m"
-        }
-        );
-        return res.status(200).send({
-            message: "TOKEN REFRESHED!",
-            token: newToken,
-        });
-    });
+//reset password
+export const resetPassword = async (req, res) => {
+    try {
+        const {
+            EMAIL_USER
+        } = req.body;
+        //QUE EXISTA EL EMAIL
+        mysqlconnection.query(`SELECT COD_USER FROM SYS_USER WHERE EMAIL_USER = LOWER('${EMAIL_USER}')`, (err, rows) => {
+            if (err) {
+                res.status(500).json({
+                    message: "Error al consultar el usuario",
+                    err
+                });
+            } else {
+                if (rows.length > 0) {
+                    //GENERAR TOKEN
+                    const token = jwt.sign({
+                        COD: rows[0].COD_USER,
+                        NAME: rows[0].USER_NAME,
+                        TYPE: rows[0].USER_TYPE,
+                    },
+                        "secret", {
+                        expiresIn: "1h"
+                    }
+                    );
+                    //ENVIAR CORREO
+                         
 }

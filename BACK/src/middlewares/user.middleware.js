@@ -39,12 +39,12 @@ module.exports = {
             const token = authHeader.split(' ')[1];
             const decoded = jwt.verify(token, "secret");
             const userData = decoded;
-            next();
+
         } catch (error) {
-            throw error;
             return res.status(400).send({
-                message: "YOUR ARE NOT LOGGED IN!",
+                message: "YOUR ARE NOT LOGGED IN OR TOKEN INVALID!",
             });
         }
+        next();
     },
 };

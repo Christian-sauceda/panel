@@ -80,6 +80,7 @@ export default function Admin() {
             <Route path="/admin/menumovie/en/list-movieen" exact component={ListMovieEn} />
             <Route path="/admin/menuserie/es/list-seriees" exact component={ListSerieEs} />
             <Route path="/admin/menuserie/en/list-serieen" exact component={ListSerieEn} />
+            <Route path="/admin/menutv/es/list-tves" exact component={ListTvEs} />
             
             
             <Redirect from="/admin" to="/admin/inicio" />

@@ -24,23 +24,9 @@ export default function CardTable({ color }) {
                 Listado de Tv Español en vivo
               </h3>
             </div>
-            
+
           </div>
         </div>
-
-<label for="my-modal" class="btn modal-button">open modal</label>
-
-
-<input type="checkbox" id="my-modal" class="modal-toggle"></input>
-<div class="modal">
-  <div class="modal-box">
-    <h3 class="font-bold text-lg">Congratulations random Interner user!</h3>
-    <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-    <div class="modal-action">
-      <label for="my-modal" class="btn">Yay!</label>
-    </div>
-  </div>
-</div>
         <div className="block w-full overflow-x-auto">
           {/* Projects table */}
           <table className="w-full bg-transparent border-collapse">
@@ -366,7 +352,7 @@ export default function CardTable({ color }) {
                   beIN Sports 1| FHD
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                TV en Español
+                  TV en Español
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
                   Añadido recientemente

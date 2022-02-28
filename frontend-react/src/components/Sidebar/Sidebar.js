@@ -347,7 +347,28 @@ export default function Sidebar() {
                 </Link>
               </li>
 
-              
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-normal block " +
+                    (window.location.href.indexOf("/admin/menuuser/") !== -1
+                      ? "text-bg-sky-800 hover:text-sky-800"
+                      : "text-sky-700 hover:text-sky-500")
+                  }
+                  to="/admin/menuuser/"
+                >
+                  <i
+                    className={
+                      "fas fa-user  mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/menuuser/") !== -1
+                        ? "opacity-75"
+                        : "text-sky-300")
+                    }
+                  ></i>{" "}
+                  Usuarios
+                </Link>
+              </li>
+
             </ul>
 
             {/* Divider */}

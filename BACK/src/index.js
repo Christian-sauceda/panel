@@ -1,5 +1,7 @@
 import app from "./app";
+require("dotenv").config();
 
-app.listen(3001);
+let port = process.env.PORT;
+app.listen(port);
 
-console.log('Server is running on http://localhost:3001');
+console.log(`Server is running on http://localhost:${port}`);

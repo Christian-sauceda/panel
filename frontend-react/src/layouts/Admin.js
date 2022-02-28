@@ -18,6 +18,7 @@ import MenuTvEn from "views/admin/menutv-en.js";
 import MenuTvInter from "views/admin/menutv-inter.js";
 import MenuEventDeportivo from "views/admin/menueventos.js";
 import MenuMantenimientos from "views/admin/menumantenimientos.js";
+import MenuUsuarios from "views/admin/menuuser.js";
 //add
 import AddMovieAdult from "views/admin/add-movie-adult.js";
 import AddMovieEs from "views/admin/add-movie-es.js";
@@ -30,6 +31,7 @@ import AddTvEs from "views/admin/add-tv-es.js";
 import AddTvEn from "views/admin/add-tv-en.js";
 import AddTvInter from "views/admin/add-tv-inter.js";
 import AddEvent from "views/admin/add-event.js";
+import AddUser from "views/admin/add-user.js";
 //list
 import ListMovieAdult from "views/admin/list-movieadult.js";
 import ListMovieEs from "views/admin/list-movie-es.js";
@@ -60,6 +62,7 @@ export default function Admin() {
             <Route path="/admin/menutv/inter" exact component={MenuTvInter} />
             <Route path="/admin/menueventos/ppv" exact component={MenuEventDeportivo} />
             <Route path="/admin/menumantenimiento" exact component={MenuMantenimientos} />
+            <Route path="/admin/menuuser" exact component={MenuUsuarios} />
 
             {/* add */}
             <Route path="/admin/menumovie/adults/add-movieadult" exact component={AddMovieAdult} />
@@ -73,7 +76,7 @@ export default function Admin() {
             <Route path="/admin/menutv/en/add-tven" exact component={AddTvEn} />
             <Route path="/admin/menutv/inter/add-tvinter" exact component={AddTvInter} />
             <Route path="/admin/menueventos/ppv/add-event" exact component={AddEvent} />
-
+            <Route path="/admin/menuuser/add-user" exact component={AddUser} />
             {/* list */}
             <Route path="/admin/menumovie/adults/list-movieadult" exact component={ListMovieAdult} />
             <Route path="/admin/menumovie/es/list-moviees" exact component={ListMovieEs} />

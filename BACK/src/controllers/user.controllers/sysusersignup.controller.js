@@ -1,28 +1,30 @@
 import bcrypt from "bcryptjs/dist/bcrypt";
 import app from "../../app";
-require("dotenv").config();
 const bcryptjs = require("bcryptjs");
 const mysqlconnection = require("../../database");
 const jwt = require("jsonwebtoken");
 import generarId from "../../helpers/generarId";
+import emailRegistro from "../../helpers/emailRegistro.js";
 
 //registro de usuario
 export const registro = async (req, res) => {
     try {
         const {
-            EMAIL_USER
+            EMAIL_USER,
+            USER_NAME,
+            TYPE
         } = req.body;
         //QUE NO EXISTA EL EMAIL
         mysqlconnection.query(`SELECT COD_USER FROM SYS_USER WHERE EMAIL_USER = LOWER('${EMAIL_USER}')`, (err, rows) => {
             if (err) {
-                res.status(500).json({
+                res.status(400).json({
                     message: "Error al consultar el usuario",
                     err
                 });
             } else {
                 if (rows.length > 0) {
                     res.status(400).json({
-                        message: "El Usuario ya existe"
+                        message: "El Usuario o Correo Ya Está Usado"
                     });
                 } else {
                     //HASH DE LA CONTRASEÑA
@@ -33,9 +35,10 @@ export const registro = async (req, res) => {
                                 err
                             });
                         } else {
+                            const tokenunico = generarId()
                             //INSERTAR USUARIO
                             mysqlconnection.query(`CALL PROC_INS_SYS_USER(?,?,?,?,?)`,
-                                [req.body.USER_NAME, hash, req.body.TYPE, req.body.EMAIL_USER, generarId()],
+                                [USER_NAME, hash, TYPE, EMAIL_USER, tokenunico],
                                 (err, rows) => {
                                     if (err) {
                                         res.status(500).json({
@@ -43,9 +46,17 @@ export const registro = async (req, res) => {
                                             err
                                         });
                                     } else {
+                                        //enviar email
+
                                         res.status(200).json({
                                             message: "Usuario creado correctamente"
                                         });
+                                        emailRegistro({
+                                            EMAIL_USER,
+                                            USER_NAME,
+                                            tokenunico
+                                        });
+
                                     }
                                 });
                         }

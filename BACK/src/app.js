@@ -31,6 +31,21 @@ app.use(express.json());
 
 app.use(cookieParser());
 
+//dominios permitidos por variables de entorno
+const dominiosPermitidos = ["http://localhost:3000", "http://localhost:3001"];
+
+const corsOptions = {
+  origin: function(origin, callback) {
+    if (dominiosPermitidos.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}
+
+app.use(cors(corsOptions));
+
 app.get("/", useMiddleware.isLoggedIn, (req, res) => {
   res.json({
     name: app.get("pkg").name,

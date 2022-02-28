@@ -145,31 +145,3 @@ export const login = (req, res, next) => {
     );
 };
 
-//reset password
-export const resetPassword = async (req, res) => {
-    try {
-        const {
-            EMAIL_USER
-        } = req.body;
-        //QUE EXISTA EL EMAIL
-        mysqlconnection.query(`SELECT COD_USER FROM SYS_USER WHERE EMAIL_USER = LOWER('${EMAIL_USER}')`, (err, rows) => {
-            if (err) {
-                res.status(500).json({
-                    message: "Error al consultar el usuario",
-                    err
-                });
-            } else {
-                if (rows.length > 0) {
-                    //GENERAR TOKEN
-                    const token = jwt.sign({
-                        COD: rows[0].COD_USER,
-                        NAME: rows[0].USER_NAME,
-                        TYPE: rows[0].USER_TYPE,
-                    },
-                        "secret", {
-                        expiresIn: "1h"
-                    }
-                    );
-                    //ENVIAR CORREO
-                         
-}

@@ -8,6 +8,12 @@ module.exports = {
                 message: "PLEASE ENTER A USERNAME WITH AT LEAST 6 CHARACTERS",
             });
         }
+        // CORREO VALIDATION
+        if (!req.body.EMAIL_USER || !req.body.EMAIL_USER.includes("@")) {
+            return res.status(400).send({
+                message: "PLEASE ENTER A VALID EMAIL",
+            });
+        }
         // PASSWORD MIN LENGTH 6
         if (!req.body.PASSWORD || req.body.PASSWORD.length < 6) {
             return res.status(400).send({
@@ -33,12 +39,12 @@ module.exports = {
             const token = authHeader.split(' ')[1];
             const decoded = jwt.verify(token, "secret");
             const userData = decoded;
-            next();
+
         } catch (error) {
-            throw error;
             return res.status(400).send({
-                message: "YOUR ARE NOT LOGGED IN!",
+                message: "YOUR ARE NOT LOGGED IN OR TOKEN INVALID!",
             });
         }
+        next();
     },
 };

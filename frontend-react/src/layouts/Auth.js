@@ -10,6 +10,7 @@ import FooterSmall from "components/Footers/FooterSmall.js";
 
 import Login from "views/auth/Login.js";
 import Register from "views/auth/recuperar-password.js";
+import ConfirmarCuenta from "views/auth/confirmar-cuenta.js";
 
 export default function Auth() {
   return (
@@ -27,6 +28,7 @@ export default function Auth() {
           <Switch>
             <Route path="/" exact component={Login} />
             <Route path="/recuperar-password" exact component={Register} />
+            <Route path="/confirmar/:id" exact component={ConfirmarCuenta} />
             <Redirect from="/" to="/" />
           </Switch>
           <FooterSmall absolute />

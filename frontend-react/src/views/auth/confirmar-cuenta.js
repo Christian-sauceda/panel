@@ -4,7 +4,6 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Alerta from "../../components/Alerts/Alerts";
 
-
 export default function ConfirmarCuenta() {
   const [cuentaConfirmada, setCuentaConfirmada] = useState(false)
   const [cargando, setCargando] = useState(true)

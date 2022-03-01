@@ -1,7 +1,37 @@
+import { useState } from "react";
 import React from "react";
 import { Link } from "react-router-dom";
+import Alerta from '../../components/Alerts/Alerts'
+import useAuth from "../../hooks/useAuth";
+import Axios from "axios";
+
 
 export default function Login() {
+    const [USER_NAME, setUser_name] = useState('')
+    const [PASSWORD, setPassword] = useState('')
+    const [alerta, setAlerta] = useState('')
+    const handSubmit = async (e) => {
+      e.preventDefault();
+      if([USER_NAME, PASSWORD].includes('')){
+          setAlerta({
+            msg: 'Todos los campos son obligatorios',
+            error: true
+          });
+          return;
+      }
+      try {
+        const url = `http://localhost:3001/login`
+          const { data } = await Axios.post(url, { USER_NAME, PASSWORD });
+          localStorage.setItem('token', data.token);
+        }
+      catch (error) {
+        setAlerta({
+          msg: error.response.data.message,
+          error: true
+        })
+      }
+    }
+    const { msg } = alerta
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -21,7 +51,11 @@ export default function Login() {
                 <div className="text-blueGray-400 text-center mb-5 font-bold ">
                   <small>Inicia Sesión con tus Credenciales</small>
                 </div>
-                <form>
+                {msg && <Alerta
+                  alerta={alerta}
+                  
+                />}
+                <form onSubmit={handSubmit} >
                   <div className="my-8">
                     <label
                       for="user"
@@ -34,7 +68,8 @@ export default function Login() {
                       name="user"
                       placeholder="Tu Username"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      required
+                      value={USER_NAME}
+                      onChange={(e) => setUser_name(e.target.value)}
                     />
                   </div>
 
@@ -49,7 +84,8 @@ export default function Login() {
                       id="pass"
                       placeholder="Tu Password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      required
+                      value={PASSWORD}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
                   <input type="submit"

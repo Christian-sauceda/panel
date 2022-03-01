@@ -11,9 +11,11 @@ import Auth from "layouts/Auth.js";
 
 // views without layouts
 import Login from "views/auth/Login.js";
+import { AuthProvider } from "./context/AuthProvider";
 
 ReactDOM.render(
   <BrowserRouter>
+    <AuthProvider>
     <Switch>
       {/* si la ruta no existe */}
       {/* add routes with layouts */}
@@ -24,6 +26,7 @@ ReactDOM.render(
       {/* add redirect for first page */}
       <Redirect from="*" to="/" />
     </Switch>
+    </AuthProvider>
   </BrowserRouter>,
   document.getElementById("root")
 );

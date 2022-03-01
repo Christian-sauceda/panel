@@ -32,12 +32,19 @@ export default function CardAddEvent() {
     setAlerta({});
     //Crear el usuario en la api
     try {
-      const url = "http://localhost:3001/registro"
-      await Axios.post(url, { EMAIL_USER, USER_NAME, PASSWORD_USER, TYPE });;
+      const url = `http://localhost:3001/registro`
+      await Axios.post(url, { EMAIL_USER, USER_NAME, PASSWORD_USER, TYPE });
       setAlerta({
         msg: 'Creado Correctamente, Revisa tu Correo',
         error: false
       })
+      //limpiar los campos
+      setNombre('');
+      setCorreoL('');
+      setPass('');
+      setPassConfirm('');
+      setTipo('');
+      
     } catch (error) {
       setAlerta({
         msg: error.response.data.message,

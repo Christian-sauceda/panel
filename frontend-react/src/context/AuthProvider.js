@@ -20,9 +20,10 @@ const AuthProvider = ({children}) => {
             try {
                 const url = `http://localhost:3001/cataudio`
                 const { data } = await axios.get(url, config);
-                console.log(data)
+                setAuth(data)
             } catch (error) {
                 console.log(error.response.data.message)
+                setAuth({})
             }
         }
         autenticarUsuario()

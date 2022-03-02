@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Alerta from '../../components/Alerts/Alerts'
 import useAuth from "../../hooks/useAuth";
 import Axios from "axios";
@@ -10,6 +10,9 @@ export default function Login() {
     const [USER_NAME, setUser_name] = useState('')
     const [PASSWORD, setPassword] = useState('')
     const [alerta, setAlerta] = useState('')
+
+    const history = useHistory();
+
     const handSubmit = async (e) => {
       e.preventDefault();
       if([USER_NAME, PASSWORD].includes('')){
@@ -23,6 +26,7 @@ export default function Login() {
         const url = `http://localhost:3001/login`
           const { data } = await Axios.post(url, { USER_NAME, PASSWORD });
           localStorage.setItem('token', data.token);
+          history.push('/admin/inicio');
         }
       catch (error) {
         setAlerta({

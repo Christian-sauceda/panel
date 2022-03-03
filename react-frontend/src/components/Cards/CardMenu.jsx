@@ -19,7 +19,7 @@ export default function CardMenu({
               <h5 className="text-white uppercase font-bold text-2xl">
                 {statSubtitle}
               </h5>
-              <span className="font-semibold text-xl text-blueGray-700">
+              <span className="font-semibold text-xl text-gray-700">
                 {statTitle}
               </span>
             </div>

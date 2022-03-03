@@ -1,383 +1,638 @@
-/*eslint-disable*/
-import React from "react";
-import { Link } from "react-router-dom";
-import './sidebar.css'
-import logo from '../../assets/img/logo.png';
+import React, { useState, useEffect, useRef } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
-import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
-import UserDropdown from "components/Dropdowns/UserDropdown.js";
+import SidebarLinkGroup from './SidebarLinkGroup';
 
-export default function Sidebar() {
-  const [collapseShow, setCollapseShow] = React.useState("hidden");
+function Sidebar({
+  sidebarOpen,
+  setSidebarOpen
+}) {
+
+  const location = useLocation();
+  const { pathname } = location;
+
+  const trigger = useRef(null);
+  const sidebar = useRef(null);
+
+  const storedSidebarExpanded = localStorage.getItem('sidebar-expanded');
+  const [sidebarExpanded, setSidebarExpanded] = useState(storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true');
+
+  // close on click outside
+  useEffect(() => {
+    const clickHandler = ({ target }) => {
+      if (!sidebar.current || !trigger.current) return;
+      if (!sidebarOpen || sidebar.current.contains(target) || trigger.current.contains(target)) return;
+      setSidebarOpen(false);
+    };
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
+  });
+
+  // close if the esc key is pressed
+  useEffect(() => {
+    const keyHandler = ({ keyCode }) => {
+      if (!sidebarOpen || keyCode !== 27) return;
+      setSidebarOpen(false);
+    };
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
+  });
+
+  useEffect(() => {
+    localStorage.setItem('sidebar-expanded', sidebarExpanded);
+    if (sidebarExpanded) {
+      document.querySelector('body').classList.add('sidebar-expanded');
+    } else {
+      document.querySelector('body').classList.remove('sidebar-expanded');
+    }
+  }, [sidebarExpanded]);
+
   return (
-    <>
-      <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
-        <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
-          {/* Toggler */}
+    <div>
+      {/* Sidebar backdrop (mobile only) */}
+      <div className={`fixed inset-0 bg-slate-900 bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200 ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} aria-hidden="true"></div>
+
+      {/* Sidebar */}
+      <div
+        id="sidebar"
+        ref={sidebar}
+        className={`flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-slate-800 p-4 transition-all duration-200 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-64'}`}
+      >
+
+        {/* Sidebar header */}
+        <div className="flex justify-between mb-10 pr-3 sm:px-2">
+          {/* Close button */}
           <button
-            className="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
-            type="button"
-            onClick={() => setCollapseShow("bg-white m-2 py-3 px-6")}
+            ref={trigger}
+            className="lg:hidden text-slate-500 hover:text-slate-400"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            aria-controls="sidebar"
+            aria-expanded={sidebarOpen}
           >
-            <i className="fas fa-bars"></i>
+            <span className="sr-only">Cerrar Barra</span>
+            <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.7 18.7l1.4-1.4L7.8 13H20v-2H7.8l4.3-4.3-1.4-1.4L4 12z" />
+            </svg>
           </button>
-          {/* Brand */}
-          <Link
-            className="md:block text-left md:pb-2 text-sky-800 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-            to="/admin/inicio"
-          >
-            <div className="sidebar__logo">
-                <img src={logo} alt="tmp" />
-            </div>
-          </Link>
-          {/* User */}
-          <ul className="md:hidden items-center flex flex-wrap list-none">
-            <li className="inline-block relative">
-              <NotificationDropdown />
-            </li>
-            <li className="inline-block relative">
-              <UserDropdown />
-            </li>
-          </ul>
-          {/* Collapse */}
-          <div
-            className={
-              "md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " +
-              collapseShow
-            }
-          >
-            {/* Collapse header */}
-            <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-sky-200">
-              <div className="flex flex-wrap">
-                <div className="w-6/12">
-                  <Link
-                    className="md:block text-left md:pb-2 text-sky-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                    to="/"
-                  >
-            <div className="sidebar__logo_text">
-                TopMedia+<br/>
-            </div>
-            <span>Panel de control</span>
-                  </Link>
-                </div>
-                <div className="w-6/12 flex justify-end">
-                  <button
-                    type="button"
-                    className="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
-                    onClick={() => setCollapseShow("hidden")}
-                  >
-                    <i className="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            {/* Form */}
-            {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none">
-            {/* INICIO */}
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/inicio") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800"
-                      : "text-sky-700 hover:text-sky-800")
-                  }
-                  to="/admin/inicio"
-                >
-                  <i
-                    className={
-                      "fas fa-home mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/inicio") !== -1
-                        ? "opacity-75"
-                        : "text-sky-300")
-                    }
-                  ></i>{" "}
-                  Inicio
-                </Link>
-              </li>
-            {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
-            <h6 className="md:min-w-full text-sky-800 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Contenido Multimedia
-            </h6>
-            {/* Navigation */}
 
+          {/* Logo */}
+          <NavLink end to="/admin" className="block text-white font-bold">
+            TopMedia+
+            <br></br>
+            Panel de Control
+          </NavLink>
+        </div>
 
-            {/* PELICULA ESP */}
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-normal block " +
-                    (window.location.href.indexOf("/admin/menumovie/es") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800"
-                      : "text-sky-700 hover:text-sky-800")
-                  }
-                  to="/admin/menumovie/es"
-                >
-                  <i
-                    className={
-                      "fas fa-film mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/menumovie/es") !== -1
-                        ? "opacity-75"
-                        : "text-sky-300")
-                    }
-                  ></i>{" "}
-                  Películas en Español
-                </Link>
+        {/* Links */}
+        <div className="space-y-8">
+          {/* Pages group */}
+          <div>
+            <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3">
+              <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true"></span>
+              <span className="lg:hidden lg:sidebar-expanded:block 2xl:block"></span>
+            </h3>
+            <ul className="mt-3">
+              {/* INICIO */}
+              <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname === '/' && 'bg-slate-900'}`}>
+                <NavLink end to="/admin" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname === '/' && 'hover:text-slate-200'}`}>
+                  <div className="flex items-center">
+                    <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                      <path className={`fill-current text-slate-400 ${pathname === '/' && '!text-indigo-500'}`} d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z" />
+                      <path className={`fill-current text-slate-600 ${pathname === '/' && 'text-indigo-600'}`} d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9z" />
+                      <path className={`fill-current text-slate-400 ${pathname === '/' && 'text-indigo-200'}`} d="M12 15c-1.654 0-3-1.346-3-3 0-.462.113-.894.3-1.285L6 6l4.714 3.301A2.973 2.973 0 0112 9c1.654 0 3 1.346 3 3s-1.346 3-3 3z" />
+                    </svg>
+                    <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Inicio</span>
+                  </div>
+                </NavLink>
               </li>
-            {/* PELICULA ENG */}
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-normal block " +
-                    (window.location.href.indexOf("/admin/menumovie/en") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800"
-                      : "text-sky-700 hover:text-sky-500")
-                  }
-                  to="/admin/menumovie/en"
-                >
-                  <i
-                    className={
-                      "fas fa-ticket-alt mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/menumovie/en") !== -1
-                        ? "opacity-75"
-                        : "text-sky-300")
-                    }
-                  ></i>{" "}
-                  Películas en Inglés
-                </Link>
-              </li>
-            {/* PELICULAS ADULT */}
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-normal block " +
-                    (window.location.href.indexOf("/admin/menumovie/adults") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800"
-                      : "text-sky-700 hover:text-sky-500")
-                  }
-                  to="/admin/menumovie/adults"
-                >
-                  <i
-                    className={
-                      "fas fa-female mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/menumovie/adults") !== -1
-                        ? "opacity-75"
-                        : "text-sky-300")
-                    }
-                  ></i>{" "}
-                  Películas Adultos
-                </Link>
-              </li>
-            {/* SERIES ESP */}
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-normal block " +
-                    (window.location.href.indexOf("/admin/menuserie/es") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800"
-                      : "text-sky-700 hover:text-sky-500")
-                  }
-                  to="/admin/menuserie/es"
-                >
-                  <i
-                    className={
-                      "fas fa-tv  mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/menuserie/es") !== -1
-                        ? "opacity-75"
-                        : "text-sky-300")
-                    }
-                  ></i>{" "}
-                  Series en Español
-                </Link>
-              </li>
-              {/* SERIES ESP */}
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-normal block " +
-                    (window.location.href.indexOf("/admin/menuserie/en") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800"
-                      : "text-sky-700 hover:text-sky-500")
-                  }
-                  to="/admin/menuserie/en"
-                >
-                  <i
-                    className={
-                      "fas fa-fire  mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/menuserie/en") !== -1
-                        ? "opacity-75"
-                        : "text-sky-300")
-                    }
-                  ></i>{" "}
-                  Series en Inglés
-                </Link>
-              </li>
+              <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3 pt-5">
+                <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">•••</span>
+                <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">Contenido Multimedia</span>
+              </h3>
+              {/* Movie en espanol */}
+              <SidebarLinkGroup activecondition={pathname.includes('movieEs')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('movieEs') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                              <path className={`fill-current text-slate-400 ${pathname.includes('movieEs') && 'text-indigo-300'}`} d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z" />
+                              <path className={`fill-current text-slate-700 ${pathname.includes('movieEs') && '!text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
+                              <path className={`fill-current text-slate-600 ${pathname.includes('movieEs') && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
+                            </svg>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Peliculas</span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Agregar Pelicula</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Listar Peliculas</span>
+                            </NavLink>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+              {/* Movie en ingles */}
+              <SidebarLinkGroup activecondition={pathname.includes('movieEn')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('movieEn') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                              <path className={`fill-current text-slate-400 ${pathname.includes('movieEn') && 'text-indigo-300'}`} d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z" />
+                              <path className={`fill-current text-slate-700 ${pathname.includes('movieEn') && '!text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
+                              <path className={`fill-current text-slate-600 ${pathname.includes('movieEn') && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
+                            </svg>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Movies</span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/en/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Add Movie</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/en/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">List Movies</span>
+                            </NavLink>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+              {/* Movie adults */}
+              <SidebarLinkGroup activecondition={pathname.includes('movieAdult')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('movieAdult') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                              <path className={`fill-current text-slate-400 ${pathname.includes('movieAdult') && 'text-indigo-300'}`} d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z" />
+                              <path className={`fill-current text-slate-700 ${pathname.includes('movieAdult') && '!text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
+                              <path className={`fill-current text-slate-600 ${pathname.includes('movieAdult') && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
+                            </svg>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Movie Adult</span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/en/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Add Movie Adult</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/en/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">List Movie Adults</span>
+                            </NavLink>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+              {/* Series en español */}
+              <SidebarLinkGroup activecondition={pathname.includes('seriesEs')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('seriesEs') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                              <path className={`fill-current text-slate-400 ${pathname.includes('seriesEs') && 'text-indigo-300'}`} d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z" />
+                              <path className={`fill-current text-slate-700 ${pathname.includes('seriesEs') && '!text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
+                              <path className={`fill-current text-slate-600 ${pathname.includes('seriesEs') && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
+                            </svg>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Series en Español</span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/series/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Agregar serie</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/series/es/addcap" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Agregar Capitulo</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/series/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Listar Series</span>
+                            </NavLink>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+              {/* Serie en ingles */}
+              <SidebarLinkGroup activecondition={pathname.includes('seriesEn')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('seriesEn') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                              <path className={`fill-current text-slate-400 ${pathname.includes('seriesEn') && 'text-indigo-300'}`} d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z" />
+                              <path className={`fill-current text-slate-700 ${pathname.includes('seriesEn') && '!text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
+                              <path className={`fill-current text-slate-600 ${pathname.includes('seriesEn') && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
+                            </svg>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tv Shows</span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/tvshow/en/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Add Tv Show</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/tvshow/en/addcap" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Add Chapter</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/tvshow/en/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">List Tv shows</span>
+                            </NavLink>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+              <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3 p-5">
+                <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">•••</span>
+                <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">Contenido Live</span>
+              </h3>
+              {/* tv Es */}
+              <SidebarLinkGroup activecondition={pathname.includes('tvEs')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('tvEs') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                              <path className={`fill-current text-slate-400 ${pathname.includes('tvEs') && 'text-indigo-300'}`} d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z" />
+                              <path className={`fill-current text-slate-700 ${pathname.includes('tvEs') && '!text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
+                              <path className={`fill-current text-slate-600 ${pathname.includes('tvEs') && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
+                            </svg>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tv en Vivo</span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Agregar Pelicula</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Listar Peliculas</span>
+                            </NavLink>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+              {/* tv En */}
+              <SidebarLinkGroup activecondition={pathname.includes('tvEn')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('tvEn') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                              <path className={`fill-current text-slate-400 ${pathname.includes('tvEn') && 'text-indigo-300'}`} d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z" />
+                              <path className={`fill-current text-slate-700 ${pathname.includes('tvEn') && '!text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
+                              <path className={`fill-current text-slate-600 ${pathname.includes('tvEn') && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
+                            </svg>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tv Live</span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Agregar Pelicula</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Listar Peliculas</span>
+                            </NavLink>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+              {/* tv Internacional */}
+              <SidebarLinkGroup activecondition={pathname.includes('tvInter')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('tvInter') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                              <path className={`fill-current text-slate-400 ${pathname.includes('tvInter') && 'text-indigo-300'}`} d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z" />
+                              <path className={`fill-current text-slate-700 ${pathname.includes('tvInter') && '!text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
+                              <path className={`fill-current text-slate-600 ${pathname.includes('tvInter') && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
+                            </svg>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tv Internacional</span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Agregar Pelicula</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Listar Peliculas</span>
+                            </NavLink>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+              {/* Eventos Deportivos */}
+              <SidebarLinkGroup activecondition={pathname.includes('eventsDepor')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('eventsDepor') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                              <path className={`fill-current text-slate-400 ${pathname.includes('eventsDepor') && 'text-indigo-300'}`} d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z" />
+                              <path className={`fill-current text-slate-700 ${pathname.includes('eventsDepor') && '!text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
+                              <path className={`fill-current text-slate-600 ${pathname.includes('eventsDepor') && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
+                            </svg>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Eventos Deportivos</span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Agregar Pelicula</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Listar Peliculas</span>
+                            </NavLink>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+              <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3 p-5">
+                <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">•••</span>
+                <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">Configuraciones</span>
+              </h3>
+              {/* Mantenimientos */}
+              <SidebarLinkGroup activecondition={pathname.includes('Mantenimientos')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('Mantenimientos') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                              <path className={`fill-current text-slate-400 ${pathname.includes('Mantenimientos') && 'text-indigo-300'}`} d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z" />
+                              <path className={`fill-current text-slate-700 ${pathname.includes('Mantenimientos') && '!text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
+                              <path className={`fill-current text-slate-600 ${pathname.includes('Mantenimientos') && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
+                            </svg>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Mantenimientos</span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tipo de Audio</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tipo de Categoria</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">EPG Channel</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tipo de Formato</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tipo de Calidad</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tipo de Contenido</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tipo de Server</span>
+                            </NavLink>
+                          </li>
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+              {/* Users */}
+              <SidebarLinkGroup activecondition={pathname.includes('tvEn')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('tvEn') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                              <path className={`fill-current text-slate-400 ${pathname.includes('tvEn') && 'text-indigo-300'}`} d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z" />
+                              <path className={`fill-current text-slate-700 ${pathname.includes('tvEn') && '!text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
+                              <path className={`fill-current text-slate-600 ${pathname.includes('tvEn') && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
+                            </svg>
+                            <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Usuarios</span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Agregar Usuario</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Listar Usuarios</span>
+                            </NavLink>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
             </ul>
-
-            {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
-            <h6 className="md:min-w-full text-sky-800 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              contenido Live
-            </h6>
-            {/* Navigation */}
-
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-normal block " +
-                    (window.location.href.indexOf("/admin/menutv/es") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800"
-                      : "text-sky-700 hover:text-sky-500")
-                  }
-                  to="/admin/menutv/es"
-                >
-                  <i
-                    className={
-                      "fas fa-headset  mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/menutv/es") !== -1
-                        ? "opacity-75"
-                        : "text-sky-300")
-                    }
-                  ></i>{" "}
-                  Tv en Español
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-normal block " +
-                    (window.location.href.indexOf("/admin/menutv/en") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800"
-                      : "text-sky-700 hover:text-sky-500")
-                  }
-                  to="/admin/menutv/en"
-                >
-                  <i
-                    className={
-                      "fas fa-language  mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/menutv/en") !== -1
-                        ? "opacity-75"
-                        : "text-sky-300")
-                    }
-                  ></i>{" "}
-                  Tv en Ingles
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-normal block " +
-                    (window.location.href.indexOf("/admin/menutv/inter") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800"
-                      : "text-sky-700 hover:text-sky-500")
-                  }
-                  to="/admin/menutv/inter"
-                >
-                  <i
-                    className={
-                      "fas fa-globe  mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/menutv/inter") !== -1
-                        ? "opacity-75"
-                        : "text-sky-300")
-                    }
-                  ></i>{" "}
-                  Tv Internacional
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-normal block " +
-                    (window.location.href.indexOf("/admin/menueventos/ppv") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800"
-                      : "text-sky-700 hover:text-sky-500")
-                  }
-                  to="/admin/menueventos/ppv"
-                >
-                  <i
-                    className={
-                      "fas fa-futbol  mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/menueventos/ppv") !== -1
-                        ? "opacity-75"
-                        : "text-sky-300")
-                    }
-                  ></i>{" "}
-                  Eventos Deportivos
-                </Link>
-              </li>
-            </ul>
-            
-            {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
-            <h6 className="md:min-w-full text-sky-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Mantenimientos
-            </h6>
-            {/* Navigation */}
-
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-            <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-normal block " +
-                    (window.location.href.indexOf("/admin/menumantenimiento") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800"
-                      : "text-sky-700 hover:text-sky-500")
-                  }
-                  to="/admin/menumantenimiento"
-                >
-                  <i
-                    className={
-                      "fas fa-cog  mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/menumantenimiento") !== -1
-                        ? "opacity-75"
-                        : "text-sky-300")
-                    }
-                  ></i>{" "}
-                  Mantenimientos
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-normal block " +
-                    (window.location.href.indexOf("/admin/menuuser/") !== -1
-                      ? "text-bg-sky-800 hover:text-sky-800"
-                      : "text-sky-700 hover:text-sky-500")
-                  }
-                  to="/admin/menuuser/"
-                >
-                  <i
-                    className={
-                      "fas fa-user  mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/menuuser/") !== -1
-                        ? "opacity-75"
-                        : "text-sky-300")
-                    }
-                  ></i>{" "}
-                  Usuarios
-                </Link>
-              </li>
-
-            </ul>
-
-            {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
-
           </div>
         </div>
-      </nav>
-    </>
+
+        {/* Expand / collapse button */}
+        <div className="pt-3 hidden lg:inline-flex 2xl:hidden justify-end mt-auto">
+          <div className="px-3 py-2">
+            <button onClick={() => setSidebarExpanded(!sidebarExpanded)}>
+              <span className="sr-only">Extender / Encoger</span>
+              <svg className="w-6 h-6 fill-current sidebar-expanded:rotate-180" viewBox="0 0 24 24">
+                <path className="text-slate-400" d="M19.586 11l-5-5L16 4.586 23.414 12 16 19.414 14.586 18l5-5H7v-2z" />
+                <path className="text-slate-600" d="M3 23H1V1h2z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
   );
 }
+
+export default Sidebar;

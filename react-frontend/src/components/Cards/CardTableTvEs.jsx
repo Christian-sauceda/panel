@@ -18,7 +18,7 @@ export default function CardTable({ color }) {
               <h3
                 className={
                   "font-semibold text-lg " +
-                  (color === "light" ? "text-blueGray-700" : "text-white")
+                  (color === "light" ? "text-gray-700" : "text-white")
                 }
               >
                 Listado de Tv Español en vivo
@@ -36,7 +36,7 @@ export default function CardTable({ color }) {
                   className={
                     "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                     (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      ? "bg-gray-50 text-gray-500 border-gray-100"
                       : "bg-sky-800 text-sky-800 border-sky-800")
                   }
                 >
@@ -46,7 +46,7 @@ export default function CardTable({ color }) {
                   className={
                     "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                     (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      ? "bg-gray-50 text-gray-500 border-gray-100"
                       : "bg-sky-800 text-sky-300 border-sky-700")
                   }
                 >
@@ -56,7 +56,7 @@ export default function CardTable({ color }) {
                   className={
                     "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                     (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      ? "bg-gray-50 text-gray-500 border-gray-100"
                       : "bg-sky-800 text-sky-300 border-sky-700")
                   }
                 >
@@ -66,7 +66,7 @@ export default function CardTable({ color }) {
                   className={
                     "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                     (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      ? "bg-gray-50 text-gray-500 border-gray-100"
                       : "bg-sky-800 text-sky-300 border-sky-700")
                   }
                 >
@@ -76,7 +76,7 @@ export default function CardTable({ color }) {
                   className={
                     "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                     (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      ? "bg-gray-50 text-gray-500 border-gray-100"
                       : "bg-sky-800 text-sky-300 border-sky-700")
                   }
                 >
@@ -86,7 +86,7 @@ export default function CardTable({ color }) {
                   className={
                     "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                     (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      ? "bg-gray-50 text-gray-500 border-gray-100"
                       : "bg-sky-800 text-sky-300 border-sky-700")
                   }
                 ></th>

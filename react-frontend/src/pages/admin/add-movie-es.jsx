@@ -2,12 +2,12 @@ import React from "react";
 
 // components
 
-import CardAddMovieEs from "components/Cards/CardAddMovieEs.js";
+import AddMovieEs from "../../components/Cards/CardAddMovieEs.jsx";
 
 export default function Addmoviees() {
     return (
         <>
-            <CardAddMovieEs />
+            <AddMovieEs />
         </>
     );
 }

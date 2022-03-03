@@ -9,7 +9,7 @@ export default function CardUltimasSeriesEs() {
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 className="font-semibold text-base text-blueGray-700">
+              <h3 className="font-semibold text-base text-gray-700">
                 Ultimas Series en Español
               </h3>
             </div>
@@ -26,10 +26,10 @@ export default function CardUltimasSeriesEs() {
           <table className="items-center w-full bg-transparent border-collapse">
             <thead className="thead-light">
               <tr>
-                <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left hover:bg-sky-800 hover:text-white">
+                <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left hover:bg-sky-800 hover:text-white">
                   Título
                 </th>
-                <th className="px-6 text-white align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left bg-sky-800">
+                <th className="px-6 text-white align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left bg-sky-800">
                   Fecha
                 </th>
 

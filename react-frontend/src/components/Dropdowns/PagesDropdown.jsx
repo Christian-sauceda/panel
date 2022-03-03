@@ -19,7 +19,7 @@ const PagesDropdown = () => {
   return (
     <>
       <a
-        className="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+        className="lg:text-white lg:hover:text-gray text-graygray3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
         href="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
@@ -38,7 +38,7 @@ const PagesDropdown = () => {
       >
         <span
           className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-gray"
           }
         >
           Admin Layout
@@ -46,7 +46,7 @@ const PagesDropdown = () => {
         <Link
           to="/admin/inicio"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray"
           }
         >
           inicio
@@ -54,7 +54,7 @@ const PagesDropdown = () => {
         <Link
           to="/admin/menumovie/es"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray"
           }
         >
           Movie Español
@@ -62,7 +62,7 @@ const PagesDropdown = () => {
         <Link
           to="/admin/menumovie/en"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray"
           }
         >
           Movie Inglés
@@ -70,7 +70,7 @@ const PagesDropdown = () => {
         <Link
           to="/admin/menumovie/adults"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray"
           }
         >
           Películas Adultos
@@ -78,15 +78,15 @@ const PagesDropdown = () => {
         <Link
           to="/admin/serie-es"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray"
           }
         >
           Serie español
         </Link>
-        <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
+        <div className="h-0 mx-4 my-2 border border-solid border-gray" />
         <span
           className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-gray"
           }
         >
           Auth Layout
@@ -94,7 +94,7 @@ const PagesDropdown = () => {
         <Link
           to="/login"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray"
           }
         >
           Login
@@ -102,15 +102,15 @@ const PagesDropdown = () => {
         <Link
           to="/recuperar-password"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray"
           }
         >
           Register
         </Link>
-        <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
+        <div className="h-0 mx-4 my-2 border border-solid border-gray" />
         <span
           className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-gray"
           }
         >
           No Layout
@@ -118,7 +118,7 @@ const PagesDropdown = () => {
         <Link
           to="/landing"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray"
           }
         >
           Landing
@@ -126,7 +126,7 @@ const PagesDropdown = () => {
         <Link
           to="/profile"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray"
           }
         >
           Profile

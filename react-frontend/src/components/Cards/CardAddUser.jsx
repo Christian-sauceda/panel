@@ -61,14 +61,14 @@ export default function CardAddEvent() {
       >
         <div className="flex flex-wrap">
           <div className="w-full lg:w-12/12 px-4 pb-0">
-            <div className="relative flex flex-col min-w-0 break-words w-full mb-0 shadow-lg rounded-lg bg-blueGray-100 border-0">
+            <div className="relative flex flex-col min-w-0 break-words w-full mb-0 shadow-lg rounded-lg bg-gray-100 border-0">
               <div className="rounded-t bg-white  px-6 py-6 mb-6">
                 <div className="text-center flex justify-between">
-                  <h6 className="text-blueGray-700 text-xl font-bold">Agregar Nuevo Administrador</h6>
+                  <h6 className="text-gray-700 text-xl font-bold">Agregar Nuevo Administrador</h6>
                 </div>
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0 mb-6">
-                <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                <h6 className="text-gray-400 text-sm mt-3 mb-6 font-bold uppercase">
                   Información Del Administrador
                 </h6>
                 <div
@@ -86,7 +86,7 @@ export default function CardAddEvent() {
                     <div className="relative w-full mb-3">
                       <label
                         for="USER_NAME"
-                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        className="block uppercase text-gray-600 text-xs font-bold mb-2"
                       >
                         Nombre:
                       </label>
@@ -94,7 +94,7 @@ export default function CardAddEvent() {
                         type="text"
                         id="USER_NAME"
                         name="USER_NAME"
-                        className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        className="border-0 px-3 py-3 placeholder-sky-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Nombre del administrador"
                         value={USER_NAME}
                         onChange={(e) => setNombre(e.target.value)}
@@ -106,7 +106,7 @@ export default function CardAddEvent() {
                     <div className="relative w-full mb-3">
                       <label
                         for="EMAIL_USER"
-                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        className="block uppercase text-gray-600 text-xs font-bold mb-2"
                       >
                         Correo:
                       </label>
@@ -114,7 +114,7 @@ export default function CardAddEvent() {
                         type="email"
                         id="EMAIL_USER"
                         name="EMAIL_USER"
-                        className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        className="border-0 px-3 py-3 placeholder-sky-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Correo del Administrador"
                         value={EMAIL_USER}
                         onChange={(e) => setCorreoL(e.target.value)}
@@ -126,7 +126,7 @@ export default function CardAddEvent() {
                     <div className="relative w-full mb-3">
                       <label
                         for="PASSWORD_USER"
-                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        className="block uppercase text-gray-600 text-xs font-bold mb-2"
                       >
                         Contraseña:
                       </label>
@@ -134,7 +134,7 @@ export default function CardAddEvent() {
                         type="password"
                         id="PASSWORD_USER"
                         name="PASSWORD_USER"
-                        className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        className="border-0 px-3 py-3 placeholder-sky-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Contraseña del Administrador"
                         value={PASSWORD_USER}
                         onChange={(e) => setPass(e.target.value)}
@@ -146,7 +146,7 @@ export default function CardAddEvent() {
                     <div className="relative w-full mb-3">
                       <label
                         for="repeatPassword"
-                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        className="block uppercase text-gray-600 text-xs font-bold mb-2"
                       >
                         Repita la Contraseña:
                       </label>
@@ -154,7 +154,7 @@ export default function CardAddEvent() {
                         type="password"
                         id="repeatPassword"
                         name="repeatPassword"
-                        className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        className="border-0 px-3 py-3 placeholder-sky-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Repita la Contraseña"
                         value={PASSWORD_CONFIRM}
                         onChange={(e) => setPassConfirm(e.target.value)}
@@ -166,14 +166,14 @@ export default function CardAddEvent() {
                     <div className="relative w-full mb-3">
                       <label
                         for="TYPE"
-                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        className="block uppercase text-gray-600 text-xs font-bold mb-2"
                       >
                         Tipo de Usuario:
                       </label>
                       <select
                         name="TYPE"
                         id="TYPE"
-                        className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        className="border-0 px-3 py-3 placeholder-sky-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         value={TYPE}
                         onChange={(e) => setTipo(e.target.value)}
                       >

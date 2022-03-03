@@ -10,10 +10,10 @@ export default function CardListSerieEs() {
                 <div className="px-6">
 
                     <div className="text-center mt-12">
-                        <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 ">
+                        <h3 className="text-xl font-semibold leading-normal mb-2 text-gray-700 ">
                             Dark
                         </h3>
-                        <div className="mb-2 text-blueGray-600 mt-10">
+                        <div className="mb-2 text-gray-600 mt-10">
                             <div className="relative w-full mb-3">
                                 <table className="w-full bg-transparent border-collapse">
                                     <thead>

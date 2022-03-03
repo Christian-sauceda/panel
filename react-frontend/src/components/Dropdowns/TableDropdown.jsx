@@ -1,14 +1,14 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
 
-const UserDropdown = () => {
+const NotificationDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
     createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start",
+      placement: "left-start",
     });
     setDropdownPopoverShow(true);
   };
@@ -18,7 +18,7 @@ const UserDropdown = () => {
   return (
     <>
       <a
-        className="text-blueGray-500 block"
+        className="text-gray-500 py-1 px-3"
         href="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
@@ -26,11 +26,7 @@ const UserDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        <div className="items-center flex bg-sky-800 rounded-lg">
-          <span className="text-sm font-bold text-white hover:text-red-800 inline-flex items-center justify-center m-2">
-            Hola, Cristian
-          </span>
-        </div>
+        <i className="fas fa-ellipsis-v"></i>
       </a>
       <div
         ref={popoverDropdownRef}
@@ -40,16 +36,35 @@ const UserDropdown = () => {
         }
       >
         <a
+          href="#pablo"
           className={
-            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap text-sky-800"
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
           }
-          href="/login"
+          onClick={(e) => e.preventDefault()}
         >
-          Cerrar Sesión
+          Action
+        </a>
+        <a
+          href="#pablo"
+          className={
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
+          }
+          onClick={(e) => e.preventDefault()}
+        >
+          Another action
+        </a>
+        <a
+          href="#pablo"
+          className={
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
+          }
+          onClick={(e) => e.preventDefault()}
+        >
+          Something else here
         </a>
       </div>
     </>
   );
 };
 
-export default UserDropdown;
+export default NotificationDropdown;

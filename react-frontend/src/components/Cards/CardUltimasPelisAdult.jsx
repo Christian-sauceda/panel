@@ -9,7 +9,7 @@ export default function CardUltimasPelisAdult() {
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 className="font-semibold text-base text-blueGray-700">
+              <h3 className="font-semibold text-base text-gray">
                 Ultimas Películas Para Adultos Añadidas 
               </h3>
             </div>
@@ -26,13 +26,13 @@ export default function CardUltimasPelisAdult() {
           <table className="items-center w-full bg-transparent hover:table-fixed border-collapse">
             <thead className="thead-light">
               <tr>
-                <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-gray py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                   Título
                 </th>
-                <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-gray py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                   Tipo
                 </th>
-                <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
+                <th className="px-6 bg-sky-800 text-white align-middle border border-solid border-gray py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
                   Fecha
                 </th>
               </tr>

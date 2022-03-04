@@ -9,7 +9,7 @@ import "./card.css";
 
 export default function CardAddEvent() {
   const [USER_NAME, setNombre] = useState('');
-  const [EMAIL_USER, setCorreoL] = useState('');
+  const [EMAIL_USER, setCorreo] = useState('');
   const [PASSWORD_USER, setPass] = useState('');
   const [PASSWORD_CONFIRM, setPassConfirm] = useState('');
   const [TYPE, setTipo] = useState('');
@@ -35,7 +35,7 @@ export default function CardAddEvent() {
       const url = `http://localhost:3001/registro`
       await Axios.post(url, { EMAIL_USER, USER_NAME, PASSWORD_USER, TYPE });
       setAlerta({
-        msg: 'Creado Correctamente, Revisa tu Correo',
+        msg: 'Usuario Creado Correctamente, Revisa tu Correo',
         error: false
       })
       //limpiar los campos

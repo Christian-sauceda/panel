@@ -1,35 +1,36 @@
 import { useState } from 'react';
+import clienteAxios from '../../config/axios';
 import Alerta from '../../components/Alerts/Alerts';
 import BannerUser from '../../partials/dashboard/BannerUser';
 import "../../components/Cards/card.css";
 
 const Registrar = () => {
   const [USER_NAME, setNombre] = useState('');
-  const [USER_EMAIL, setCorreo] = useState('');
-  const [USER_PASSWORD, setPass] = useState('');
-  const [USER_CONFIRM_PASSWORD, setPassConfirm] = useState('');
+  const [EMAIL_USER, setCorreo] = useState('');
+  const [PASSWORD_USER, setPass] = useState('');
+  const [PASSWORD_CONFIRM, setPassConfirm] = useState('');
   const [TYPE, setTipo] = useState('');
 
   const [alerta, setAlerta] = useState({});
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    if ([USER_NAME, USER_EMAIL, USER_PASSWORD, USER_CONFIRM_PASSWORD].includes('')) {
+    if ([USER_NAME, EMAIL_USER, PASSWORD_USER, PASSWORD_CONFIRM, TYPE].includes('')) {
       setAlerta({
         msg: 'Hay Campos Vacios',
         error: true,
       });
       return;
     }
-    if (USER_PASSWORD !== USER_CONFIRM_PASSWORD) {
+    if (PASSWORD_USER !== PASSWORD_CONFIRM) {
       setAlerta({
         msg: 'Las Contraseñas no Coinciden',
         error: true,
       });
       return;
     }
-    if (USER_PASSWORD.length < 6) {
+    if (PASSWORD_USER.length < 6) {
       setAlerta({
         msg: 'Contraseña es Insegura, debe tener al menos 6 caracteres',
         error: true,
@@ -39,7 +40,25 @@ const Registrar = () => {
     setAlerta({})
 
     //Crear Usuario
-    
+    try {
+      await clienteAxios.post(`/registro`, { EMAIL_USER, USER_NAME, PASSWORD_USER, TYPE });
+      setAlerta({
+        msg: 'Creado Correctamente, Revisa tu Correo',
+        error: false
+      })
+      //limpiar los campos
+      setNombre('');
+      setCorreo('');
+      setPass('');
+      setPassConfirm('');
+      setTipo('');
+
+    } catch (error) {
+      setAlerta({
+        msg: error.response.data.message,
+        error: true
+      })
+    }
   }
 
   const { msg } = alerta;
@@ -49,7 +68,7 @@ const Registrar = () => {
       <main>
         <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
           <BannerUser />
-           {msg && <Alerta alerta={alerta} />}
+          {msg && <Alerta alerta={alerta} />}
           <div className="sm:flex sm:justify-between sm:items-center mb-8">
 
             <form
@@ -71,7 +90,7 @@ const Registrar = () => {
                           <div className="relative w-full mb-3">
                             <label
                               for="USER_NAME"
-                              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             >
                               Nombre:
                             </label>
@@ -91,7 +110,7 @@ const Registrar = () => {
                           <div className="relative w-full mb-3">
                             <label
                               for="EMAIL_USER"
-                              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             >
                               Correo:
                             </label>
@@ -101,7 +120,7 @@ const Registrar = () => {
                               name="EMAIL_USER"
                               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               placeholder="Correo del Administrador"
-                              value={USER_EMAIL}
+                              value={EMAIL_USER}
                               onChange={(e) => setCorreo(e.target.value)}
                             />
                           </div>
@@ -111,7 +130,7 @@ const Registrar = () => {
                           <div className="relative w-full mb-3">
                             <label
                               for="PASSWORD_USER"
-                              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             >
                               Contraseña:
                             </label>
@@ -121,7 +140,7 @@ const Registrar = () => {
                               name="PASSWORD_USER"
                               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               placeholder="Contraseña del Administrador"
-                              value={USER_PASSWORD}
+                              value={PASSWORD_USER}
                               onChange={(e) => setPass(e.target.value)}
                             />
                           </div>
@@ -131,7 +150,7 @@ const Registrar = () => {
                           <div className="relative w-full mb-3">
                             <label
                               for="repeatPassword"
-                              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             >
                               Repita la Contraseña:
                             </label>
@@ -141,7 +160,7 @@ const Registrar = () => {
                               name="repeatPassword"
                               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               placeholder="Repita la Contraseña"
-                              value={USER_CONFIRM_PASSWORD}
+                              value={PASSWORD_CONFIRM}
                               onChange={(e) => setPassConfirm(e.target.value)}
                             />
                           </div>
@@ -151,7 +170,7 @@ const Registrar = () => {
                           <div className="relative w-full mb-3">
                             <label
                               for="TYPE"
-                              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             >
                               Tipo de Usuario:
                             </label>

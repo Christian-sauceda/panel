@@ -37,9 +37,10 @@ const dominiosPermitidos = ["http://localhost:3000", "http://localhost:3001"];
 const corsOptions = {
   origin: function(origin, callback) {
     if (dominiosPermitidos.indexOf(origin) !== -1) {
+      //el origen del request es permitido
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error('No permitido por CORS'));
     }
   }
 }

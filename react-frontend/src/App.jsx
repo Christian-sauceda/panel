@@ -12,25 +12,28 @@ import Inicio from './pages/admin/Inicio.jsx'
 //add
 import AddMovieEs from './pages/admin/AddMovieEs'
 
+import { AuthProvider } from './context/AuthProvider'
+
 function App() {
+
 
   return (
     <BrowserRouter>
+    <AuthProvider>
       <Routes>
         <Route path="/" element={<AuthLayout />}>
           <Route index element={<Login />} />
           <Route path="olvide-password" element={<OlvidePassword />} />
           <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
         </Route>
-      </Routes>
 
-      <Routes>
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Inicio />} />
           <Route path="movie/es/add" element={<AddMovieEs />} />
           <Route path="user/registrar" element={<Registrar />} />
         </Route>
       </Routes>
+      </AuthProvider>
     </BrowserRouter>
   )
 }

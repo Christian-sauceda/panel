@@ -12,6 +12,9 @@ import Inicio from './pages/admin/Inicio.jsx'
 //add
 import AddMovieEs from './pages/admin/AddMovieEs'
 
+//cat
+import ManCatAudio from './pages/admin/ManCatAudio'
+
 import { AuthProvider } from './context/AuthProvider'
 
 function App() {
@@ -31,6 +34,7 @@ function App() {
           <Route index element={<Inicio />} />
           <Route path="movie/es/add" element={<AddMovieEs />} />
           <Route path="user/registrar" element={<Registrar />} />
+          <Route path="cat/audio" element={<ManCatAudio />} />
         </Route>
       </Routes>
       </AuthProvider>

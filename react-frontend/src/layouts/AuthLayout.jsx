@@ -1,22 +1,14 @@
 import { Outlet } from 'react-router-dom'
 
 //components
-import Navbar from "../components/Navbars/AuthNavbar";
-import FooterSmall from "../components/Footers/FooterSmall";
+
 //importar css
 import "./AuthLayout.css";
 const AuthLayout = () => {
     return (
         <>
-            <Navbar transparent />
-            <main>
-                <section className="relative py-40 min-h-screen">
-                    <div
-                        className="absolute top-0 w-full h-full bg-color bg-image"
-                    ></div>
-                    <Outlet />
-                    <FooterSmall absolute />
-                </section>
+            <main className="container mx-auto md:grid md:grid-cols-2 mt-24 gap-10 p-5 items-center">
+            <Outlet />
             </main>
 
         </>

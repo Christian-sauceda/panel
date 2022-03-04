@@ -40,7 +40,7 @@ export default function CardAddEvent() {
       })
       //limpiar los campos
       setNombre('');
-      setCorreoL('');
+      setCorreo('');
       setPass('');
       setPassConfirm('');
       setTipo('');
@@ -117,7 +117,7 @@ export default function CardAddEvent() {
                         className="border-0 px-3 py-3 placeholder-sky-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Correo del Administrador"
                         value={EMAIL_USER}
-                        onChange={(e) => setCorreoL(e.target.value)}
+                        onChange={(e) => setCorreo(e.target.value)}
                       />
                     </div>
                   </div>

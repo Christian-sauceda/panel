@@ -1,8 +1,8 @@
-import React from "react";
+
 
 const Alerta = ({alerta}) => {
     return (
-        <div className={`${alerta.error ? 'bg-red-600' : 'bg-sky-800'} text-white pt-2 pb-2 px-2 justify-center mb-6 text-center font-bold uppercase text-sm`}>
+        <div className={`${alerta.error ? 'from-red-600 to-red-800' : 'from-green-600 to-green-800'} bg-gradient-to-r text-white pt-2 pb-2 px-2 justify-center mb-6 text-center font-bold uppercase text-sm rounded-xl`}>
             {alerta.msg}
         </div>
     );

@@ -1,4 +1,4 @@
-import WelcomeBanner from '../../partials/dashboard/BannerMovieEs';
+import BanneMovieEs from '../../partials/dashboard/BannerMovieEs';
 import "../../components/Cards/card.css";
 import CardFileAddMovieAdult from "../../components/Cards/CardFileAddMovieAdult.jsx";
 
@@ -7,20 +7,14 @@ function AddMovieEs() {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <WelcomeBanner />
+                    <BanneMovieEs />
                     <div className="sm:flex sm:justify-between sm:items-center mb-8">
-
                         <form>
                             <div className="flex flex-wrap">
                                 <div className="w-full lg:w-8/12 px-4">
                                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
-                                        
                                         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                                            <h6 className="text-gray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                                                Información General
-                                            </h6>
                                             <div className="flex flex-wrap">
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label

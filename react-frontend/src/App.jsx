@@ -19,7 +19,6 @@ function App() {
       <Routes>
         <Route path="/" element={<AuthLayout />}>
           <Route index element={<Login />} />
-          <Route path="registrar" element={<Registrar />} />
           <Route path="olvide-password" element={<OlvidePassword />} />
           <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
         </Route>
@@ -29,8 +28,7 @@ function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Inicio />} />
           <Route path="movie/es/add" element={<AddMovieEs />} />
-          <Route path="olvide-password" element={<OlvidePassword />} />
-          <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
+          <Route path="user/registrar" element={<Registrar />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,11 +1,11 @@
 import React from 'react';
 
-function BannerMovieEs() {
+function BannerUser() {
   return (
-     <div className="relative bg-indigo-200 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+     <div className="relative bg-red-200 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
 
       {/* Background illustration */}
-      <div className="absolute right-0 top-0 -mt-4 mr-16 pointer-events-none hidden xl:block" aria-hidden="true">
+      <div className="absolute right-0 top-0 -mt-2 mr-16 pointer-events-none hidden xl:block" aria-hidden="true">
         <svg width="319" height="198" xmlnsXlink="http://www.w3.org/1999/xlink">
           <defs>
             <path id="welcome-a" d="M64 0l64 128-64-20-64 20z" />
@@ -48,12 +48,12 @@ function BannerMovieEs() {
 
       {/* Content */}
       <div className="relative">
-        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Agregar Película En Español</h1>
-        <p>Información General</p>
+        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Agregar Usuario</h1>
+        <p>Información Del Administrador</p>
       </div>
 
     </div>
   );
 }
 
-export default BannerMovieEs;
+export default BannerUser;

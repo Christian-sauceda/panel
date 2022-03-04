@@ -3,71 +3,49 @@ import { Link } from "react-router-dom";
 const Login = () => {
     return (
         <>
-            <div className="container mx-auto px-4 h-full">
-                <div className="flex content-center items-center justify-center h-full">
-                    <div className="w-full lg:w-4/12 px-4">
-                        <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-200 border-0">
-                            <div className="rounded-t mb-0 px-6 py-6">
-                                <div className="text-center mb-3">
-                                    <h6 className="text-black text-sm font-bold">
-                                        Bienvenido al panel administrador de TopMedia+
-                                    </h6>
-                                </div>
-                                <hr className="mt-6 border-b-1 border-gray-700" />
-                            </div>
-                            <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                                <div className="text-black text-center mb-5 font-bold ">
-                                    <small>Inicia Sesión con tus Credenciales</small>
-                                </div>
-                                <form>
-                                    <div className="my-8">
-                                        <label
-                                            for="user"
-                                            className="block uppercase text-gray-600 text-xs font-bold mb-2">
-                                            Username:
-                                        </label>
-                                        <input type="text"
-                                            autoComplete="off"
-                                            id="user"
-                                            name="user"
-                                            placeholder="Tu Username"
-                                            className="border-0 px-3 py-3 placeholder-gray-500 text-gray-400 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        />
-                                    </div>
-
-                                    <div className="my-5 mt-4">
-                                        <label
-                                            for="pass"
-                                            className="block uppercase text-gray-600 text-xs font-bold mb-2">
-                                            Password:
-                                        </label>
-                                        <input type="password"
-                                            name="pass"
-                                            id="pass"
-                                            placeholder="Tu Password"
-                                            className="border-0 px-3 py-3 placeholder-gray-500 text-gray-400 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        />
-                                    </div>
-                                    <input type="submit"
-                                        value="Ingresar"
-                                        className="bg-gray-800 mt-4 text-white active:bg-gray-500 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                                        href="/admin"
-                                    />
-                                </form>
-                            </div>
-                        </div>
-                        <div className="flex flex-wrap mt-6 relative">
-                            <div className="w-1/2">
-
-                            </div>
-                            <div className="w-1/2 text-right">
-                                <Link to="/recuperar-password" className="text-gray-200">
-                                    <small>¿Se te olvidó tu contraseña?</small>
-                                </Link>
-                            </div>
-                        </div>
+            <div>
+                <h1 className="text-sky-600 font-black text-6xl">
+                    Inicia Sesión y Administra el Contenido de 
+                    <span className="text-black"> TopMedia+</span>
+                </h1>
+            </div>
+            <div>
+                <form>
+                    <div className="my-5 pt-16 md:pt-0 md:mt-20">
+                        <label
+                            className="uppercase text-gray-600 block text-xl font-bold">
+                            Nombre Usuario:
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Tu Nombre de Usuario"
+                            className="border w-full p-3 rounded-xl mt-3 bg-gray-100"
+                        />
                     </div>
-                </div>
+                    <div className="my-5">
+                        <label
+                            className="uppercase text-gray-600 block text-xl font-bold">
+                            Contraseña:
+                        </label>
+                        <input
+                            type="password"
+                            placeholder="Tu Contraseña"
+                            className="border w-full p-3 rounded-xl mt-3 bg-gray-100"
+                        />
+                    </div>
+                    <input
+                        type="submit"
+                        value="Iniciar Sesión"
+                        className="bg-sky-600 w-full py-3 px-10 rounded-xl mt-6 text-white uppercase font-bold hover:cursor-pointer hover:bg-sky-700 md:w-auto "
+                    />
+                </form>
+                <nav className="mt-10 lg:flex lg:justify-end">
+                    <Link
+                    className="block text-center my-5 text-gray-500"
+                        to="olvide-password"
+                    >Recuperar Contraseña
+                    </Link>
+                </nav>
             </div>
         </>
     )

@@ -536,32 +536,32 @@ function Sidebar({
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
-                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                            <NavLink end to="/admin/typecategory" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tipo de Categoria</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
-                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                            <NavLink end to="/admin/cat/contentepgchannel" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">EPG Channel</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
-                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                            <NavLink end to="/admin/cat/formart" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tipo de Formato</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
-                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                            <NavLink end to="/admin/cat/quality" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tipo de Calidad</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
-                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                            <NavLink end to="/admin/cat/content" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tipo de Contenido</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
-                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                            <NavLink end to="/admin/cat/server" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tipo de Server</span>
                             </NavLink>
                           </li>

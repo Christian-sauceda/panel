@@ -13,8 +13,8 @@ import Inicio from './pages/admin/Inicio.jsx'
 import AddMovieEs from './pages/admin/AddMovieEs'
 
 //cat
-import ManCatAudio from './pages/admin/ManCatAudio'
-import ManCatContent from './pages/admin/ManCatContent'
+import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
+import ManCatContent from './pages/admin/Mantenimientos/ManCatContent'
 
 import { AuthProvider } from './context/AuthProvider'
 import { CatTypeContentProvider } from './context/CatTypeContenidoProvider'

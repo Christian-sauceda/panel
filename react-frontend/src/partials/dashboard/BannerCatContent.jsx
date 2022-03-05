@@ -48,7 +48,7 @@ function BannerCatContent() {
 
       {/* Content */}
       <div className="relative">
-        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Agregar Tipo de Contenido</h1>
+        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Tipos de Contenidos</h1>
           <p>Añade un Nuevo Tipo de Contenido o Administralos</p>
       </div>
 

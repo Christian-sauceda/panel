@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs/dist/bcrypt";
 import app from "../../app";
 const bcryptjs = require("bcryptjs");
 const mysqlconnection = require("../../database");

@@ -1,5 +1,5 @@
-import React, { useState, Navigate } from 'react';
-import { Outlet } from 'react-router-dom'
+import { useState } from 'react';
+import { Outlet, Navigate } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 //components
 
@@ -26,7 +26,7 @@ const AdminLayout = () => {
                     <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
                     <main>
                         <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                            <Outlet />
+                            {auth?.COD ? <Outlet /> : <Navigate to="/" />}
                         </div>
                     </main>
                 </div>

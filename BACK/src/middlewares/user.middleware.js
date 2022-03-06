@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+const mysqlconnection = require("../database");
 
 const checkAuth = (req, res, next) => {
     let token;
@@ -9,10 +10,11 @@ const checkAuth = (req, res, next) => {
         try {
             token = req.headers.authorization.split(' ')[1]
             const decoded = jwt.verify(token, 'secret');
+            const iduser = decoded.COD;
             req.user = decoded;
             return next()
         } catch (error) {
-            const e = new Error("token is not valid");
+            const e = new Error("Forbidden");
             return res.status(403).json({ message: e.message });
         }
     }

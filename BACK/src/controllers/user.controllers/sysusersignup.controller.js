@@ -67,7 +67,7 @@ export const registro = async (req, res) => {
 
 //confirmacion de correo
 export const confirmar = async (req, res) => {
-    const  { token } = req.params;
+    const { token } = req.params;
     mysqlconnection.query(`SELECT * FROM SYS_USER WHERE TOKEN = '${token}'`, (err, rows) => {
         if (err) {
             res.status(500).json({
@@ -146,5 +146,10 @@ export const login = (req, res, next) => {
             );
         }
     );
+};
+
+export const perfil = (req, res) => {
+    const  { user }  = req;
+    res.json( user);
 };
 

@@ -2,7 +2,7 @@ import {
     Router
 } from "express";
 import * as userCtrl from "../../controllers/user.controllers/sysusersignup.controller";
-const useMiddleware = require("../../middlewares/user.middleware");
+import checkAuth from "../../middlewares/user.middleware.js";
 
 const router = Router();
 
@@ -12,5 +12,7 @@ router.post("/registro", userCtrl.registro);
 router.get("/confirmar/:token", userCtrl.confirmar);
 // login
 router.post("/login", userCtrl.login);
+//perfil
+router.get("/perfil", checkAuth, userCtrl.perfil);
 
 export default router;

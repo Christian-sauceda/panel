@@ -19,7 +19,7 @@ const [auth, setAuth] = useState({})
                 }
             }
             try {
-                const { data } = await clienteAxios.get('/cataudio', config)
+                const { data } = await clienteAxios.get('/perfil', config)
                 setAuth(data)
             } catch (error) {
                 console.log(error.response.data.message)

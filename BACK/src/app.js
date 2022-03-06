@@ -20,7 +20,7 @@ import sysignup from "./routes/auth.routes/auth.routes";
 import tvlivees from "./routes/tvlive.routes/tvlivees.routes";
 import tvliveen from "./routes/tvlive.routes/tvliveen.routes";
 import tvliveinter from "./routes/tvlive.routes/tvliveinter.routes";
-const useMiddleware = require("./middlewares/user.middleware");
+import checkAuth from "./middlewares/user.middleware.js";
 const cookieParser = require('cookie-parser')
 
 const app = express();
@@ -47,7 +47,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.get("/", useMiddleware.isLoggedIn, (req, res) => {
+app.get("/", checkAuth, (req, res) => {
   res.json({
     name: app.get("pkg").name,
     author: app.get("pkg").author,
@@ -57,29 +57,29 @@ app.get("/", useMiddleware.isLoggedIn, (req, res) => {
 });
 
 // MAINTENANCE
-app.use('/cataudio', useMiddleware.isLoggedIn, cataudio);
-app.use('/catcategory', useMiddleware.isLoggedIn, catcategory);
-app.use('/catepgchannel', useMiddleware.isLoggedIn, catepgchannel);
-app.use('/catformatvideo', useMiddleware.isLoggedIn, catformatvideo);
-app.use('/catplataform', useMiddleware.isLoggedIn, catplataform);
-app.use('/catquality', useMiddleware.isLoggedIn, catquality);
-app.use('/catypecontent', useMiddleware.isLoggedIn, catypecontent);
-app.use('/catypeserver', useMiddleware.isLoggedIn, catypeserver);
+app.use('/cataudio', checkAuth, cataudio);
+app.use('/catcategory', checkAuth, catcategory);
+app.use('/catepgchannel', checkAuth, catepgchannel);
+app.use('/catformatvideo', checkAuth, catformatvideo);
+app.use('/catplataform', checkAuth, catplataform);
+app.use('/catquality', checkAuth, catquality);
+app.use('/catypecontent', checkAuth, catypecontent);
+app.use('/catypeserver', checkAuth, catypeserver);
 
 // MOVIE
-app.use('/mtmovie/es', useMiddleware.isLoggedIn, mtmoviees);
-app.use('/mtmovie/en', useMiddleware.isLoggedIn, mtmovieen);
-app.use('/mtmovie/adult', useMiddleware.isLoggedIn, mtmovieadult);
+app.use('/mtmovie/es', checkAuth, mtmoviees);
+app.use('/mtmovie/en', checkAuth, mtmovieen);
+app.use('/mtmovie/adult', checkAuth, mtmovieadult);
 
 // TVSHOWS
-app.use('/mttvshows/en', useMiddleware.isLoggedIn, mttvshowsen);
-app.use('/mttvshows/es', useMiddleware.isLoggedIn, mttvshowses);
-app.use('/mttvshowschapter', useMiddleware.isLoggedIn, mttvshowschapter);
+app.use('/mttvshows/en', checkAuth, mttvshowsen);
+app.use('/mttvshows/es', checkAuth, mttvshowses);
+app.use('/mttvshowschapter', checkAuth, mttvshowschapter);
 
 // TV LIVE
-app.use('/tvlive/es', useMiddleware.isLoggedIn, tvlivees);
-app.use('/tvlive/en', useMiddleware.isLoggedIn, tvliveen);
-app.use('/tvlive/inter', useMiddleware.isLoggedIn, tvliveinter);
+app.use('/tvlive/es', checkAuth, tvlivees);
+app.use('/tvlive/en', checkAuth, tvliveen);
+app.use('/tvlive/inter', checkAuth, tvliveinter);
 
 // AUTH
 app.use('/', sysignup);

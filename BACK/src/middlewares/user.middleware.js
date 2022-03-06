@@ -39,7 +39,8 @@ module.exports = {
             const token = authHeader.split(' ')[1];
             const decoded = jwt.verify(token, "secret");
             const userData = decoded;
-
+            req.userData = userData;
+            console.log(req.userData);
         } catch (error) {
             return res.status(400).send({
                 message: "YOUR ARE NOT LOGGED IN OR TOKEN INVALID!",

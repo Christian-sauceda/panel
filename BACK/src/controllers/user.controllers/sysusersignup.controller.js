@@ -9,29 +9,25 @@ import emailRegistro from "../../helpers/emailRegistro.js";
 //registro de usuario
 export const registro = async (req, res) => {
     try {
-        const {
-            EMAIL_USER,
-            USER_NAME,
-            TYPE
-        } = req.body;
+        const { EMAIL_USER, USER_NAME, TYPE } = req.body;
         //QUE NO EXISTA EL EMAIL
         mysqlconnection.query(`SELECT COD_USER FROM SYS_USER WHERE EMAIL_USER = LOWER('${EMAIL_USER}')`, (err, rows) => {
             if (err) {
                 res.status(400).json({
-                    message: "Error al consultar el usuario",
+                    message: "Error al Consultar el Usuario",
                     err
                 });
             } else {
                 if (rows.length > 0) {
                     res.status(400).json({
-                        message: "El Usuario o Correo Ya Está Usado"
+                        message: "El Usuario o Correo Ya Está en Uso"
                     });
                 } else {
                     //HASH DE LA CONTRASEÑA
                     bcrypt.hash(req.body.PASSWORD_USER, 10, (err, hash) => {
                         if (err) {
                             res.status(500).json({
-                                message: "Error al encriptar la contraseña",
+                                message: "Error al Encriptar la Contraseña",
                                 err
                             });
                         } else {
@@ -42,21 +38,18 @@ export const registro = async (req, res) => {
                                 (err, rows) => {
                                     if (err) {
                                         res.status(500).json({
-                                            message: "Error al insertar el usuario",
+                                            message: "Error al Insertar el Usuario",
                                             err
                                         });
                                     } else {
-                                        //enviar email
-
                                         res.status(200).json({
-                                            message: "Usuario creado correctamente"
+                                            message: "Usuario Creado Correctamente"
                                         });
                                         emailRegistro({
                                             EMAIL_USER,
                                             USER_NAME,
                                             tokenunico
                                         });
-
                                     }
                                 });
                         }
@@ -66,7 +59,7 @@ export const registro = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            message: "Error al registrar el usuario",
+            message: "Error al Registrar el Usuario",
             error
         });
     }
@@ -75,11 +68,10 @@ export const registro = async (req, res) => {
 //confirmacion de correo
 export const confirmar = async (req, res) => {
     const  { token } = req.params;
-
     mysqlconnection.query(`SELECT * FROM SYS_USER WHERE TOKEN = '${token}'`, (err, rows) => {
         if (err) {
             res.status(500).json({
-                message: "Error al consultar el usuario",
+                message: "Error al Consultar el Usuario",
                 err
             });
         } else {
@@ -87,18 +79,18 @@ export const confirmar = async (req, res) => {
                 mysqlconnection.query(`UPDATE SYS_USER SET TOKEN = '', CONFIRMED = 1 WHERE TOKEN = '${token}'`, (err, rows) => {
                     if (err) {
                         res.status(500).json({
-                            message: "Error al actualizar el usuario",
+                            message: "Error al Cctualizar el Usuario",
                             err
                         });
                     } else {
                         res.status(200).json({
-                            message: "Usuario confirmado correctamente"
+                            message: "Usuario Confirmado Correctamente"
                         });
                     }
                 });
             } else {
                 res.status(400).json({
-                    message: "El token no es valido"
+                    message: "El Token no es Válido"
                 });
             }
         }
@@ -111,13 +103,13 @@ export const login = (req, res, next) => {
         `SELECT * FROM SYS_USER WHERE CONFIRMED = '1' AND USER_NAME = ${mysqlconnection.escape(req.body.USER_NAME)};`,
         (err, result) => {
             if (err) {
-                return res.status(400).send({
+                return res.status(403).send({
                     message: err
                 });
             }
             if (!result.length) {
-                return res.status(400).send({
-                    message: "El usuario no existe o sin confirmar",
+                return res.status(404).send({
+                    message: "El Usuario no Existe o Sin Confirmar",
                 });
             }
             bcryptjs.compare(
@@ -125,8 +117,8 @@ export const login = (req, res, next) => {
                 result[0].PASSWORD,
                 (bErr, bresult) => {
                     if (bErr) {
-                        return res.status(400).send({
-                            message: "USERNAME OR PASSWORD INCORRECT!",
+                        return res.status(403).send({
+                            message: "Nombre o Contraseña Icorrecta!!",
                         });
                     }
                     if (bresult) { //password correct
@@ -148,7 +140,7 @@ export const login = (req, res, next) => {
                         });
                     }
                     return res.status(401).send({
-                        message: "USERNAME OR PASSWORD INCORRECT",
+                        message: "Nombre o Contraseña Icorrecta!!",
                     });
                 }
             );

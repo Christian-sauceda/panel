@@ -62,13 +62,34 @@ export const CatContenidoProvider = ({ children }) => {
         setCatcontent(contenido)
     }
 
+    const eliminarContenido = async id => {
+        const confirmar = confirm('Confirma que deseas eliminar')
+        if(confirmar) {
+            try {
+                const token = localStorage.getItem('token')
+                const config = {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+                const { data } = await clienteAxios.delete(`/catypecontent/${id}`,config)
+                const contenidoActualizado = catContenido.filter( contenidoState => contenidoState.COD_TYPE_CONTENT!==id)
+                setCatContenido(contenidoActualizado)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
     return (
         <CatContenidoContext.Provider
             value={{
                 catContenido,
                 guardarCatContenido,
                 setEdicion,
-                catcontent
+                catcontent,
+                eliminarContenido
             }}>
             {children}
         </CatContenidoContext.Provider>

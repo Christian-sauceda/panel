@@ -1,7 +1,7 @@
 import useContenido from '../../hooks/useContenido'
 const Contenido = ({ contenido }) => {
 
-    const { setEdicion } = useContenido()
+    const { setEdicion, eliminarContenido } = useContenido()
     const { COD_TYPE_CONTENT, NAME_TYPE_CONTENT } = contenido
     return (
         <>
@@ -21,6 +21,7 @@ const Contenido = ({ contenido }) => {
                         >Editar</button>
                         <button
                             className="py-2 px-6 bg-red-600 hover:bg-red-700 text-white uppercase font-bold rounded-md"
+                            onClick={() => eliminarContenido(COD_TYPE_CONTENT)}
                         >Eliminar</button>
                     </td>
                 </tr>

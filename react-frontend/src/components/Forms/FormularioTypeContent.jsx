@@ -4,7 +4,7 @@ import useCatContenido from '../../hooks/useContenido';
 
 const FormularioTypeContent = () => {
     const [NAME_TYPE_CONTENT, setNAME_TYPE_CONTENT] = useState('');
-    const [id, setId] = useState(null);
+    const [COD_TYPE_CONTENT, setCOD_TYPE_CONTENT] = useState(null);
     const [alerta, setAlerta] = useState({});
 
     const { guardarCatContenido, catcontent } = useCatContenido();
@@ -12,7 +12,7 @@ const FormularioTypeContent = () => {
     useEffect(() => {
         if (catcontent?.NAME_TYPE_CONTENT) {
             setNAME_TYPE_CONTENT(catcontent.NAME_TYPE_CONTENT)
-            setId(catcontent.COD_TYPE_CONTENT) // para editar
+            setCOD_TYPE_CONTENT(catcontent.COD_TYPE_CONTENT) // para editar
         } else {
             setNAME_TYPE_CONTENT('');
         }
@@ -30,13 +30,14 @@ const FormularioTypeContent = () => {
             return;
         }
 
+        guardarCatContenido({ NAME_TYPE_CONTENT, COD_TYPE_CONTENT })
         setAlerta({
             msg: 'Guardado Correctamente',
             error: false
         })
-        guardarCatContenido({ NAME_TYPE_CONTENT, id })
         setNAME_TYPE_CONTENT('');
-        useState('');
+        setCOD_TYPE_CONTENT('');
+
     }
     const { msg } = alerta;
     return (
@@ -65,7 +66,7 @@ const FormularioTypeContent = () => {
                 <input
                     type='submit'
                     className='bg-blue-600 w-full p-3 px-2 rounded-xl mt-1 text-white uppercase font-bold hover:cursor-pointer text-center hover:bg-blue-800 cursor-pointer transition-colors'
-                    value={id ? 'Guardar Cambios' : 'Agregar'}
+                    value={COD_TYPE_CONTENT ? 'Guardar Cambios' : 'Agregar'}
                 />
             </form>
         </>

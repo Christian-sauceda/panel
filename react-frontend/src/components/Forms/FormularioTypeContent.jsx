@@ -1,70 +1,59 @@
 import { useState } from 'react'
 import Alerta from '../Alerts/Alerts';
-import useCatContent from '../../hooks/useTypeContent';
+import useCatContenido from '../../hooks/useContenido';
 
 const FormularioTypeContent = () => {
-
     const [NAME_TYPE_CONTENT, setNAME_TYPE_CONTENT] = useState('');
+    const [alerta, setAlerta] = useState(false);
 
-    const [alerta, setAlerta] = useState({});
+    const { guardarCatContenido } = useCatContenido();
 
-    const { CatContent } = useCatContent();
-    console.log(CatContent);
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        //validar formulario
-        if([NAME_TYPE_CONTENT].includes('')) {
+        //validar
+        if ([NAME_TYPE_CONTENT].includes('')) {
             setAlerta({
-                msg: 'El campo Nombre de Tipo de Contenido es obligatorio',
+                msg: 'El Nombre del Tipo de Contenido es obligatorio',
                 error: true
             })
             return;
         }
 
+        setAlerta({})
+        guardarCatContenido({ NAME_TYPE_CONTENT })
+
     }
     const { msg } = alerta;
     return (
         <>
-        {msg && <Alerta alerta={alerta} />}
+            { msg && <Alerta alerta={alerta} /> }
             <form
-            onSubmit={handleSubmit}
+                onSubmit={handleSubmit}
+                className='bg-white py-10 px-1 mb-10 lg:mb-0 shadow-md rounded-md'
             >
-                <div className="flex flex-wrap">
-                    <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
-                        <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                            <div className="w-full lg:w-12/12 px-4">
-                                <div className="relative w-full mb-3">
-                                    <label
-                                        className="block uppercase text-gray-600 text-xs font-bold mb-2"
-                                    >
-                                        Tipo:
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="tipo"
-                                        name="tipo"
-                                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                        placeholder="Nombre del  Tipo de Contenido"
-                                        value={NAME_TYPE_CONTENT}
-                                        onChange={(e) => setNAME_TYPE_CONTENT(e.target.value)}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-full lg:w-4/12 px-4">
-                    </div>
-                </div>
-                <div className="">
-                    <input type="submit"
-                        value="añadir"
-                        className="cla"
-                        to="#"
+                <div className='mb-5'>
+                    <label
+                        htmlFor='nombre'
+                        className='block text-gray-700 uppercase font-bold'>
+                        Nombre:
+                    </label>
+                    <input
+                        type='text'
+                        id='nombre'
+                        placeholder='Escribe el Nombre del Tipo'
+                        className='border-2 w-full p-2 mt-2 placeholder-gray-600
+                    rounded-md'
+                        value={NAME_TYPE_CONTENT}
+                        onChange={e => setNAME_TYPE_CONTENT(e.target.value)}
                     />
                 </div>
+                <input
+                    type='submit'
+                    className='bg-blue-600 w-full p-3 px-2 rounded-xl mt-1 text-white uppercase font-bold hover:cursor-pointer text-center hover:bg-blue-800 cursor-pointer transition-colors'
+                    value='Agregar Tipo'
+                />
             </form>
         </>
-
     )
 }
 

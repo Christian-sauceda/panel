@@ -15,9 +15,9 @@ import AddMovieEs from './pages/admin/AddMovieEs'
 //cat
 import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
 import ManCatContent from './pages/admin/Mantenimientos/ManCatContent'
-
+//providers
 import { AuthProvider } from './context/AuthProvider'
-import { CatTypeContentProvider } from './context/CatTypeContenidoProvider'
+import { CatContenidoProvider } from './context/CatContenidoProvider'
 
 function App() {
 
@@ -25,7 +25,7 @@ function App() {
   return (
     <BrowserRouter>
     <AuthProvider>
-    <CatTypeContentProvider>
+    <CatContenidoProvider>
       <Routes>
         <Route path="/" element={<AuthLayout />}>
           <Route index element={<Login />} />
@@ -41,7 +41,7 @@ function App() {
           <Route path="cat/content" element={<ManCatContent />} />    
         </Route>
       </Routes>
-      </CatTypeContentProvider>
+      </CatContenidoProvider>
       </AuthProvider>
     </BrowserRouter>
   )

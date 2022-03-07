@@ -11,7 +11,7 @@ export default function Inicio() {
         <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Total Películas Español"
-            statTitle="2356"
+            statTitle="1"
             statIconName="fas fa-film"
             statIconColor="bg-indigo-500"
           />
@@ -19,7 +19,7 @@ export default function Inicio() {
         <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Total Películas Inglés"
-            statTitle="2356"
+            statTitle="0"
             statIconName="fas fa-video"
             statIconColor="bg-orange-500"
           />
@@ -27,7 +27,7 @@ export default function Inicio() {
         <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Total Series en Español"
-            statTitle="924"
+            statTitle="2"
             statIconName="fas fa-tv"
             statIconColor="bg-sky-800"
           />
@@ -35,7 +35,7 @@ export default function Inicio() {
         <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Total Series en Inglés"
-            statTitle="485"
+            statTitle="3"
             statIconName="fas fa-file-video"
             statIconColor="bg-red-700"
           />

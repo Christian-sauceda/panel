@@ -12,6 +12,7 @@ const [auth, setAuth] = useState({})
                 setCargando(false)
                 return
             }
+
             const config = {
                 headers: {
                     "Content-Type": "application/json",
@@ -29,6 +30,7 @@ const [auth, setAuth] = useState({})
         }
         autenticarUsuario()
     }, [])
+
 
     return(
         <AuthContext.Provider

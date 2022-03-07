@@ -98,7 +98,7 @@ export const confirmar = async (req, res) => {
 
 //login
 export const login = (req, res, next) => {
-    mysqlconnection.query(
+    const usuario = mysqlconnection.query(
         `SELECT * FROM SYS_USER WHERE CONFIRMED = '1' AND USER_NAME = ${mysqlconnection.escape(req.body.USER_NAME)};`,
         (err, result) => {
             if (err) {
@@ -130,7 +130,7 @@ export const login = (req, res, next) => {
                             expiresIn: "1h"
                         }
                         );
-                        return res.status(200).send({
+                        return res.json({
                             message: "LOGGED IN SUCCESSFULLY!",
                             COD: result[0].COD_USER,
                             NAME: result[0].USER_NAME,
@@ -148,7 +148,7 @@ export const login = (req, res, next) => {
 };
 
 export const perfil = (req, res) => {
-    const  { user }  = req;
-    res.json( user);
+    const { user } = req;
+    res.json(user);
 };
 

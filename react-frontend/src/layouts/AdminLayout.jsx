@@ -12,8 +12,6 @@ import "./AuthLayout.css";
 const AdminLayout = () => {
     const { auth, cargando } = useAuth()
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    console.log(auth)
-    console.log(cargando)
     if (cargando) return 'cargando...'
     return (
         <>
@@ -27,6 +25,7 @@ const AdminLayout = () => {
                     <main>
                         <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                             {auth?.COD ? <Outlet /> : <Navigate to="/" />}
+                            
                         </div>
                     </main>
                 </div>

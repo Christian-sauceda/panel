@@ -1,12 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Alerta from '../Alerts/Alerts';
 import useCatContenido from '../../hooks/useContenido';
 
 const FormularioTypeContent = () => {
     const [NAME_TYPE_CONTENT, setNAME_TYPE_CONTENT] = useState('');
-    const [alerta, setAlerta] = useState(false);
+    const [id, setId] = useState(null);
+    const [alerta, setAlerta] = useState({});
 
-    const { guardarCatContenido } = useCatContenido();
+    const { guardarCatContenido, catcontent } = useCatContenido();
+
+    useEffect(() => {
+        if (catcontent?.NAME_TYPE_CONTENT) {
+            setNAME_TYPE_CONTENT(catcontent.NAME_TYPE_CONTENT)
+            setId(catcontent.COD_TYPE_CONTENT) // para editar
+        } else {
+            setNAME_TYPE_CONTENT('');
+        }
+
+    }, [catcontent])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,9 +30,13 @@ const FormularioTypeContent = () => {
             return;
         }
 
-        setAlerta({})
-        guardarCatContenido({ NAME_TYPE_CONTENT })
-
+        setAlerta({
+            msg: 'Guardado Correctamente',
+            error: false
+        })
+        guardarCatContenido({ NAME_TYPE_CONTENT, id })
+        setNAME_TYPE_CONTENT('');
+        useState('');
     }
     const { msg } = alerta;
     return (
@@ -50,7 +65,7 @@ const FormularioTypeContent = () => {
                 <input
                     type='submit'
                     className='bg-blue-600 w-full p-3 px-2 rounded-xl mt-1 text-white uppercase font-bold hover:cursor-pointer text-center hover:bg-blue-800 cursor-pointer transition-colors'
-                    value='Agregar Tipo'
+                    value={id ? 'Guardar Cambios' : 'Agregar'}
                 />
             </form>
         </>

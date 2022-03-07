@@ -7,6 +7,7 @@ const Login = () => {
     const [USER_NAME, setUSER_NAME] = useState("");
     const [PASSWORD, setPASSWORD] = useState("");
     const [alerta, setAlerta] = useState({});
+    const { setAuth } = useAuth()
     const navigate = useNavigate()
     const handleSubmit = async e => {
         e.preventDefault();
@@ -20,6 +21,7 @@ const Login = () => {
         try {
             const { data } = await clienteAxios.post("/login", {USER_NAME, PASSWORD})
             localStorage.setItem('token', data.token)
+            setAuth(data)
             navigate('/admin')
         } catch (error) {
             setAlerta({

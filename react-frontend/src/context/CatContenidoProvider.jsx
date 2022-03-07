@@ -6,12 +6,13 @@ const CatContenidoContext = createContext()
 export const CatContenidoProvider = ({ children }) => {
 
     const [catContenido, setCatContenido] = useState([])
+    const [catcontent, setCatcontent] = useState({})
 
     useEffect(() => {
         const obternerCatContenido = async () => {
             try {
                 const token = localStorage.getItem("token")
-                if(!token) return
+                if (!token) return
                 const config = {
                     headers: {
                         "Content-Type": "application/json",
@@ -28,28 +29,46 @@ export const CatContenidoProvider = ({ children }) => {
     }, [])
 
     const guardarCatContenido = async (contenido) => {
-        try {
-            const token = localStorage.getItem('token')
-            const config = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                }
-
+        const token = localStorage.getItem('token')
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
             }
-            const { data } = await clienteAxios.post('/catypecontent',
-                contenido, config)
-            setCatContenido([data])
-        } catch (error) {
-            console.log(error.response.data.message)
         }
+        if (catcontent.COD_TYPE_CONTENT) {
+            try {
+                const { data } = await clienteAxios.put(`/catypecontent/${catcontent.COD_TYPE_CONTENT}`, contenido, config)
+
+                const contenidoActualizado = catContenido.map( contenidoState => contenidoState.COD_TYPE_CONTENT ===
+                    data.COD_TYPE_CONTENT ? data : contenidoState)
+                    setCatContenido(contenidoActualizado)
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            try {
+                const { data } = await clienteAxios.post('/catypecontent',
+                    contenido, config)
+                const { ...contenidoAlmacenado } = data
+                setCatContenido([contenidoAlmacenado, ...catContenido])
+            } catch (error) {
+                console.log(error.response.data.message)
+            }
+        }
+    }
+
+    const setEdicion = (contenido) => {
+        setCatcontent(contenido)
     }
 
     return (
         <CatContenidoContext.Provider
             value={{
                 catContenido,
-                guardarCatContenido
+                guardarCatContenido,
+                setEdicion,
+                catcontent
             }}>
             {children}
         </CatContenidoContext.Provider>

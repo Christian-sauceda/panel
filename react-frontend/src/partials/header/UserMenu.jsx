@@ -10,7 +10,7 @@ function UserMenu() {
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
-
+  const [auth, setAuth] = useState({})
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
@@ -74,7 +74,7 @@ function UserMenu() {
               <Link
                 className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
                 to="/"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                onClick={() => setDropdownOpen(!dropdownOpen, localStorage.removeItem('token'), setAuth({}))}
               >
                 Cerrar sesión
               </Link>

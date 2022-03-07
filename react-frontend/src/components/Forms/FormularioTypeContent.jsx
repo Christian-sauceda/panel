@@ -35,7 +35,6 @@ const FormularioTypeContent = () => {
                             <div className="w-full lg:w-12/12 px-4">
                                 <div className="relative w-full mb-3">
                                     <label
-                                        for="tipo"
                                         className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                     >
                                         Tipo:

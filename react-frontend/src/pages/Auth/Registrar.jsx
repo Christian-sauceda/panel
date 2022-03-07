@@ -89,7 +89,6 @@ const Registrar = () => {
                         <div className="w-full lg:w-8/12 px-4 mb-6">
                           <div className="relative w-full mb-3">
                             <label
-                              for="USER_NAME"
                               className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             >
                               Nombre:
@@ -109,7 +108,6 @@ const Registrar = () => {
                         <div className="w-full lg:w-8/12 px-4 mb-6">
                           <div className="relative w-full mb-3">
                             <label
-                              for="EMAIL_USER"
                               className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             >
                               Correo:
@@ -129,7 +127,6 @@ const Registrar = () => {
                         <div className="w-full lg:w-6/12 px-4 mb-6">
                           <div className="relative w-full mb-3">
                             <label
-                              for="PASSWORD_USER"
                               className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             >
                               Contraseña:
@@ -149,7 +146,6 @@ const Registrar = () => {
                         <div className="w-full lg:w-6/12 px-4 mb-6">
                           <div className="relative w-full mb-3">
                             <label
-                              for="repeatPassword"
                               className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             >
                               Repita la Contraseña:
@@ -169,7 +165,6 @@ const Registrar = () => {
                         <div className="w-full lg:w-4/12 px-4">
                           <div className="relative w-full mb-3">
                             <label
-                              for="TYPE"
                               className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             >
                               Tipo de Usuario:

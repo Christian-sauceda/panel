@@ -83,7 +83,7 @@ function Sidebar({
               <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname === '/' && 'bg-slate-900'}`}>
                 <NavLink end to="/admin" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname === '/' && 'hover:text-slate-200'}`}>
                   <div className="flex items-center">
-                    <i class="fi fi-rr-apps"></i>
+                    <i className="fi fi-rr-apps"></i>
                     <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Inicio</span>
                   </div>
                 </NavLink>
@@ -100,7 +100,7 @@ function Sidebar({
                       <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('movieEs') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <i class="fi fi-rr-popcorn"></i>
+                            <i className="fi fi-rr-popcorn"></i>
                             <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Peliculas</span>
                           </div>
                           {/* Icon */}
@@ -115,12 +115,12 @@ function Sidebar({
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-plus"></i> Agregar Pelicula</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Pelicula</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-list"></i> Listar Peliculas</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-list"></i> Listar Peliculas</span>
                             </NavLink>
                           </li>
                         </ul>
@@ -137,7 +137,7 @@ function Sidebar({
                       <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('movieEn') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <i class="fi fi-rr-film"></i>
+                            <i className="fi fi-rr-film"></i>
                             <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Movies</span>
                           </div>
                           {/* Icon */}
@@ -152,12 +152,12 @@ function Sidebar({
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/en/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-plus"></i> Add Movie</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Add Movie</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/en/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-list"></i> List Movies</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-list"></i> List Movies</span>
                             </NavLink>
                           </li>
 
@@ -175,7 +175,7 @@ function Sidebar({
                       <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('movieAdult') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                             </svg>
                             <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Movie Adult</span>
@@ -192,12 +192,12 @@ function Sidebar({
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/en/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-plus"></i> Add Movie Adult</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Add Movie Adult</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/en/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-list"></i> List Movie Adults</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-list"></i> List Movie Adults</span>
                             </NavLink>
                           </li>
 
@@ -215,7 +215,7 @@ function Sidebar({
                       <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('seriesEs') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
                             <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Series en Español</span>
@@ -232,17 +232,17 @@ function Sidebar({
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/series/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-plus"></i> Agregar serie</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar serie</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/series/es/addcap" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-plus"></i> Agregar Capitulo</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Capitulo</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/series/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-list"></i> Listar Series</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-list"></i> Listar Series</span>
                             </NavLink>
                           </li>
 
@@ -260,7 +260,7 @@ function Sidebar({
                       <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('seriesEn') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -278,17 +278,17 @@ function Sidebar({
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/tvshow/en/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-plus"></i> Add Tv Show</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Add Tv Show</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/tvshow/en/addcap" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-plus"></i> Add Chapter</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Add Chapter</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/tvshow/en/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-list"></i> List Tv shows</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-list"></i> List Tv shows</span>
                             </NavLink>
                           </li>
 
@@ -310,7 +310,7 @@ function Sidebar({
                       <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('tvEs') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <i class="fi fi-rr-screen"></i>
+                            <i className="fi fi-rr-screen"></i>
                             <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tv en Vivo</span>
                           </div>
                           {/* Icon */}
@@ -325,12 +325,12 @@ function Sidebar({
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-plus"></i> Agregar Pelicula</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Pelicula</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-list"></i> Listar Peliculas</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-list"></i> Listar Peliculas</span>
                             </NavLink>
                           </li>
 
@@ -348,7 +348,7 @@ function Sidebar({
                       <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('tvEn') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <i class="fi fi-rr-screen"></i>
+                            <i className="fi fi-rr-screen"></i>
                             <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tv Live</span>
                           </div>
                           {/* Icon */}
@@ -363,12 +363,12 @@ function Sidebar({
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-plus"></i> Agregar Pelicula</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Pelicula</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-list"></i> Listar Peliculas</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-list"></i> Listar Peliculas</span>
                             </NavLink>
                           </li>
 
@@ -386,7 +386,7 @@ function Sidebar({
                       <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('tvInter') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tv Internacional</span>
@@ -403,12 +403,12 @@ function Sidebar({
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-plus"></i> Agregar Pelicula</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Pelicula</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-list"></i> Listar Peliculas</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-list"></i> Listar Peliculas</span>
                             </NavLink>
                           </li>
 
@@ -426,7 +426,7 @@ function Sidebar({
                       <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('eventsDepor') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <i class="fi fi-rr-basketball"></i>
+                            <i className="fi fi-rr-basketball"></i>
                             <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Eventos Deportivos</span>
                           </div>
                           {/* Icon */}
@@ -441,7 +441,7 @@ function Sidebar({
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-plus"></i> Agregar Pelicula</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Pelicula</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
@@ -468,7 +468,7 @@ function Sidebar({
                       <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('Mantenimientos') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
@@ -486,37 +486,37 @@ function Sidebar({
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/cat/audio" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-angle-double-small-right"></i> Tipo de Audio</span>
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo de Audio</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/typecategory" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-angle-double-small-right"></i> Tipo de Categoria</span>
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo de Categoria</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/cat/contentepgchannel" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-angle-double-small-right"></i> EPG Channel</span>
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> EPG Channel</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/cat/formart" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-angle-double-small-right"></i> Tipo de Formato</span>
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo de Formato</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/cat/quality" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-angle-double-small-right"></i> Tipo de Calidad</span>
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo de Calidad</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/cat/content" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-angle-double-small-right"></i> Tipo de Contenido</span>
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo de Contenido</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/cat/server" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-angle-double-small-right"></i> Tipo de Server</span>
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo de Server</span>
                             </NavLink>
                           </li>
                         </ul>
@@ -533,7 +533,7 @@ function Sidebar({
                       <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('tvEn') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <i class="fi fi-rr-user"></i>
+                            <i className="fi fi-rr-user"></i>
                             <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Usuarios</span>
                           </div>
                           {/* Icon */}
@@ -548,12 +548,12 @@ function Sidebar({
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/user/registrar" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-plus"></i> Agregar Usuario</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Usuario</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i class="fi fi-rr-list"></i> Listar Usuarios</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-list"></i> Listar Usuarios</span>
                             </NavLink>
                           </li>
 

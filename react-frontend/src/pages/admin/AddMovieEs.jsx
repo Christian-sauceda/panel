@@ -19,7 +19,6 @@ function AddMovieEs() {
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="title"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Título:
@@ -38,7 +37,6 @@ function AddMovieEs() {
                                                 <div className="w-full lg:w-4/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="year"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Año:
@@ -59,7 +57,6 @@ function AddMovieEs() {
                                                 <div className="w-full lg:w-4/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="duration"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Duración:
@@ -79,7 +76,6 @@ function AddMovieEs() {
                                                 <div className="w-full lg:w-4/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="clasificacion"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Clasificacion:
@@ -99,7 +95,6 @@ function AddMovieEs() {
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="director"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Director:
@@ -119,7 +114,6 @@ function AddMovieEs() {
                                                     <div className="relative w-full mb-3">
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
-                                                            for="reparto"
                                                         >
                                                             Reparto
                                                         </label>
@@ -138,7 +132,6 @@ function AddMovieEs() {
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="pais"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Pais:
@@ -158,7 +151,6 @@ function AddMovieEs() {
                                                     <div className="relative w-full mb-3">
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
-                                                            for="sinopsis"
                                                         >
                                                             Sinopsis
                                                         </label>
@@ -177,7 +169,6 @@ function AddMovieEs() {
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="back"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Backgorund:
@@ -196,7 +187,6 @@ function AddMovieEs() {
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="link"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Link de la Película:
@@ -215,7 +205,6 @@ function AddMovieEs() {
                                                 <div className="w-full lg:w-3/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="calidad"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Calidad:
@@ -235,7 +224,6 @@ function AddMovieEs() {
                                                 <div className="w-full lg:w-3/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="audio"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Audio:
@@ -254,7 +242,6 @@ function AddMovieEs() {
                                                 <div className="w-full lg:w-3/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="formato"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Formato:
@@ -275,7 +262,6 @@ function AddMovieEs() {
                                                 <div className="w-full lg:w-3/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="seguridad"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Pin de Seguridad:
@@ -297,8 +283,8 @@ function AddMovieEs() {
                                                 <label className="block uppercase text-gray-600 text-xs font-bold mb-2">
                                                     Generos:
                                                 </label>
-                                                <div class=" p-2 mx-auto grid grid-cols-6">
-                                                    <label class="inline-flex items-start p-2">
+                                                <div className=" p-2 mx-auto grid grid-cols-6">
+                                                    <label className="inline-flex items-start p-2">
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
@@ -306,7 +292,7 @@ function AddMovieEs() {
                                                         />
                                                         Accion
                                                     </label>
-                                                    <label class="inline-flex items-start p-2">
+                                                    <label className="inline-flex items-start p-2">
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
@@ -314,7 +300,7 @@ function AddMovieEs() {
                                                         />
                                                         Aventura
                                                     </label>
-                                                    <label class="inline-flex items-start p-2">
+                                                    <label className="inline-flex items-start p-2">
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
@@ -322,7 +308,7 @@ function AddMovieEs() {
                                                         />
                                                         Comedia
                                                     </label>
-                                                    <label class="inline-flex items-start p-2">
+                                                    <label className="inline-flex items-start p-2">
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
@@ -330,7 +316,7 @@ function AddMovieEs() {
                                                         />
                                                         Drama
                                                     </label>
-                                                    <label class="inline-flex items-start p-2">
+                                                    <label className="inline-flex items-start p-2">
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-sky-800 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
@@ -338,7 +324,7 @@ function AddMovieEs() {
                                                         />
                                                         Fantasia
                                                     </label>
-                                                    <label class="inline-flex items-start p-2">
+                                                    <label className="inline-flex items-start p-2">
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-800 rounded"
                                                             type="checkbox"
@@ -346,7 +332,7 @@ function AddMovieEs() {
                                                         />
                                                         Horror
                                                     </label>
-                                                    <label class="inline-flex items-start p-2">
+                                                    <label className="inline-flex items-start p-2">
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
@@ -354,7 +340,7 @@ function AddMovieEs() {
                                                         />
                                                         Misterio
                                                     </label>
-                                                    <label class="inline-flex items-start p-2">
+                                                    <label className="inline-flex items-start p-2">
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
@@ -362,7 +348,7 @@ function AddMovieEs() {
                                                         />
                                                         Romance
                                                     </label>
-                                                    <label class="inline-flex items-start p-2">
+                                                    <label className="inline-flex items-start p-2">
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
@@ -370,7 +356,7 @@ function AddMovieEs() {
                                                         />
                                                         Terror
                                                     </label>
-                                                    <label class="inline-flex items-start p-2">
+                                                    <label className="inline-flex items-start p-2">
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
@@ -378,7 +364,7 @@ function AddMovieEs() {
                                                         />
                                                         Suspenso
                                                     </label>
-                                                    <label class="inline-flex items-start p-2">
+                                                    <label className="inline-flex items-start p-2">
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"

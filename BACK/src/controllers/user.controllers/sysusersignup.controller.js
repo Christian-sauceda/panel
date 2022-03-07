@@ -8,7 +8,7 @@ import emailRegistro from "../../helpers/emailRegistro.js";
 //registro de usuario
 export const registro = async (req, res) => {
     try {
-        const { EMAIL_USER, USER_NAME, TYPE } = req.body;
+        const { EMAIL_USER, PASSWORD_USER, USER_NAME, TYPE } = req.body;
         //QUE NO EXISTA EL EMAIL
         mysqlconnection.query(`SELECT COD_USER FROM SYS_USER WHERE EMAIL_USER = LOWER('${EMAIL_USER}')`, (err, rows) => {
             if (err) {
@@ -23,7 +23,7 @@ export const registro = async (req, res) => {
                     });
                 } else {
                     //HASH DE LA CONTRASEÑA
-                    bcrypt.hash(req.body.PASSWORD_USER, 10, (err, hash) => {
+                    bcryptjs.hash(PASSWORD_USER, 10, (err, hash) => {
                         if (err) {
                             res.status(500).json({
                                 message: "Error al Encriptar la Contraseña",
@@ -117,7 +117,7 @@ export const login = (req, res, next) => {
                 (bErr, bresult) => {
                     if (bErr) {
                         return res.status(403).send({
-                            message: "Nombre o Contraseña Icorrecta!!",
+                            message: "Nombre o Contraseña Incorrecta!!",
                         });
                     }
                     if (bresult) { //password correct
@@ -139,7 +139,7 @@ export const login = (req, res, next) => {
                         });
                     }
                     return res.status(401).send({
-                        message: "Nombre o Contraseña Icorrecta!!",
+                        message: "Nombre o Contraseña Incorrecta!!",
                     });
                 }
             );

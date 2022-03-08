@@ -13,10 +13,11 @@ import Inicio from './pages/admin/Inicio.jsx'
 import AddMovieEs from './pages/admin/AddMovieEs'
 
 //cat
-import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
 import ManCatContent from './pages/admin/Mantenimientos/ManCatContent'
+import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
 //providers
 import { AuthProvider } from './context/AuthProvider'
+import { AudiosProvider } from './context/AudiosProvider'
 import { CatContenidoProvider } from './context/CatContenidoProvider'
 
 function App() {
@@ -24,24 +25,26 @@ function App() {
 
   return (
     <BrowserRouter>
-    <AuthProvider>
-    <CatContenidoProvider>
-      <Routes>
-        <Route path="/" element={<AuthLayout />}>
-          <Route index element={<Login />} />
-          <Route path="olvide-password" element={<OlvidePassword />} />
-          <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
-        </Route>
+      <AuthProvider>
+        <AudiosProvider>
+          <CatContenidoProvider>
+            <Routes>
+              <Route path="/" element={<AuthLayout />}>
+                <Route index element={<Login />} />
+                <Route path="olvide-password" element={<OlvidePassword />} />
+                <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
+              </Route>
 
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<Inicio />} />
-          <Route path="movie/es/add" element={<AddMovieEs />} />
-          <Route path="user/registrar" element={<Registrar />} />
-          <Route path="cat/audio" element={<ManCatAudio />} />
-          <Route path="cat/content" element={<ManCatContent />} />    
-        </Route>
-      </Routes>
-      </CatContenidoProvider>
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<Inicio />} />
+                <Route path="movie/es/add" element={<AddMovieEs />} />
+                <Route path="user/registrar" element={<Registrar />} />
+                <Route path="cat/content" element={<ManCatContent />} />
+                <Route path="cat/audio" element={<ManCatAudio />} />
+              </Route>
+            </Routes>
+          </CatContenidoProvider>
+        </AudiosProvider>
       </AuthProvider>
     </BrowserRouter>
   )

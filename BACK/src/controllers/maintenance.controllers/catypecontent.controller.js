@@ -19,7 +19,7 @@ export const getCatypeContentById = (req, res) => {
     mysqlconnection.query('CALL PROC_SEL_CAT_TYPE_CONTENT_COD(?)', [COD], (err,
         rows, fields) => {
         if (!err) {
-            res.status(200).json(rows[0]);
+            res.status(200).json(req.body);
         } else {
             console.log(err);
         }

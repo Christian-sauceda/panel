@@ -29,14 +29,13 @@ export const getCataudioById = (req, res) => {
 // CREATE CATALOG OF AUDIO
 export const createCataudio = (req, res) => {
     const {
-        NAME
+        AUDIO
     } = req.body;
     const query = `CALL PROC_INS_CAT_AUDIO(?);`;
-    mysqlconnection.query(query, [NAME], (err, rows, fields) => {
+    mysqlconnection.query(query, [AUDIO], (err, rows, fields) => {
         if (!err) {
-            res.json({
-                Status: "CATALOG OF AUDIO ADDED"
-            });
+            //retornar el registro insertado
+            res.status(200).json(req.body);
         } else {
             console.log(req.body);
         }
@@ -46,19 +45,17 @@ export const createCataudio = (req, res) => {
 // UPDATE CATALOG OF AUDIO
 export const updateCataudioById = (req, res) => {
     const {
-        NAME
+        AUDIO
     } = req.body;
     const {
         COD
     } = req.params;
     mysqlconnection.query(
         "CALL PROC_UPD_CAT_AUDIO(?,?)",
-        [NAME, COD],
+        [AUDIO, COD],
         (err, rows, fields) => {
             if (!err) {
-                res.json({
-                    Status: "CATALOG OF AUDIO UPDATED"
-                });
+                res.status(200).json(req.body);
             } else {
                 console.log(err);
             }

@@ -55,6 +55,7 @@ export const updateCataudioById = (req, res) => {
         [AUDIO, COD],
         (err, rows, fields) => {
             if (!err) {
+                //retornar el registro insertado
                 res.status(200).json(req.body);
             } else {
                 console.log(err);

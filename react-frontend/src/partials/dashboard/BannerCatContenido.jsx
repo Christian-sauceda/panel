@@ -1,11 +1,11 @@
 import React from 'react';
 
-function BannerCatContent() {
+function BannerMovieEs() {
   return (
-    <div className="relative bg-green-200 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+     <div className="relative bg-violet-300 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
 
       {/* Background illustration */}
-      <div className="absolute right-0 top-0 -mt-2 mr-16 pointer-events-none hidden xl:block" aria-hidden="true">
+      <div className="absolute right-0 top-0 -mt-4 mr-16 pointer-events-none hidden xl:block" aria-hidden="true">
         <svg width="319" height="198" xmlnsXlink="http://www.w3.org/1999/xlink">
           <defs>
             <path id="welcome-a" d="M64 0l64 128-64-20-64 20z" />
@@ -48,12 +48,12 @@ function BannerCatContent() {
 
       {/* Content */}
       <div className="relative">
-        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Tipos de Contenidos</h1>
-        <p>Añade un Nuevo Tipo de Contenido o Administralos</p>
+        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Mantenimientos Contenidos</h1>
+        <p>Agrega y/o Administralos</p>
       </div>
 
     </div>
   );
 }
 
-export default BannerCatContent;
+export default BannerMovieEs;

@@ -29,14 +29,13 @@ export const getCatypeContentById = (req, res) => {
 // CREATE CATALOG OF TYPE CONTENT
 export const createCatypeContent = (req, res) => {
     const {
-        NAME_TYPE_CONTENT
+        CONTENIDO
     } = req.body;
     const query = `CALL PROC_INS_CAT_TYPE_CONTENT(?);`;
-    mysqlconnection.query(query, [NAME_TYPE_CONTENT], (err, rows, fields) => {
+    mysqlconnection.query(query, [CONTENIDO], (err, rows, fields) => {
         if (!err) {
-            res.json({
-                Status: "CATALOG OF TYPE CONTENT ADDED"
-            });
+            //retornar el registro insertado
+            res.status(200).json(req.body);
         } else {
             console.log(req.body);
         }
@@ -46,17 +45,16 @@ export const createCatypeContent = (req, res) => {
 // UPDATE CATALOG OF TYPE CONTENT
 export const updateCatypeContentById = (req, res) => {
     const {
-        NAME_TYPE_CONTENT
+        CONTENIDO
     } = req.body;
     const {
         COD
     } = req.params;
     mysqlconnection.query("CALL PROC_UPD_CAT_TYPE_CONTENT(?,?)",
-        [NAME_TYPE_CONTENT, COD], (err, rows, fields) => {
+        [CONTENIDO, COD], (err, rows, fields) => {
             if (!err) {
-                res.json({
-                    Status: "CATALOG OF TYPE CONTENT UPDATED"
-                });
+            //retornar el registro insertado
+            res.status(200).json(req.body);
             } else {
                 console.log(err);
             }

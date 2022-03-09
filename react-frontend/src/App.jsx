@@ -15,10 +15,12 @@ import AddMovieEs from './pages/admin/AddMovieEs'
 //cat
 import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
 import ManCatFormato from './pages/admin/Mantenimientos/ManCatFormato'
+import ManCatContenido from './pages/admin/Mantenimientos/ManCatContenido'
 //providers
 import { AuthProvider } from './context/AuthProvider'
 import { AudiosProvider } from './context/AudiosProvider'
 import { FormatosProvider } from './context/FormatosProvider'
+import { ContenidosProvider } from './context/ContenidosProvider'
 
 
 function App() {
@@ -29,6 +31,7 @@ function App() {
       <AuthProvider>
         <AudiosProvider>
         <FormatosProvider>
+        <ContenidosProvider>
             <Routes>
               <Route path="/" element={<AuthLayout />}>
                 <Route index element={<Login />} />
@@ -42,8 +45,10 @@ function App() {
                 <Route path="user/registrar" element={<Registrar />} />
                 <Route path="cat/audio" element={<ManCatAudio />} />
                 <Route path="cat/formato" element={<ManCatFormato />} />
+                <Route path="cat/contenido" element={<ManCatContenido />} />
               </Route>
             </Routes>
+            </ContenidosProvider>
           </FormatosProvider>
         </AudiosProvider>
       </AuthProvider>

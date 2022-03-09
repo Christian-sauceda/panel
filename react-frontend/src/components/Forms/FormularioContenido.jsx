@@ -57,7 +57,7 @@ const FormularioContenido = () => {
                         id='nombre'
                         placeholder='Escribe el Nombre del Tipo'
                         className='border-2 w-full p-2 mt-2 placeholder-gray-600
-                    rounded-md'
+                    rounded-md uppercase'
                         value={CONTENIDO}
                         onChange={e => setCONTENIDO(e.target.value)}
                     />

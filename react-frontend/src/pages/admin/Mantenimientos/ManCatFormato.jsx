@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import BannerCatContent from '../../../partials/dashboard/BannerCatContent';
+import Banner from '../../../partials/dashboard/BannerCatFormato';
 
 //components
-import FormularioTypeContent from '../../../components/Forms/FormularioTypeContent';
-import ListadoTypeContent from '../../../components/List/ListadoTypeContent';
+import Formulario from '../../../components/Forms/FormularioFormato';
+import ListadoFormatos from '../../../components/List/ListadoFormatos';
 
-const ManCatAudio = () => {
+const ManCatFormato = () => {
     const [mostrarForm, setMostrarForm] = useState(false);
     return (
         <>
-            <BannerCatContent />
+            <Banner />
             <main className="container mx-auto md:grid md:grid-cols-2 mt-0 gap-0 p-2">
                 <button
                     type='button'
@@ -19,14 +19,14 @@ const ManCatAudio = () => {
                 <div 
                 className={`${mostrarForm ? 'block' : 'hidden' } md:block md:w-1/2 lg:w-4/5`}
                 >
-                <FormularioTypeContent />
+                { <Formulario /> }
                 </div>
                 <div className='md:w-1/2 lg:w-4/5'>
-                    <ListadoTypeContent />
+                    { <ListadoFormatos />}
                 </div>
             </main>
         </>
     )
 }
 
-export default ManCatAudio
+export default ManCatFormato

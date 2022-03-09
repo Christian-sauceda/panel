@@ -1,48 +1,47 @@
-import { useState, useEffect } from 'react'
+
+import { useState, useEffect } from 'react';
 import Alerta from '../Alerts/Alerts';
-import useCatContenido from '../../hooks/useContenido';
+import useFormatos from '../../hooks/useFormatos'
 
-const FormularioTypeContent = () => {
-    const [NAME_TYPE_CONTENT, setNAME_TYPE_CONTENT] = useState('');
-    const [COD_TYPE_CONTENT, setCOD_TYPE_CONTENT] = useState(null);
-    const [alerta, setAlerta] = useState({});
+const FormularioFormato = () => {
+    const [FORMATO, setFORMATO] = useState('')
+    const [id, setId] = useState(null)
+    const [alerta, setAlerta] = useState({})
 
-    const { guardarCatContenido, catcontent } = useCatContenido();
+    const { guardarFormato, formato } = useFormatos()
 
-    useEffect(() => {
-        if (catcontent?.NAME_TYPE_CONTENT) {
-            setNAME_TYPE_CONTENT(catcontent.NAME_TYPE_CONTENT)
-            setCOD_TYPE_CONTENT(catcontent.COD_TYPE_CONTENT) // para editar
-        } else {
-            setNAME_TYPE_CONTENT('');
+    useEffect(() =>{
+        if(formato?.FORMATO){
+            setFORMATO(formato.FORMATO)
+            setId(formato.COD_FORMATO)
         }
+    }, [formato])
 
-    }, [catcontent])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault();
         //validar
-        if ([NAME_TYPE_CONTENT].includes('')) {
+        if ([FORMATO].includes('')) {
             setAlerta({
-                msg: 'El Nombre del Tipo de Contenido es obligatorio',
+                msg: 'El campo Nombre es obligatorio',
                 error: true
             })
-            return;
+            return
         }
 
-        guardarCatContenido({ NAME_TYPE_CONTENT, COD_TYPE_CONTENT })
+        
+        guardarFormato({ FORMATO, id})
         setAlerta({
-            msg: 'Guardado Correctamente',
+            msg: 'Formato guardado',
             error: false
         })
-        setNAME_TYPE_CONTENT('');
-        setCOD_TYPE_CONTENT('');
-
+        setFORMATO('')
+        setId('')
     }
     const { msg } = alerta;
     return (
         <>
-            { msg && <Alerta alerta={alerta} /> }
+            {msg && < Alerta alerta={alerta} />}
             <form
                 onSubmit={handleSubmit}
                 className='bg-white py-10 px-1 mb-10 lg:mb-0 shadow-md rounded-md'
@@ -59,18 +58,18 @@ const FormularioTypeContent = () => {
                         placeholder='Escribe el Nombre del Tipo'
                         className='border-2 w-full p-2 mt-2 placeholder-gray-600
                     rounded-md'
-                        value={NAME_TYPE_CONTENT}
-                        onChange={e => setNAME_TYPE_CONTENT(e.target.value)}
+                        value={FORMATO}
+                        onChange={e => setFORMATO(e.target.value)}
                     />
                 </div>
                 <input
                     type='submit'
                     className='bg-blue-600 w-full p-3 px-2 rounded-xl mt-1 text-white uppercase font-bold hover:cursor-pointer text-center hover:bg-blue-800 cursor-pointer transition-colors'
-                    value={COD_TYPE_CONTENT ? 'Guardar Cambios' : 'Agregar'}
+                    value={id ? 'Guardar Cambios' : 'Agregar Formato'}
                 />
             </form>
         </>
     )
 }
 
-export default FormularioTypeContent
+export default FormularioFormato

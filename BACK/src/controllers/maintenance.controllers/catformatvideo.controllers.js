@@ -29,14 +29,13 @@ export const getCatformartvideoById = (req, res) => {
 // CREATE CATALOG OF FORMAT VIDEO
 export const createCatformartvideo = (req, res) => {
     const {
-        NAME_FORMAT
+        FORMATO
     } = req.body;
     const query = `CALL PROC_INS_CAT_FORMAT_VIDEO(?);`;
-    mysqlconnection.query(query, [NAME_FORMAT], (err, rows, fields) => {
+    mysqlconnection.query(query, [FORMATO], (err, rows, fields) => {
         if (!err) {
-            res.json({
-                Status: "CATALOG OF FORMAT VIDEO ADDED"
-            });
+            //retornar el registro insertado
+            res.status(200).json(req.body);
         } else {
             console.log(req.body);
         }
@@ -46,17 +45,16 @@ export const createCatformartvideo = (req, res) => {
 // UPDATE CATALOG OF FORMAT VIDEO
 export const updateCatformartvideoById = (req, res) => {
     const {
-        NAME_FORMAT
+        FORMATO
     } = req.body;
     const {
         COD
     } = req.params;
     mysqlconnection.query("CALL PROC_UPD_CAT_FORMAT_VIDEO(?,?)",
-        [NAME_FORMAT, COD], (err, rows, fields) => {
+        [FORMATO, COD], (err, rows, fields) => {
             if (!err) {
-                res.json({
-                    Status: "CATALOG OF FORMAT VIDEO UPDATED"
-                });
+                //retornar el registro insertado
+                res.status(200).json(req.body);
             } else {
                 console.log(err);
             }

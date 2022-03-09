@@ -13,12 +13,13 @@ import Inicio from './pages/admin/Inicio.jsx'
 import AddMovieEs from './pages/admin/AddMovieEs'
 
 //cat
-import ManCatContent from './pages/admin/Mantenimientos/ManCatContent'
 import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
+import ManCatFormato from './pages/admin/Mantenimientos/ManCatFormato'
 //providers
 import { AuthProvider } from './context/AuthProvider'
 import { AudiosProvider } from './context/AudiosProvider'
-import { CatContenidoProvider } from './context/CatContenidoProvider'
+import { FormatosProvider } from './context/FormatosProvider'
+
 
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <AudiosProvider>
-          <CatContenidoProvider>
+        <FormatosProvider>
             <Routes>
               <Route path="/" element={<AuthLayout />}>
                 <Route index element={<Login />} />
@@ -39,11 +40,11 @@ function App() {
                 <Route index element={<Inicio />} />
                 <Route path="movie/es/add" element={<AddMovieEs />} />
                 <Route path="user/registrar" element={<Registrar />} />
-                <Route path="cat/content" element={<ManCatContent />} />
                 <Route path="cat/audio" element={<ManCatAudio />} />
+                <Route path="cat/formart" element={<ManCatFormato />} />
               </Route>
             </Routes>
-          </CatContenidoProvider>
+          </FormatosProvider>
         </AudiosProvider>
       </AuthProvider>
     </BrowserRouter>

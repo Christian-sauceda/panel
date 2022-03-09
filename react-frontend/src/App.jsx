@@ -41,7 +41,7 @@ function App() {
                 <Route path="movie/es/add" element={<AddMovieEs />} />
                 <Route path="user/registrar" element={<Registrar />} />
                 <Route path="cat/audio" element={<ManCatAudio />} />
-                <Route path="cat/formart" element={<ManCatFormato />} />
+                <Route path="cat/formato" element={<ManCatFormato />} />
               </Route>
             </Routes>
           </FormatosProvider>

@@ -29,14 +29,13 @@ export const getCatQualityById = (req, res) => {
 // CREATE CATALOG OF QUALITY
 export const createCatQuality = (req, res) => {
     const {
-        NAME_QUALITY
+        CALIDAD
     } = req.body;
     const query = `CALL PROC_INS_CAT_QUALITY(?);`;
-    mysqlconnection.query(query, [NAME_QUALITY], (err, rows, fields) => {
+    mysqlconnection.query(query, [CALIDAD], (err, rows, fields) => {
         if (!err) {
-            res.json({
-                Status: "CATALOG OF QUALITY ADDED"
-            });
+                //retornar el registro insertado
+                res.status(200).json(req.body);
         } else {
             console.log(req.body);
         }
@@ -46,17 +45,16 @@ export const createCatQuality = (req, res) => {
 // UPDATE CATALOG OF QUALITY
 export const updateCatQualityById = (req, res) => {
     const {
-        NAME_QUALITY
+        CALIDAD
     } = req.body;
     const {
         COD
     } = req.params;
     mysqlconnection.query("CALL PROC_UPD_CAT_QUALITY(?,?)",
-        [NAME_QUALITY, COD], (err, rows, fields) => {
+        [CALIDAD, COD], (err, rows, fields) => {
             if (!err) {
-                res.json({
-                    Status: "CATALOG OF QUALITY UPDATED"
-                });
+                //retornar el registro insertado
+                res.status(200).json(req.body);
             } else {
                 console.log(err);
             }

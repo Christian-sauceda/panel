@@ -20,7 +20,7 @@ const ListadoAudios = () => {
                                                             <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-600 uppercase dark:text-gray-400">
                                                                 Nombre
                                                             </th>
-                                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-600 uppercase dark:text-gray-400">
+                                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-gray-600 uppercase dark:text-gray-400">
                                                                 Acciones
                                                             </th>
                                                         </tr>

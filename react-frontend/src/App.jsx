@@ -17,6 +17,7 @@ import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
 import ManCatFormato from './pages/admin/Mantenimientos/ManCatFormato'
 import ManCatContenido from './pages/admin/Mantenimientos/ManCatContenido'
 import ManCatCalidad from './pages/admin/Mantenimientos/ManCatCalidad'
+import ManCatPlataforma from './pages/admin/Mantenimientos/ManCatPlataforma'
 
 //providers
 import { AuthProvider } from './context/AuthProvider'
@@ -24,6 +25,7 @@ import { AudiosProvider } from './context/AudiosProvider'
 import { FormatosProvider } from './context/FormatosProvider'
 import { ContenidosProvider } from './context/ContenidosProvider'
 import { CalidadesProvider } from './context/CalidadesProvider'
+import { PlataformasProvider } from './context/PlataformasProvider'
 
 
 function App() {
@@ -34,6 +36,7 @@ function App() {
           <FormatosProvider>
             <ContenidosProvider>
               <CalidadesProvider>
+              <PlataformasProvider>
                 <Routes>
                   <Route path="/" element={<AuthLayout />}>
                     <Route index element={<Login />} />
@@ -49,8 +52,10 @@ function App() {
                     <Route path="cat/formato" element={<ManCatFormato />} />
                     <Route path="cat/contenido" element={<ManCatContenido />} />
                     <Route path="cat/calidad" element={<ManCatCalidad />} />
+                    <Route path="cat/plataforma" element={<ManCatPlataforma />} />
                   </Route>
                 </Routes>
+                </PlataformasProvider>
               </CalidadesProvider>
             </ContenidosProvider>
           </FormatosProvider>

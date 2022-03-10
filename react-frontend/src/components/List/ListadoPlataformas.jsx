@@ -1,13 +1,13 @@
-import useCalidades from "../../hooks/useCalidades";
-import Calidad from "./Calidad";
-const ListadoCalidades = () => {
+import usePlataformas from "../../hooks/usePlataformas";
+import Plataforma from "./Plataforma";
+const ListadoPlataformas = () => {
 
-    const { calidades } = useCalidades();
+    const { plataformas } = usePlataformas();
     return (
         <>
             <div className="pt-10">
                 <>
-                    {calidades.length ? (
+                    {plataformas.length ? (
                         <>
                             <div>
                                 <div class="flex flex-col">
@@ -25,10 +25,10 @@ const ListadoCalidades = () => {
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    {calidades.map(calidad => (
-                                                        <Calidad
-                                                            key={calidad.COD_CALIDAD}
-                                                            calidad={calidad}
+                                                    {plataformas.map(plataforma => (
+                                                        <Plataforma
+                                                            key={plataforma.COD_PLATAFORMA}
+                                                            plataforma={plataforma}
                                                         />
                                                     ))}
                                                 </table>
@@ -43,7 +43,7 @@ const ListadoCalidades = () => {
                             <>
                                 <h2
                                     className="font-black text-3xl text-center text-gray-800"
-                                >No hay Tipo de Calidades Agregado</h2>
+                                >No hay Tipo de Plataformas Agregado</h2>
                                 <p
                                     className="text-xl mt-5 mb-10 text-center"
                                 >
@@ -57,4 +57,4 @@ const ListadoCalidades = () => {
     )
 }
 
-export default ListadoCalidades
+export default ListadoPlataformas

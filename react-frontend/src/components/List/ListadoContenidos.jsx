@@ -43,7 +43,7 @@ const ListadoContenidos = () => {
                             <>
                                 <h2
                                     className="font-black text-3xl text-center text-gray-800"
-                                >No hay Tipo de Contenido Agregado</h2>
+                                >No hay Tipo de Contenidos Agregado</h2>
                                 <p
                                     className="text-xl mt-5 mb-10 text-center"
                                 >

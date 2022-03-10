@@ -48,7 +48,7 @@ function BannerMovieEs() {
 
       {/* Content */}
       <div className="relative">
-        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Mantenimientos Contenidos</h1>
+        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Mantenimiento Tipo de Contenidos</h1>
         <p>Agrega y/o Administralos</p>
       </div>
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 function BannerMovieEs() {
   return (
-    <div className="relative bg-lime-200 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+     <div className="relative bg-rose-200 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
 
       {/* Background illustration */}
       <div className="absolute right-0 top-0 -mt-4 mr-16 pointer-events-none hidden xl:block" aria-hidden="true">
@@ -48,7 +48,7 @@ function BannerMovieEs() {
 
       {/* Content */}
       <div className="relative">
-        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Mantenimiento Tipo de Formatos</h1>
+        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Mantenimiento Tipos de Plataformas</h1>
         <p>Agrega y/o Administralos</p>
       </div>
 

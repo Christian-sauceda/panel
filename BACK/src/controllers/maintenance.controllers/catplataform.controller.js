@@ -29,14 +29,13 @@ export const getCatPlataformById = (req, res) => {
 // CREATE CATALOG OF PLATAFORM
 export const createCatPlataform = (req, res) => {
     const {
-        NAME_PLATAFORM
+        PLATAFORMA
     } = req.body;
     const query = `CALL PROC_INS_CAT_PLATAFORM(?);`;
-    mysqlconnection.query(query, [NAME_PLATAFORM], (err, rows, fields) => {
+    mysqlconnection.query(query, [PLATAFORMA], (err, rows, fields) => {
         if (!err) {
-            res.json({
-                Status: "CATALOG OF PLATAFORM ADDED"
-            });
+            //retornar el registro insertado
+            res.status(200).json(req.body);
         } else {
             console.log(req.body);
         }
@@ -46,17 +45,16 @@ export const createCatPlataform = (req, res) => {
 // UPDATE CATALOG OF PLATAFORM
 export const updateCatPlataformById = (req, res) => {
     const {
-        NAME_PLATAFORM
+        PLATAFORMA
     } = req.body;
     const {
         COD
     } = req.params;
     mysqlconnection.query("CALL PROC_UPD_CAT_PLATAFORM(?,?)",
-        [NAME_PLATAFORM, COD], (err, rows, fields) => {
+        [PLATAFORMA, COD], (err, rows, fields) => {
             if (!err) {
-                res.json({
-                    Status: "CATALOG OF PLATAFORM UPDATED"
-                });
+            //retornar el registro insertado
+            res.status(200).json(req.body);
             } else {
                 console.log(err);
             }

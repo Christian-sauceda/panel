@@ -18,6 +18,7 @@ import ManCatFormato from './pages/admin/Mantenimientos/ManCatFormato'
 import ManCatContenido from './pages/admin/Mantenimientos/ManCatContenido'
 import ManCatCalidad from './pages/admin/Mantenimientos/ManCatCalidad'
 import ManCatPlataforma from './pages/admin/Mantenimientos/ManCatPlataforma'
+import ManCatCategoria from './pages/admin/Mantenimientos/ManCatCategoria'
 
 //providers
 import { AuthProvider } from './context/AuthProvider'
@@ -26,6 +27,7 @@ import { FormatosProvider } from './context/FormatosProvider'
 import { ContenidosProvider } from './context/ContenidosProvider'
 import { CalidadesProvider } from './context/CalidadesProvider'
 import { PlataformasProvider } from './context/PlataformasProvider'
+import { CategoriasProvider } from './context/CategoriasProvider'
 
 
 function App() {
@@ -36,25 +38,28 @@ function App() {
           <FormatosProvider>
             <ContenidosProvider>
               <CalidadesProvider>
-              <PlataformasProvider>
-                <Routes>
-                  <Route path="/" element={<AuthLayout />}>
-                    <Route index element={<Login />} />
-                    <Route path="olvide-password" element={<OlvidePassword />} />
-                    <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
-                  </Route>
+                <PlataformasProvider>
+                  <CategoriasProvider>
+                    <Routes>
+                      <Route path="/" element={<AuthLayout />}>
+                        <Route index element={<Login />} />
+                        <Route path="olvide-password" element={<OlvidePassword />} />
+                        <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
+                      </Route>
 
-                  <Route path="/admin" element={<AdminLayout />}>
-                    <Route index element={<Inicio />} />
-                    <Route path="movie/es/add" element={<AddMovieEs />} />
-                    <Route path="user/registrar" element={<Registrar />} />
-                    <Route path="cat/audio" element={<ManCatAudio />} />
-                    <Route path="cat/formato" element={<ManCatFormato />} />
-                    <Route path="cat/contenido" element={<ManCatContenido />} />
-                    <Route path="cat/calidad" element={<ManCatCalidad />} />
-                    <Route path="cat/plataforma" element={<ManCatPlataforma />} />
-                  </Route>
-                </Routes>
+                      <Route path="/admin" element={<AdminLayout />}>
+                        <Route index element={<Inicio />} />
+                        <Route path="movie/es/add" element={<AddMovieEs />} />
+                        <Route path="user/registrar" element={<Registrar />} />
+                        <Route path="cat/audio" element={<ManCatAudio />} />
+                        <Route path="cat/formato" element={<ManCatFormato />} />
+                        <Route path="cat/contenido" element={<ManCatContenido />} />
+                        <Route path="cat/calidad" element={<ManCatCalidad />} />
+                        <Route path="cat/plataforma" element={<ManCatPlataforma />} />
+                        <Route path="cat/categoria" element={<ManCatCategoria />} />
+                      </Route>
+                    </Routes>
+                  </CategoriasProvider>
                 </PlataformasProvider>
               </CalidadesProvider>
             </ContenidosProvider>

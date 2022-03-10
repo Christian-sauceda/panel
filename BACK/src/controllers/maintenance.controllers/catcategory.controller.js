@@ -44,11 +44,11 @@ export const getCatcategoryByType = (req, res) => {
 // CREATE CATALOG OF CATEGORY
 export const createcatcategory = (req, res) => {
     const {
-        NAME_CATEGORY,
-        TYPE_CONTENT
+        CATEGORIA,
+        COD_CONTENIDO
     } = req.body;
     const query = `CALL PROC_INS_CAT_CATEGORY(?,?);`;
-    mysqlconnection.query(query, [NAME_CATEGORY, TYPE_CONTENT], (err, rows, fields) => {
+    mysqlconnection.query(query, [CATEGORIA, COD_CONTENIDO], (err, rows, fields) => {
         if (!err) {
             //retornar el registro insertado
             res.status(200).json(req.body);
@@ -61,14 +61,14 @@ export const createcatcategory = (req, res) => {
 // UPDATE CATALOG OF CATEGORY
 export const updateCatcategoryById = (req, res) => {
     const {
-        NAME_CATEGORY,
-        TYPE_CONTENT
+        CATEGORIA,
+        COD_CONTENIDO
     } = req.body;
     const {
         COD
     } = req.params;
     mysqlconnection.query("CALL PROC_UPD_CAT_CATEGORY(?,?,?)",
-        [NAME_CATEGORY, TYPE_CONTENT, COD], (err, rows, fields) => {
+        [CATEGORIA, COD_CONTENIDO, COD], (err, rows, fields) => {
             if (!err) {
                 //retornar el registro insertado
                 res.status(200).json(req.body);

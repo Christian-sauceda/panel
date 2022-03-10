@@ -501,22 +501,27 @@ function Sidebar({
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/cat/formato" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo de Formato</span>
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo Formato</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/cat/plataforma" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo Plataforma</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/cat/calidad" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo de Calidad</span>
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo Calidad</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/cat/contenido" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo de Contenido</span>
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo Contenido</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/cat/server" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo de Server</span>
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-angle-double-small-right"></i> Tipo Server</span>
                             </NavLink>
                           </li>
                         </ul>

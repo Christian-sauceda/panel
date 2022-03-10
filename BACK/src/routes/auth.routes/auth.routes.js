@@ -6,10 +6,9 @@ const useMiddleware = require("../../middlewares/user.middleware");
 
 const router = Router();
 
-// resgisro de usuario
-router.post("/registro", userCtrl.registro);
-// confirmacion de correo
-router.get("/confirmar/:token", userCtrl.confirmar);
+// sign-up
+router.post("/signup", useMiddleware.validateRegister, userCtrl.sign_up);
+
 // login
 router.post("/login", userCtrl.login);
 

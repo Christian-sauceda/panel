@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Outlet, Navigate } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
+import Skeleton from '../components/Alerts/Skeletor'
 //components
 
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
@@ -12,7 +13,8 @@ import "./AuthLayout.css";
 const AdminLayout = () => {
     const { auth, cargando } = useAuth()
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    if (cargando) return 'cargando...'
+    if (cargando) return <Skeleton/>
+    
     return (
         <>
             <div className="flex h-screen overflow-hidden">

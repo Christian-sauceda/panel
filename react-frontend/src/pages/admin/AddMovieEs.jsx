@@ -38,12 +38,11 @@ function AddMovieEs() {
 
     //desestructurar arreglo
     const { categoria, response } = CODCATEGORY;
-    console.log(categoria);
+    
     const handleChange = (e) => {
         // Destructuring
         const { value, checked } = e.target;
         const { categoria } = CODCATEGORY;
-        CODCATEGORY = categoria;
         // Case 1 : The user checks the box
         if (checked) {
             setCODCATEGORY({
@@ -59,11 +58,10 @@ function AddMovieEs() {
         }
 
     };
-   
 
     const handleSubmit = e => {
         e.preventDefault();
-        if ([CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS].includes('')) {
+        if ([CODAUDIO, categoria, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS].includes('')) {
             setAlerta({
                 msg: "Todos los campos son obligatorios",
                 error: true
@@ -368,8 +366,7 @@ function AddMovieEs() {
                                                     </div>
                                                 </div>
 
-                                            </div>
-                                            <div className="">
+                                                <div className="">
                                                 {/* checkboxes */}
 
                                                 <label className="block uppercase text-gray-600 text-xs font-bold mb-2">
@@ -443,76 +440,11 @@ function AddMovieEs() {
                                                         />
                                                         Suspenso
                                                     </label>
-                                                    <label className="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="categoria"
-                                                            value="6"
-                                                            id="flexCheckDefault"
-                                                            onChange={handleChange}
-                                                        />
-                                                        Suspenso
-                                                    </label>
-                                                    <label className="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="categoria"
-                                                            value="6"
-                                                            id="flexCheckDefault"
-                                                            onChange={handleChange}
-                                                        />
-                                                        Suspenso
-                                                    </label>
-                                                    <label className="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="categoria"
-                                                            value="6"
-                                                            id="flexCheckDefault"
-                                                            onChange={handleChange}
-                                                        />
-                                                        Suspenso
-                                                    </label>
-                                                    <label className="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="categoria"
-                                                            value="6"
-                                                            id="flexCheckDefault"
-                                                            onChange={handleChange}
-                                                        />
-                                                        Suspenso
-                                                    </label>
-                                                    <label className="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="categoria"
-                                                            value="6"
-                                                            id="flexCheckDefault"
-                                                            onChange={handleChange}
-                                                        />
-                                                        Suspenso
-                                                    </label>
-                                                    <label className="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="categoria"
-                                                            value="6"
-                                                            id="flexCheckDefault"
-                                                            onChange={handleChange}
-                                                        />
-                                                        Suspenso
-                                                    </label>
 
                                                 </div>
                                             </div>
 
+                                            </div>
                                         </div>
                                         <input
                                             type="text"

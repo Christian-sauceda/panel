@@ -8,19 +8,12 @@ import React from "react";
 import Alerta from "../../components/Alerts/Alerts";
 import Select from 'react-select';
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
-
 function AddMovieEs() {
 
     const { auth, cargando } = useAuth()
 
     const [CODAUDIO, setCODAUDIO] = useState("");
     const [CODQUALITY, setCODQUALITY] = useState("");
-    const [CODCATEGORY, setCODCATEGORY] = useState("");
     const [CODUSER, setCODUSER] = useState(auth.COD);
     const [TITLE, setTITLE] = useState("");
     const [BACK, setBACK] = useState("");
@@ -38,6 +31,36 @@ function AddMovieEs() {
     const [SYNOPSIS, setSYNOPSIS] = useState("");
 
     const [alerta, setAlerta] = useState({});
+
+    const [CODCATEGORY, setCODCATEGORY] = useState({
+        categoria: [],
+    });
+
+    //desestructurar arreglo
+    const { categoria, response } = CODCATEGORY;
+    console.log(categoria);
+    const handleChange = (e) => {
+        // Destructuring
+        const { value, checked } = e.target;
+        const { categoria } = CODCATEGORY;
+        CODCATEGORY = categoria;
+        // Case 1 : The user checks the box
+        if (checked) {
+            setCODCATEGORY({
+                categoria: [...categoria, parseInt(value)],
+            });
+        }
+
+        // Case 2  : The user unchecks the box
+        else {
+            setCODCATEGORY({
+                categoria: categoria.filter((e) => e !== parseInt(value)),
+            });
+        }
+
+    };
+   
+
     const handleSubmit = e => {
         e.preventDefault();
         if ([CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS].includes('')) {
@@ -280,15 +303,6 @@ function AddMovieEs() {
                                                             <option value="2">MKV</option>
                                                             <option value="2">3GP</option>
                                                         </select>
-
-                                                        <Select
-                                                            defaultValue={CODQUALITY}
-                                                            isMulti
-                                                            name="colors"
-                                                            options={options}
-                                                            className="basic-multi-select"
-                                                            classNamePrefix="select"
-                                                        />
                                                     </div>
                                                 </div>
 
@@ -355,25 +369,22 @@ function AddMovieEs() {
                                                 </div>
 
                                             </div>
-                                            <div className="flex flex-wrap">
+                                            <div className="">
                                                 {/* checkboxes */}
+
                                                 <label className="block uppercase text-gray-600 text-xs font-bold mb-2">
                                                     Generos:
                                                 </label>
                                                 <div className=" p-2 mx-auto grid grid-cols-6">
+
                                                     <label className="inline-flex items-start p-2">
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
-                                                            name="genero"
-                                                        />
-                                                        Accion
-                                                    </label>
-                                                    <label className="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="genero"
+                                                            name="categoria"
+                                                            value="1"
+                                                            id="flexCheckDefault"
+                                                            onChange={handleChange}
                                                         />
                                                         Aventura
                                                     </label>
@@ -381,7 +392,21 @@ function AddMovieEs() {
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
-                                                            name="genero"
+                                                            name="categoria"
+                                                            value="2"
+                                                            id="flexCheckDefault"
+                                                            onChange={handleChange}
+                                                        />
+                                                        Acción
+                                                    </label>
+                                                    <label className="inline-flex items-start p-2">
+                                                        <input
+                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
+                                                            type="checkbox"
+                                                            name="categoria"
+                                                            value="3"
+                                                            id="flexCheckDefault"
+                                                            onChange={handleChange}
                                                         />
                                                         Comedia
                                                     </label>
@@ -389,55 +414,32 @@ function AddMovieEs() {
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
-                                                            name="genero"
+                                                            name="categoria"
+                                                            value="4"
+                                                            id="flexCheckDefault"
+                                                            onChange={handleChange}
                                                         />
                                                         Drama
                                                     </label>
                                                     <label className="inline-flex items-start p-2">
                                                         <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-sky-800 focus:ring-opacity-25 border border-gray-300 rounded"
+                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
-                                                            name="genero"
+                                                            name="categoria"
+                                                            value="5"
+                                                            id="flexCheckDefault"
+                                                            onChange={handleChange}
                                                         />
-                                                        Fantasia
-                                                    </label>
-                                                    <label className="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-800 rounded"
-                                                            type="checkbox"
-                                                            name="genero"
-                                                        />
-                                                        Horror
+                                                        Fantasía
                                                     </label>
                                                     <label className="inline-flex items-start p-2">
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
-                                                            name="genero"
-                                                        />
-                                                        Misterio
-                                                    </label>
-                                                    <label className="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="genero"
-                                                        />
-                                                        Romance
-                                                    </label>
-                                                    <label className="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="genero"
-                                                        />
-                                                        Terror
-                                                    </label>
-                                                    <label className="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="genero"
+                                                            name="categoria"
+                                                            value="6"
+                                                            id="flexCheckDefault"
+                                                            onChange={handleChange}
                                                         />
                                                         Suspenso
                                                     </label>
@@ -445,15 +447,84 @@ function AddMovieEs() {
                                                         <input
                                                             className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
                                                             type="checkbox"
-                                                            name="genero"
+                                                            name="categoria"
+                                                            value="6"
+                                                            id="flexCheckDefault"
+                                                            onChange={handleChange}
                                                         />
-                                                        Ciencia Ficcion
+                                                        Suspenso
                                                     </label>
+                                                    <label className="inline-flex items-start p-2">
+                                                        <input
+                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
+                                                            type="checkbox"
+                                                            name="categoria"
+                                                            value="6"
+                                                            id="flexCheckDefault"
+                                                            onChange={handleChange}
+                                                        />
+                                                        Suspenso
+                                                    </label>
+                                                    <label className="inline-flex items-start p-2">
+                                                        <input
+                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
+                                                            type="checkbox"
+                                                            name="categoria"
+                                                            value="6"
+                                                            id="flexCheckDefault"
+                                                            onChange={handleChange}
+                                                        />
+                                                        Suspenso
+                                                    </label>
+                                                    <label className="inline-flex items-start p-2">
+                                                        <input
+                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
+                                                            type="checkbox"
+                                                            name="categoria"
+                                                            value="6"
+                                                            id="flexCheckDefault"
+                                                            onChange={handleChange}
+                                                        />
+                                                        Suspenso
+                                                    </label>
+                                                    <label className="inline-flex items-start p-2">
+                                                        <input
+                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
+                                                            type="checkbox"
+                                                            name="categoria"
+                                                            value="6"
+                                                            id="flexCheckDefault"
+                                                            onChange={handleChange}
+                                                        />
+                                                        Suspenso
+                                                    </label>
+                                                    <label className="inline-flex items-start p-2">
+                                                        <input
+                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
+                                                            type="checkbox"
+                                                            name="categoria"
+                                                            value="6"
+                                                            id="flexCheckDefault"
+                                                            onChange={handleChange}
+                                                        />
+                                                        Suspenso
+                                                    </label>
+
                                                 </div>
                                             </div>
+
                                         </div>
+                                        <input
+                                            type="text"
+                                            className="hidden"
+                                            name="response"
+                                            value={CODCATEGORY.response}
+                                            id="floatingTextarea2"
+                                            onChange={handleChange}
+                                        ></input>
                                     </div>
                                 </div>
+
                                 <div className="w-full lg:w-4/12 px-4">
                                     <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
                                         <div>
@@ -529,8 +600,11 @@ function AddMovieEs() {
 
                 </div>
             </main>
+
         </>
+
     )
+
 }
 
 export default AddMovieEs

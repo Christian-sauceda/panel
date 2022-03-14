@@ -11,6 +11,8 @@ import Inicio from './pages/admin/Inicio.jsx'
 
 //add
 import AddMovieEs from './pages/admin/AddMovieEs'
+import AddMovieEn from './pages/admin/AddMovieEn'
+import AddSerieEs from './pages/admin/AddSerieEs'
 
 //cat
 import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
@@ -50,6 +52,8 @@ function App() {
                       <Route path="/admin" element={<AdminLayout />}>
                         <Route index element={<Inicio />} />
                         <Route path="movie/es/add" element={<AddMovieEs />} />
+                        <Route path="movie/en/add" element={<AddMovieEn />} />
+                        <Route path="series/es/add" element={<AddSerieEs />} />
                         <Route path="user/registrar" element={<Registrar />} />
                         <Route path="cat/audio" element={<ManCatAudio />} />
                         <Route path="cat/formato" element={<ManCatFormato />} />

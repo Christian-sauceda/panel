@@ -1,4 +1,4 @@
-import BanneMovieEs from '../../partials/dashboard/BannerMovieEs';
+import BanneMovieEn from '../../partials/dashboard/BannerMovieEn';
 import { useState } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
@@ -6,7 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
 
-export default function AddMovieEs() {
+export default function AddMovieEn() {
 
     const { auth } = useAuth()
     const [CODAUDIO, setCODAUDIO] = useState("");
@@ -51,9 +51,9 @@ export default function AddMovieEs() {
                 }
             }
             const datos = { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS }
-            await clienteAxios.post(`/mtmovie/es`, datos, config)
+            await clienteAxios.post(`/mtmovie/en`, datos, config)
             setAlerta({
-                msg: 'Pelicula en Español Agregada Correctamente',
+                msg: 'Pelicula en Ingles Agregada Correctamente',
                 error: false
             })
             //limpiar los campos
@@ -86,7 +86,7 @@ export default function AddMovieEs() {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <BanneMovieEs />
+                    <BanneMovieEn />
                     <div className="sm:flex sm:justify-between sm:items-center mb-8">
                         <form
                             onSubmit={handleSubmit}
@@ -101,7 +101,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2 pt-2"
                                                         >
-                                                            Título:
+                                                            TITLE:
                                                         </label>
                                                         <input
                                                             type="text"
@@ -120,7 +120,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Año:
+                                                            YEAR:
                                                         </label>
                                                         <input
                                                             name="year"
@@ -141,7 +141,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Duración:
+                                                            DURATION:
                                                         </label>
                                                         <input
                                                             name="duration"
@@ -161,7 +161,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Clasificacion:
+                                                            CLASIFICATION:
                                                         </label>
                                                         <input
                                                             name="clasificacion"
@@ -181,7 +181,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Calificacion:
+                                                            CALIFICATION:
                                                         </label>
                                                         <input
                                                             name="calificacion"
@@ -201,7 +201,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Director:
+                                                            DIRECTOR:
                                                         </label>
                                                         <input
                                                             type="text"
@@ -220,7 +220,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Reparto
+                                                            CAST:
                                                         </label>
                                                         <textarea
                                                             type="text"
@@ -240,7 +240,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Pais:
+                                                            COUNTRY:
                                                         </label>
                                                         <input
                                                             type="text"
@@ -259,7 +259,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Sinopsis
+                                                            SYNOPSIS
                                                         </label>
                                                         <textarea
                                                             type="text"
@@ -279,7 +279,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Link de la Película:
+                                                            LINK OF THE MOVIE:
                                                         </label>
                                                         <input
                                                             type="text"
@@ -298,7 +298,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Calidad:
+                                                        QUANTITY:
                                                         </label>
                                                         <select
                                                             name="calidad"
@@ -320,7 +320,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Audio:
+                                                            AUDIO:
                                                         </label>
                                                         <select
                                                             name="audio"
@@ -341,7 +341,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Formato:
+                                                            FORMAT:
                                                         </label>
                                                         <select
                                                             name="formato"
@@ -364,7 +364,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Pin de Seguridad:
+                                                            safety pin:
                                                         </label>
                                                         <select
                                                             name="seguridad"
@@ -386,7 +386,7 @@ export default function AddMovieEs() {
                                                     <label
                                                         className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                     >
-                                                        Generos:
+                                                        GENRE:
                                                     </label>
                                                     <input
                                                         type="number"
@@ -426,7 +426,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Imagen de Fondo:
+                                                            IMAGE Backdrops:
                                                         </label>
                                                         <input
                                                             type="text"
@@ -445,7 +445,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Imagen de Portada:
+                                                            Cover image:
                                                         </label>
                                                         <input
                                                             type="text"

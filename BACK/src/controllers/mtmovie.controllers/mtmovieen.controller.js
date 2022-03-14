@@ -46,12 +46,11 @@ export const createmovieen = (req, res) => {
         ASKPIN,
         CODFORMATVIDEO,
         URL,
-        SUBT,
         SYNOPSIS
     } = req.body;
-    const query = `CALL PROC_INS_MOVIE_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+    const query = `CALL PROC_INS_MOVIE_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
     mysqlconnection.query(query, [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER,
-            YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SUBT, SYNOPSIS
+            YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS
         ],
         (err, rows, fields) => {
             if (!err) {
@@ -84,13 +83,12 @@ export const updatemovieenById = (req, res) => {
         ASKPIN,
         CODFORMATVIDEO,
         URL,
-        SUBT,
         SYNOPSIS
     } = req.body;
     const {
         COD
     } = req.params;
-    mysqlconnection.query("CALL PROC_UPD_MOVIE_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    mysqlconnection.query("CALL PROC_UPD_MOVIE_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF,
             DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SUBT, SYNOPSIS, COD
         ],

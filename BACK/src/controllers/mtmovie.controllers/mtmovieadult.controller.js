@@ -40,12 +40,11 @@ export const createmovieadult = (req, res) => {
         DURATION,
         CODFORMATVIDEO,
         URL,
-        SUBT,
         SYNOPSIS
     } = req.body;
-    const query = `CALL PROC_INS_MOVIE_ADULT(?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+    const query = `CALL PROC_INS_MOVIE_ADULT(?,?,?,?,?,?,?,?,?,?,?,?)`;
     mysqlconnection.query(query, [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, DURATION,
-            CODFORMATVIDEO, URL, SUBT, SYNOPSIS
+            CODFORMATVIDEO, URL, SYNOPSIS
         ],
         (err, rows, fields) => {
             if (!err) {
@@ -72,15 +71,14 @@ export const updatemovieadultById = (req, res) => {
         DURATION,
         CODFORMATVIDEO,
         URL,
-        SUBT,
         SYNOPSIS
     } = req.body;
     const {
         COD
     } = req.params;
-    mysqlconnection.query("CALL PROC_UPD_MOVIE_ADULT(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    mysqlconnection.query("CALL PROC_UPD_MOVIE_ADULT(?,?,?,?,?,?,?,?,?,?,?,?)",
         [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, DURATION,
-            CODFORMATVIDEO, URL, SUBT, SYNOPSIS, COD
+            CODFORMATVIDEO, URL, SYNOPSIS, COD
         ],
         (err, rows, fields) => {
             if (!err) {

@@ -12,6 +12,8 @@ import Inicio from './pages/admin/Inicio.jsx'
 //add
 import AddMovieEs from './pages/admin/AddMovieEs'
 import AddMovieEn from './pages/admin/AddMovieEn'
+import AddMovieAdult from './pages/admin/AddMovieAdults'
+
 import AddSerieEs from './pages/admin/AddSerieEs'
 
 //cat
@@ -53,6 +55,7 @@ function App() {
                         <Route index element={<Inicio />} />
                         <Route path="movie/es/add" element={<AddMovieEs />} />
                         <Route path="movie/en/add" element={<AddMovieEn />} />
+                        <Route path="movie/adult/add" element={<AddMovieAdult />} />
                         <Route path="series/es/add" element={<AddSerieEs />} />
                         <Route path="user/registrar" element={<Registrar />} />
                         <Route path="cat/audio" element={<ManCatAudio />} />

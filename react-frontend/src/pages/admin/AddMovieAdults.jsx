@@ -1,43 +1,42 @@
+
+import BanneMovieAdult from '../../partials/dashboard/BannerMovieAdult';
 import { useState } from "react";
-import "./../../components/Cards/card.css";
+import "../../components/Cards/Card.css";
 import useAuth from '../../hooks/useAuth';
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
-import BanneMovieEs from '../../partials/dashboard/BannerSeriesEs';
 
-export default function AddSerieEs() {
+export default function AddMovieAdult() {
 
     const { auth } = useAuth()
-    const [CODAUDIO, setCODAUDIO] = useState("1");
-    const [CODCATEGORY, setCODCATEGORY] = useState("1");
+    const [CODAUDIO, setCODAUDIO] = useState("");
+    const [CODQUALITY, setCODQUALITY] = useState("");
+    const [CODCATEGORY, setCODCATEGORY] = useState("");
     const [CODUSER, setCODUSER] = useState(`${auth.COD}`);
     const [TITLE, setTITLE] = useState("");
-    const [TITLE_LATIN, setTITLE_LATIN] = useState("");
     const [BACK, setBACK] = useState("");
     const [POSTER, setPOSTER] = useState("");
     const [YEAR, setYEAR] = useState("");
-    const [CLASIF, setCLASIF] = useState("");
-    const [COUNTRY, setCOUNTRY] = useState("");
-    const [CALIF, setCALIF] = useState("");
-    const [DIRECTOR, setDIRECTOR] = useState("");
-    const [CAST, setCAST] = useState("");
+    const [DURATION, setDURATION] = useState("");
+    const [CODFORMATVIDEO, setCODFORMATVIDEO] = useState("");
+    const [URL, setURL] = useState("");
     const [SYNOPSIS, setSYNOPSIS] = useState("");
 
     const [alerta, setAlerta] = useState({});
 
     const handleSubmit = async e => {
         e.preventDefault();
-        if ([CODAUDIO, CODCATEGORY, TITLE, TITLE_LATIN, BACK, POSTER, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS].includes('')) {
+        //validar formulario
+        if ([ CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, DURATION, CODFORMATVIDEO, URL, SYNOPSIS ].includes("")) {
             setAlerta({
                 msg: "Todos los campos son obligatorios",
                 error: true
             })
             return;
         }
-
         setAlerta({})
-
+        //insertar en la base de datos
         try {
             const token = localStorage.getItem("token")
             const config = {
@@ -46,65 +45,64 @@ export default function AddSerieEs() {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const datos = { CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS }
-            await clienteAxios.post(`/mttvshows/es`, datos, config)
+            const datos = { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, DURATION, CODFORMATVIDEO, URL, SYNOPSIS }
+            await clienteAxios.post(`/mtmovie/adult`, datos, config)
             setAlerta({
-                msg: 'Serie Agregada Correctamente',
+                msg: "Pelicula Adulto Agregada Correctamente",
                 error: false
             })
-            //limpiar los campos
+            //limpiar el formulario
+            setCODAUDIO("");
+            setCODQUALITY("");
+            setCODCATEGORY("");
             setTITLE("");
-            setTITLE_LATIN("");
             setBACK("");
             setPOSTER("");
             setYEAR("");
-            setCLASIF("");
-            setCOUNTRY("");
-            setCALIF("");
-            setDIRECTOR("");
-            setCAST("");
+            setDURATION("");
+            setCODFORMATVIDEO("");
+            setURL("");
             setSYNOPSIS("");
-
         } catch (error) {
             setAlerta({
-                msg: error.data.respuesta.message,
+                msg: error.response.data.message,
                 error: true
             })
         }
 
     }
+
     const { msg } = alerta;
     return (
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <BanneMovieEs />
+                    <BanneMovieAdult />
                     <div className="sm:flex sm:justify-between sm:items-center mb-8">
-                        <form
+                    <form
                             onSubmit={handleSubmit}
                         >
-                            <div className="flex flex-wrap">
-                                <div className="w-full lg:w-8/12 px-4">
+                            <div className="flex flex-wrap ">
+                                <div className="w-full lg:w-8/12 px-4 pt-2">
                                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
 
                                         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+                                            <div className="flex flex-wrap">
 
-                                            <div className="flex flex-wrap pt-4">
-
-                                                <div className="w-full lg:w-6/12 px-4 ">
-                                                    <div className="relative w-full mb-3 ">
+                                                <div className="w-full lg:w-12/12 px-4">
+                                                    <div className="relative w-full mb-3">
                                                         <label
                                                             for="title"
-                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2 "
+                                                            className=" block pt-4 uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Título Original:
+                                                            Título:
                                                         </label>
                                                         <input
                                                             type="text"
                                                             id="title"
                                                             name="title"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Título Original de la Serie"
+                                                            placeholder="Título de la Película "
                                                             value={TITLE}
                                                             onChange={(e) => setTITLE(e.target.value)}
                                                         />
@@ -112,26 +110,6 @@ export default function AddSerieEs() {
                                                 </div>
 
                                                 <div className="w-full lg:w-6/12 px-4">
-                                                    <div className="relative w-full mb-3">
-                                                        <label
-                                                            for="titlelatin"
-                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2"
-                                                        >
-                                                            Título En latino:
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            id="titlelatin"
-                                                            name="titlelatin"
-                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Título latino de la Serie"
-                                                            value={TITLE_LATIN}
-                                                            onChange={(e) => setTITLE_LATIN(e.target.value)}
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="w-full lg:w-4/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
                                                             for="year"
@@ -142,7 +120,7 @@ export default function AddSerieEs() {
                                                         <input
                                                             name="year"
                                                             id="year"
-                                                            placeholder="Año de la Serie"
+                                                            placeholder="Año de la Película"
                                                             min={1970}
                                                             max={2030}
                                                             type="number"
@@ -153,106 +131,23 @@ export default function AddSerieEs() {
                                                     </div>
                                                 </div>
 
-
-                                                <div className="w-full lg:w-4/12 px-4">
+                                                <div className="w-full lg:w-6/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="clasificacion"
+                                                            for="duration"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Clasificacion:
+                                                            Duración:
                                                         </label>
                                                         <input
-                                                            name="clasificacion"
-                                                            id="clasificacion"
-                                                            type="text"
-                                                            placeholder="Clasificacion de la Serie"
+                                                            name="duration"
+                                                            id="duration"
+                                                            type="number"
+                                                            placeholder="Duración en minutos"
                                                             min={10}
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            value={CLASIF}
-                                                            onChange={(e) => setCLASIF(e.target.value)}
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="w-full lg:w-4/12 px-4">
-                                                    <div className="relative w-full mb-3">
-                                                        <label
-                                                            for="clasificacion"
-                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2"
-                                                        >
-                                                            Calificaion:
-                                                        </label>
-                                                        <input
-                                                            name="calificacion"
-                                                            id="calificacion"
-                                                            type="text"
-                                                            placeholder="Calificacion de la Serie"
-                                                            min={10}
-                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            value={CALIF}
-                                                            onChange={(e) => setCALIF(e.target.value)}
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="w-full lg:w-12/12 px-4">
-                                                    <div className="relative w-full mb-3">
-                                                        <label
-                                                            for="director"
-                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2"
-                                                        >
-                                                            Director:
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            id="director"
-                                                            name="director"
-                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Director de la Serie"
-                                                            value={DIRECTOR}
-                                                            onChange={(e) => setDIRECTOR(e.target.value)}
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="w-full lg:w-12/12 px-4">
-                                                    <div className="relative w-full mb-3">
-                                                        <label
-                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2"
-                                                            for="reparto"
-                                                        >
-                                                            Reparto
-                                                        </label>
-                                                        <textarea
-                                                            type="text"
-                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            name="reparto"
-                                                            id="reparto"
-                                                            placeholder="Reparto de la Serie"
-                                                            rows="4"
-                                                            value={CAST}
-                                                            onChange={(e) => setCAST(e.target.value)}
-                                                        ></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <div className="w-full lg:w-12/12 px-4">
-                                                    <div className="relative w-full mb-3">
-                                                        <label
-                                                            for="pais"
-                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2"
-                                                        >
-                                                            Pais:
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            id="pais"
-                                                            name="pais"
-                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Pais donde filmo la Serie"
-                                                            value={COUNTRY}
-                                                            onChange={(e) => setCOUNTRY(e.target.value)}
+                                                            value={DURATION}
+                                                            onChange={(e) => setDURATION(e.target.value)}
                                                         />
                                                     </div>
                                                 </div>
@@ -270,7 +165,7 @@ export default function AddSerieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             name="sinopsis"
                                                             id="sinopsis"
-                                                            placeholder="Sinopsis de la Serie"
+                                                            placeholder="Sinopsis de la Película"
                                                             rows="4"
                                                             value={SYNOPSIS}
                                                             onChange={(e) => setSYNOPSIS(e.target.value)}
@@ -278,48 +173,120 @@ export default function AddSerieEs() {
                                                     </div>
                                                 </div>
 
+                                                <div className="w-full lg:w-12/12 px-4">
+                                                    <div className="relative w-full mb-3">
+                                                        <label
+                                                            for="link"
+                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2"
+                                                        >
+                                                            Link del video:
+                                                        </label>
+                                                        <input
+                                                            type="text"
+                                                            id="link"
+                                                            name="link"
+                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            placeholder="Link del video"
+                                                            value={URL}
+                                                            onChange={(e) => setURL(e.target.value)}
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="w-full lg:w-4/12 px-4">
+                                                    <div className="relative w-full mb-3">
+                                                        <label
+                                                            for="calidad"
+                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2"
+                                                        >
+                                                            Calidad:
+                                                        </label>
+                                                        <select
+                                                            name="calidad"
+                                                            id="calidad"
+                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            value={CODQUALITY}
+                                                            onChange={(e) => setCODQUALITY(e.target.value)}
+                                                        >
+                                                            <option value="">Seleccione</option>
+                                                            <option value="1">MP4</option>
+                                                            <option value="2">MKV</option>
+                                                            <option value="2">3GP</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div className="w-full lg:w-4/12 px-4">
+                                                    <div className="relative w-full mb-3">
+                                                        <label
+                                                            for="audio"
+                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2"
+                                                        >
+                                                            Audio:
+                                                        </label>
+                                                        <select
+                                                            name="audio"
+                                                            id="audio"
+                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            value={CODAUDIO}
+                                                            onChange={(e) => setCODAUDIO(e.target.value)}
+                                                        >
+                                                            <option value="">Seleccione</option>
+                                                            <option value="1">Inglés</option>
+                                                            <option value="2">Español</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div className="w-full lg:w-4/12 px-4">
+                                                    <div className="relative w-full mb-3">
+                                                        <label
+                                                            for="formato"
+                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2"
+                                                        >
+                                                            Formato:
+                                                        </label>
+                                                        <select
+                                                            name="formato"
+                                                            id="formato"
+                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            value={CODFORMATVIDEO}
+                                                            onChange={(e) => setCODFORMATVIDEO(e.target.value)}
+                                                        >
+                                                            
+                                                            <option value="1">SD</option>
+                                                            <option value="2">HD</option>
+                                                            <option value="3">FULL HD</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                             <div className="flex flex-wrap">
                                                 {/* checkboxes */}
-                                                <label className="block uppercase text-gray-600 text-xs font-bold mb-2">
-                                                    Generos:
-                                                </label>
-                                                <div class="max-w-xs p-2 mx-auto">
-                                                    <label class="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="genero"
-                                                        />
-                                                        Accion
-                                                    </label>
-                                                    <label class="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="genero"
-                                                        />
-                                                        Aventura
-                                                    </label>
-                                                    <label class="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="genero"
-                                                        />
-                                                        Comedia
-                                                    </label>
-                                                    <label class="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="genero"
-                                                        />
-                                                        Drama
-                                                    </label>
-                                                </div>
+                                                <div className="w-full lg:w-4/12 px-4">
+                                                    <div className="relative w-full mb-3">
+                                                        <label
+                                                            for="genero"
+                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2"
+                                                        >
+                                                            Género:
+                                                        </label>
+                                                        <select
+                                                            name="categoria"
+                                                            id="categoria"
+                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            value={CODCATEGORY}
+                                                            onChange={(e) => setCODCATEGORY(e.target.value)}
+                                                        >
+                                                            <option value="">Seleccione</option>
+                                                            <option value="1">Acción</option>
+                                                            <option value="2">Animación</option>
+                                                            <option value="3">Aventura</option>
+                                                        </select>
+                                                        </div>
+                                                        </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -347,14 +314,14 @@ export default function AddSerieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Imagen de Fondo:
+                                                            IMAGE Backdrops:
                                                         </label>
                                                         <input
                                                             type="text"
                                                             id="back"
                                                             name="back"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Fondo de la Serie"
+                                                            placeholder="Fondo de la Pelicula"
                                                             value={BACK}
                                                             onChange={(e) => setBACK(e.target.value)}
                                                         />
@@ -366,14 +333,14 @@ export default function AddSerieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Imagen de Portada:
+                                                            Cover image:
                                                         </label>
                                                         <input
                                                             type="text"
                                                             id="front"
                                                             name="front"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Poster de la Serie"
+                                                            placeholder="Poster de la Pelicula"
                                                             value={POSTER}
                                                             onChange={(e) => setPOSTER(e.target.value)}
                                                         />
@@ -393,7 +360,7 @@ export default function AddSerieEs() {
                                 />
                             </div>
                         </form>
-                    </div>
+                        </div>
                 </div>
             </main>
         </>

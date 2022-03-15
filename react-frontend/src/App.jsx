@@ -15,6 +15,7 @@ import AddMovieEn from './pages/admin/AddMovieEn'
 import AddMovieAdult from './pages/admin/AddMovieAdults'
 
 import AddSerieEs from './pages/admin/AddSerieEs'
+import AddSerieEn from './pages/admin/AddSerieEn'
 
 //cat
 import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
@@ -57,6 +58,7 @@ function App() {
                         <Route path="movie/en/add" element={<AddMovieEn />} />
                         <Route path="movie/adult/add" element={<AddMovieAdult />} />
                         <Route path="series/es/add" element={<AddSerieEs />} />
+                        <Route path="tvshow/en/add" element={<AddSerieEn />} />
                         <Route path="user/registrar" element={<Registrar />} />
                         <Route path="cat/audio" element={<ManCatAudio />} />
                         <Route path="cat/formato" element={<ManCatFormato />} />

@@ -12,7 +12,7 @@ export default function Inicio() {
           <CardStats
             statSubtitle="Total Películas Español"
             statTitle="1"
-            statIconName="fas fa-film"
+            statIconName={`fas fa-film`}
             statIconColor="bg-indigo-500"
           />
         </div>

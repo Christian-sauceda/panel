@@ -1,5 +1,6 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
+import useAuth from '../../hooks/useAuth'
 
 const UserDropdown = () => {
   // dropdown props
@@ -15,6 +16,8 @@ const UserDropdown = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+  const { auth } = useAuth()
+  const user = auth.USER_NAME
   return (
     <>
       <a
@@ -28,7 +31,7 @@ const UserDropdown = () => {
       >
         <div className="items-center flex bg-sky-800 rounded-lg">
           <span className="text-sm font-bold text-white hover:text-red-800 inline-flex items-center justify-center m-2">
-            Hola, Cristian
+            Hola, ${user}
           </span>
         </div>
       </a>
@@ -43,9 +46,9 @@ const UserDropdown = () => {
           className={
             "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap text-sky-800"
           }
-          href="/login"
+          href="/"
         >
-          Cerrar Sesión
+          Cerrar Sesiónn
         </a>
       </div>
     </>

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Transition from '../../utils/Transition.jsx';
-
+import useAuth from '../../hooks/useAuth'
 import UserAvatar from '../../assets/img/user.png';
 
 function UserMenu() {
@@ -10,7 +10,6 @@ function UserMenu() {
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
-  const [auth, setAuth] = useState({})
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
@@ -30,7 +29,8 @@ function UserMenu() {
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
   });
-
+  const { auth, setAuth } = useAuth()
+    const user = (auth.NAME)
   return (
     <div className="relative inline-flex">
       <button
@@ -42,7 +42,7 @@ function UserMenu() {
       >
         <img className="w-8 h-8 rounded-full" src={UserAvatar} width="32" height="32" alt="User" />
         <div className="flex items-center truncate">
-          <span className="truncate ml-2 text-sm font-medium group-hover:text-slate-800">Christian.</span>
+          <span className="truncate ml-2 text-sm font-medium group-hover:text-slate-800"><span className='uppercase p-4 bg-slate-700  text-white rounded-full text-center'> {user}</span></span>
           <svg className="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
             <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
           </svg>
@@ -65,19 +65,19 @@ function UserMenu() {
           onBlur={() => setDropdownOpen(false)}
         >
           <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200">
-            <div className="font-medium text-slate-800">Hola, Christian.</div>
-            <div className="text-xs text-slate-500 italic">Administrator</div>
-          </div>
+            <div className="font-medium text-slate-800">Hola, <span className='text-red-600 text-center'> {user}</span></div>
+             </div>
           <ul>
 
             <li>
-              <Link
-                className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
-                to="/"
+              <a
+                className="font-medium text-sm text-indigo-600 hover:text-indigo-800 flex items-center py-1 px-3"
+                href="/"
                 onClick={() => setDropdownOpen(!dropdownOpen, localStorage.removeItem('token'), setAuth({}))}
               >
-                Cerrar sesión
-              </Link>
+              <span className='uppercase text-center'> Cerrar sesión</span>
+                
+              </a>
             </li>
           </ul>
         </div>

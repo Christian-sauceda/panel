@@ -46,10 +46,12 @@ export const createtvshowChapter = (req, res) => {
         NUMBER_SEASON,
         NUMBER_CHAPTER,
         SYNOSIS,
-        SUPTITLE,
         URL,
+        SUPTITLE,
+        BACK,
+        POSTER
     } = req.body;
-    const query = "CALL PROC_INS_CHAPTER(?,?,?,?,?,?,?,?,?)";
+    const query = "CALL PROC_INS_CHAPTER(?,?,?,?,?,?,?,?,?,?,?)";
     mysqlconnection.query(
         query,
         [
@@ -60,8 +62,10 @@ export const createtvshowChapter = (req, res) => {
             NUMBER_SEASON,
             NUMBER_CHAPTER,
             SYNOSIS,
-            SUPTITLE,
             URL,
+            SUPTITLE,
+            BACK,
+            POSTER
         ],
         (err, rows, fields) => {
             if (!err) {
@@ -87,12 +91,14 @@ export const updatetvshowsChapterById = (req, res) => {
         SYNOSIS,
         URL,
         SUPTITLE,
+        BACK,
+        POSTER
     } = req.body;
     const {
         COD
     } = req.params;
     mysqlconnection.query(
-        "CALL PROC_UPD_CHAPTER(?,?,?,?,?,?,?,?,?,?)",
+        "CALL PROC_UPD_CHAPTER(?,?,?,?,?,?,?,?,?,?,?,?)",
         [
             COD_CONTENT,
             NAME_CHAPTER,
@@ -103,6 +109,8 @@ export const updatetvshowsChapterById = (req, res) => {
             SYNOSIS,
             URL,
             SUPTITLE,
+            BACK,
+            POSTER,
             COD,
         ],
         (err, rows, fields) => {

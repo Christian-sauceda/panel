@@ -78,7 +78,7 @@ export const confirmar = async (req, res) => {
                 mysqlconnection.query(`UPDATE SYS_USER SET TOKEN = '', CONFIRMED = 1 WHERE TOKEN = '${token}'`, (err, rows) => {
                     if (err) {
                         res.status(500).json({
-                            message: "Error al Cctualizar el Usuario",
+                            message: "Error al Actualizar el Usuario",
                             err
                         });
                     } else {
@@ -124,7 +124,7 @@ export const login = (req, res, next) => {
                         const token = jwt.sign({
                             COD: result[0].COD_USER,
                             NAME: result[0].USER_NAME,
-                            TYPE: result[0].USER_TYPE,
+                            TYPE: result[0].TYPE_USER,
                         },
                             "secret", {
                             expiresIn: "1h"
@@ -134,7 +134,7 @@ export const login = (req, res, next) => {
                             message: "LOGGED IN SUCCESSFULLY!",
                             COD: result[0].COD_USER,
                             NAME: result[0].USER_NAME,
-                            TYPE: result[0].USER_TYPE,
+                            TYPE: result[0].TYPE_USER,
                             token,
                         });
                     }

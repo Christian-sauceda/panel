@@ -67,7 +67,7 @@ export default function AddSerieEn() {
 
         } catch (error) {
             setAlerta({
-                msg: error.data.respuesta.message,
+                msg: error.response.data.message,
                 error: true
             })
         }

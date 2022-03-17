@@ -15,9 +15,9 @@ import AddMovieEn from './pages/admin/AddMovieEn'
 import AddMovieAdult from './pages/admin/AddMovieAdults'
 import AddCapSerieEs from './pages/admin/AddCapSerieEs'
 import AddCapSerieEn from './pages/admin/AddCapSerieEn'
-
 import AddSerieEs from './pages/admin/AddSerieEs'
 import AddSerieEn from './pages/admin/AddSerieEn'
+import AddTvEs from './pages/admin/AddTvEs'
 
 //cat
 import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
@@ -70,7 +70,7 @@ function App() {
                         <Route path="cat/calidad" element={<ManCatCalidad />} />
                         <Route path="cat/plataforma" element={<ManCatPlataforma />} />
                         <Route path="cat/categoria" element={<ManCatCategoria />} />
-                        
+                        <Route path="tv/es/add" element={<AddTvEs />} />
                       </Route>
                     </Routes>
                   </CategoriasProvider>

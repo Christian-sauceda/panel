@@ -18,6 +18,8 @@ import AddCapSerieEn from './pages/admin/AddCapSerieEn'
 import AddSerieEs from './pages/admin/AddSerieEs'
 import AddSerieEn from './pages/admin/AddSerieEn'
 import AddTvEs from './pages/admin/AddTvEs'
+import AddTvEn from './pages/admin/AddTvEn'
+import AddTvInter from './pages/admin/AddTvInter'
 
 //cat
 import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
@@ -71,6 +73,8 @@ function App() {
                         <Route path="cat/plataforma" element={<ManCatPlataforma />} />
                         <Route path="cat/categoria" element={<ManCatCategoria />} />
                         <Route path="tv/es/add" element={<AddTvEs />} />
+                        <Route path="tv/en/add" element={<AddTvEn />} />
+                        <Route path="tv/inter/add" element={<AddTvInter />} />
                       </Route>
                     </Routes>
                   </CategoriasProvider>

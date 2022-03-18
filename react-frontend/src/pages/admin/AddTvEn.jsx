@@ -4,7 +4,7 @@ import useAuth from '../../hooks/useAuth';
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
-import BannerTvEs from '../../partials/dashboard/BannerTvEs';
+import BannerTvEn from '../../partials/dashboard/BannerTvEn';
 
 export default function AddSerieEs() {
 
@@ -30,8 +30,8 @@ export default function AddSerieEs() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        if ([ COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG,
-            TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON ].includes('')) {
+        if ([COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG,
+            TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON].includes('')) {
             setAlerta({
                 msg: "Todos los campos son obligatorios",
                 error: true
@@ -50,9 +50,9 @@ export default function AddSerieEs() {
                 }
             }
             const datos = { COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON }
-            await clienteAxios.post(`/tvlive/es`, datos, config)
+            await clienteAxios.post(`/tvlive/en`, datos, config)
             setAlerta({
-                msg: 'Tv en Español Agregada Correctamente',
+                msg: 'Tv en Ingles Agregada Correctamente',
                 error: false
             })
             //limpiar los campos
@@ -76,7 +76,7 @@ export default function AddSerieEs() {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <BannerTvEs />
+                    <BannerTvEn />
                     <div className="sm:flex sm:justify-between sm:items-center mb-8">
                         <form
                             onSubmit={handleSubmit}
@@ -96,7 +96,7 @@ export default function AddSerieEs() {
                                                             for="title"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Nombre del Canal:
+                                                            Name of Channel:
                                                         </label>
                                                         <input
                                                             type="text"
@@ -116,7 +116,7 @@ export default function AddSerieEs() {
                                                             for="link"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Enlace del Canal:
+                                                            Link of Channel:
                                                         </label>
                                                         <input
                                                             type="text"
@@ -136,7 +136,7 @@ export default function AddSerieEs() {
                                                             for="categoria"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Categoria:
+                                                            Category:
                                                         </label>
                                                         <select
                                                             name="categoria"
@@ -159,7 +159,7 @@ export default function AddSerieEs() {
                                                 </div>
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="mt-4 mb-6 text-sm font-bold text-sky-600">
-                                                    Configuración de EPG:
+                                                        EPG Settings:
                                                     </div>
                                                     <div className="w-full lg:w-6/12 px-4">
                                                         <div className="relative w-full mb-3">
@@ -167,7 +167,7 @@ export default function AddSerieEs() {
                                                                 for="servidor"
                                                                 className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                             >
-                                                                Servidor:
+                                                                Server:
                                                             </label>
                                                             <select
                                                                 name="servidor"
@@ -191,7 +191,7 @@ export default function AddSerieEs() {
                                                                 for="canal"
                                                                 className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                             >
-                                                                Canal:
+                                                                Channel:
                                                             </label>
                                                             <select
                                                                 name="canal"
@@ -218,9 +218,7 @@ export default function AddSerieEs() {
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    </div>
-
-
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -249,7 +247,7 @@ export default function AddSerieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Imagen de Portada:
+                                                            Image of Channel:
                                                         </label>
                                                         <input
                                                             type="text"

@@ -4,7 +4,7 @@ import useAuth from '../../hooks/useAuth';
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
-import BannerTvEs from '../../partials/dashboard/BannerTvEs';
+import BannerTvInter from '../../partials/dashboard/BannerTvInter';
 
 export default function AddSerieEs() {
 
@@ -50,9 +50,9 @@ export default function AddSerieEs() {
                 }
             }
             const datos = { COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON }
-            await clienteAxios.post(`/tvlive/es`, datos, config)
+            await clienteAxios.post(`/tvlive/inter`, datos, config)
             setAlerta({
-                msg: 'Tv en Español Agregada Correctamente',
+                msg: 'Tv Internacional Agregado Correctamente',
                 error: false
             })
             //limpiar los campos
@@ -76,7 +76,7 @@ export default function AddSerieEs() {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <BannerTvEs />
+                    <BannerTvInter />
                     <div className="sm:flex sm:justify-between sm:items-center mb-8">
                         <form
                             onSubmit={handleSubmit}
@@ -146,14 +146,14 @@ export default function AddSerieEs() {
                                                             onChange={e => setCODCATEGORY(e.target.value)}
                                                         >
                                                             <option value="">Selecciona una Categoria</option>
-                                                            <option value="1">CINE 24/7</option>
-                                                            <option value="2">CANALES LOCALES</option>
-                                                            <option value="3">CINEMA</option>
-                                                            <option value="4">DOCUMENTALES</option>
-                                                            <option value="5">ENTRETENIMIENTO</option>
-                                                            <option value="6">RELIGION</option>
-                                                            <option value="7">MUSICA</option>
-                                                            <option value="8">DEPORTES</option>
+                                                            <option value="1">Uruguay</option>
+                                                            <option value="2">Argentina</option>
+                                                            <option value="3">Brasil</option>
+                                                            <option value="4">Chile</option>
+                                                            <option value="5">Colombia</option>
+                                                            <option value="6">Ecuador</option>
+                                                            <option value="7">Paraguay</option>
+                                                            <option value="8">Peru</option>
                                                         </select>
                                                     </div>
                                                 </div>

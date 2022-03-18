@@ -298,6 +298,45 @@ function Sidebar({
                   );
                 }}
               </SidebarLinkGroup>
+              {/* Eventos Deportivos */}
+              <SidebarLinkGroup activecondition={pathname.includes('eventsDepor')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('eventsDepor') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <i className="fi fi-rr-basketball"></i>
+                            <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Eventos Deportivos</span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/events/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Eventos Deportivo</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/events/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-list"></i> Listar Eventos Deportivos</span>
+                            </NavLink>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+
               <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3 p-5">
                 <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">•••</span>
                 <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">Contenido Live</span>
@@ -389,7 +428,7 @@ function Sidebar({
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tv Internacional</span>
+                            <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"> Tv Internacional</span>
                           </div>
                           {/* Icon */}
                           <div className="flex shrink-0 ml-2">
@@ -403,7 +442,7 @@ function Sidebar({
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/tv/inter/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Tv Internacional</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i>Agregar Tv Internacional</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
@@ -418,44 +457,8 @@ function Sidebar({
                   );
                 }}
               </SidebarLinkGroup>
-              {/* Eventos Deportivos */}
-              <SidebarLinkGroup activecondition={pathname.includes('eventsDepor')}>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('eventsDepor') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <i className="fi fi-rr-basketball"></i>
-                            <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Eventos Deportivos</span>
-                          </div>
-                          {/* Icon */}
-                          <div className="flex shrink-0 ml-2">
-                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
-                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
-                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink end to="/admin/events/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Eventos Deportivo</span>
-                            </NavLink>
-                          </li>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink end to="/admin/events/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-list"></i> Listar Eventos Deportivos</span>
-                            </NavLink>
-                          </li>
 
-                        </ul>
-                      </div>
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
+
               <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3 p-5">
                 <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">•••</span>
                 <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">Configuraciones</span>

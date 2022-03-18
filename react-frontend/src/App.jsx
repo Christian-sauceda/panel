@@ -13,6 +13,7 @@ import Inicio from './pages/admin/Inicio.jsx'
 import AddMovieEs from './pages/admin/AddMovieEs'
 import AddMovieEn from './pages/admin/AddMovieEn'
 import AddMovieAdult from './pages/admin/AddMovieAdults'
+import AddEvent from './pages/admin/AddEvent'
 import AddCapSerieEs from './pages/admin/AddCapSerieEs'
 import AddCapSerieEn from './pages/admin/AddCapSerieEn'
 import AddSerieEs from './pages/admin/AddSerieEs'
@@ -61,6 +62,7 @@ function App() {
                         <Route path="movie/es/add" element={<AddMovieEs />} />
                         <Route path="movie/en/add" element={<AddMovieEn />} />
                         <Route path="movie/adult/add" element={<AddMovieAdult />} />
+                        <Route path="events/add" element={<AddEvent />} />
                         <Route path="series/es/add" element={<AddSerieEs />} />
                         <Route path="series/es/addcap" element={<AddCapSerieEs />} />
                         <Route path="tvshow/en/addcap" element={<AddCapSerieEn />} />

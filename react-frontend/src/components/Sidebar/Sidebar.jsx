@@ -88,8 +88,8 @@ function Sidebar({
                   </div>
                 </NavLink>
               </li>
-              <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3 pt-5">
-                <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">•••</span>
+              <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3 pt-5 pb-5">
+                <span className="hidden  lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">•••</span>
                 <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">Contenido Multimedia</span>
               </h3>
               {/* Movie en espanol */}

@@ -88,7 +88,7 @@ function Sidebar({
                   </div>
                 </NavLink>
               </li>
-              <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3 pt-5">
+              <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3 pt-5 pb-5">
                 <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">•••</span>
                 <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">Contenido Multimedia</span>
               </h3>
@@ -298,6 +298,44 @@ function Sidebar({
                   );
                 }}
               </SidebarLinkGroup>
+              {/* Eventos Deportivos */}
+              <SidebarLinkGroup activecondition={pathname.includes('eventsDepor')}>
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('eventsDepor') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <i className="fi fi-rr-basketball"></i>
+                            <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Eventos Deportivos</span>
+                          </div>
+                          {/* Icon */}
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Pelicula</span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Listar Peliculas</span>
+                            </NavLink>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
               <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3 p-5">
                 <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">•••</span>
                 <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">Contenido Live</span>
@@ -418,44 +456,7 @@ function Sidebar({
                   );
                 }}
               </SidebarLinkGroup>
-              {/* Eventos Deportivos */}
-              <SidebarLinkGroup activecondition={pathname.includes('eventsDepor')}>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <a href="#0" className={`block text-slate-200 hover:text-white truncate transition duration-150 ${pathname.includes('eventsDepor') && 'hover:text-slate-200'}`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true) }}>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <i className="fi fi-rr-basketball"></i>
-                            <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Eventos Deportivos</span>
-                          </div>
-                          {/* Icon */}
-                          <div className="flex shrink-0 ml-2">
-                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
-                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
-                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Pelicula</span>
-                            </NavLink>
-                          </li>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Listar Peliculas</span>
-                            </NavLink>
-                          </li>
 
-                        </ul>
-                      </div>
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
             </ul>
           </div>
         </div>

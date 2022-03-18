@@ -57,6 +57,8 @@ export const CategoriasProvider = ({ children }) => {
         }
     }
 
+    
+
     const setEdicion = (categoria) => {
         setCategoria(categoria)
     }

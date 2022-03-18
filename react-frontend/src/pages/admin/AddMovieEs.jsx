@@ -2,6 +2,9 @@ import BanneMovieEs from '../../partials/dashboard/BannerMovieEs';
 import { useState } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
+import useCalidades from "../../hooks/useCalidades";
+import useAudios from "../../hooks/useAudios";
+import useFormatos from "../../hooks/useFormatos";
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
@@ -81,6 +84,9 @@ export default function AddMovieEs() {
             })
         }
     }
+    const { calidades } = useCalidades();
+    const { audios } = useAudios();
+    const { formatos } = useFormatos();
     const { msg } = alerta;
     return (
         <>
@@ -308,9 +314,9 @@ export default function AddMovieEs() {
                                                             onChange={(e) => setCODQUALITY(e.target.value)}
                                                         >
                                                         <option value="">Seleccione</option>
-                                                            <option value="1">MP4</option>
-                                                            <option value="2">MKV</option>
-                                                            <option value="2">3GP</option>
+                                                            {calidades.map((item) => (
+                                                                <option key={item.COD_CALIDAD} value={item.COD_CALIDAD}>{item.CALIDAD}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -330,8 +336,9 @@ export default function AddMovieEs() {
                                                             onChange={(e) => setCODAUDIO(e.target.value)}
                                                         >
                                                         <option value="">Seleccione</option>
-                                                            <option value="1">Español</option>
-                                                            <option value="2">Inglés</option>
+                                                            {audios.map((item) => (
+                                                                <option key={item.COD_AUDIO} value={item.COD_AUDIO}>{item.AUDIO}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -351,10 +358,9 @@ export default function AddMovieEs() {
                                                             onChange={(e) => setCODFORMATVIDEO(e.target.value)}
                                                         >
                                                             <option value="">Seleccione</option>
-                                                            <option value="1">SD (480p)</option>
-                                                            <option value="2">HD (720p)</option>
-                                                            <option value="3">FULLHD (1080p)</option>
-                                                            <option value="3">4K (2160p)</option>
+                                                            {formatos.map((item) => (
+                                                                <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO===1 }>{item.FORMATO}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </div>

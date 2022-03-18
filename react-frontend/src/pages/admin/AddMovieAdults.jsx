@@ -3,6 +3,9 @@ import BanneMovieAdult from '../../partials/dashboard/BannerMovieAdult';
 import { useState } from "react";
 import "../../components/Cards/Card.css";
 import useAuth from '../../hooks/useAuth';
+import useCalidades from "../../hooks/useCalidades";
+import useAudios from "../../hooks/useAudios";
+import useFormatos from "../../hooks/useFormatos";
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
@@ -71,7 +74,9 @@ export default function AddMovieAdult() {
         }
 
     }
-
+    const { calidades } = useCalidades();
+    const { audios } = useAudios();
+    const { formatos } = useFormatos();
     const { msg } = alerta;
     return (
         <>
@@ -209,9 +214,9 @@ export default function AddMovieAdult() {
                                                             onChange={(e) => setCODQUALITY(e.target.value)}
                                                         >
                                                             <option value="">Seleccione</option>
-                                                            <option value="1">MP4</option>
-                                                            <option value="2">MKV</option>
-                                                            <option value="2">3GP</option>
+                                                            {calidades.map((item) => (
+                                                                <option key={item.COD_CALIDAD} value={item.COD_CALIDAD}>{item.CALIDAD}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -232,8 +237,9 @@ export default function AddMovieAdult() {
                                                             onChange={(e) => setCODAUDIO(e.target.value)}
                                                         >
                                                             <option value="">Seleccione</option>
-                                                            <option value="1">Inglés</option>
-                                                            <option value="2">Español</option>
+                                                            {audios.map((item) => (
+                                                                <option key={item.COD_AUDIO} value={item.COD_AUDIO}>{item.AUDIO}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -253,10 +259,10 @@ export default function AddMovieAdult() {
                                                             value={CODFORMATVIDEO}
                                                             onChange={(e) => setCODFORMATVIDEO(e.target.value)}
                                                         >
-                                                            
-                                                            <option value="1">SD</option>
-                                                            <option value="2">HD</option>
-                                                            <option value="3">FULL HD</option>
+                                                            <option value="">Seleccione</option>
+                                                            {formatos.map((item) => (
+                                                                <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO===1 }>{item.FORMATO}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </div>

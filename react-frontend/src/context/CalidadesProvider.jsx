@@ -39,7 +39,7 @@ export const CalidadesProvider = ({ children }) => {
         if (calidad.id) {
             try {
                 const { data } = await clienteAxios.put(`/catquality/${calidad.id}`, calidad, config)
-                const calidadesActualizados = calidades.map( calidadState => calidadState.COD_CALIDAD ===
+                const calidadesActualizados = calidades.map(calidadState => calidadState.COD_CALIDAD ===
                     data.id ? data : calidadState)
                 setCalidades(calidadesActualizados)
             } catch (error) {
@@ -66,7 +66,7 @@ export const CalidadesProvider = ({ children }) => {
 
     const EliminarCalidad = async id => {
         const confirmar = confirm('¿Estas seguro de eliminar esta Calidad?')
-        if(confirmar){
+        if (confirmar) {
             try {
                 const token = localStorage.getItem("token")
                 const config = {
@@ -75,7 +75,7 @@ export const CalidadesProvider = ({ children }) => {
                         Authorization: `Bearer ${token}`
                     }
                 }
-                const {data} = await clienteAxios.delete(`/catquality/${id}`, config)
+                const { data } = await clienteAxios.delete(`/catquality/${id}`, config)
                 const calidadesActualizados = calidades.filter(calidadesState => calidadesState.
                     COD_CALIDAD !== id)
                 setCalidades(calidadesActualizados)
@@ -85,6 +85,25 @@ export const CalidadesProvider = ({ children }) => {
         }
     }
 
+    //traer todas las calidades
+    const obtenerCalidades = async () => {
+        try {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const { data } = await clienteAxios.get(
+                "/catquality", config)
+            setCalidades(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
 
     return (
         <CalidadesContext.Provider
@@ -93,8 +112,8 @@ export const CalidadesProvider = ({ children }) => {
                 guardarCalidad,
                 setEdicion,
                 EliminarCalidad,
-                calidad
-
+                calidad,
+                obtenerCalidades
             }}
         >
             {children}

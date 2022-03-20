@@ -1,8 +1,5 @@
 const mysqlconnection = require("../../database");
-var fs = require('fs'),
-    request = require('request');
-
-
+const { downloadback, downloadposter } = require('../downloadimage.controllers/img.controllers');
 
 // GET ALL CATALOG OF MOVIES
 export const getmoviees = async (req, res) => {
@@ -56,18 +53,6 @@ export const createmoviees = (req, res) => {
     const nameimgback = req.body.TITLE + 'back.jpg';
     const urlimgposter = req.body.POSTER
     const nameimgposter = req.body.TITLE + 'poster.jpg';
-
-    var downloadback = function (uri, filename, callback) {
-        request.head(uri, function (err, res, body) {
-            request(uri).pipe(fs.createWriteStream('./src/imgs/back/' + filename)).on('close', callback);
-        });
-    };
-    var downloadposter = function (uri, filename, callback) {
-        request.head(uri, function (err, res, body) {
-            request(uri).pipe(fs.createWriteStream('./src/imgs/poster/' + filename)).on('close', callback);
-        });
-    };
-
 
     downloadback(urlimgback, nameimgback, function () {
         console.log('done');

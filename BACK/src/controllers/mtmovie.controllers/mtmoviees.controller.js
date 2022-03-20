@@ -1,4 +1,7 @@
 const mysqlconnection = require("../../database");
+var fs = require('fs'),
+    request = require('request');
+
 
 
 // GET ALL CATALOG OF MOVIES
@@ -49,10 +52,36 @@ export const createmoviees = (req, res) => {
         URL,
         SYNOPSIS
     } = req.body;
+    const urlimgback = req.body.BACK
+    const nameimgback = req.body.TITLE + 'back.jpg';
+    const urlimgposter = req.body.POSTER
+    const nameimgposter = req.body.TITLE + 'poster.jpg';
+
+    var downloadback = function (uri, filename, callback) {
+        request.head(uri, function (err, res, body) {
+            request(uri).pipe(fs.createWriteStream('./src/imgs/back/' + filename)).on('close', callback);
+        });
+    };
+    var downloadposter = function (uri, filename, callback) {
+        request.head(uri, function (err, res, body) {
+            request(uri).pipe(fs.createWriteStream('./src/imgs/poster/' + filename)).on('close', callback);
+        });
+    };
+
+
+    downloadback(urlimgback, nameimgback, function () {
+        console.log('done');
+    });
+
+    downloadposter(urlimgposter, nameimgposter, function () {
+        console.log('done');
+    });
+
+
     const query = `CALL PROC_INS_MOVIE_ES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
     mysqlconnection.query(query, [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER,
-            YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS
-        ],
+        YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS
+    ],
         (err, rows, fields) => {
             if (!err) {
                 res.json({

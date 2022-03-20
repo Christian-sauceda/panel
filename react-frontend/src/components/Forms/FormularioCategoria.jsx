@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Alerta from '../Alerts/Alerts';
 import useCategorias from '../../hooks/useCategorias'
+import useContenidos from '../../hooks/useContenidos'
 
 const FormularioCategoria = () => {
     const [CATEGORIA, setCATEGORIA] = useState('')
@@ -11,8 +12,8 @@ const FormularioCategoria = () => {
 
     const { guardarCategoria, categoria } = useCategorias()
 
-    useEffect(() =>{
-        if(categoria?.CATEGORIA){
+    useEffect(() => {
+        if (categoria?.CATEGORIA) {
             setCATEGORIA(categoria.CATEGORIA)
             setCOD_CONTENIDO(categoria.COD_CONTENIDO)
             setId(categoria.COD_CATEGORIA)
@@ -30,8 +31,8 @@ const FormularioCategoria = () => {
             return
         }
 
-        
-        guardarCategoria({ CATEGORIA, COD_CONTENIDO, id})
+
+        guardarCategoria({ CATEGORIA, COD_CONTENIDO, id })
         setAlerta({
             msg: 'Tipo Categoria guardada',
             error: false
@@ -40,6 +41,7 @@ const FormularioCategoria = () => {
         setCOD_CONTENIDO('')
         setId('')
     }
+    const { contenidos } = useContenidos()
     const { msg } = alerta;
     return (
         <>
@@ -66,8 +68,8 @@ const FormularioCategoria = () => {
                 </div>
                 <div className='mb-5'>
                     <label
-                    htmlFor='tipo'
-                    className='block text-gray-700 uppercase font-bold'>
+                        htmlFor='tipo'
+                        className='block text-gray-700 uppercase font-bold'>
                         Tipo de Contenido:
                     </label>
                     <select
@@ -78,10 +80,9 @@ const FormularioCategoria = () => {
                         onChange={e => setCOD_CONTENIDO(e.target.value)}
                     >
                         <option value=''>Seleccione un Tipo de Contenido</option>
-                        <option value='1'>PELICULAS</option>
-                        <option value='2'>MOVIES</option>
-                        <option value='3'>SERIES</option>
-                        <option value='4'>TV SHOWS</option>
+                        {contenidos.map((item) => (
+                            <option key={item.COD_CONTENIDO} value={item.COD_CONTENIDO}>{item.CONTENIDO}</option>
+                        ))}
                     </select>
                 </div>
                 <input

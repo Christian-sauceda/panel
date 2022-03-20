@@ -1,4 +1,5 @@
 const mysqlconnection = require("../../database");
+const { downloadback, downloadposter } = require('../downloadimage.controllers/img.controllers');
 
 // GET ALL CATALOG OF MOVIES EN
 export const getmovieen = async (req, res) => {
@@ -48,8 +49,26 @@ export const createmovieen = (req, res) => {
         URL,
         SYNOPSIS
     } = req.body;
+
+    const urlimgback = req.body.BACK
+    const nameimgback = req.body.TITLE + 'back.jpg';
+    const urlimgposter = req.body.POSTER
+    const nameimgposter = req.body.TITLE + 'poster.jpg';
+
+    downloadback(urlimgback, nameimgback, function () {
+        console.log('done');
+    });
+
+    // ruta de la imagen en el servidor
+    const port = process.env.DOMINIO;
+    const urlback = port + '/src/imgs/back/' + nameimgback;
+    const urlposter = port + '/src/imgs/poster/' + nameimgposter;
+
+    downloadposter(urlimgposter, nameimgposter, function () {
+        console.log('done');
+    });
     const query = `CALL PROC_INS_MOVIE_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-    mysqlconnection.query(query, [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER,
+    mysqlconnection.query(query, [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, urlback, urlposter,
             YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS
         ],
         (err, rows, fields) => {

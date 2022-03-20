@@ -60,8 +60,8 @@ export const createmoviees = (req, res) => {
 
     // ruta de la imagen en el servidor
     const port = process.env.DOMINIO;
-    const urlback = port + '/src/imgs/back/' + nameimgback;
-    const urlposter = port + '/src/imgs/poster/' + nameimgposter;
+    const urlback = port + '/src/imgs/movieses/back/' + nameimgback;
+    const urlposter = port + '/src/imgs/movieses/poster/' + nameimgposter;
 
     downloadposter(urlimgposter, nameimgposter, function () {
         console.log('done');

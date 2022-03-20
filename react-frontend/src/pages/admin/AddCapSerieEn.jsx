@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
+import useFormatos from "../../hooks/useFormatos";
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
@@ -64,6 +65,7 @@ export default function AddCapSerieEs() {
         }
     }
     const { msg } = alerta;
+    const { formatos } = useFormatos();
     return (
         <>
             <main>
@@ -246,11 +248,9 @@ export default function AddCapSerieEs() {
                                                             onChange={(e) => setCOD_FORMAT_VIDEO(e.target.value)}
                                                         >
                                                             <option value="">Seleccione Formato</option>
-                                                            <option value="1">MP4</option>
-                                                            <option value="2">WEBM</option>
-                                                            <option value="3">MKV</option>
-                                                            <option value="4">FLV</option>
-                                                            <option value="5">AVI</option>
+                                                            {formatos.map((item) => (
+                                                                <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO===1 }>{item.FORMATO}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </div>

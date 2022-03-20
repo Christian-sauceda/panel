@@ -58,13 +58,17 @@ export const createmoviees = (req, res) => {
         console.log('done');
     });
 
+    // ruta de la imagen en el servidor
+    const port = process.env.DOMINIO;
+    const urlback = port + '/src/imgs/back/' + nameimgback;
+    const urlposter = port + '/src/imgs/poster/' + nameimgposter;
+
     downloadposter(urlimgposter, nameimgposter, function () {
         console.log('done');
     });
 
-
     const query = `CALL PROC_INS_MOVIE_ES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-    mysqlconnection.query(query, [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER,
+    mysqlconnection.query(query, [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, urlback, urlposter,
         YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS
     ],
         (err, rows, fields) => {

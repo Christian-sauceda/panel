@@ -1,5 +1,5 @@
 const mysqlconnection = require("../../database");
-
+const { downloadcapserieback, downloadcapserieposter } = require('../downloadimage.controllers/img.controllers');
 // GET ALL CHAPTERS BY TV SHOW
 export const getchapterBytvShow = (req, res) => {
     const {
@@ -51,6 +51,26 @@ export const createtvshowChapter = (req, res) => {
         BACK,
         POSTER
     } = req.body;
+
+    const urlimgback = req.body.BACK
+    const nameimgback = req.body.COD_CONTENT + req.body.NAME_CHAPTER + 'back.jpg';
+    const urlimgposter = req.body.POSTER
+    const nameimgposter = req.body.COD_CONTENT + req.body.NAME_CHAPTER + 'poster.jpg';
+
+    downloadcapserieback(urlimgback, nameimgback, function () {
+        console.log('done');
+    });
+
+    // ruta de la imagen en el servidor
+    const port = process.env.DOMINIO;
+    const imagback = process.env.RUTAIMAGESERIEESBACK
+    const imagposter = process.env.RUTAIMAGESERIEESPOSTER
+    const urlback = port + imagback + nameimgback;
+    const urlposter = port + imagposter + nameimgposter;
+
+    downloadcapserieposter(urlimgposter, nameimgposter, function () {
+        console.log('done');
+    });
     const query = "CALL PROC_INS_CHAPTER(?,?,?,?,?,?,?,?,?,?,?)";
     mysqlconnection.query(
         query,
@@ -64,8 +84,8 @@ export const createtvshowChapter = (req, res) => {
             SYNOSIS,
             URL,
             SUPTITLE,
-            BACK,
-            POSTER
+            urlback,
+            urlposter
         ],
         (err, rows, fields) => {
             if (!err) {
@@ -89,8 +109,8 @@ export const updatetvshowsChapterById = (req, res) => {
         COD_FORMAT_VIDEO,
         COD_USER,
         SYNOSIS,
-        URL,
         SUPTITLE,
+        URL,
         BACK,
         POSTER
     } = req.body;
@@ -107,8 +127,8 @@ export const updatetvshowsChapterById = (req, res) => {
             COD_FORMAT_VIDEO,
             COD_USER,
             SYNOSIS,
-            URL,
             SUPTITLE,
+            URL,
             BACK,
             POSTER,
             COD,

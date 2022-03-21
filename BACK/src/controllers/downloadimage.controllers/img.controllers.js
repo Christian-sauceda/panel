@@ -12,14 +12,14 @@ let imgposteradult = process.env.RUTAIMAGEMOVIEADULTPOSTER
 
 let imgbackseriees = process.env.RUTAIMAGESERIEESBACK
 let imgposteries = process.env.RUTAIMAGESERIEESPOSTER
-let imgbackcapseriees = process.env.RUTAIMAGECAPSERIEESBACK
-let imgpostercapseriees = process.env.RUTAIMAGECAPSERIEESPOSTER
 
 let imgbackserieen = process.env.RUTAIMAGESERIEENBACK
 let imgposterien = process.env.RUTAIMAGESERIEENPOSTER
-let imgbackcapserieen = process.env.RUTAIMAGECAPSERIEENBACK
-let imgpostercapserieen = process.env.RUTAIMAGECAPSERIEENPOSTER
 
+let imgbackcapserie = process.env.RUTAIMAGECAPSERIEBACK
+let imgpostercapserie = process.env.RUTAIMAGECAPSERIEPOSTER
+
+console.log(imgpostercapserie)
 export const downloadmovieesback = function (uri, filename, callback) {
     request.head(uri, function (err, res, body) {
         request(uri).pipe(fs.createWriteStream('.' + imagbackes + filename)).on('close', callback);
@@ -68,18 +68,7 @@ export const downloadserieesposter = function (uri, filename, callback) {
     });
 };
 
-export const downloadcapserieesback = function (uri, filename, callback) {
-    request.head(uri, function (err, res, body) {
-        request(uri).pipe(fs.createWriteStream('.' + imgbackcapseriees + filename)).on('close', callback);
-    });
-};
-
-export const downloadcapserieesposter = function (uri, filename, callback) {
-    request.head(uri, function (err, res, body) {
-        request(uri).pipe(fs.createWriteStream('.' + imgpostercapseriees + filename)).on('close', callback);
-    });
-};
-
+/* series ingles */
 export const downloadserieenback = function (uri, filename, callback) {
     request.head(uri, function (err, res, body) {
         request(uri).pipe(fs.createWriteStream('.' + imgbackserieen + filename)).on('close', callback);
@@ -92,14 +81,15 @@ export const downloadserieenposter = function (uri, filename, callback) {
     });
 };
 
-export const downloadcapserieenback = function (uri, filename, callback) {
+export const downloadcapserieback = function (uri, filename, callback) {
     request.head(uri, function (err, res, body) {
-        request(uri).pipe(fs.createWriteStream('.' + imgbackcapserieen + filename)).on('close', callback);
+        request(uri).pipe(fs.createWriteStream('.' + imgbackcapserie + filename)).on('close', callback);
     });
 };
 
-export const downloadcapserieenposter = function (uri, filename, callback) {
+export const downloadcapserieposter = function (uri, filename, callback) {
     request.head(uri, function (err, res, body) {
-        request(uri).pipe(fs.createWriteStream('.' + imgpostercapserieen + filename)).on('close', callback);
+        request(uri).pipe(fs.createWriteStream('.' + imgpostercapserie + filename)).on('close', callback);
     });
 };
+

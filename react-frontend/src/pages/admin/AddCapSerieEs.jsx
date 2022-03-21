@@ -9,7 +9,7 @@ import BannerSerieCapEs from '../../partials/dashboard/BannerSerieCapEs';
 
 export default function AddCapSerieEs() {
     const { auth } = useAuth()
-    const [COD_CONTENT, setCOD_CONTENT] = useState("");
+    const [COD_CONTENT, setCOD_CONTENT] = useState("18");
     const [COD_FORMAT_VIDEO, setCOD_FORMAT_VIDEO] = useState("");
     const [COD_USER, setCOD_USER] = useState(`${auth.COD}`);
     const [NAME_CHAPTER, setNAME_CHAPTER] = useState("");
@@ -42,8 +42,7 @@ export default function AddCapSerieEs() {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const datos = { COD_CONTENT, COD_FORMAT_VIDEO, COD_USER, NAME_CHAPTER, NUMBER_SEASON, NUMBER_CHAPTER, SYNOSIS, URL, SUPTITLE, BACK, POSTER }
-            console.log(datos)
+            const datos = { COD_CONTENT, COD_FORMAT_VIDEO, COD_USER, NAME_CHAPTER, NUMBER_SEASON, NUMBER_CHAPTER, SYNOSIS, SUPTITLE, URL, BACK, POSTER }
             await clienteAxios.post("/mttvshowschapter", datos, config)
             setAlerta({
                 msg: "Capítulo de serie en Español Agregado",

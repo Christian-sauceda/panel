@@ -1,4 +1,5 @@
 const mysqlconnection = require("../../database");
+const { downloadserieesback, downloadserieesposter } = require('../downloadimage.controllers/img.controllers');
 
 // GET ALL CATALOG OF TV SHOWS ES
 export const gettvshowses = async (req, res) => {
@@ -44,10 +45,31 @@ export const createtvshowses = (req, res) => {
         CAST,
         SYNOPSIS
     } = req.body;
+
+    const urlimgback = req.body.BACK
+    const nameimgback = req.body.TITLE + 'back.jpg';
+    const urlimgposter = req.body.POSTER
+    const nameimgposter = req.body.TITLE + 'poster.jpg';
+
+    downloadserieesback(urlimgback, nameimgback, function () {
+        console.log('done');
+    });
+
+    // ruta de la imagen en el servidor
+    const port = process.env.DOMINIO;
+    const imagback = process.env.RUTAIMAGESERIEESBACK
+    const imagposter = process.env.RUTAIMAGESERIEESPOSTER
+    const urlback = port + imagback + nameimgback;
+    const urlposter = port + imagposter + nameimgposter;
+
+    downloadserieesposter(urlimgposter, nameimgposter, function () {
+        console.log('done');
+    });
+
     const query = 'CALL PROC_INS_TVSHOW_ES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-    mysqlconnection.query(query, [CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK,
-            POSTER, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS
-        ],
+    mysqlconnection.query(query, [CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, urlback,
+        urlposter, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS
+    ],
         (err, rows, fields) => {
             if (!err) {
                 res.json({

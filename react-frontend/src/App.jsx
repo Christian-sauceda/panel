@@ -22,6 +22,10 @@ import AddTvEs from './pages/admin/AddTvEs'
 import AddTvEn from './pages/admin/AddTvEn'
 import AddTvInter from './pages/admin/AddTvInter'
 
+//list
+import ListMovieEs from './pages/admin/ListMovieEs'
+import ListMovieEn from './pages/admin/ListMovieEn'
+
 //cat
 import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
 import ManCatFormato from './pages/admin/Mantenimientos/ManCatFormato'
@@ -77,6 +81,8 @@ function App() {
                         <Route path="tv/es/add" element={<AddTvEs />} />
                         <Route path="tv/en/add" element={<AddTvEn />} />
                         <Route path="tv/inter/add" element={<AddTvInter />} />
+                        <Route path="movie/es/list" element={<ListMovieEs />} />
+                        <Route path="movie/en/list" element={<ListMovieEn />} />
                       </Route>
                     </Routes>
                   </CategoriasProvider>

@@ -28,7 +28,7 @@ export default function AddSerieEs() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        if ([CODAUDIO, CODCATEGORY, TITLE, TITLE_LATIN, BACK, POSTER, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS].includes('')) {
+        if ([CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS].includes('')) {
             setAlerta({
                 msg: "Todos los campos son obligatorios",
                 error: true
@@ -47,7 +47,7 @@ export default function AddSerieEs() {
                 }
             }
             const datos = { CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS }
-            await clienteAxios.post(`/mttvshowschapter`, datos, config)
+            await clienteAxios.post(`/mttvshows/es`, datos, config)
             setAlerta({
                 msg: 'Serie Agregada Correctamente',
                 error: false

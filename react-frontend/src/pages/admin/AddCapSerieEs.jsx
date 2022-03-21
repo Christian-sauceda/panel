@@ -23,7 +23,7 @@ export default function AddCapSerieEs() {
 
     const [alerta, setAlerta] = useState({});
 
-     const handleSubmit = async e => {
+    const handleSubmit = async e => {
         e.preventDefault();
 
         if ([COD_CONTENT, COD_FORMAT_VIDEO, COD_USER, NAME_CHAPTER, NUMBER_SEASON, NUMBER_CHAPTER, SYNOSIS, URL, SUPTITLE, BACK, POSTER].includes("")) {
@@ -43,9 +43,10 @@ export default function AddCapSerieEs() {
                 }
             }
             const datos = { COD_CONTENT, COD_FORMAT_VIDEO, COD_USER, NAME_CHAPTER, NUMBER_SEASON, NUMBER_CHAPTER, SYNOSIS, URL, SUPTITLE, BACK, POSTER }
+            console.log(datos)
             await clienteAxios.post("/mttvshowschapter", datos, config)
             setAlerta({
-                 msg: "Capítulo de serie en Español Agregado",
+                msg: "Capítulo de serie en Español Agregado",
                 error: false
             })
             //LIMPIAR CAMPOS
@@ -255,7 +256,7 @@ export default function AddCapSerieEs() {
                                                         >
                                                             <option value="">Seleccione Formato</option>
                                                             {formatos.map((item) => (
-                                                                <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO===1 }>{item.FORMATO}</option>
+                                                                <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO === 1}>{item.FORMATO}</option>
                                                             ))}
                                                         </select>
                                                     </div>

@@ -1,5 +1,5 @@
 const mysqlconnection = require("../../database");
-const { downloadback, downloadposter } = require('../downloadimage.controllers/img.controllers');
+const { downloadmovieenback, downloadmovieenposter } = require('../downloadimage.controllers/img.controllers');
 
 // GET ALL CATALOG OF MOVIES EN
 export const getmovieen = async (req, res) => {
@@ -49,22 +49,23 @@ export const createmovieen = (req, res) => {
         URL,
         SYNOPSIS
     } = req.body;
-
     const urlimgback = req.body.BACK
     const nameimgback = req.body.TITLE + 'back.jpg';
     const urlimgposter = req.body.POSTER
     const nameimgposter = req.body.TITLE + 'poster.jpg';
 
-    downloadback(urlimgback, nameimgback, function () {
+    downloadmovieenback(urlimgback, nameimgback, function () {
         console.log('done');
     });
 
     // ruta de la imagen en el servidor
     const port = process.env.DOMINIO;
-    const urlback = port + '/src/imgs/back/' + nameimgback;
-    const urlposter = port + '/src/imgs/poster/' + nameimgposter;
+    const imagback = process.env.RUTAIMAGEMOVIEENBACK
+    const imagposter = process.env.RUTAIMAGEMOVIEENPOSTER
+    const urlback = port + imagback + nameimgback;
+    const urlposter = port + imagposter + nameimgposter;
 
-    downloadposter(urlimgposter, nameimgposter, function () {
+    downloadmovieenposter(urlimgposter, nameimgposter, function () {
         console.log('done');
     });
     const query = `CALL PROC_INS_MOVIE_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;

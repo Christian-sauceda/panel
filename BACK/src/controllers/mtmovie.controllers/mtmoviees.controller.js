@@ -1,5 +1,5 @@
 const mysqlconnection = require("../../database");
-const { downloadback, downloadposter } = require('../downloadimage.controllers/img.controllers');
+const { downloadmovieesback, downloadmovieesposter } = require('../downloadimage.controllers/img.controllers');
 
 // GET ALL CATALOG OF MOVIES
 export const getmoviees = async (req, res) => {
@@ -54,16 +54,18 @@ export const createmoviees = (req, res) => {
     const urlimgposter = req.body.POSTER
     const nameimgposter = req.body.TITLE + 'poster.jpg';
 
-    downloadback(urlimgback, nameimgback, function () {
+    downloadmovieesback(urlimgback, nameimgback, function () {
         console.log('done');
     });
 
     // ruta de la imagen en el servidor
     const port = process.env.DOMINIO;
-    const urlback = port + '/src/imgs/movieses/back/' + nameimgback;
-    const urlposter = port + '/src/imgs/movieses/poster/' + nameimgposter;
+    const imagback = process.env.RUTAIMAGEMOVIESBACK
+    const imagposter = process.env.RUTAIMAGEMOVIESPOSTER
+    const urlback = port + imagback + nameimgback;
+    const urlposter = port + imagposter + nameimgposter;
 
-    downloadposter(urlimgposter, nameimgposter, function () {
+    downloadmovieesposter(urlimgposter, nameimgposter, function () {
         console.log('done');
     });
 

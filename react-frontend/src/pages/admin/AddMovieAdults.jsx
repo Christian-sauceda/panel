@@ -31,7 +31,7 @@ export default function AddMovieAdult() {
     const handleSubmit = async e => {
         e.preventDefault();
         //validar formulario
-        if ([ CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, DURATION, CODFORMATVIDEO, URL, SYNOPSIS ].includes("")) {
+        if ([ CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, POSTER, YEAR, DURATION, CODFORMATVIDEO, URL, SYNOPSIS ].includes("")) {
             setAlerta({
                 msg: "Todos los campos son obligatorios",
                 error: true

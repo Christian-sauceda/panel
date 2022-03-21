@@ -1,4 +1,5 @@
 const mysqlconnection = require("../../database");
+const { downloadmovieadultback, downloadmovieadultposter } = require('../downloadimage.controllers/img.controllers');
 
 // GET ALL CATALOG OF MOVIE ADULT
 export const getmovieadult = async (req, res) => {
@@ -42,8 +43,29 @@ export const createmovieadult = (req, res) => {
         URL,
         SYNOPSIS
     } = req.body;
+
+    const urlimgback = req.body.BACK
+    const nameimgback = req.body.TITLE + 'back.jpg';
+    const urlimgposter = req.body.POSTER
+    const nameimgposter = req.body.TITLE + 'poster.jpg';
+
+    downloadmovieadultback(urlimgback, nameimgback, function () {
+        console.log('done');
+    });
+
+    // ruta de la imagen en el servidor
+    const port = process.env.DOMINIO;
+    const imagback = process.env.RUTAIMAGEMOVIEADULTBACK
+    const imagposter = process.env.RUTAIMAGEMOVIEADULTPOSTER
+    const urlback = port + imagback + nameimgback;
+    const urlposter = port + imagposter + nameimgposter;
+
+    downloadmovieadultposter(urlimgposter, nameimgposter, function () {
+        console.log('done');
+    });
+
     const query = `CALL PROC_INS_MOVIE_ADULT(?,?,?,?,?,?,?,?,?,?,?,?)`;
-    mysqlconnection.query(query, [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, DURATION,
+    mysqlconnection.query(query, [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, urlback, urlposter, YEAR, DURATION,
             CODFORMATVIDEO, URL, SYNOPSIS
         ],
         (err, rows, fields) => {

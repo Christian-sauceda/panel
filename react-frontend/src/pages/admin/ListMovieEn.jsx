@@ -29,10 +29,10 @@ const AddCapSerieEs = () => {
       margin: 16px;
       animation: ${rotate360} 1s linear infinite;
       transform: translateZ(0);
-      border-top: 2px solid grey;
-      border-right: 2px solid grey;
-      border-bottom: 2px solid grey;
-      border-left: 4px solid black;
+      border-top: 4px solid grey;
+      border-right: 4px solid grey;
+      border-bottom: 4px solid grey;
+      border-left: 10px solid black;
       background: transparent;
       width: 80px;
       height: 80px;
@@ -108,7 +108,6 @@ const AddCapSerieEs = () => {
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                     <BannerSerieCapEn />
                     <DataTable
-                        title="Movie List"
                         columns={columns}
                         data={peliculas}
                         progressPending={pending}

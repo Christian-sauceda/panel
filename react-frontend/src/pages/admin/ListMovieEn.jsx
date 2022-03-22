@@ -9,7 +9,7 @@ import DataTable, { createTheme } from 'react-data-table-component'
 // components
 import clienteAxios from "../../config/axios";
 
-import BannerSerieCapEn from '../../partials/dashboard/BannerSerieCapEn';
+import BannerListMovieEn from '../../partials/dashboard/BannerListMovieEn';
 
 const AddCapSerieEs = () => {
     const { auth } = useAuth()
@@ -69,7 +69,7 @@ const AddCapSerieEs = () => {
         const timeout = setTimeout(() =>{
             consultarApi()
         setPending(false)
-        }, 2000)
+        })
             return() => clearTimeout(timeout)
     }, [])
     // 3 comfigutamos las columnas para el data table
@@ -91,6 +91,7 @@ const AddCapSerieEs = () => {
             selector: row => dateFormat(row.UPLOAD_DATE, "dddd, mmmm dS, yyyy"),
         },
         {
+            name: 'ACCIONES',
             cell: row => (
                 <div className="btn-group" role="group" aria-label="Basic example">
                     <button type="button" className="bg-green-500 text-white hover:bg-green-700 text-lg p-1">Editar</button>
@@ -106,12 +107,12 @@ const AddCapSerieEs = () => {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <BannerSerieCapEn />
+                    <BannerListMovieEn />
                     <DataTable
                         columns={columns}
                         data={peliculas}
                         progressPending={pending}
-                        progressComponent={<CustomLoader />}
+                        noDataComponent={<CustomLoader />}
                         pagination={true}
                     />
                 </div>

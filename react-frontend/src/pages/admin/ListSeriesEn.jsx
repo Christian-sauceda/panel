@@ -1,19 +1,13 @@
 import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
-import useAuth from '../../hooks/useAuth';
 import styled, { keyframes } from 'styled-components';
 import dateFormat from 'dateformat';
-
 import DataTable, { createTheme } from 'react-data-table-component'
 
 // components
-import clienteAxios from "../../config/axios";
-
-import BannerListMovieEs from '../../partials/dashboard/BannerListMovieEs';
+import BannerListSerieEn from '../../partials/dashboard/BannerListSerieEn';
 
 const AddCapSerieEs = () => {
-    const { auth } = useAuth()
-    const [alerta, setAlerta] = useState({});
 
     const rotate360 = keyframes`
     from {
@@ -24,8 +18,8 @@ const AddCapSerieEs = () => {
       transform: rotate(360deg);
     }
   `;
-  
-  const Spinner = styled.div`
+
+    const Spinner = styled.div`
       margin: 16px;
       animation: ${rotate360} 1s linear infinite;
       transform: translateZ(0);
@@ -42,15 +36,15 @@ const AddCapSerieEs = () => {
     const CustomLoader = () => (
         <div style={{ padding: '24px' }}>
             <Spinner />
-            <div>Buscando las Peliculas...</div>
+            <div>Buscando las Series en Ingles...</div>
         </div>
     );
-    
+
     // 1 configurar el hooks
-    const [peliculas, setPeliculas] = useState([]);
+    const [series, setSeries] = useState([]);
     const [pending, setPending] = useState(true);
     // 2 funcion para mostrar los datos con fetch
-    const URL = `${import.meta.env.VITE_LISTMOVIEES_API}`
+    const URL = `${import.meta.env.VITE_LISTSERIEEN_API}`
 
     const consultarApi = async () => {
         const token = localStorage.getItem("token")
@@ -62,15 +56,16 @@ const AddCapSerieEs = () => {
         }
         const response = await fetch(URL, config)
         const data = await response.json()
-        setPeliculas(data)
+        setSeries(data)
+        
     }
 
     useEffect(() => {
-        const timeout = setTimeout(() =>{
+        const timeout = setTimeout(() => {
             consultarApi()
-        setPending(false)
-    })
-            return() => clearTimeout(timeout)
+            setPending(false)
+        })
+        return () => clearTimeout(timeout)
     }, [])
     // 3 comfigutamos las columnas para el data table
     const columns = [
@@ -83,8 +78,8 @@ const AddCapSerieEs = () => {
             selector: row => row.CONTENIDO,
         },
         {
-            name: 'CALIDAD',
-            selector: row => row.CALIDAD,
+            name: 'ClASIFICACION',
+            selector: row => row.CLASIFICATION
         },
         {
             name: 'FECHA SUBIDA',
@@ -107,10 +102,10 @@ const AddCapSerieEs = () => {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <BannerListMovieEs />
+                    <BannerListSerieEn />
                     <DataTable
                         columns={columns}
-                        data={peliculas}
+                        data={series}
                         progressPending={pending}
                         noDataComponent={<CustomLoader />}
                         pagination={true}

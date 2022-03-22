@@ -1,8 +1,8 @@
 import React from 'react';
 
-function BannerListMovieEs() {
+function BannerListSerieEn() {
   return (
-    <div className="relative bg-indigo-300 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+    <div className="relative bg-emerald-300 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
 
       {/* Background illustration */}
       <div className="absolute right-0 top-0 -mt-4 mr-16 pointer-events-none hidden xl:block" aria-hidden="true">
@@ -48,7 +48,7 @@ function BannerListMovieEs() {
 
       {/* Content */}
       <div className="relative">
-        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Listado Peliculas en Español</h1>
+        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Listado Series en Ingles</h1>
         <p> <br></br></p>
       </div>
 
@@ -56,4 +56,4 @@ function BannerListMovieEs() {
   );
 }
 
-export default BannerListMovieEs;
+export default BannerListSerieEn;

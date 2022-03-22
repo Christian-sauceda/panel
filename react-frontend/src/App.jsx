@@ -25,6 +25,11 @@ import AddTvInter from './pages/admin/AddTvInter'
 //list
 import ListMovieEs from './pages/admin/ListMovieEs'
 import ListMovieEn from './pages/admin/ListMovieEn'
+import ListMovieAdult from './pages/admin/ListMovieAdulto'
+import ListSeriesEs from './pages/admin/ListSeriesEs'
+import ListSeriesEn from './pages/admin/ListSeriesEn'
+import ListEventos from './pages/admin/ListEventos'
+import ListUsers from './pages/admin/ListUsers'
 
 //cat
 import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
@@ -83,6 +88,11 @@ function App() {
                         <Route path="tv/inter/add" element={<AddTvInter />} />
                         <Route path="movie/es/list" element={<ListMovieEs />} />
                         <Route path="movie/en/list" element={<ListMovieEn />} />
+                        <Route path="movie/adult/list" element={<ListMovieAdult />} />
+                        <Route path="series/es/list" element={<ListSeriesEs />} />
+                        <Route path="tvshow/en/list" element={<ListSeriesEn />} />
+                        <Route path="events/list" element={<ListEventos />} />
+                        <Route path="users/list" element={<ListUsers />} />
                       </Route>
                     </Routes>
                   </CategoriasProvider>

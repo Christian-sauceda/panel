@@ -1,19 +1,13 @@
 import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
-import useAuth from '../../hooks/useAuth';
 import styled, { keyframes } from 'styled-components';
 import dateFormat from 'dateformat';
-
 import DataTable, { createTheme } from 'react-data-table-component'
 
 // components
-import clienteAxios from "../../config/axios";
-
-import BannerListMovieEs from '../../partials/dashboard/BannerListMovieEs';
+import BannerListMovieAD from '../../partials/dashboard/BannerListMovieAD';
 
 const AddCapSerieEs = () => {
-    const { auth } = useAuth()
-    const [alerta, setAlerta] = useState({});
 
     const rotate360 = keyframes`
     from {
@@ -24,8 +18,8 @@ const AddCapSerieEs = () => {
       transform: rotate(360deg);
     }
   `;
-  
-  const Spinner = styled.div`
+
+    const Spinner = styled.div`
       margin: 16px;
       animation: ${rotate360} 1s linear infinite;
       transform: translateZ(0);
@@ -40,18 +34,22 @@ const AddCapSerieEs = () => {
   `;
 
     const CustomLoader = () => (
-        <div style={{ padding: '24px' }}>
+        <div 
+        style={{ padding: '24px' }}
+        className="d-flex justify-content-center align-items-center"
+        >
             <Spinner />
             <div>Buscando las Peliculas...</div>
         </div>
     );
-    
+
     // 1 configurar el hooks
     const [peliculas, setPeliculas] = useState([]);
     const [pending, setPending] = useState(true);
     // 2 funcion para mostrar los datos con fetch
-    const URL = `${import.meta.env.VITE_LISTMOVIEES_API}`
+    const URL = `${import.meta.env.VITE_LISTMOVIEAD_API}`
 
+    console.log(import.meta.env.VITE_LISTMOVIEAD_API)
     const consultarApi = async () => {
         const token = localStorage.getItem("token")
         const config = {
@@ -66,11 +64,11 @@ const AddCapSerieEs = () => {
     }
 
     useEffect(() => {
-        const timeout = setTimeout(() =>{
+        const timeout = setTimeout(() => {
             consultarApi()
-        setPending(false)
-    })
-            return() => clearTimeout(timeout)
+            setPending(false)
+        })
+        return () => clearTimeout(timeout)
     }, [])
     // 3 comfigutamos las columnas para el data table
     const columns = [
@@ -107,12 +105,12 @@ const AddCapSerieEs = () => {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <BannerListMovieEs />
+                    <BannerListMovieAD />
                     <DataTable
                         columns={columns}
+                        noDataComponent={<CustomLoader />}
                         data={peliculas}
                         progressPending={pending}
-                        noDataComponent={<CustomLoader />}
                         pagination={true}
                     />
                 </div>

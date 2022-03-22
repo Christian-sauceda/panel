@@ -9,7 +9,7 @@ import DataTable, { createTheme } from 'react-data-table-component'
 // components
 import clienteAxios from "../../config/axios";
 
-import BannerListMovieEs from '../../partials/dashboard/BannerListMovieEs';
+import BannerListSerieEs from '../../partials/dashboard/BannerListSerieEs';
 
 const AddCapSerieEs = () => {
     const { auth } = useAuth()
@@ -50,7 +50,7 @@ const AddCapSerieEs = () => {
     const [peliculas, setPeliculas] = useState([]);
     const [pending, setPending] = useState(true);
     // 2 funcion para mostrar los datos con fetch
-    const URL = `${import.meta.env.VITE_LISTMOVIEES_API}`
+    const URL = `${import.meta.env.VITE_LISTSERIEES_API}`
 
     const consultarApi = async () => {
         const token = localStorage.getItem("token")
@@ -64,7 +64,6 @@ const AddCapSerieEs = () => {
         const data = await response.json()
         setPeliculas(data)
     }
-
     useEffect(() => {
         const timeout = setTimeout(() =>{
             consultarApi()
@@ -83,8 +82,8 @@ const AddCapSerieEs = () => {
             selector: row => row.CONTENIDO,
         },
         {
-            name: 'CALIDAD',
-            selector: row => row.CALIDAD,
+            name: 'ClASIFICACION',
+            selector: row => row.CLASIFICATION,
         },
         {
             name: 'FECHA SUBIDA',
@@ -107,7 +106,7 @@ const AddCapSerieEs = () => {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <BannerListMovieEs />
+                    <BannerListSerieEs />
                     <DataTable
                         columns={columns}
                         data={peliculas}

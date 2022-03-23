@@ -12,6 +12,16 @@ export const getmoviees = async (req, res) => {
     });
 }
 
+export const countmoviees = async (req, res) => {
+    mysqlconnection.query("CALL PROC_COUNTMOVIEES()", (err, rows, fields) => {
+        if (!err) {
+            res.status(200).json(rows[0]);
+        } else {
+            console.log(err);
+        }
+    });
+}
+
 // GET CATALOG OF MOVIE BY ID
 export const getmovieesById = (req, res) => {
     const {

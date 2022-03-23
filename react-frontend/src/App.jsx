@@ -8,6 +8,7 @@ import OlvidePassword from './pages/Auth/OlvidePassword'
 import ConfirmarCuenta from './pages/Auth/ConfirmarCuenta'
 
 import Inicio from './pages/admin/Inicio.jsx'
+import NotFound from './pages/admin/NotFound'
 
 //add
 import AddMovieEs from './pages/admin/AddMovieEs'
@@ -29,6 +30,9 @@ import ListMovieAdult from './pages/admin/ListMovieAdulto'
 import ListSeriesEs from './pages/admin/ListSeriesEs'
 import ListSeriesEn from './pages/admin/ListSeriesEn'
 import ListEventos from './pages/admin/ListEventos'
+import ListTvEs from './pages/admin/ListTvEs'
+import ListTvEn from './pages/admin/ListTvEn'
+import ListTvInter from './pages/admin/ListTvInter'
 import ListUsers from './pages/admin/ListUsers'
 
 //cat
@@ -60,6 +64,7 @@ function App() {
                 <PlataformasProvider>
                   <CategoriasProvider>
                     <Routes>
+                    <Route path="*" element={<NotFound />} />
                       <Route path="/" element={<AuthLayout />}>
                         <Route index element={<Login />} />
                         <Route path="olvide-password" element={<OlvidePassword />} />
@@ -93,6 +98,9 @@ function App() {
                         <Route path="tvshow/en/list" element={<ListSeriesEn />} />
                         <Route path="events/list" element={<ListEventos />} />
                         <Route path="users/list" element={<ListUsers />} />
+                        <Route path="tv/es/list" element={<ListTvEs />} />
+                        <Route path="tv/en/list" element={<ListTvEn />} />
+                        <Route path="tv/inter/list" element={<ListTvInter />} />
                       </Route>
                     </Routes>
                   </CategoriasProvider>

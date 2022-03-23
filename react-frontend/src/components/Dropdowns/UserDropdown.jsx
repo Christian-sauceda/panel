@@ -48,7 +48,7 @@ const UserDropdown = () => {
           }
           href="/"
         >
-          Cerrar Sesiónn
+          Cerrar Sesión
         </a>
       </div>
     </>

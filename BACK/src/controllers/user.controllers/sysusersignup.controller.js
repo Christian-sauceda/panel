@@ -5,6 +5,18 @@ const jwt = require("jsonwebtoken");
 import generarId from "../../helpers/generarId";
 import emailRegistro from "../../helpers/emailRegistro.js";
 
+
+// get all users
+export const getuser = async (req, res) => {
+    mysqlconnection.query("CALL PROC_SEL_USERS()", (err, rows, fields) => {
+        if (!err) {
+            res.status(200).json(rows[0]);
+        } else {
+            console.log(err);
+        }
+    });
+};
+
 //registro de usuario
 export const registro = async (req, res) => {
     try {
@@ -147,6 +159,7 @@ export const login = (req, res, next) => {
     );
 };
 
+//perfil
 export const perfil = (req, res) => {
     const { user } = req;
     res.json(user);

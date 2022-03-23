@@ -50,7 +50,7 @@ const AddCapSerieEs = () => {
     const [peliculas, setPeliculas] = useState([]);
     const [pending, setPending] = useState(true);
     // 2 funcion para mostrar los datos con fetch
-    const URL = `${import.meta.env.VITE_LISTMOVIEEN_API}`
+    const URL = `${import.meta.env.VITE_LISTEVENTOS_API}`
 
     const consultarApi = async () => {
         const token = localStorage.getItem("token")

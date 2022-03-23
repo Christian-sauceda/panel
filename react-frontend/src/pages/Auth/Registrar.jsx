@@ -177,8 +177,8 @@ const Registrar = () => {
                               onChange={(e) => setTipo(e.target.value)}
                             >
                               <option value="">Selecciona el Tipo de Usuario</option>
-                              <option value="0">Administrador</option>
-                              <option value="1">Manager</option>
+                              <option value="1">Administrador</option>
+                              <option value="0">Manager</option>
                             </select>
                           </div>
                         </div>

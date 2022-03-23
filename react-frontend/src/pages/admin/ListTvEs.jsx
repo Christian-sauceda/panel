@@ -9,7 +9,7 @@ import DataTable, { createTheme } from 'react-data-table-component'
 // components
 import clienteAxios from "../../config/axios";
 
-import BannerListEventos from '../../partials/dashboard/BannerListEventos';
+import BannerListSerieEs from '../../partials/dashboard/BannerListSerieEs';
 
 const AddCapSerieEs = () => {
     const { auth } = useAuth()
@@ -24,8 +24,8 @@ const AddCapSerieEs = () => {
       transform: rotate(360deg);
     }
   `;
-
-    const Spinner = styled.div`
+  
+  const Spinner = styled.div`
       margin: 16px;
       animation: ${rotate360} 1s linear infinite;
       transform: translateZ(0);
@@ -45,13 +45,13 @@ const AddCapSerieEs = () => {
             <div>Buscando las Peliculas...</div>
         </div>
     );
-
+    
     // 1 configurar el hooks
     const [peliculas, setPeliculas] = useState([]);
     const [pending, setPending] = useState(true);
     // 2 funcion para mostrar los datos con fetch
-    const URL = `http://localhost:3001/users`
-    // VITE_LISTUSERS_API = 
+    const URL = `${import.meta.env.VITE_LISTTVES_API}`
+
     const consultarApi = async () => {
         const token = localStorage.getItem("token")
         const config = {
@@ -65,42 +65,29 @@ const AddCapSerieEs = () => {
         setPeliculas(data)
         console.log(data)
     }
-
     useEffect(() => {
-        const timeout = setTimeout(() => {
+        const timeout = setTimeout(() =>{
             consultarApi()
-            setPending(false)
-        })
-        return () => clearTimeout(timeout)
+        setPending(false)
+    })
+            return() => clearTimeout(timeout)
     }, [])
     // 3 comfigutamos las columnas para el data table
     const columns = [
         {
-            name: 'USUARIO',
-            selector: row => row.USER_NAME,
-        },
-        {
-            name: 'CORREO',
-            selector: row => row.EMAIL_USER,
+            name: 'TITULO',
+            selector: row => row.TITLE,
         },
         {
             name: 'TIPO',
-            selector: row => (
-                <div className={`${row.TYPE_USER === "0" ? 'text-indigo-600 font-bold' : 'text-black' }`}>
-                    {row.TYPE_USER === "0" ? 'MANAGER' : 'ADMINISTRADOR'}
-                </div>
-            ),
+            selector: row => row.CONTENIDO,
         },
         {
-            name: 'ESTADO',
-            selector: row => (
-                <div className={`${row.CONFIRMED === 0 ? 'text-indigo-600 font-bold' : 'text-black' }`}>
-                    {row.CONFIRMED === 0 ? 'PENDIENTE' : 'CONFIRMADO'}
-                </div>
-            ),
+            name: 'CATEGORIA',
+            selector: row => row.CATEGORIA,
         },
         {
-            name: 'FECHA CREACION',
+            name: 'FECHA SUBIDA',
             selector: row => dateFormat(row.UPLOAD_DATE, "dddd, mmmm dS, yyyy"),
         },
         {
@@ -108,7 +95,7 @@ const AddCapSerieEs = () => {
             cell: row => (
                 <div className="btn-group" role="group" aria-label="Basic example">
                     <button type="button" className="bg-green-500 text-white hover:bg-green-700 text-lg p-1">Editar</button>
-                    <button type="button" className="bg-red-500 text-white hover:bg-red-700 text-lg p-1 mx-1">Eliminar</button>
+                    <button type="button" className="bg-amber-400 text-white hover:bg-amber-600 text-lg p-1 mx-1">Desactivar</button>
                 </div>
             ),
         },
@@ -120,7 +107,7 @@ const AddCapSerieEs = () => {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <BannerListEventos />
+                    <BannerListSerieEs />
                     <DataTable
                         columns={columns}
                         data={peliculas}

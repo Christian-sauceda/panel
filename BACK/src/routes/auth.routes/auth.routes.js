@@ -6,6 +6,7 @@ import checkAuth from "../../middlewares/user.middleware.js";
 
 const router = Router();
 
+router.get("/users", checkAuth, userCtrl.getuser);
 // resgisro de usuario
 router.post("/registro", userCtrl.registro);
 // confirmacion de correo

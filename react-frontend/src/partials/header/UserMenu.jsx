@@ -31,6 +31,7 @@ function UserMenu() {
   });
   const { auth, setAuth } = useAuth()
     const user = (auth.NAME)
+    const tipo = (auth.TYPE)
   return (
     <div className="relative inline-flex">
       <button
@@ -65,7 +66,10 @@ function UserMenu() {
           onBlur={() => setDropdownOpen(false)}
         >
           <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200">
-            <div className="font-medium text-slate-800">Hola, <span className='text-red-600 text-center'> {user}</span></div>
+            <div className="font-medium text-slate-800">Hola, <span className='text-red-400 hover:text-red-600 text-center'> {user}</span></div>
+            <div className={`${tipo === "0" ? 'text-orange-400 hover:text-orange-600 font-bold text-center' : 'text-black text-center' }`}>
+                    {tipo === "0" ? 'MANAGER' : 'ADMINISTRADOR'}
+                </div>
              </div>
           <ul>
 

@@ -52,7 +52,7 @@ export default function AddSerieEs() {
             const datos = { COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON }
             await clienteAxios.post(`/tvlive/en`, datos, config)
             setAlerta({
-                msg: 'Tv en Ingles Agregada Correctamente',
+                msg: 'Tv en Inglés Agregada Correctamente',
                 error: false
             })
             //limpiar los campos

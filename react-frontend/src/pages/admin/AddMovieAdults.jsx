@@ -51,7 +51,7 @@ export default function AddMovieAdult() {
             const datos = { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, DURATION, CODFORMATVIDEO, URL, SYNOPSIS }
             await clienteAxios.post(`/mtmovie/adult`, datos, config)
             setAlerta({
-                msg: "Pelicula Adulto Agregada Correctamente",
+                msg: "Película Adulto Agregada Correctamente",
                 error: false
             })
             //limpiar el formulario
@@ -327,7 +327,7 @@ export default function AddMovieAdult() {
                                                             id="back"
                                                             name="back"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Fondo de la Pelicula"
+                                                            placeholder="Fondo de la Película"
                                                             value={BACK}
                                                             onChange={(e) => setBACK(e.target.value)}
                                                         />
@@ -346,7 +346,7 @@ export default function AddMovieAdult() {
                                                             id="front"
                                                             name="front"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Poster de la Pelicula"
+                                                            placeholder="Poster de la Película"
                                                             value={POSTER}
                                                             onChange={(e) => setPOSTER(e.target.value)}
                                                         />

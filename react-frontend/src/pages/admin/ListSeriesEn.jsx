@@ -36,7 +36,7 @@ const AddCapSerieEs = () => {
     const CustomLoader = () => (
         <div style={{ padding: '24px' }}>
             <Spinner />
-            <div>Buscando las Series en Ingles...</div>
+            <div>Buscando las Series en Inglés...</div>
         </div>
     );
 

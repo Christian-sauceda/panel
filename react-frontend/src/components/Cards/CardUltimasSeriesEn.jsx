@@ -7,7 +7,7 @@ import ClienteAxios from "../../config/axios";
 //BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY)
 //AND CURDATE() AND t1.COD_CAT_TYPE_CONTENT = 1;
 
-const CardUltimasSeriesEs = () => {
+const CardUltimasSeriesEn = () => {
     // configurar los hooks de estado
     const [series, guardarSeries] = useState([]);
     const mostrarDatos = async () => {
@@ -19,7 +19,7 @@ const CardUltimasSeriesEs = () => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const resultado = await ClienteAxios.get("/users", config).then((response) => {
+            const resultado = await ClienteAxios.get("/mttvshows/en/getseriesen/lastday", config).then((response) => {
                 const data = response.data
                 guardarSeries(data)
             })
@@ -30,29 +30,15 @@ const CardUltimasSeriesEs = () => {
     //definir columnas
     const columns = [
         {
-            name: "COD_USER",
-            label: "ID",
+            name: "TITLE",
+            label: "Titulo",
             options: {
                 filter: true,
             },
         },
         {
-            name: "USER_NAME",
-            label: "Nombre",
-            options: {
-                filter: true,
-            },
-        },
-        {
-            name: "EMAIL_USER",
-            label: "Correo",
-            options: {
-                filter: true,
-            },
-        },
-        {
-            name: "TYPE_USER",
-            label: "Tipo de usuario",
+            name: "UPLOAD_DATE",
+            label: "Fecha",
             options: {
                 filter: true,
             },
@@ -70,17 +56,17 @@ const CardUltimasSeriesEs = () => {
                         <div className="relative w-full px-4 max-w-full flex-grow flex-1">
                         </div>
                         <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                            <Link to="/admin/tvshow/en/list"
-                                className="bg-indigo-500 text-white active:bg-indigo-600 font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 text-xl">
+                            <Link to="/admin/series/es/list"
+                                                                className="bg-indigo-500 text-white active:bg-indigo-600 text-lg font-bold uppercase px-3 rounded outline-none focus:outline-none mr-2 ease-linear transition-all duration-150">
                                 <small>Ver Todas</small>
                             </Link>
                         </div>
                     </div>
                 </div>
-                <div className="block w-full overflow-x-auto">
+                <div className="block w-full overflow-x-auto ">
                     {/* Projects table */}
                     <MUIDataTable
-                        title={"Ultimas Series en Ingles"}
+                        title={"Ultimas Series en Inglés"}
                         data={series}
                         columns={columns}
                         options={{
@@ -131,4 +117,4 @@ const CardUltimasSeriesEs = () => {
     );
 }
 
-export default CardUltimasSeriesEs;
+export default CardUltimasSeriesEn;

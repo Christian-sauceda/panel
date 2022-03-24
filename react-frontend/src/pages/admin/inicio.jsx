@@ -10,63 +10,93 @@ import CardUltimasSeriesEn from "../../components/Cards/CardUltimasSeriesEn.jsx"
 import CardUltimasPelisAdult from "../../components/Cards/CardUltimasPelisAdult.jsx";
 
 export default function Inicio() {
-  const [series, guardarSeries] = useState([]);
-    const mostrarDatos = async () => {
-        try {
-            const token = localStorage.getItem("token")
-            const config = {
-                headers: {
-                    "content-type": "application/json",
-                    Authorization: `Bearer ${token}`
-                }
-            }
-            const resultado = await ClienteAxios.get("/mtmovie/es/countmoviees", config).then((response) => {
-                const data = response.data;
-                guardarSeries(data)
-            })
-        } catch (error) {
-            console.log(error);
+  const [movieses, setMovieses] = useState([]);
+  const [moviesen, setMoviesen] = useState([]);
+  const [serieses, setSerieses] = useState([]);
+  const [seriesen, setSeriesen] = useState([]);
+  const mostrarDatos = async () => {
+    try {
+      const token = localStorage.getItem("token")
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`
         }
-    };
-        useEffect(() => {
-        mostrarDatos();
-    }, [])
+      }
+      const resultadomes = await ClienteAxios.get("/mtmovie/es/countmoviees", config).then((response) => {
+        const mes = response.data;
+        setMovieses(mes)
+      })
+      const resultadomen = await ClienteAxios.get("/mtmovie/es/countmoviees", config).then((response) => {
+        const men = response.data;
+        setMoviesen(men)
+      })
+      const resultadoses = await ClienteAxios.get("/mtmovie/es/countmoviees", config).then((response) => {
+        const ses = response.data;
+        setSerieses(ses)
+      })
+      const resultadosen = await ClienteAxios.get("/mtmovie/es/countmoviees", config).then((response) => {
+        const sen = response.data;
+        setSeriesen(sen)
+      })
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    mostrarDatos();
+  }, [])
+  //recorrer arreglo de series
+
   return (
     <>
       <div className="flex flex-wrap pb-10">
 
-        <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <CardStats
-            statSubtitle="Total Películas Español"
-            statTitle="{''}"
-            statIconName={`fas fa-film`}
-            statIconColor="bg-indigo-500"
-          />
-        </div>
-        <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <CardStats
-            statSubtitle="Total Películas Inglés"
-            statTitle="0"
-            statIconName="fas fa-video"
-            statIconColor="bg-orange-500"
-          />
-        </div>
-        <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <CardStats
-            statSubtitle="Total Series en Español"
-            statTitle="2"
-            statIconName="fas fa-tv"
-            statIconColor="bg-sky-800"
-          />
-        </div>
-        <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <CardStats
-            statSubtitle="Total Series en Inglés"
-            statTitle="3"
-            statIconName="fas fa-file-video"
-            statIconColor="bg-red-700"
-          />
-        </div>
+        {movieses.map((item) => (
+          <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+            <CardStats
+              statSubtitle="Total Películas Español"
+              statTitle={item.moviees}
+              statIconName={`fas fa-film`}
+              statIconColor="bg-indigo-500"
+            />
+          </div>
+        ))}
+
+        {moviesen.map((item) => (
+          <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+            <CardStats
+              statSubtitle="Total Películas Inglés"
+              statTitle={item.moviees}
+              statIconName="fas fa-video"
+              statIconColor="bg-orange-500"
+            />
+          </div>
+        ))}
+
+        {serieses.map((item) => (
+          <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+            <CardStats
+              statSubtitle="Total Series en Español"
+              statTitle={item.moviees}
+              statIconName="fas fa-tv"
+              statIconColor="bg-sky-800"
+            />
+          </div>
+        ))}
+
+        {seriesen.map((item) => (
+          <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+            <CardStats
+              statSubtitle="Total Series en Inglés"
+              statTitle={item.moviees}
+              statIconName="fas fa-file-video"
+              statIconColor="bg-red-700"
+            />
+          </div>
+        ))}
+
       </div>
 
       <div className="flex flex-wrap mt-4 pt-6 ">

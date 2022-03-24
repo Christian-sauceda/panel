@@ -12,6 +12,17 @@ export const getmovieadult = async (req, res) => {
     });
 }
 
+
+export const getmovieadultlastday = async (req, res) => {
+    mysqlconnection.query("CALL PROC_SEL_ADULTLASTDAY()", (err, rows, fields) => {
+        if (!err) {
+            res.status(200).json(rows[0]);
+        } else {
+            console.log(err);
+        }
+    });
+}
+
 // GET MOVIE ADULT EN BY ID
 export const getmovieadultById = (req, res) => {
     const {

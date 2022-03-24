@@ -12,6 +12,17 @@ export const gettvshowsen = (req, res) => {
     });
 }
 
+export const gettvshowsenlastday = async (req, res) => {
+    mysqlconnection.query("CALL PROC_SEL_SERIESENLASTDAY()", (err, rows, fields) => {
+        if (!err) {
+            res.status(200).json(rows[0]);
+        } else {
+            console.log(err);
+        }
+    });
+}
+
+
 // GET CATALOG OF TV SHOW EN BY ID
 export const gettvshowsenById = (req, res) => {
     const {

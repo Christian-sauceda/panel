@@ -48,7 +48,7 @@ function BannerListMovieAD() {
 
       {/* Content */}
       <div className="relative">
-        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Listado Peliculas Adultos</h1>
+        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Listado Películas Adultos</h1>
         <p> <br></br></p>
       </div>
 

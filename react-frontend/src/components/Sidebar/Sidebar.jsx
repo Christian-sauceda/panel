@@ -101,7 +101,7 @@ function Sidebar({
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
                             <i className="fi fi-rr-popcorn"></i>
-                            <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Peliculas</span>
+                            <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Películas</span>
                           </div>
                           {/* Icon */}
                           <div className="flex shrink-0 ml-2">
@@ -115,12 +115,12 @@ function Sidebar({
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/es/add" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Pelicula</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-plus"></i> Agregar Película</span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink end to="/admin/movie/es/list" className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate">
-                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-list"></i> Listar Peliculas</span>
+                              <span className="text-base font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><i className="fi fi-rr-list"></i> Listar Películas</span>
                             </NavLink>
                           </li>
                         </ul>

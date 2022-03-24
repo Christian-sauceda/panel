@@ -56,7 +56,7 @@ export default function AddMovieEn() {
             const datos = { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS }
             await clienteAxios.post(`/mtmovie/en`, datos, config)
             setAlerta({
-                msg: 'Pelicula en Ingles Agregada Correctamente',
+                msg: 'Película en Inglés Agregada Correctamente',
                 error: false
             })
             //limpiar los campos

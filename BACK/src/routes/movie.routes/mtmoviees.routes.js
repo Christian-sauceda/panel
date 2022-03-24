@@ -7,6 +7,7 @@ const router = Router();
 
 router.get('/', movieESCtrl.getmoviees);
 router.get('/countmoviees', movieESCtrl.countmoviees);
+router.get('/getmoviees/lastday', movieESCtrl.getmovieeslastday);
 router.get('/:COD', movieESCtrl.getmovieesById);
 router.post('/', movieESCtrl.createmoviees);
 router.put('/:COD', movieESCtrl.updatemovieesById);

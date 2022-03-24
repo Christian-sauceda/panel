@@ -39,7 +39,7 @@ const AddCapSerieEs = () => {
         className="d-flex justify-content-center align-items-center"
         >
             <Spinner />
-            <div>Buscando las Peliculas...</div>
+            <div>Buscando las Películas...</div>
         </div>
     );
 
@@ -49,7 +49,6 @@ const AddCapSerieEs = () => {
     // 2 funcion para mostrar los datos con fetch
     const URL = `${import.meta.env.VITE_LISTMOVIEAD_API}`
 
-    console.log(import.meta.env.VITE_LISTMOVIEAD_API)
     const consultarApi = async () => {
         const token = localStorage.getItem("token")
         const config = {

@@ -7,13 +7,10 @@ import dateFormat from 'dateformat';
 import DataTable, { createTheme } from 'react-data-table-component'
 
 // components
-import clienteAxios from "../../config/axios";
 
 import BannerListEventos from '../../partials/dashboard/BannerListEventos';
 
 const AddCapSerieEs = () => {
-    const { auth } = useAuth()
-    const [alerta, setAlerta] = useState({});
 
     const rotate360 = keyframes`
     from {
@@ -42,7 +39,7 @@ const AddCapSerieEs = () => {
     const CustomLoader = () => (
         <div style={{ padding: '24px' }}>
             <Spinner />
-            <div>Buscando las Peliculas...</div>
+            <div>Buscando Los Usuarios...</div>
         </div>
     );
 
@@ -63,7 +60,6 @@ const AddCapSerieEs = () => {
         const response = await fetch(URL, config)
         const data = await response.json()
         setPeliculas(data)
-        
     }
 
     useEffect(() => {

@@ -17,7 +17,7 @@ export default function AddCapSerieEs() {
     const [NUMBER_CHAPTER, setNUMBER_CHAPTER] = useState("");
     const [SYNOSIS, setSYNOSIS] = useState("");
     const [URL, setURL] = useState("");
-    const [SUPTITLE, setSUPTITLE] = useState("Ingles");
+    const [SUPTITLE, setSUPTITLE] = useState("Inglés");
     const [BACK, setBACK] = useState("");
     const [POSTER, setPOSTER] = useState("");
 
@@ -44,7 +44,7 @@ export default function AddCapSerieEs() {
             const datos = { COD_CONTENT, COD_FORMAT_VIDEO, COD_USER, NAME_CHAPTER, NUMBER_SEASON, NUMBER_CHAPTER, SYNOSIS, URL, SUPTITLE, BACK, POSTER }
             await clienteAxios.post("/mttvshowschapter", datos, config)
             setAlerta({
-                msg: "Capítulo de serie en Ingles Agregado Correctamente",
+                msg: "Capítulo de serie en Inglés Agregado Correctamente",
                 error: false
             })
             //LIMPIAR CAMPOS

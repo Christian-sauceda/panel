@@ -48,7 +48,7 @@ function BannerTvEn() {
 
       {/* Content */}
       <div className="relative">
-        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Agregar Tv En Vivo En Ingles</h1>
+        <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Agregar Tv En Vivo En Inglés</h1>
         <p>Información General</p>
       </div>
 

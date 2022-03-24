@@ -27,6 +27,16 @@ export const getmovieenById = (req, res) => {
     });
 };
 
+export const getmovieenlastday = async (req, res) => {
+    mysqlconnection.query("CALL PROC_SEL_MOVIEENLASTDAY()", (err, rows, fields) => {
+        if (!err) {
+            res.status(200).json(rows[0]);
+        } else {
+            console.log(err);
+        }
+    });
+}
+
 // CREATE CATALOG OF MOVIE EN
 export const createmovieen = (req, res) => {
     const {

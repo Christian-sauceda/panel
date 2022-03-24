@@ -43,14 +43,14 @@ export default function CardStats({
 
 CardStats.defaultProps = {
   statSubtitle: "",
-  statTitle: "",
+  statTitle: 0,
   statIconName: "",
   statIconColor: "",
 };
 
 CardStats.propTypes = {
   statSubtitle: PropTypes.string,
-  statTitle: PropTypes.string,
+  statTitle: PropTypes.number,
   statIconName: PropTypes.string,
   statIconColor: PropTypes.string,
 };

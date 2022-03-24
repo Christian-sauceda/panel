@@ -42,7 +42,7 @@ const AddCapSerieEs = () => {
     const CustomLoader = () => (
         <div style={{ padding: '24px' }}>
             <Spinner />
-            <div>Buscando las Peliculas...</div>
+            <div>Buscando las Películas...</div>
         </div>
     );
     

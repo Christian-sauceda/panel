@@ -50,9 +50,6 @@ export const AudiosProvider = ({ children }) => {
 
                 const { data } = await clienteAxios.post("/cataudio", audio, config)
                 const { ...audioAlmacenado } = data
-                console.log(data)
-                console.log(audioAlmacenado)
-                console.log(audios)
                 setAudios([audioAlmacenado, ...audios])
             } catch (error) {
                 console.log(error.error.data.message)

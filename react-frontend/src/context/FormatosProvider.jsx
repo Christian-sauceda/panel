@@ -50,9 +50,6 @@ export const FormatosProvider = ({ children }) => {
 
                 const { data } = await clienteAxios.post("/catformatvideo", formato, config)
                 const { ...formatoAlmacenado } = data
-                console.log(data)
-                console.log(formatoAlmacenado)
-                console.log(formatos)
                 setFormatos([formatoAlmacenado, ...formatos])
             } catch (error) {
                 console.log(error.error.data.message)

@@ -57,7 +57,7 @@ const FormularioCalidad = () => {
                         id='nombre'
                         placeholder='Escribe el Nombre del Tipo'
                         className='border-2 w-full p-2 mt-2 placeholder-gray-600
-                    rounded-md uppercase'
+                    rounded-md '
                         value={CALIDAD}
                         onChange={e => setCALIDAD(e.target.value)}
                     />

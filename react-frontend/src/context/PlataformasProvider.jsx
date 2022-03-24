@@ -50,7 +50,6 @@ export const PlataformasProvider = ({ children }) => {
 
                 const { data } = await clienteAxios.post("/catplataform", plataforma, config)
                 const { ...plataformaAlmacenado } = data
-                console.log(data)
                 console.log(plataformaAlmacenado)
                 console.log(plataformas)
                 setPlataformas([plataformaAlmacenado, ...plataformas])

@@ -50,9 +50,6 @@ export const CalidadesProvider = ({ children }) => {
 
                 const { data } = await clienteAxios.post("/catquality", calidad, config)
                 const { ...calidadAlmacenado } = data
-                console.log(data)
-                console.log(calidadAlmacenado)
-                console.log(calidades)
                 setCalidades([calidadAlmacenado, ...calidades])
             } catch (error) {
                 console.log(error.error.data.message)

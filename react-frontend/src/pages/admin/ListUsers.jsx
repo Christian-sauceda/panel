@@ -63,7 +63,7 @@ const AddCapSerieEs = () => {
         const response = await fetch(URL, config)
         const data = await response.json()
         setPeliculas(data)
-        console.log(data)
+        
     }
 
     useEffect(() => {

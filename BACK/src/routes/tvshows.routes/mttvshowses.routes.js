@@ -7,6 +7,7 @@ const router = Router();
 
 router.get('/', tvshowsESCtrl.gettvshowses);
 router.get('/:COD', tvshowsESCtrl.gettvshowsesById);
+router.get('/count/es', tvshowsESCtrl.countseriees);
 router.get('/getserieses/lastday', tvshowsESCtrl.gettvshowseslastday);
 router.post('/', tvshowsESCtrl.createtvshowses);
 router.put('/:COD', tvshowsESCtrl.updatetvshowsesById);

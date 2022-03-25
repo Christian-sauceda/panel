@@ -7,6 +7,7 @@ const router = Router();
 
 router.get('/', movieadultCtrl.getmovieadult);
 router.get('/:COD', movieadultCtrl.getmovieadultById);
+router.get('/count/adult', movieadultCtrl.countmovieadult);
 router.get('/getmovieadult/lastday', movieadultCtrl.getmovieadultlastday);
 router.post('/', movieadultCtrl.createmovieadult);
 router.put('/:COD', movieadultCtrl.updatemovieadultById);

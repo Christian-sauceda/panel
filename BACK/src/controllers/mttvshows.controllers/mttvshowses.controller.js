@@ -38,6 +38,16 @@ export const gettvshowsesById = (req, res) => {
     });
 };
 
+export const countseriees = async (req, res) => {
+    mysqlconnection.query("CALL PROC_COUNTSERIEES()", (err, rows, fields) => {
+        if (!err) {
+            res.status(200).json(rows[0]);
+        } else {
+            console.log(err);
+        }
+    });
+}
+
 // CREATE CATALOG OF TV SHOW ES
 export const createtvshowses = (req, res) => {
     const {

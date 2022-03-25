@@ -13,6 +13,16 @@ export const getmovieadult = async (req, res) => {
 }
 
 
+export const countmovieadult = async (req, res) => {
+    mysqlconnection.query("CALL PROC_COUNTMOVIEADULT()", (err, rows, fields) => {
+        if (!err) {
+            res.status(200).json(rows[0]);
+        } else {
+            console.log(err);
+        }
+    });
+}
+
 export const getmovieadultlastday = async (req, res) => {
     mysqlconnection.query("CALL PROC_SEL_ADULTLASTDAY()", (err, rows, fields) => {
         if (!err) {

@@ -6,7 +6,7 @@ import * as movieESCtrl from '../../controllers/mtmovie.controllers/mtmoviees.co
 const router = Router();
 
 router.get('/', movieESCtrl.getmoviees);
-router.get('/countmoviees', movieESCtrl.countmoviees);
+router.get('/count/es', movieESCtrl.countmoviees);
 router.get('/getmoviees/lastday', movieESCtrl.getmovieeslastday);
 router.get('/:COD', movieESCtrl.getmovieesById);
 router.post('/', movieESCtrl.createmoviees);

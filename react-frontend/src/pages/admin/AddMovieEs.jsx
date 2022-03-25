@@ -5,6 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import useCalidades from "../../hooks/useCalidades";
 import useAudios from "../../hooks/useAudios";
 import useFormatos from "../../hooks/useFormatos";
+import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
@@ -313,7 +314,7 @@ export default function AddMovieEs() {
                                                             value={CODQUALITY}
                                                             onChange={(e) => setCODQUALITY(e.target.value)}
                                                         >
-                                                        <option value="">Seleccione</option>
+                                                            <option value="">Seleccione</option>
                                                             {calidades.map((item) => (
                                                                 <option key={item.COD_CALIDAD} value={item.COD_CALIDAD}>{item.CALIDAD}</option>
                                                             ))}
@@ -335,7 +336,7 @@ export default function AddMovieEs() {
                                                             value={CODAUDIO}
                                                             onChange={(e) => setCODAUDIO(e.target.value)}
                                                         >
-                                                        <option value="">Seleccione</option>
+                                                            <option value="">Seleccione</option>
                                                             {audios.map((item) => (
                                                                 <option key={item.COD_AUDIO} value={item.COD_AUDIO}>{item.AUDIO}</option>
                                                             ))}
@@ -359,7 +360,7 @@ export default function AddMovieEs() {
                                                         >
                                                             <option value="">Seleccione</option>
                                                             {formatos.map((item) => (
-                                                                <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO===1 }>{item.FORMATO}</option>
+                                                                <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO === 1}>{item.FORMATO}</option>
                                                             ))}
                                                         </select>
                                                     </div>
@@ -379,7 +380,7 @@ export default function AddMovieEs() {
                                                             value={ASKPIN}
                                                             onChange={(e) => setASKPIN(e.target.value)}
                                                         >
-                                                        <option value="">Seleccione</option>
+                                                            <option value="">Seleccione</option>
                                                             <option value="1">No</option>
                                                             <option value="2">Si</option>
                                                         </select>
@@ -463,6 +464,15 @@ export default function AddMovieEs() {
                                                             onChange={(e) => setPOSTER(e.target.value)}
                                                         />
                                                     </div>
+                                                </div>
+                                                <div className="grid place-items-center pt-6 pb-6">
+                                                    <ReactPlayer
+                                                        playing={true}
+                                                        url={`${URL}`}
+                                                        controls={true}
+                                                        width="95%"
+                                                        height="95%"
+                                                    />
                                                 </div>
                                             </div>
                                         </div>

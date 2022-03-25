@@ -34,12 +34,7 @@ const AddCapSerieEn = () => {
       border-radius: 50%;
   `;
 
-    const CustomLoader = () => (
-        <div style={{ padding: '24px' }}>
-            <Spinner />
-            <div>Buscando las Películas...</div>
-        </div>
-    );
+
 
     // 1 configurar el hooks
     const [peliculas, setPeliculas] = useState([]);

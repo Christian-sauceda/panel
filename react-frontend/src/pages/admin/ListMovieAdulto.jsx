@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
 import styled, { keyframes } from 'styled-components';
 import MUIDataTable from "mui-datatables";
+import dateFormat, { masks } from "dateformat";
 // components
 import clienteAxios from "../../config/axios";
 
@@ -107,6 +108,9 @@ const AddCapSerieAdult = () => {
             label: 'Fecha',
             options: {
                 filter: true,
+                customBodyRender: (value) => {
+                    return dateFormat(value, "dd/mm/yyyy")
+                }
             },
         },
         {

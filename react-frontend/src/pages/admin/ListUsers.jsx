@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
-import useAuth from '../../hooks/useAuth';
 import styled, { keyframes } from 'styled-components';
-import dateFormat from 'dateformat';
-
-import DataTable, { createTheme } from 'react-data-table-component'
-
+import MUIDataTable from "mui-datatables";
 // components
+import clienteAxios from "../../config/axios";
 
-import BannerListEventos from '../../partials/dashboard/BannerListEventos';
+import BannerListSerieES from '../../partials/dashboard/BannerListSerieES';
 
-const AddCapSerieEs = () => {
+const AddCapSerieAdult = () => {
 
     const rotate360 = keyframes`
     from {
@@ -39,7 +36,7 @@ const AddCapSerieEs = () => {
     const CustomLoader = () => (
         <div style={{ padding: '24px' }}>
             <Spinner />
-            <div>Buscando Los Usuarios...</div>
+            <div>Buscando las Películas...</div>
         </div>
     );
 
@@ -47,19 +44,23 @@ const AddCapSerieEs = () => {
     const [peliculas, setPeliculas] = useState([]);
     const [pending, setPending] = useState(true);
     // 2 funcion para mostrar los datos con fetch
-    const URL = `http://localhost:3001/users`
-    // VITE_LISTUSERS_API = 
     const consultarApi = async () => {
-        const token = localStorage.getItem("token")
-        const config = {
-            headers: {
-                "content-type": "application/json",
-                Authorization: `Bearer ${token}`
+        try {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
             }
+            const resultado = await clienteAxios.get("/users", config).then((response) => {
+                const data = response.data
+                setPeliculas(data)
+                console.log(data)
+            })
+        } catch (error) {
+            console.log(error);
         }
-        const response = await fetch(URL, config)
-        const data = await response.json()
-        setPeliculas(data)
     }
 
     useEffect(() => {
@@ -72,41 +73,89 @@ const AddCapSerieEs = () => {
     // 3 comfigutamos las columnas para el data table
     const columns = [
         {
-            name: 'USUARIO',
-            selector: row => row.USER_NAME,
+            name: "COD_USER",
+            label: "Codigo",
+            options: {
+                filter: false,
+                sort: true,
+                display: false
+            }
         },
         {
-            name: 'CORREO',
-            selector: row => row.EMAIL_USER,
+            name: 'USER_NAME',
+            label: 'Nombre de Usuario',
+            options: {
+                filter: true,
+            },
         },
         {
-            name: 'TIPO',
-            selector: row => (
-                <div className={`${row.TYPE_USER === "0" ? 'text-indigo-600 font-bold' : 'text-black' }`}>
-                    {row.TYPE_USER === "0" ? 'MANAGER' : 'ADMINISTRADOR'}
-                </div>
-            ),
+            name: 'TYPE_USER',
+            label: 'Tipo de Usuario',
+            options: {
+                filter: true,
+
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <>
+                            <div className={value === "0" ? "text-indigo-500 font-bold" : "ADMINISTRADOR"}>
+                                {value === "0" ? "MANAGER" : "ADMINISTRADOR"}
+                            </div>
+
+                        </>
+                    )
+                }
+            },
         },
         {
-            name: 'ESTADO',
-            selector: row => (
-                <div className={`${row.CONFIRMED === 0 ? 'text-indigo-600 font-bold' : 'text-black' }`}>
-                    {row.CONFIRMED === 0 ? 'PENDIENTE' : 'CONFIRMADO'}
-                </div>
-            ),
+            name: 'EMAIL_USER',
+            label: 'Correo Electronico',
+            options: {
+                filter: true,
+            },
         },
         {
-            name: 'FECHA CREACION',
-            selector: row => dateFormat(row.UPLOAD_DATE, "dddd, mmmm dS, yyyy"),
+            name: 'CONFIRMED',
+            label: 'Estado',
+            options: {
+                filter: true,
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <>
+                            <div className={value === 0 ? "text-indigo-500 font-bold" : "ADMINISTRADOR"}>
+                                {value === 0 ? "PENDIENTE" : "CONFIRMADO"}
+                            </div>
+
+                        </>
+                    )
+                }
+            },
         },
         {
-            name: 'ACCIONES',
-            cell: row => (
-                <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="bg-green-500 text-white hover:bg-green-700 text-lg p-1">Editar</button>
-                    <button type="button" className="bg-red-500 text-white hover:bg-red-700 text-lg p-1 mx-1">Eliminar</button>
-                </div>
-            ),
+            name: 'Acciones',
+            label: 'Acciones',
+            options: {
+                filter: true,
+
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <>
+                            <button className="bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
+                                window.location.href = `/admin/user/edit/${tableMeta.rowData[0]}`
+                            }}>
+                                <i className="fas fa-edit">EDITAR</i>
+                            </button>
+
+                            <button className="bg-red-600 font-bold  p-2 text-white" onClick={() => {
+                                window.location.href = `/admin/user/deleted/${tableMeta.rowData[0]}`
+                            }}>
+                                <i className="fas fa-edit">ELIMINAR</i>
+                            </button>
+
+                        </>
+                    )
+                }
+            },
+
         },
     ]
 
@@ -116,19 +165,57 @@ const AddCapSerieEs = () => {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <BannerListEventos />
-                    <DataTable
-                        columns={columns}
+                    <BannerListSerieES />
+
+                    <MUIDataTable
                         data={peliculas}
-                        progressPending={pending}
-                        noDataComponent={<CustomLoader />}
-                        pagination={true}
+                        columns={columns}
+                        
+                        options={{
+                            responsive: "scroll",
+                            selectableRows: "none",
+                            fixedHeader: false ,
+                            elevation: 10,
+                            textLabels: {
+                                body: {
+                                    noMatch: "No hay datos para mostrar",
+                                    toolTip: "Ordenar",
+                                },
+                                pagination: {
+                                    next: "Siguiente",
+                                    previous: "Anterior",
+                                    rowsPerPage: "Filas por página:",
+                                    displayRows: "de",
+                                },
+                                toolbar: {
+                                    search: "Buscar",
+                                    downloadCsv: "Descargar CSV",
+                                    print: "Imprimir",
+                                    viewColumns: "Ver Columnas",
+                                    filterTable: "Filtrar Tabla",
+                                },
+                                filter: {
+                                    all: "Todos",
+                                    title: "FILTROS",
+                                    reset: "RESETEAR",
+                                },
+                                viewColumns: {
+                                    title: "Mostrar Columnas",
+                                    titleAria: "Mostrar/Ocultar Columnas",
+                                },
+                                selectedRows: {
+                                    text: "fila(s) seleccionada(s)",
+                                    delete: "Eliminar",
+                                    deleteAria: "Eliminar fila seleccionada",
+                                },
+                            },
+                        }}
                     />
                 </div>
             </main>
         </>
     );
 }
-export default AddCapSerieEs;
+export default AddCapSerieAdult;
 
 

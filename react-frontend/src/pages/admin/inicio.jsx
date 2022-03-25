@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import ClienteAxios from "../../config/axios";
+
 // components
 import CardStats from "../../components/Cards/CardStats.jsx";
 import CardUltimasPelisEs from "../../components/Cards/CardUltimasPelisEs.jsx";
@@ -63,61 +64,62 @@ export default function Inicio() {
     <>
       <div className="flex flex-wrap pb-10">
 
-        {movieses.map((item) => (
-          <div className="w-full lg:w-6/12 xl:w-2/12 px-4">
+
+        <div className="w-full lg:w-6/12 xl:w-2/12 px-4">
+          {movieses.map((item) => (
             <CardStats
               statSubtitle="Total Películas Español"
               statTitle={item.moviees}
               statIconName={`fas fa-film`}
               statIconColor="bg-indigo-500"
             />
-          </div>
-        ))}
+          ))}
+        </div>
 
-        {moviesen.map((item) => (
-          <div className="w-full lg:w-6/12 xl:w-2/12 px-4">
+        <div className="w-full lg:w-6/12 xl:w-2/12 px-4">
+          {moviesen.map((item) => (
             <CardStats
               statSubtitle="Total Películas Inglés"
               statTitle={item.movieen}
               statIconName="fas fa-video"
               statIconColor="bg-orange-500"
             />
-          </div>
-        ))}
+          ))}
+        </div>
 
-        {moviesadult.map((item) => (
-          <div className="w-full lg:w-6/12 xl:w-2/12 px-4">
+        <div className="w-full lg:w-6/12 xl:w-2/12 px-4">
+          {moviesadult.map((item) => (
             <CardStats
               statSubtitle="Total Películas para Adultos"
               statTitle={item.moviead}
               statIconName="fas fa-tv"
               statIconColor="bg-green-500"
-            />
-          </div>
-        ))}
 
-        {serieses.map((item) => (
-          <div className="w-full lg:w-6/12 xl:w-2/12 px-4">
+            />
+          ))}
+        </div>
+
+        <div className="w-full lg:w-6/12 xl:w-2/12 px-4">
+          {serieses.map((item) => (
             <CardStats
               statSubtitle="Total Series en Español"
               statTitle={item.seriees}
               statIconName="fas fa-tv"
               statIconColor="bg-sky-800"
             />
-          </div>
-        ))}
+          ))}
+        </div>
 
-        {seriesen.map((item) => (
-          <div className="w-full lg:w-6/12 xl:w-2/12 px-4">
+        <div className="w-full lg:w-6/12 xl:w-2/12 px-4">
+          {seriesen.map((item) => (
             <CardStats
               statSubtitle="Total Series en Inglés"
               statTitle={item.serieen}
               statIconName="fas fa-file-video"
               statIconColor="bg-red-700"
             />
-          </div>
-        ))}
-
+          ))}
+        </div>
       </div>
 
       <div className="flex flex-wrap mt-4 pt-6 ">

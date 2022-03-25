@@ -2,11 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import MUIDataTable from "mui-datatables";
 import ClienteAxios from "../../config/axios";
-// components
-//SELECT * FROM MT_CONTENTS t1 WHERE UPLOAD_DATE 
-//BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY)
-//AND CURDATE() AND t1.COD_CAT_TYPE_CONTENT = 1;
-
+import dateFormat, { masks } from "dateformat";
 const CardUltimasSeriesEn = () => {
     // configurar los hooks de estado
     const [series, guardarSeries] = useState([]);
@@ -41,6 +37,9 @@ const CardUltimasSeriesEn = () => {
             label: "Fecha",
             options: {
                 filter: true,
+                customBodyRender: (value) => {
+                    return dateFormat(value, "dd/mm/yyyy")
+                }
             },
         },
     ];
@@ -66,7 +65,7 @@ const CardUltimasSeriesEn = () => {
                 <div className="block w-full overflow-x-auto ">
                     {/* Projects table */}
                     <MUIDataTable
-                        title={"Ultimas Series en Inglés"}
+                        title={"Últimas Series en Inglés"}
                         data={series}
                         columns={columns}
                         options={{
@@ -74,6 +73,7 @@ const CardUltimasSeriesEn = () => {
                             responsive: "scroll",
                             selectableRows: "none",
                             elevation: 0,
+                            fixedHeader: false ,
                             rowsPerPage: 5,
                             textLabels: {
                                 body: {

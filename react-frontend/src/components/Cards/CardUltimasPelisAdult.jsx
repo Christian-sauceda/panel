@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import MUIDataTable from "mui-datatables";
 import ClienteAxios from "../../config/axios";
+import dateFormat, { masks } from "dateformat";
 // components
 
 
@@ -39,6 +40,9 @@ const CardUltimasSeriesEs = () => {
             label: "Fecha",
             options: {
                 filter: true,
+                customBodyRender: (value) => {
+                    return dateFormat(value, "dd/mm/yyyy")
+                }
             },
         },
     ];
@@ -64,7 +68,7 @@ const CardUltimasSeriesEs = () => {
                 <div className="block w-full overflow-x-auto">
                     {/* Projects table */}
                     <MUIDataTable
-                        title={"Ultimas Películas para Adultos"}
+                        title={"Últimas Películas para Adultos"}
                         data={series}
                         columns={columns}
                         options={{
@@ -72,6 +76,7 @@ const CardUltimasSeriesEs = () => {
                             responsive: "scroll",
                             selectableRows: "none",
                             elevation: 0,
+                            fixedHeader: false ,
                             rowsPerPage: 5,
                             textLabels: {
                                 body: {

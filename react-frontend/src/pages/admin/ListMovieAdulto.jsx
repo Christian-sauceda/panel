@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
 import styled, { keyframes } from 'styled-components';
-import dateFormat from 'dateformat';
-import DataTable, { createTheme } from 'react-data-table-component'
-
+import MUIDataTable from "mui-datatables";
 // components
+import clienteAxios from "../../config/axios";
+
 import BannerListMovieAD from '../../partials/dashboard/BannerListMovieAD';
 
-const AddCapSerieEs = () => {
+const AddCapSerieAdult = () => {
 
     const rotate360 = keyframes`
     from {
@@ -34,10 +34,7 @@ const AddCapSerieEs = () => {
   `;
 
     const CustomLoader = () => (
-        <div 
-        style={{ padding: '24px' }}
-        className="d-flex justify-content-center align-items-center"
-        >
+        <div style={{ padding: '24px' }}>
             <Spinner />
             <div>Buscando las Películas...</div>
         </div>
@@ -47,19 +44,23 @@ const AddCapSerieEs = () => {
     const [peliculas, setPeliculas] = useState([]);
     const [pending, setPending] = useState(true);
     // 2 funcion para mostrar los datos con fetch
-    const URL = `${import.meta.env.VITE_LISTMOVIEAD_API}`
-
     const consultarApi = async () => {
-        const token = localStorage.getItem("token")
-        const config = {
-            headers: {
-                "content-type": "application/json",
-                Authorization: `Bearer ${token}`
+        try {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
             }
+            const resultado = await clienteAxios.get("/mtmovie/adult", config).then((response) => {
+                const data = response.data
+                setPeliculas(data)
+                console.log(data)
+            })
+        } catch (error) {
+            console.log(error);
         }
-        const response = await fetch(URL, config)
-        const data = await response.json()
-        setPeliculas(data)
     }
 
     useEffect(() => {
@@ -72,29 +73,68 @@ const AddCapSerieEs = () => {
     // 3 comfigutamos las columnas para el data table
     const columns = [
         {
-            name: 'TITULO',
-            selector: row => row.TITLE,
+            name: "COD_CONTENT",
+            label: "Codigo",
+            options: {
+                filter: false,
+                sort: true,
+                display: false
+            }
         },
         {
-            name: 'TIPO',
-            selector: row => row.CONTENIDO,
+            name: 'TITLE',
+            label: 'Titulo',
+            options: {
+                filter: true,
+            },
+        },
+        {
+            name: 'CONTENIDO',
+            label: 'Contenido',
+            options: {
+                filter: true,
+            },
         },
         {
             name: 'CALIDAD',
-            selector: row => row.CALIDAD,
+            label: 'Calidad',
+            options: {
+                filter: true,
+            },
         },
         {
-            name: 'FECHA SUBIDA',
-            selector: row => dateFormat(row.UPLOAD_DATE, "dddd, mmmm dS, yyyy"),
+            name: 'UPLOAD_DATE',
+            label: 'Fecha',
+            options: {
+                filter: true,
+            },
         },
         {
-            name: 'ACCIONES',
-            cell: row => (
-                <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="bg-green-500 text-white hover:bg-green-700 text-lg p-1">Editar</button>
-                    <button type="button" className="bg-red-500 text-white hover:bg-red-700 text-lg p-1 mx-1">Eliminar</button>
-                </div>
-            ),
+            name: 'Acciones',
+            label: 'Acciones',
+            options: {
+                filter: true,
+
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <>
+                            <button className="bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
+                                window.location.href = `/admin/movie/adult/edit/${tableMeta.rowData[0]}`
+                            }}>
+                                <i className="fas fa-edit">EDITAR</i>
+                            </button>
+
+                            <button className="bg-red-600 font-bold  p-2 text-white" onClick={() => {
+                                window.location.href = `/admin/movie/adult/deleted/${tableMeta.rowData[0]}`
+                            }}>
+                                <i className="fas fa-edit">ELIMINAR</i>
+                            </button>
+
+                        </>
+                    )
+                }
+            },
+
         },
     ]
 
@@ -105,18 +145,56 @@ const AddCapSerieEs = () => {
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                     <BannerListMovieAD />
-                    <DataTable
-                        columns={columns}
-                        noDataComponent={<CustomLoader />}
+
+                    <MUIDataTable
                         data={peliculas}
-                        progressPending={pending}
-                        pagination={true}
+                        columns={columns}
+                        
+                        options={{
+                            responsive: "scroll",
+                            selectableRows: "none",
+                            fixedHeader: false ,
+                            elevation: 10,
+                            textLabels: {
+                                body: {
+                                    noMatch: "No hay datos para mostrar",
+                                    toolTip: "Ordenar",
+                                },
+                                pagination: {
+                                    next: "Siguiente",
+                                    previous: "Anterior",
+                                    rowsPerPage: "Filas por página:",
+                                    displayRows: "de",
+                                },
+                                toolbar: {
+                                    search: "Buscar",
+                                    downloadCsv: "Descargar CSV",
+                                    print: "Imprimir",
+                                    viewColumns: "Ver Columnas",
+                                    filterTable: "Filtrar Tabla",
+                                },
+                                filter: {
+                                    all: "Todos",
+                                    title: "FILTROS",
+                                    reset: "RESETEAR",
+                                },
+                                viewColumns: {
+                                    title: "Mostrar Columnas",
+                                    titleAria: "Mostrar/Ocultar Columnas",
+                                },
+                                selectedRows: {
+                                    text: "fila(s) seleccionada(s)",
+                                    delete: "Eliminar",
+                                    deleteAria: "Eliminar fila seleccionada",
+                                },
+                            },
+                        }}
                     />
                 </div>
             </main>
         </>
     );
 }
-export default AddCapSerieEs;
+export default AddCapSerieAdult;
 
 

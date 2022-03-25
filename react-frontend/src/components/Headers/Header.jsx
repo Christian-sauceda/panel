@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import SearchModal from '../../partials/header/SearchModal';
-import Notifications from '../../partials/header/Notifications';
-import Help from '../../partials/header/Help';
 import UserMenu from '../../partials/header/UserMenu';
 
 function Header({
@@ -9,7 +6,6 @@ function Header({
   setSidebarOpen
 }) {
 
-  const [searchModalOpen, setSearchModalOpen] = useState(false)
 
   return (
     <header className="sticky top-0 bg-white border-b border-slate-200 z-30">

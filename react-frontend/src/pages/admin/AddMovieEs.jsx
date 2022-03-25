@@ -467,7 +467,7 @@ export default function AddMovieEs() {
                                                 </div>
                                                 <div className="grid place-items-center pt-6 pb-6">
                                                     <ReactPlayer
-                                                        playing={true}
+                                                        playing={false}
                                                         url={`${URL}`}
                                                         controls={true}
                                                         width="95%"

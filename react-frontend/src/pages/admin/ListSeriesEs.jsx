@@ -1,19 +1,13 @@
 import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
-import useAuth from '../../hooks/useAuth';
 import styled, { keyframes } from 'styled-components';
-import dateFormat from 'dateformat';
-
-import DataTable, { createTheme } from 'react-data-table-component'
-
+import MUIDataTable from "mui-datatables";
 // components
 import clienteAxios from "../../config/axios";
 
-import BannerListSerieEs from '../../partials/dashboard/BannerListSerieEs';
+import BannerListSerieES from '../../partials/dashboard/BannerListSerieES';
 
-const AddCapSerieEs = () => {
-    const { auth } = useAuth()
-    const [alerta, setAlerta] = useState({});
+const AddCapSerieAdult = () => {
 
     const rotate360 = keyframes`
     from {
@@ -24,8 +18,8 @@ const AddCapSerieEs = () => {
       transform: rotate(360deg);
     }
   `;
-  
-  const Spinner = styled.div`
+
+    const Spinner = styled.div`
       margin: 16px;
       animation: ${rotate360} 1s linear infinite;
       transform: translateZ(0);
@@ -45,58 +39,102 @@ const AddCapSerieEs = () => {
             <div>Buscando las Películas...</div>
         </div>
     );
-    
+
     // 1 configurar el hooks
     const [peliculas, setPeliculas] = useState([]);
     const [pending, setPending] = useState(true);
     // 2 funcion para mostrar los datos con fetch
-    const URL = `${import.meta.env.VITE_LISTSERIEES_API}`
-
     const consultarApi = async () => {
-        const token = localStorage.getItem("token")
-        const config = {
-            headers: {
-                "content-type": "application/json",
-                Authorization: `Bearer ${token}`
+        try {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
             }
+            const resultado = await clienteAxios.get("/mttvshows/es", config).then((response) => {
+                const data = response.data
+                setPeliculas(data)
+                console.log(data)
+            })
+        } catch (error) {
+            console.log(error);
         }
-        const response = await fetch(URL, config)
-        const data = await response.json()
-        setPeliculas(data)
     }
+
     useEffect(() => {
-        const timeout = setTimeout(() =>{
+        const timeout = setTimeout(() => {
             consultarApi()
-        setPending(false)
-    })
-            return() => clearTimeout(timeout)
+            setPending(false)
+        })
+        return () => clearTimeout(timeout)
     }, [])
     // 3 comfigutamos las columnas para el data table
     const columns = [
         {
-            name: 'TITULO',
-            selector: row => row.TITLE,
+            name: "COD_CONTENT",
+            label: "Codigo",
+            options: {
+                filter: false,
+                sort: true,
+                display: false
+            }
         },
         {
-            name: 'TIPO',
-            selector: row => row.CONTENIDO,
+            name: 'TITLE_LATIN',
+            label: 'Titulo en Español',
+            options: {
+                filter: true,
+            },
         },
         {
-            name: 'ClASIFICACION',
-            selector: row => row.CLASIFICATION,
+            name: 'TITLE',
+            label: 'Titulo Original',
+            options: {
+                filter: true,
+            },
         },
         {
-            name: 'FECHA SUBIDA',
-            selector: row => dateFormat(row.UPLOAD_DATE, "dddd, mmmm dS, yyyy"),
+            name: 'CONTENIDO',
+            label: 'Contenido',
+            options: {
+                filter: true,
+            },
         },
         {
-            name: 'ACCIONES',
-            cell: row => (
-                <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="bg-green-500 text-white hover:bg-green-700 text-lg p-1">Editar</button>
-                    <button type="button" className="bg-red-500 text-white hover:bg-red-700 text-lg p-1 mx-1">Eliminar</button>
-                </div>
-            ),
+            name: 'CLASIFICATION',
+            label: 'Clasificacion',
+            options: {
+                filter: true,
+            },
+        },
+        {
+            name: 'Acciones',
+            label: 'Acciones',
+            options: {
+                filter: true,
+
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <>
+                            <button className="bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
+                                window.location.href = `/admin/tvshows/es/edit/${tableMeta.rowData[0]}`
+                            }}>
+                                <i className="fas fa-edit">EDITAR</i>
+                            </button>
+
+                            <button className="bg-red-600 font-bold  p-2 text-white" onClick={() => {
+                                window.location.href = `/admin/movie/tvshows/es/deleted/${tableMeta.rowData[0]}`
+                            }}>
+                                <i className="fas fa-edit">ELIMINAR</i>
+                            </button>
+
+                        </>
+                    )
+                }
+            },
+
         },
     ]
 
@@ -106,19 +144,57 @@ const AddCapSerieEs = () => {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <BannerListSerieEs />
-                    <DataTable
-                        columns={columns}
+                    <BannerListSerieES />
+
+                    <MUIDataTable
                         data={peliculas}
-                        progressPending={pending}
-                        noDataComponent={<CustomLoader />}
-                        pagination={true}
+                        columns={columns}
+                        
+                        options={{
+                            responsive: "scroll",
+                            selectableRows: "none",
+                            fixedHeader: false ,
+                            elevation: 10,
+                            textLabels: {
+                                body: {
+                                    noMatch: "No hay datos para mostrar",
+                                    toolTip: "Ordenar",
+                                },
+                                pagination: {
+                                    next: "Siguiente",
+                                    previous: "Anterior",
+                                    rowsPerPage: "Filas por página:",
+                                    displayRows: "de",
+                                },
+                                toolbar: {
+                                    search: "Buscar",
+                                    downloadCsv: "Descargar CSV",
+                                    print: "Imprimir",
+                                    viewColumns: "Ver Columnas",
+                                    filterTable: "Filtrar Tabla",
+                                },
+                                filter: {
+                                    all: "Todos",
+                                    title: "FILTROS",
+                                    reset: "RESETEAR",
+                                },
+                                viewColumns: {
+                                    title: "Mostrar Columnas",
+                                    titleAria: "Mostrar/Ocultar Columnas",
+                                },
+                                selectedRows: {
+                                    text: "fila(s) seleccionada(s)",
+                                    delete: "Eliminar",
+                                    deleteAria: "Eliminar fila seleccionada",
+                                },
+                            },
+                        }}
                     />
                 </div>
             </main>
         </>
     );
 }
-export default AddCapSerieEs;
+export default AddCapSerieAdult;
 
 

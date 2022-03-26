@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
+import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
@@ -259,6 +260,15 @@ export default function AddSerieEs() {
                                                             onChange={(e) => setPOSTER(e.target.value)}
                                                         />
                                                     </div>
+                                                </div>
+                                                <div className="grid place-items-center pt-6 pb-6">
+                                                    <ReactPlayer
+                                                        playing={false}
+                                                        url={`${URL}`}
+                                                        controls={true}
+                                                        width="95%"
+                                                        height="95%"
+                                                    />
                                                 </div>
                                             </div>
                                         </div>

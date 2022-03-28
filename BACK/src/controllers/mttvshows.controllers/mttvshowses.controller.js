@@ -12,6 +12,16 @@ export const gettvshowses = async (req, res) => {
     });
 }
 
+export const getselecttvshowses = async (req, res) => {
+    mysqlconnection.query("CALL PROC_SELECT_TVSHOW_ES()", (err, rows, fields) => {
+        if (!err) {
+            res.status(200).json(rows[0]);
+        } else {
+            console.log(err);
+        }
+    });
+}
+
 export const gettvshowseslastday = async (req, res) => {
     mysqlconnection.query("CALL PROC_SEL_SERIESESLASTDAY()", (err, rows, fields) => {
         if (!err) {

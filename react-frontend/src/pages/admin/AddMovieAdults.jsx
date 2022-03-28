@@ -1,17 +1,50 @@
 
 import BanneMovieAdult from '../../partials/dashboard/BannerMovieAdult';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../../components/Cards/Card.css";
 import useAuth from '../../hooks/useAuth';
-import useCalidades from "../../hooks/useCalidades";
-import useAudios from "../../hooks/useAudios";
-import useFormatos from "../../hooks/useFormatos";
 import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
 
 export default function AddMovieAdult() {
+
+    const [selectcalidad, setSelectcalidad] = useState([]);
+    const [selectaudio, setSelectaudio] = useState([]);
+    const [selectformato, setSelectformato] = useState([]);
+
+    const mostrarDatos = async () => {
+        try {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const resultadosc = await clienteAxios.get("/catquality", config).then((response) => {
+                const sc = response.data;
+                setSelectcalidad(sc)
+            })
+
+            const resultadosf = await clienteAxios.get("/catformatvideo", config).then((response) => {
+                const sf = response.data;
+                setSelectformato(sf)
+            })
+
+            const resultadosa = await clienteAxios.get("/cataudio", config).then((response) => {
+                const sa = response.data;
+                setSelectaudio(sa)
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        mostrarDatos();
+    }, [])
 
     const { auth } = useAuth()
     const [CODAUDIO, setCODAUDIO] = useState("");
@@ -75,9 +108,6 @@ export default function AddMovieAdult() {
         }
 
     }
-    const { calidades } = useCalidades();
-    const { audios } = useAudios();
-    const { formatos } = useFormatos();
     const { msg } = alerta;
     return (
         <>
@@ -215,7 +245,7 @@ export default function AddMovieAdult() {
                                                             onChange={(e) => setCODQUALITY(e.target.value)}
                                                         >
                                                             <option value="">Seleccione</option>
-                                                            {calidades.map((item) => (
+                                                            {selectcalidad.map((item) => (
                                                                 <option key={item.COD_CALIDAD} value={item.COD_CALIDAD}>{item.CALIDAD}</option>
                                                             ))}
                                                         </select>
@@ -238,7 +268,7 @@ export default function AddMovieAdult() {
                                                             onChange={(e) => setCODAUDIO(e.target.value)}
                                                         >
                                                             <option value="">Seleccione</option>
-                                                            {audios.map((item) => (
+                                                            {selectaudio.map((item) => (
                                                                 <option key={item.COD_AUDIO} value={item.COD_AUDIO}>{item.AUDIO}</option>
                                                             ))}
                                                         </select>
@@ -261,7 +291,7 @@ export default function AddMovieAdult() {
                                                             onChange={(e) => setCODFORMATVIDEO(e.target.value)}
                                                         >
                                                             <option value="">Seleccione</option>
-                                                            {formatos.map((item) => (
+                                                            {selectformato.map((item) => (
                                                                 <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO===1 }>{item.FORMATO}</option>
                                                             ))}
                                                         </select>

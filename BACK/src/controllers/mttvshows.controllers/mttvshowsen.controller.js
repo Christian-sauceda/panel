@@ -74,7 +74,8 @@ export const createtvshowsen = (req, res) => {
         CALIF,
         DIRECTOR,
         CAST,
-        SYNOPSIS
+        SYNOPSIS,
+        COD_CONTENIDO
     } = req.body;
 
     const urlimgback = req.body.BACK
@@ -97,9 +98,9 @@ export const createtvshowsen = (req, res) => {
         console.log('done');
     });
 
-    const query = 'CALL PROC_INS_TVSHOW_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const query = 'CALL PROC_INS_TVSHOW_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
     mysqlconnection.query(query, [CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, urlback,
-        urlposter, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS
+        urlposter, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS, COD_CONTENIDO
         ],
         (err, rows, fields) => {
             if (!err) {

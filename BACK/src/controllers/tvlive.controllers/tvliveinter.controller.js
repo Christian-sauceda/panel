@@ -53,11 +53,12 @@ export const createtvliveinter = (req, res) => {
         EPG_NEXT,
         STATTUS,
         ORDER_LIVE_TV,
-        ICON
+        ICON,
+        COD_CONTENIDO
     } = req.body;
-    const query = 'CALL PROC_INS_LIVETV_INTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const query = 'CALL PROC_INS_LIVETV_INTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
     mysqlconnection.query(query, [COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG,
-        COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON
+        COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD_CONTENIDO
         ],
         (err, rows, fields) => {
             if (!err) {

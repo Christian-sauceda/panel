@@ -46,6 +46,7 @@ export default function AddMovieEs() {
     }, [])
 
     const { auth } = useAuth()
+    const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_MOVIES_ES}`);
     const [CODAUDIO, setCODAUDIO] = useState("");
     const [CODQUALITY, setCODQUALITY] = useState("");
     const [CODCATEGORY, setCODCATEGORY] = useState("");
@@ -70,7 +71,7 @@ export default function AddMovieEs() {
     const handleSubmit = async e => {
         e.preventDefault()
         //validad formulario
-        if ([CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS].includes('')) {
+        if ([CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO].includes('')) {
             setAlerta({
                 msg: "Todos los campos son obligatorios",
                 error: true
@@ -87,7 +88,7 @@ export default function AddMovieEs() {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const datos = { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS }
+            const datos = { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO }
             await clienteAxios.post(`/mtmovie/es`, datos, config)
             setAlerta({
                 msg: 'Película en Español Agregada Correctamente',

@@ -36,6 +36,7 @@ export default function AddSerieEs() {
 
 
     const { auth } = useAuth()
+    const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_LIVE_EN}`);
     const [COD_EPG_CHANNEL, setCOD_EPG_CHANNEL] = useState("");
     const [COD_CATEGORY, setCODCATEGORY] = useState("");
     const [COD_SERVER, setCOD_SERVER] = useState("");
@@ -58,7 +59,7 @@ export default function AddSerieEs() {
     const handleSubmit = async e => {
         e.preventDefault();
         if ([COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG,
-            TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON].includes('')) {
+            TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD_CONTENIDO].includes('')) {
             setAlerta({
                 msg: "Todos los campos son obligatorios",
                 error: true
@@ -76,7 +77,7 @@ export default function AddSerieEs() {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const datos = { COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON }
+            const datos = { COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD_CONTENIDO }
             await clienteAxios.post(`/tvlive/en`, datos, config)
             setAlerta({
                 msg: 'Tv en Inglés Agregada Correctamente',

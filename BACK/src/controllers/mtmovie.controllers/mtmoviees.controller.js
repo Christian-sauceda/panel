@@ -67,7 +67,8 @@ export const createmoviees = (req, res) => {
         ASKPIN,
         CODFORMATVIDEO,
         URL,
-        SYNOPSIS
+        SYNOPSIS,
+        COD_CONTENIDO
     } = req.body;
     const urlimgback = req.body.BACK
     const nameimgback = req.body.TITLE + 'back.jpg';
@@ -89,9 +90,9 @@ export const createmoviees = (req, res) => {
         console.log('done');
     });
 
-    const query = `CALL PROC_INS_MOVIE_ES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+    const query = `CALL PROC_INS_MOVIE_ES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
     mysqlconnection.query(query, [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, urlback, urlposter,
-        YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS
+        YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO
     ],
         (err, rows, fields) => {
             if (!err) {

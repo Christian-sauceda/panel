@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
 import ReactPlayer from 'react-player'
@@ -8,7 +8,30 @@ import clienteAxios from "../../config/axios";
 import BannerEvent from '../../partials/dashboard/BannerEvent';
 
 export default function AddSerieEs() {
+    const [selectcategoria, setSelectcategoria] = useState([]);
 
+    const mostrarDatos = async () => {
+        try {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+            const resultados = await clienteAxios.get("/mttvshows/en/seltvshow/en", config).then((response) => {
+                const s = response.data;
+                setSelectcategoria(s)
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        mostrarDatos();
+    }, [])
     const { auth } = useAuth()
     const [COD_CATEGORY, setCODCATEGORY] = useState("");
     const [COD_USER, setCOD_USER] = useState(`${auth.COD}`);
@@ -83,7 +106,7 @@ export default function AddSerieEs() {
                                                             for="title"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Nombre del Canal:
+                                                            Nombre del Evento:
                                                         </label>
                                                         <input
                                                             type="text"
@@ -103,7 +126,7 @@ export default function AddSerieEs() {
                                                             for="link"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Enlace del Canal:
+                                                            Enlace del Video:
                                                         </label>
                                                         <input
                                                             type="text"

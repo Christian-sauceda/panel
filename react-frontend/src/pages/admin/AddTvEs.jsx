@@ -35,6 +35,7 @@ export default function AddSerieEs() {
     }, [])
 
     const { auth } = useAuth()
+    const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_LIVE_ES}`);
     const [duracion, setDuracion] = useState('');
     const [COD_EPG_CHANNEL, setCOD_EPG_CHANNEL] = useState("");
     const [COD_CATEGORY, setCODCATEGORY] = useState("");
@@ -58,7 +59,7 @@ export default function AddSerieEs() {
     const handleSubmit = async e => {
         e.preventDefault();
         if ([COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG,
-            TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON].includes('')) {
+            TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD_CONTENIDO].includes('')) {
             setAlerta({
                 msg: "Todos los campos son obligatorios",
                 error: true
@@ -76,7 +77,7 @@ export default function AddSerieEs() {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const datos = { COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON }
+            const datos = { COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD_CONTENIDO }
             await clienteAxios.post(`/tvlive/es`, datos, config)
             setAlerta({
                 msg: 'Tv en Español Agregada Correctamente',
@@ -285,7 +286,6 @@ export default function AddSerieEs() {
                                                         controls={true}
                                                         width="95%"
                                                         height="95%"
-                                                        onDuration={(e) => setDURATION(e)}
                                                     />
                                                 </div>
                                             </div>

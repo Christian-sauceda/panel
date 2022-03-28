@@ -47,6 +47,7 @@ export default function AddMovieAdult() {
     }, [])
 
     const { auth } = useAuth()
+    const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_MOVIES_AD}`);
     const [CODAUDIO, setCODAUDIO] = useState("");
     const [CODQUALITY, setCODQUALITY] = useState("");
     const [CODCATEGORY, setCODCATEGORY] = useState("");
@@ -65,7 +66,7 @@ export default function AddMovieAdult() {
     const handleSubmit = async e => {
         e.preventDefault();
         //validar formulario
-        if ([ CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, POSTER, YEAR, DURATION, CODFORMATVIDEO, URL, SYNOPSIS ].includes("")) {
+        if ([ CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, POSTER, YEAR, DURATION, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO ].includes("")) {
             setAlerta({
                 msg: "Todos los campos son obligatorios",
                 error: true
@@ -82,7 +83,7 @@ export default function AddMovieAdult() {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const datos = { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, DURATION, CODFORMATVIDEO, URL, SYNOPSIS }
+            const datos = { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, DURATION, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO }
             await clienteAxios.post(`/mtmovie/adult`, datos, config)
             setAlerta({
                 msg: "Película Adulto Agregada Correctamente",

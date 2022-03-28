@@ -9,6 +9,7 @@ import BanneMovieEs from '../../partials/dashboard/BannerSeriesEs';
 export default function AddSerieEs() {
 
     const { auth } = useAuth()
+    const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_SERIES_ES}`);
     const [CODAUDIO, setCODAUDIO] = useState("1");
     const [CODCATEGORY, setCODCATEGORY] = useState("1");
     const [CODUSER, setCODUSER] = useState(`${auth.COD}`);
@@ -28,7 +29,7 @@ export default function AddSerieEs() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        if ([CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS].includes('')) {
+        if ([CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS, COD_CONTENIDO].includes('')) {
             setAlerta({
                 msg: "Todos los campos son obligatorios",
                 error: true
@@ -46,7 +47,7 @@ export default function AddSerieEs() {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const datos = { CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS }
+            const datos = { CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS, COD_CONTENIDO }
             await clienteAxios.post(`/mttvshows/es`, datos, config)
             setAlerta({
                 msg: 'Serie Agregada Correctamente',

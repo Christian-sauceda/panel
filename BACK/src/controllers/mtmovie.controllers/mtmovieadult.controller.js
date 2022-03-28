@@ -62,7 +62,8 @@ export const createmovieadult = (req, res) => {
         DURATION,
         CODFORMATVIDEO,
         URL,
-        SYNOPSIS
+        SYNOPSIS,
+        COD_CONTENIDO
     } = req.body;
 
     const urlimgback = req.body.BACK
@@ -85,9 +86,9 @@ export const createmovieadult = (req, res) => {
         console.log('done');
     });
 
-    const query = `CALL PROC_INS_MOVIE_ADULT(?,?,?,?,?,?,?,?,?,?,?,?)`;
+    const query = `CALL PROC_INS_MOVIE_ADULT(?,?,?,?,?,?,?,?,?,?,?,?,?)`;
     mysqlconnection.query(query, [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, urlback, urlposter, YEAR, DURATION,
-            CODFORMATVIDEO, URL, SYNOPSIS
+            CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO
         ],
         (err, rows, fields) => {
             if (!err) {

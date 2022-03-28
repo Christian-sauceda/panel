@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
-import useFormatos from "../../hooks/useFormatos";
 import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
@@ -9,6 +8,38 @@ import clienteAxios from "../../config/axios";
 import BannerSerieCapEn from '../../partials/dashboard/BannerSerieCapEn';
 
 export default function AddCapSerieEs() {
+    const [selectformato, setSelectformato] = useState([]);
+    const [selectSerieen, setSelectSerieen] = useState([]);
+
+    const mostrarDatos = async () => {
+        try {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+            const resultadosf = await clienteAxios.get("/catformatvideo", config).then((response) => {
+                const sf = response.data;
+                setSelectformato(sf)
+            })
+
+            const resultados = await clienteAxios.get("/mttvshows/en/seltvshow/en", config).then((response) => {
+                const s = response.data;
+                setSelectSerieen(s)
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        mostrarDatos();
+    }, [])
+
+
     const { auth } = useAuth()
     const [COD_CONTENT, setCOD_CONTENT] = useState("");
     const [COD_FORMAT_VIDEO, setCOD_FORMAT_VIDEO] = useState("");
@@ -66,7 +97,6 @@ export default function AddCapSerieEs() {
         }
     }
     const { msg } = alerta;
-    const { formatos } = useFormatos();
     return (
         <>
             <main>
@@ -97,15 +127,9 @@ export default function AddCapSerieEs() {
                                                             onChange={(e) => setCOD_CONTENT(e.target.value)}
                                                         >
                                                             <option value="">Seleccione una Serie</option>
-                                                            <option value="1">Dark</option>
-                                                            <option value="2">La Casa de Papel</option>
-                                                            <option value="3">The Walking Dead</option>
-                                                            <option value="4">The Sopranos</option>
-                                                            <option value="5">The Vampire Did</option>
-                                                            <option value="6">Breaking Bad</option>
-                                                            <option value="7">The Big Bang Theory</option>
-                                                            <option value="8">The Simpsons</option>
-                                                            <option value="9">The Office</option>
+                                                            {selectSerieen.map((s) => (
+                                                                <option key={s.COD_CONTENT} value={s.COD_CONTENT}>{s.TITLE_LATIN}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -249,7 +273,7 @@ export default function AddCapSerieEs() {
                                                             onChange={(e) => setCOD_FORMAT_VIDEO(e.target.value)}
                                                         >
                                                             <option value="">Seleccione Formato</option>
-                                                            {formatos.map((item) => (
+                                                            {selectformato.map((item) => (
                                                                 <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO===1 }>{item.FORMATO}</option>
                                                             ))}
                                                         </select>

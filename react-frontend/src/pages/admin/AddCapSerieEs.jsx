@@ -101,7 +101,7 @@ export default function AddCapSerieEs() {
     const { msg } = alerta;
 
     //funcion imprima json numero del 1 al 30
-    const numeros = [...Array(30).keys()];
+    const numeros = [...Array(31).keys()];
 
     return (
         <>

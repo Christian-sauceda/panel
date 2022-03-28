@@ -334,7 +334,7 @@ export default function AddCapSerieEs() {
                                                 </div>
                                                 <div className="grid place-items-center pt-6 pb-6">
                                                     <ReactPlayer
-                                                        playing={false}
+                                                        playing={true}
                                                         url={`${URL}`}
                                                         controls={true}
                                                         width="95%"

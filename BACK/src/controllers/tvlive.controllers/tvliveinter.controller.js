@@ -11,6 +11,15 @@ export const gettvliveinter = (req, res) => {
     });
 }
 
+export const getselecttvliveinter = (req, res) => {
+    mysqlconnection.query("CALL PROC_SELECT_CAT_CATEGORY_TVINTER()", (err, rows, fields) => {
+        if (!err) {
+            res.status(200).json(rows[0]);
+        } else {
+            console.log(err);
+        }
+    });
+}
 // GET CATALOG OF TV LIVE INTERNACIONAL BY ID
 export const gettvliveinterById = (req, res) => {
     const {

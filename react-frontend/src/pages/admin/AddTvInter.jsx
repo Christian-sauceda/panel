@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
 import ReactPlayer from 'react-player'
@@ -8,6 +8,31 @@ import clienteAxios from "../../config/axios";
 import BannerTvInter from '../../partials/dashboard/BannerTvInter';
 
 export default function AddSerieEs() {
+    const [selecttvinter, setSelecttvinter] = useState([]);
+
+    const mostrarDatos = async () => {
+        try {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+
+            const resultados = await clienteAxios.get("/tvlive/inter/selecttvinter", config).then((response) => {
+                const tves = response.data;
+                setSelecttvinter(tves)
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        mostrarDatos();
+    }, [])
 
     const { auth } = useAuth()
     const [COD_EPG_CHANNEL, setCOD_EPG_CHANNEL] = useState("");
@@ -147,14 +172,9 @@ export default function AddSerieEs() {
                                                             onChange={e => setCODCATEGORY(e.target.value)}
                                                         >
                                                             <option value="">Selecciona una Categoria</option>
-                                                            <option value="1">Uruguay</option>
-                                                            <option value="2">Argentina</option>
-                                                            <option value="3">Brasil</option>
-                                                            <option value="4">Chile</option>
-                                                            <option value="5">Colombia</option>
-                                                            <option value="6">Ecuador</option>
-                                                            <option value="7">Paraguay</option>
-                                                            <option value="8">Peru</option>
+                                                            {selecttvinter.map((tves) => (
+                                                                <option key={tves.COD_CATEGORIA} value={tves.COD_CATEGORIA}>{tves.CATEGORIA}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -265,7 +285,7 @@ export default function AddSerieEs() {
                                                 </div>
                                                 <div className="grid place-items-center pt-6 pb-6">
                                                     <ReactPlayer
-                                                        playing={false}
+                                                        playing={true}
                                                         url={`${URL}`}
                                                         controls={true}
                                                         width="95%"

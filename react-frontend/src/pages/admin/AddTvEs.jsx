@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
 import ReactPlayer from 'react-player'
@@ -8,8 +8,34 @@ import clienteAxios from "../../config/axios";
 import BannerTvEs from '../../partials/dashboard/BannerTvEs';
 
 export default function AddSerieEs() {
+    const [selecttves, setSelecttves] = useState([]);
+
+    const mostrarDatos = async () => {
+        try {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+
+            const resultados = await clienteAxios.get("/tvlive/es/selecttves", config).then((response) => {
+                const tves = response.data;
+                setSelecttves(tves)
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        mostrarDatos();
+    }, [])
 
     const { auth } = useAuth()
+    const [duracion, setDuracion] = useState('');
     const [COD_EPG_CHANNEL, setCOD_EPG_CHANNEL] = useState("");
     const [COD_CATEGORY, setCODCATEGORY] = useState("");
     const [COD_SERVER, setCOD_SERVER] = useState("");
@@ -31,8 +57,8 @@ export default function AddSerieEs() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        if ([ COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG,
-            TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON ].includes('')) {
+        if ([COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG,
+            TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON].includes('')) {
             setAlerta({
                 msg: "Todos los campos son obligatorios",
                 error: true
@@ -83,14 +109,10 @@ export default function AddSerieEs() {
                             onSubmit={handleSubmit}
                         >
                             <div className="flex flex-wrap">
-
                                 <div className="w-full lg:w-8/12 px-4">
                                     <div className="relative min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
-
                                         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-
                                             <div className="flex flex-wrap pt-4">
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -147,20 +169,15 @@ export default function AddSerieEs() {
                                                             onChange={e => setCODCATEGORY(e.target.value)}
                                                         >
                                                             <option value="">Selecciona una Categoria</option>
-                                                            <option value="1">CINE 24/7</option>
-                                                            <option value="2">CANALES LOCALES</option>
-                                                            <option value="3">CINEMA</option>
-                                                            <option value="4">DOCUMENTALES</option>
-                                                            <option value="5">ENTRETENIMIENTO</option>
-                                                            <option value="6">RELIGION</option>
-                                                            <option value="7">MUSICA</option>
-                                                            <option value="8">DEPORTES</option>
+                                                            {selecttves.map((tves) => (
+                                                                <option key={tves.COD_CATEGORIA} value={tves.COD_CATEGORIA}>{tves.CATEGORIA}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="mt-4 mb-6 text-sm font-bold text-sky-600">
-                                                    Configuración de EPG:
+                                                        Configuración de EPG:
                                                     </div>
                                                     <div className="w-full lg:w-6/12 px-4">
                                                         <div className="relative w-full mb-3">
@@ -219,9 +236,7 @@ export default function AddSerieEs() {
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    </div>
-
-
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -265,11 +280,12 @@ export default function AddSerieEs() {
                                                 </div>
                                                 <div className="grid place-items-center pt-6 pb-6">
                                                     <ReactPlayer
-                                                        playing={false}
+                                                        playing={true}
                                                         url={`${URL}`}
                                                         controls={true}
                                                         width="95%"
                                                         height="95%"
+                                                        onDuration={(e) => setDURATION(e)}
                                                     />
                                                 </div>
                                             </div>

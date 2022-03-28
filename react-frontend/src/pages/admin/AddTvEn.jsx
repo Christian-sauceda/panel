@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
 import ReactPlayer from 'react-player'
@@ -8,6 +8,32 @@ import clienteAxios from "../../config/axios";
 import BannerTvEn from '../../partials/dashboard/BannerTvEn';
 
 export default function AddSerieEs() {
+    const [selecttven, setSelecttven] = useState([]);
+
+    const mostrarDatos = async () => {
+        try {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+
+            const resultados = await clienteAxios.get("/tvlive/en/selecttven", config).then((response) => {
+                const tves = response.data;
+                setSelecttven(tves)
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        mostrarDatos();
+    }, [])
+
 
     const { auth } = useAuth()
     const [COD_EPG_CHANNEL, setCOD_EPG_CHANNEL] = useState("");
@@ -147,14 +173,9 @@ export default function AddSerieEs() {
                                                             onChange={e => setCODCATEGORY(e.target.value)}
                                                         >
                                                             <option value="">Selecciona una Categoria</option>
-                                                            <option value="1">CINE 24/7</option>
-                                                            <option value="2">CANALES LOCALES</option>
-                                                            <option value="3">CINEMA</option>
-                                                            <option value="4">DOCUMENTALES</option>
-                                                            <option value="5">ENTRETENIMIENTO</option>
-                                                            <option value="6">RELIGION</option>
-                                                            <option value="7">MUSICA</option>
-                                                            <option value="8">DEPORTES</option>
+                                                            {selecttven.map((tves) => (
+                                                                <option key={tves.COD_CATEGORIA} value={tves.COD_CATEGORIA}>{tves.CATEGORIA}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -263,7 +284,7 @@ export default function AddSerieEs() {
                                                 </div>
                                                 <div className="grid place-items-center pt-6 pb-6">
                                                     <ReactPlayer
-                                                        playing={false}
+                                                        playing={true}
                                                         url={`${URL}`}
                                                         controls={true}
                                                         width="95%"

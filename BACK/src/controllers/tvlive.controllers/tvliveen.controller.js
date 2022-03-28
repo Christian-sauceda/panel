@@ -11,6 +11,16 @@ export const gettvliveen = (req, res) => {
     });
 }
 
+export const getselecttvliveen = (req, res) => {
+    mysqlconnection.query("CALL PROC_SELECT_CAT_CATEGORY_TVEN()", (err, rows, fields) => {
+        if (!err) {
+            res.status(200).json(rows[0]);
+        } else {
+            console.log(err);
+        }
+    });
+}
+
 // GET CATALOG OF TV LIVE EN BY ID
 export const gettvliveenById = (req, res) => {
     const {

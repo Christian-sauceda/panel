@@ -47,7 +47,7 @@ const ListadoPlataformas = () => {
                                 <p
                                     className="text-xl mt-5 mb-10 text-center"
                                 >
-                                    Agrega un Nuevo tipo de Contenido <apan className="text-indigo-600 font-bold"> Y Aparecerá Aquí</apan>
+                                    Agrega un Nuevo tipo de Plataforma <apan className="text-indigo-600 font-bold"> Y Aparecerá Aquí</apan>
                                 </p>
                             </>
                         )}

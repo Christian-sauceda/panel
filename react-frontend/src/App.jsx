@@ -34,6 +34,8 @@ import ListTvEs from './pages/admin/ListTvEs'
 import ListTvEn from './pages/admin/ListTvEn'
 import ListTvInter from './pages/admin/ListTvInter'
 import ListUsers from './pages/admin/ListUsers'
+import ListSeriescapEs from './pages/admin/ListSeriescapEs'
+import ListSeriescapEn from './pages/admin/ListSeriescapEn'
 
 //cat
 import ManCatAudio from './pages/admin/Mantenimientos/ManCatAudio'
@@ -80,6 +82,8 @@ function App() {
                         <Route path="series/es/add" element={<AddSerieEs />} />
                         <Route path="series/es/addcap" element={<AddCapSerieEs />} />
                         <Route path="tvshow/en/addcap" element={<AddCapSerieEn />} />
+                        <Route path="tvshows/es/capitulos/:COD" element={<ListSeriescapEs />} />
+                        <Route path="tvshows/en/capitulos/:COD" element={<ListSeriescapEn />} />
                         <Route path="tvshow/en/add" element={<AddSerieEn />} />
                         <Route path="user/registrar" element={<Registrar />} />
                         <Route path="cat/audio" element={<ManCatAudio />} />

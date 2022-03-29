@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import "./../../components/Cards/card.css";
 import styled, { keyframes } from 'styled-components';
 import MUIDataTable from "mui-datatables";
+import dateFormat, { masks } from "dateformat";
 // components
 import clienteAxios from "../../config/axios";
 
-import BannerListSerieEN from '../../partials/dashboard/BannerListSerieEN';
-
 const AddCapSerieAdult = () => {
-
     const rotate360 = keyframes`
     from {
       transform: rotate(0deg);
@@ -18,7 +17,6 @@ const AddCapSerieAdult = () => {
       transform: rotate(360deg);
     }
   `;
-
     const Spinner = styled.div`
       margin: 16px;
       animation: ${rotate360} 1s linear infinite;
@@ -32,16 +30,16 @@ const AddCapSerieAdult = () => {
       height: 80px;
       border-radius: 50%;
   `;
-
     const CustomLoader = () => (
         <div style={{ padding: '24px' }}>
             <Spinner />
             <div>Buscando las Películas...</div>
         </div>
     );
-
+        //extraer parámetros de la ruta
+        const { COD } = useParams();
     // 1 configurar el hooks
-    const [peliculas, setPeliculas] = useState([]);
+    const [peliculas, setPeliculas] = useState([0]);
     const [pending, setPending] = useState(true);
     // 2 funcion para mostrar los datos con fetch
     const consultarApi = async () => {
@@ -53,15 +51,16 @@ const AddCapSerieAdult = () => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const resultado = await clienteAxios.get("/mttvshows/en", config).then((response) => {
+            const resultado = await clienteAxios.get(`/mttvshowschapter/tvshow/${COD}`, config).then((response) => {
                 const data = response.data
                 setPeliculas(data)
-                console.log(data)
             })
+
         } catch (error) {
             console.log(error);
         }
     }
+
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -73,7 +72,7 @@ const AddCapSerieAdult = () => {
     // 3 comfigutamos las columnas para el data table
     const columns = [
         {
-            name: "COD_CONTENT",
+            name: "COD_CHAPTERS_SERIES",
             label: "Codigo",
             options: {
                 filter: false,
@@ -82,31 +81,34 @@ const AddCapSerieAdult = () => {
             }
         },
         {
-            name: 'TITLE',
-            label: 'Titulo Original',
+            name: 'NAME_CHAPTERS',
+            label: 'Nombre Capitulo',
             options: {
                 filter: true,
             },
         },
         {
-            name: 'TITLE_LATIN',
-            label: 'Titulo en Español',
+            name: 'CHAPTER_NUMBER',
+            label: 'Numero Capitulo',
             options: {
                 filter: true,
             },
         },
         {
-            name: 'CONTENIDO',
-            label: 'Contenido',
+            name: 'SEASON_NUMBER',
+            label: 'Numero Temporada',
             options: {
                 filter: true,
             },
         },
         {
-            name: 'CLASIFICATION',
-            label: 'Clasificacion',
+            name: 'DATE_ADD',
+            label: 'Fecha',
             options: {
                 filter: true,
+                customBodyRender: (value) => {
+                    return dateFormat(value, "dd/mm/yyyy")
+                }
             },
         },
         {
@@ -119,15 +121,15 @@ const AddCapSerieAdult = () => {
                     return (
                         <>
                             <button className="bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
-                                window.location.href = `/admin/tvshows/es/edit/${tableMeta.rowData[0]}`
+                                window.location.href = `/admin/tvshows/es/capedit/${tableMeta.rowData[0]}`
                             }}>
                                 <i className="fas fa-edit">EDITAR</i>
                             </button>
 
-                            <button className="bg-indigo-500 font-bold  p-2 text-white" onClick={() => {
-                                window.location.href = `/admin/tvshows/en/capitulos/${tableMeta.rowData[0]}`
+                            <button className="bg-red-500 font-bold  p-2 text-white" onClick={() => {
+                                window.location.href = `/admin/tvshows/es/capdelete/${tableMeta.rowData[0]}`
                             }}>
-                                <i className="fas fa-edit">VER CAPITULOS</i>
+                                <i className="fas fa-edit">ELIMINAR</i>
                             </button>
 
                         </>
@@ -144,9 +146,8 @@ const AddCapSerieAdult = () => {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <BannerListSerieEN />
-
                     <MUIDataTable
+                        title={`${peliculas[0]?.TITLE  ? 'Listado de Capitulos de: ' +  peliculas[0].TITLE  + ' (Español)': 'No Hay Capítulos Agregados a Esta Serie'}`}
                         data={peliculas}
                         columns={columns}
                         

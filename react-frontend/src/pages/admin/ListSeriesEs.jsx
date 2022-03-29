@@ -124,10 +124,10 @@ const AddCapSerieAdult = () => {
                                 <i className="fas fa-edit">EDITAR</i>
                             </button>
 
-                            <button className="bg-red-600 font-bold  p-2 text-white" onClick={() => {
-                                window.location.href = `/admin/movie/tvshows/es/deleted/${tableMeta.rowData[0]}`
+                            <button className="bg-indigo-500 font-bold  p-2 text-white" onClick={() => {
+                                window.location.href = `/admin/tvshows/es/capitulos/${tableMeta.rowData[0]}`
                             }}>
-                                <i className="fas fa-edit">ELIMINAR</i>
+                                <i className="fas fa-edit">VER CAPITULOS</i>
                             </button>
 
                         </>

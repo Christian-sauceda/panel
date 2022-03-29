@@ -23,6 +23,9 @@ import AddTvEs from './pages/admin/AddTvEs'
 import AddTvEn from './pages/admin/AddTvEn'
 import AddTvInter from './pages/admin/AddTvInter'
 
+//edit
+import EditMovieEs from './pages/admin/EditMovieEs'
+
 //list
 import ListMovieEs from './pages/admin/ListMovieEs'
 import ListMovieEn from './pages/admin/ListMovieEn'
@@ -76,6 +79,7 @@ function App() {
                       <Route path="/admin" element={<AdminLayout />}>
                         <Route index element={<Inicio />} />
                         <Route path="movie/es/add" element={<AddMovieEs />} />
+                        <Route path="movie/es/edit/:COD" element={<EditMovieEs />} />
                         <Route path="movie/en/add" element={<AddMovieEn />} />
                         <Route path="movie/adult/add" element={<AddMovieAdult />} />
                         <Route path="events/add" element={<AddEvent />} />

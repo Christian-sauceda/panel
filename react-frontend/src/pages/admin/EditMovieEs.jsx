@@ -47,6 +47,8 @@ export default function AddMovieEs() {
                 setSelectaudio(sa)
             })
 
+           
+
         } catch (error) {
             console.log(error);
         }
@@ -55,14 +57,15 @@ export default function AddMovieEs() {
     useEffect(() => {
         mostrarDatos();
     }, [])
-
+    const titulo = EditMovieEs[0].TITLE;
+    console.log(titulo)
     const { auth } = useAuth()
     const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_MOVIES_ES}`);
     const [CODAUDIO, setCODAUDIO] = useState("");
     const [CODQUALITY, setCODQUALITY] = useState("");
     const [CODCATEGORY, setCODCATEGORY] = useState("");
     const [CODUSER, setCODUSER] = useState(`${auth.COD}`);
-    const [TITLE, setTITLE] = useState(`${auth.COD}`);
+    const [TITLE, setTITLE] = useState(`${titulo}`);
     const [BACK, setBACK] = useState("");
     const [POSTER, setPOSTER] = useState("");
     const [YEAR, setYEAR] = useState("");
@@ -132,8 +135,7 @@ export default function AddMovieEs() {
     }
 
     const { msg } = alerta;
-    const titulo = EditMovieEs[0].TITLE;
-    console.log(titulo)
+
     return (
         <>
             <main>

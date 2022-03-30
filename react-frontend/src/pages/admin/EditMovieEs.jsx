@@ -9,13 +9,37 @@ import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
 
 export default function AddMovieEs() {
-    //extraer parámetros de la ruta
+
+    const { auth } = useAuth()
+    const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_MOVIES_ES}`);
+    const [CODAUDIO, setCODAUDIO] = useState("");
+    const [CODQUALITY, setCODQUALITY] = useState("");
+    const [CODCATEGORY, setCODCATEGORY] = useState("");
+    const [CODUSER, setCODUSER] = useState(`${auth.COD}`);
+    const [TITLE, setTITLE] = useState("");
+    const [BACK, setBACK] = useState("");
+    const [POSTER, setPOSTER] = useState("");
+    const [YEAR, setYEAR] = useState("");
+    const [CLASIF, setCLASIF] = useState("");
+    const [DURATION, setDURATION] = useState("");
+    const [COUNTRY, setCOUNTRY] = useState("");
+    const [CALIF, setCALIF] = useState("");
+    const [DIRECTOR, setDIRECTOR] = useState("");
+    const [CAST, setCAST] = useState("");
+    const [ASKPIN, setASKPIN] = useState("");
+    const [CODFORMATVIDEO, setCODFORMATVIDEO] = useState("");
+    const [URL, setURL] = useState("");
+    const [SYNOPSIS, setSYNOPSIS] = useState("");
     const { COD } = useParams();
 
     const [selectcalidad, setSelectcalidad] = useState([]);
     const [selectaudio, setSelectaudio] = useState([]);
     const [selectformato, setSelectformato] = useState([]);
-    const [EditMovieEs, setEditMovieEs] = useState([0]);
+    const [EditMovieEs, setEditMovieEs] = useState([]);
+    const [alerta, setAlerta] = useState({});
+
+
+
 
     const mostrarDatos = async () => {
         try {
@@ -29,7 +53,6 @@ export default function AddMovieEs() {
             const resultado = await clienteAxios.get(`/mtmovie/es/${COD}`, config).then((response) => {
                 const data = response.data
                 setEditMovieEs(data)
-                console.log(data)
             })
 
             const resultadosc = await clienteAxios.get("/catquality", config).then((response) => {
@@ -47,7 +70,6 @@ export default function AddMovieEs() {
                 setSelectaudio(sa)
             })
 
-           
 
         } catch (error) {
             console.log(error);
@@ -57,30 +79,34 @@ export default function AddMovieEs() {
     useEffect(() => {
         mostrarDatos();
     }, [])
-    const titulo = EditMovieEs[0].TITLE;
-    console.log(titulo)
-    const { auth } = useAuth()
-    const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_MOVIES_ES}`);
-    const [CODAUDIO, setCODAUDIO] = useState("");
-    const [CODQUALITY, setCODQUALITY] = useState("");
-    const [CODCATEGORY, setCODCATEGORY] = useState("");
-    const [CODUSER, setCODUSER] = useState(`${auth.COD}`);
-    const [TITLE, setTITLE] = useState(`${titulo}`);
-    const [BACK, setBACK] = useState("");
-    const [POSTER, setPOSTER] = useState("");
-    const [YEAR, setYEAR] = useState("");
-    const [CLASIF, setCLASIF] = useState("");
-    const [DURATION, setDURATION] = useState("");
-    const [COUNTRY, setCOUNTRY] = useState("");
-    const [CALIF, setCALIF] = useState("");
-    const [DIRECTOR, setDIRECTOR] = useState("");
-    const [CAST, setCAST] = useState("");
-    const [ASKPIN, setASKPIN] = useState("");
-    const [CODFORMATVIDEO, setCODFORMATVIDEO] = useState("");
-    const [URL, setURL] = useState("");
-    const [SYNOPSIS, setSYNOPSIS] = useState("");
 
-    const [alerta, setAlerta] = useState({});
+    // ternario para llenar los campos
+    const llenarDatos = () => {
+        (EditMovieEs.length > 0) ?
+            (setCODAUDIO(EditMovieEs[0].COD_CAT_AUDIO),
+                setCODQUALITY(EditMovieEs[0].COD_CAT_QUALITY),
+                setCODCATEGORY(EditMovieEs[0].COD_CAT_CATEGORY),
+                setTITLE(EditMovieEs[0].TITLE),
+                setBACK(EditMovieEs[0].BACKGROUND),
+                setPOSTER(EditMovieEs[0].POSTER),
+                setYEAR(EditMovieEs[0].YEAR),
+                setCLASIF(EditMovieEs[0].CLASIFICATION),
+                setDURATION(EditMovieEs[0].DURATION),
+                setCOUNTRY(EditMovieEs[0].COUNTRY),
+                setCALIF(EditMovieEs[0].CALIFICATION),
+                setDIRECTOR(EditMovieEs[0].DIRECTOR),
+                setCAST(EditMovieEs[0].CAST),
+                setASKPIN(EditMovieEs[0].ASK_PIN),
+                setCODFORMATVIDEO(EditMovieEs[0].COD_CAT_FORMAT_VIDEO),
+                setURL(EditMovieEs[0].URL_VIDEO),
+                setSYNOPSIS(EditMovieEs[0].SYNOPSIS),
+                setCOD_CONTENIDO(EditMovieEs[0].COD_CONTENIDO)) :
+            null
+    }
+
+    useEffect(() => {
+        llenarDatos();
+    }, [EditMovieEs])
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -103,29 +129,11 @@ export default function AddMovieEs() {
                 }
             }
             const datos = { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO }
-            await clienteAxios.post(`/mtmovie/es`, datos, config)
+            await clienteAxios.put(`/mtmovie/es/${COD}`, datos, config)
             setAlerta({
-                msg: 'Película en Español Agregada Correctamente',
+                msg: 'Película en Español ha sido Editada Correctamente',
                 error: false
             })
-            //limpiar los campos
-            setCODAUDIO("");
-            setCODQUALITY("");
-            setCODCATEGORY("");
-            setTITLE("");
-            setBACK("");
-            setPOSTER("");
-            setYEAR("");
-            setCLASIF("");
-            setDURATION("");
-            setCOUNTRY("");
-            setCALIF("");
-            setDIRECTOR("");
-            setCAST("");
-            setASKPIN("");
-            setCODFORMATVIDEO("");
-            setURL("");
-            setSYNOPSIS("");
         } catch (error) {
             setAlerta({
                 msg: error.response.data.message,
@@ -135,6 +143,7 @@ export default function AddMovieEs() {
     }
 
     const { msg } = alerta;
+    //extraer parámetros de la ruta
 
     return (
         <>

@@ -9,8 +9,9 @@ import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
 
 export default function AddMovieEs() {
-        //extraer parámetros de la ruta
-        const { COD } = useParams();
+    //extraer parámetros de la ruta
+    const { COD } = useParams();
+
     const [selectcalidad, setSelectcalidad] = useState([]);
     const [selectaudio, setSelectaudio] = useState([]);
     const [selectformato, setSelectformato] = useState([]);
@@ -30,7 +31,7 @@ export default function AddMovieEs() {
                 setEditMovieEs(data)
                 console.log(data)
             })
-            
+
             const resultadosc = await clienteAxios.get("/catquality", config).then((response) => {
                 const sc = response.data;
                 setSelectcalidad(sc)
@@ -50,7 +51,6 @@ export default function AddMovieEs() {
             console.log(error);
         }
     };
-    const eTITLE = EditMovieEs[0].TITLE
 
     useEffect(() => {
         mostrarDatos();
@@ -132,6 +132,8 @@ export default function AddMovieEs() {
     }
 
     const { msg } = alerta;
+    const titulo = EditMovieEs[0].TITLE;
+    console.log(titulo)
     return (
         <>
             <main>
@@ -151,7 +153,7 @@ export default function AddMovieEs() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2 pt-2"
                                                         >
-                                                            Título {eTITLE}:
+                                                            Título :
                                                         </label>
                                                         <input
                                                             type="text"

@@ -56,7 +56,6 @@ const AddCapSerieAdult = () => {
             const resultado = await clienteAxios.get("/mttvshows/es", config).then((response) => {
                 const data = response.data
                 setPeliculas(data)
-                console.log(data)
             })
         } catch (error) {
             console.log(error);
@@ -118,16 +117,16 @@ const AddCapSerieAdult = () => {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <>
-                            <button className="bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
+                            <button className="animate__animated animate__bounceIn bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
                                 window.location.href = `/admin/tvshows/es/edit/${tableMeta.rowData[0]}`
                             }}>
-                                <i className="fas fa-edit">EDITAR</i>
+                                EDITAR
                             </button>
 
-                            <button className="bg-indigo-500 font-bold  p-2 text-white" onClick={() => {
+                            <button className="animate__animated animate__bounceIn bg-indigo-500 font-bold  p-2 text-white" onClick={() => {
                                 window.location.href = `/admin/tvshows/es/capitulos/${tableMeta.rowData[0]}`
                             }}>
-                                <i className="fas fa-edit">VER CAPITULOS</i>
+                                VER CAPITULOS
                             </button>
 
                         </>

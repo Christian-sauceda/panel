@@ -3,10 +3,14 @@ import "./../../components/Cards/card.css";
 import styled, { keyframes } from 'styled-components';
 import MUIDataTable from "mui-datatables";
 import dateFormat, { masks } from "dateformat";
+
 // components
 import clienteAxios from "../../config/axios";
 
 import BannerListMovieAD from '../../partials/dashboard/BannerListMovieAD';
+import Swal from 'sweetalert2'
+
+
 
 const AddCapSerieAdult = () => {
 
@@ -57,7 +61,6 @@ const AddCapSerieAdult = () => {
             const resultado = await clienteAxios.get("/mtmovie/adult", config).then((response) => {
                 const data = response.data
                 setPeliculas(data)
-                console.log(data)
             })
         } catch (error) {
             console.log(error);
@@ -122,14 +125,52 @@ const AddCapSerieAdult = () => {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <>
-                            <button className="bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
+                            <button className="animate__animated animate__bounceIn bg-green-600 font-bold mr-1 p-2 text-white hover:bg-green-700" onClick={() => {
                                 window.location.href = `/admin/movie/adult/edit/${tableMeta.rowData[0]}`
                             }}>
                                 <i className="fas fa-edit">EDITAR</i>
                             </button>
 
-                            <button className="bg-red-600 font-bold  p-2 text-white" onClick={() => {
-                                window.location.href = `/admin/movie/adult/deleted/${tableMeta.rowData[0]}`
+                            <button className="animate__animated animate__bounceIn bg-red-500 hover:bg-red-700 font-bold  p-2 text-white" onClick={(e) => {
+                                // eliminar pelicula con alert
+                                e.preventDefault()
+                                Swal.fire({
+                                    title: 'Estas seguro?',
+                                    text: "No podrás revertir esto!",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: '¡Sí, bórrala!',
+                                    showClass: {
+                                        popup: 'animate__animated animate__bounceInLeft'
+                                    },
+                                    hideClass: {
+                                        popup: 'animate__animated animate__bounceOutRight'
+                                    }
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        const token = localStorage.getItem("token")
+                                        const config = {
+                                            headers: {
+                                                "content-type": "application/json",
+                                                Authorization: `Bearer ${token}`
+                                            }
+                                        }
+                                        clienteAxios.delete(`/mtmovie/adult/${tableMeta.rowData[0]}`, config).then(() => {
+                                            // actualizar el state
+                                            consultarApi()
+
+                                        })
+                                        Swal.fire(
+                                            '¡Eliminada!',
+                                            'Pelicula adulto ha sido eliminada',
+                                            'success'
+                                        )
+                                    }
+                                })
+
+
                             }}>
                                 <i className="fas fa-edit">ELIMINAR</i>
                             </button>
@@ -153,11 +194,11 @@ const AddCapSerieAdult = () => {
                     <MUIDataTable
                         data={peliculas}
                         columns={columns}
-                        
+
                         options={{
                             responsive: "scroll",
                             selectableRows: "none",
-                            fixedHeader: false ,
+                            fixedHeader: false,
                             elevation: 10,
                             textLabels: {
                                 body: {

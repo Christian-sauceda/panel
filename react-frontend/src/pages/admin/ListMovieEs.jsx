@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
-import useAuth from '../../hooks/useAuth';
-import styled, { keyframes } from 'styled-components';
 import MUIDataTable from "mui-datatables";
 import dateFormat, { masks } from "dateformat";
+import 'animate.css';
 // components
 import clienteAxios from "../../config/axios";
-
 import BannerListMovieEs from '../../partials/dashboard/BannerListMovieEs';
 
 const AddCapSerieEs = () => {
@@ -91,16 +89,31 @@ const AddCapSerieEs = () => {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <>
-                            <button className="bg-green-600 font-bold mr-1 p-2 text-white hover:bg-green-700" onClick={() => {
+                            <button className="animate__animated animate__bounceIn bg-green-600 font-bold mr-1 p-2 text-white hover:bg-green-700" onClick={() => {
                                 window.location.href = `/admin/movie/es/edit/${tableMeta.rowData[0]}`
                             }}>
                                 <i className="fas fa-edit">EDITAR</i>
                             </button>
 
-                            <button className="bg-red-500 hover:bg-red-700 font-bold  p-2 text-white" onClick={(e) => {
+                            <button className="animate__animated animate__bounceIn bg-red-500 hover:bg-red-700 font-bold  p-2 text-white" onClick={(e) => {
                                 // eliminar pelicula con alert
-                                    e.preventDefault()
-                                    if (window.confirm("¿Estas seguro de eliminar esta pelicula?")) {
+                                e.preventDefault()
+                                Swal.fire({
+                                    title: 'Estas seguro?',
+                                    text: "No podrás revertir esto!",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: '¡Sí, bórrala!',
+                                    showClass: {
+                                        popup: 'animate__animated animate__bounceInLeft'
+                                    },
+                                    hideClass: {
+                                        popup: 'animate__animated animate__bounceOutRight'
+                                    }
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
                                         const token = localStorage.getItem("token")
                                         const config = {
                                             headers: {
@@ -111,15 +124,20 @@ const AddCapSerieEs = () => {
                                         clienteAxios.delete(`/mtmovie/es/${tableMeta.rowData[0]}`, config).then(() => {
                                             // actualizar el state
                                             consultarApi()
-                                            
-                                        })
-                                    }
 
-                                
+                                        })
+                                        Swal.fire(
+                                            '¡Eliminada!',
+                                            'Pelicula adulto ha sido eliminada',
+                                            'success'
+                                        )
+                                    }
+                                })
+
+
                             }}>
                                 <i className="fas fa-edit">ELIMINAR</i>
                             </button>
-
                         </>
                     )
                 }
@@ -133,7 +151,7 @@ const AddCapSerieEs = () => {
     return (
         <>
             <main>
-                <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+                <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto ">
                     <BannerListMovieEs />
 
                     <MUIDataTable
@@ -142,7 +160,7 @@ const AddCapSerieEs = () => {
                         options={{
                             responsive: "scroll",
                             selectableRows: "none",
-                            fixedHeader: false ,
+                            fixedHeader: false,
                             elevation: 10,
                             textLabels: {
                                 body: {

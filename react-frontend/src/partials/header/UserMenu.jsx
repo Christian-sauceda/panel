@@ -33,7 +33,7 @@ function UserMenu() {
     const user = (auth.NAME)
     const tipo = (auth.TYPE)
   return (
-    <div className="relative inline-flex">
+     <div className="relative inline-flex animate__animated animate__backInRight">
       <button
         ref={trigger}
         className="inline-flex justify-center items-center group"

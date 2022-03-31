@@ -25,6 +25,9 @@ import AddTvInter from './pages/admin/AddTvInter'
 
 //edit
 import EditMovieEs from './pages/admin/EditMovieEs'
+import EditMovieEn from './pages/admin/EditMovieEn'
+import EditMovieAdults from './pages/admin/EditMovieAdults'
+import EdirSerieEs from './pages/admin/EdirSerieEs'
 
 //list
 import ListMovieEs from './pages/admin/ListMovieEs'
@@ -80,6 +83,9 @@ function App() {
                         <Route index element={<Inicio />} />
                         <Route path="movie/es/add" element={<AddMovieEs />} />
                         <Route path="movie/es/edit/:COD" element={<EditMovieEs />} />
+                        <Route path="movie/en/edit/:COD" element={<EditMovieEn />} />
+                        <Route path="movie/adult/edit/:COD" element={<EditMovieAdults />} />
+                        <Route path="tvshows/es/edit/:COD" element={<EdirSerieEs />} />
                         <Route path="movie/en/add" element={<AddMovieEn />} />
                         <Route path="movie/adult/add" element={<AddMovieAdult />} />
                         <Route path="events/add" element={<AddEvent />} />

@@ -56,7 +56,6 @@ const AddCapSerieAdult = () => {
             const resultado = await clienteAxios.get("/tvlive/en", config).then((response) => {
                 const data = response.data
                 setPeliculas(data)
-                console.log(data)
             })
         } catch (error) {
             console.log(error);

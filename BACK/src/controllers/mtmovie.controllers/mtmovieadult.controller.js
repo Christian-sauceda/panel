@@ -115,14 +115,15 @@ export const updatemovieadultById = (req, res) => {
         DURATION,
         CODFORMATVIDEO,
         URL,
-        SYNOPSIS
+        SYNOPSIS,
+        COD_CONTENIDO
     } = req.body;
     const {
         COD
     } = req.params;
-    mysqlconnection.query("CALL PROC_UPD_MOVIE_ADULT(?,?,?,?,?,?,?,?,?,?,?,?)",
+    mysqlconnection.query("CALL PROC_UPD_MOVIE_ADULT(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, DURATION,
-            CODFORMATVIDEO, URL, SYNOPSIS, COD
+            CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO, COD
         ],
         (err, rows, fields) => {
             if (!err) {

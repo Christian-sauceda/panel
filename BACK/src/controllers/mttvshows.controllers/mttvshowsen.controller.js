@@ -46,10 +46,9 @@ export const gettvshowsenlastday = async (req, res) => {
 // GET CATALOG OF TV SHOW EN BY ID
 export const gettvshowsenById = (req, res) => {
     const {
-        COD_CONTENIDO,
         COD
     } = req.params;
-    mysqlconnection.query('CALL PROC_SEL_TVSHOW_EN_COD(?,?)', [COD_CONTENIDO, COD], (err,
+    mysqlconnection.query('CALL PROC_SEL_TVSHOW_EN_COD(?)', [COD], (err,
         rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);

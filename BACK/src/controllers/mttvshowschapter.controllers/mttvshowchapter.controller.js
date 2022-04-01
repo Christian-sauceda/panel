@@ -109,7 +109,6 @@ export const updatetvshowsChapterById = (req, res) => {
         COD_FORMAT_VIDEO,
         COD_USER,
         SYNOSIS,
-        SUPTITLE,
         URL,
         BACK,
         POSTER
@@ -118,7 +117,7 @@ export const updatetvshowsChapterById = (req, res) => {
         COD
     } = req.params;
     mysqlconnection.query(
-        "CALL PROC_UPD_CHAPTER(?,?,?,?,?,?,?,?,?,?,?,?)",
+        "CALL PROC_UPD_CHAPTER(?,?,?,?,?,?,?,?,?,?,?)",
         [
             COD_CONTENT,
             NAME_CHAPTER,
@@ -127,11 +126,10 @@ export const updatetvshowsChapterById = (req, res) => {
             COD_FORMAT_VIDEO,
             COD_USER,
             SYNOSIS,
-            SUPTITLE,
             URL,
+            COD,
             BACK,
             POSTER,
-            COD,
         ],
         (err, rows, fields) => {
             if (!err) {

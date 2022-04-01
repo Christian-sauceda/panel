@@ -5,6 +5,7 @@ import styled, { keyframes } from 'styled-components';
 import MUIDataTable from "mui-datatables";
 import dateFormat, { masks } from "dateformat";
 // components
+import 'animate.css';
 import clienteAxios from "../../config/axios";
 
 const AddCapSerieAdult = () => {
@@ -120,14 +121,52 @@ const AddCapSerieAdult = () => {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <>
-                            <button className="bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
+                            <button className="animate__animated animate__bounceIn bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
                                 window.location.href = `/admin/tvshows/en/capedit/${tableMeta.rowData[0]}`
                             }}>
                                 <i className="fas fa-edit">EDITAR</i>
                             </button>
 
-                            <button className="bg-red-500 font-bold  p-2 text-white" onClick={() => {
-                                window.location.href = `/admin/tvshows/en/capdelete/${tableMeta.rowData[0]}`
+                            <button className="animate__animated animate__bounceIn bg-red-500 font-bold  p-2 text-white" onClick={(e) => {
+                                // eliminar pelicula con alert
+                                e.preventDefault()
+                                Swal.fire({
+                                    title: 'Estas seguro?',
+                                    text: "No podrás revertir esto!",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: '¡Sí, bórrala!',
+                                    showClass: {
+                                        popup: 'animate__animated animate__bounceInLeft'
+                                    },
+                                    hideClass: {
+                                        popup: 'animate__animated animate__bounceOutRight'
+                                    }
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        const token = localStorage.getItem("token")
+                                        const config = {
+                                            headers: {
+                                                "content-type": "application/json",
+                                                Authorization: `Bearer ${token}`
+                                            }
+                                        }
+                                        clienteAxios.delete(`/mttvshowschapter/${tableMeta.rowData[0]}`, config).then(() => {
+                                            // actualizar el state
+                                            consultarApi()
+
+                                        })
+                                        Swal.fire(
+                                            '¡Eliminada!',
+                                            'Capitulo ha sido eliminada con exito.',
+                                            'success'
+                                        )
+                                    }
+                                })
+
+
                             }}>
                                 <i className="fas fa-edit">ELIMINAR</i>
                             </button>

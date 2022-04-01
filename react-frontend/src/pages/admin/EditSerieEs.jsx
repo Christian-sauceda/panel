@@ -44,7 +44,6 @@ export default function AddSerieEs() {
             const resultado = await clienteAxios.get(`/mttvshows/es/${COD}`, config).then((response) => {
                 const data = response.data
                 setEditSerieES(data)
-                console.log(data)
             })
 
             const resultadosa = await clienteAxios.get("/cataudio", config).then((response) => {

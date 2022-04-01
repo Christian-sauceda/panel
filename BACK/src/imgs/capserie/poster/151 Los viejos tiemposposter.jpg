@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Error: No permitido por CORS<br> &nbsp; &nbsp;at origin (C:\Users\chris\OneDrive\Escritorio\topmediaplus-front-back\BACK\src\/app.js:43:16)<br> &nbsp; &nbsp;at C:\Users\chris\OneDrive\Escritorio\topmediaplus-front-back\BACK\node_modules\cors\lib\index.js:219:13<br> &nbsp; &nbsp;at optionsCallback (C:\Users\chris\OneDrive\Escritorio\topmediaplus-front-back\BACK\node_modules\cors\lib\index.js:199:9)<br> &nbsp; &nbsp;at corsMiddleware (C:\Users\chris\OneDrive\Escritorio\topmediaplus-front-back\BACK\node_modules\cors\lib\index.js:204:7)<br> &nbsp; &nbsp;at Layer.handle [as handle_request] (C:\Users\chris\OneDrive\Escritorio\topmediaplus-front-back\BACK\node_modules\express\lib\router\layer.js:95:5)<br> &nbsp; &nbsp;at trim_prefix (C:\Users\chris\OneDrive\Escritorio\topmediaplus-front-back\BACK\node_modules\express\lib\router\index.js:323:13)<br> &nbsp; &nbsp;at C:\Users\chris\OneDrive\Escritorio\topmediaplus-front-back\BACK\node_modules\express\lib\router\index.js:284:7<br> &nbsp; &nbsp;at Function.process_params (C:\Users\chris\OneDrive\Escritorio\topmediaplus-front-back\BACK\node_modules\express\lib\router\index.js:341:12)<br> &nbsp; &nbsp;at next (C:\Users\chris\OneDrive\Escritorio\topmediaplus-front-back\BACK\node_modules\express\lib\router\index.js:275:10)<br> &nbsp; &nbsp;at cookieParser (C:\Users\chris\OneDrive\Escritorio\topmediaplus-front-back\BACK\node_modules\cookie-parser\index.js:57:14)</pre>
+</body>
+</html>

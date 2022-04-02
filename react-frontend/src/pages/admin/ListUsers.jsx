@@ -138,13 +138,13 @@ const AddCapSerieAdult = () => {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <>
-                            <button className="bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
+                            <button className="animate__animated animate__bounceIn bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
                                 window.location.href = `/admin/user/edit/${tableMeta.rowData[0]}`
                             }}>
                                 <i className="fas fa-edit">EDITAR</i>
                             </button>
 
-                            <button className="bg-red-600 font-bold  p-2 text-white" onClick={() => {
+                            <button className="animate__animated animate__bounceIn bg-red-600 font-bold  p-2 text-white" onClick={() => {
                                 window.location.href = `/admin/user/deleted/${tableMeta.rowData[0]}`
                             }}>
                                 <i className="fas fa-edit">ELIMINAR</i>

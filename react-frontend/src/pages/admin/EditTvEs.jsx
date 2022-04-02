@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
 import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
@@ -8,32 +9,6 @@ import clienteAxios from "../../config/axios";
 import BannerTvEs from '../../partials/dashboard/BannerTvEs';
 
 export default function AddSerieEs() {
-    const [selecttves, setSelecttves] = useState([]);
-
-    const mostrarDatos = async () => {
-        try {
-            const token = localStorage.getItem("token")
-            const config = {
-                headers: {
-                    "content-type": "application/json",
-                    Authorization: `Bearer ${token}`
-                }
-            }
-
-
-            const resultados = await clienteAxios.get("/tvlive/es/selecttves", config).then((response) => {
-                const tves = response.data;
-                setSelecttves(tves)
-            })
-
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    useEffect(() => {
-        mostrarDatos();
-    }, [])
-
     const { auth } = useAuth()
     const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_LIVE_ES}`);
     const [duracion, setDuracion] = useState('');
@@ -53,8 +28,56 @@ export default function AddSerieEs() {
     const [STATTUS, setSTATTUS] = useState("1");
     const [ORDER_LIVE_TV, setORDER_LIVE_TV] = useState("1");
     const [ICON, setICON] = useState("NULL");
+    const { COD } = useParams();
+    const [selecttves, setSelecttves] = useState([]);
+    const [editTvEs, setEditTvEs] = useState([]);
+
+    const mostrarDatos = async () => {
+        try {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const resultado = await clienteAxios.get(`/tvlive/es/${COD}`, config).then((response) => {
+                const data = response.data
+                setEditTvEs(data)
+                console.log(data)
+            })
+
+            const resultados = await clienteAxios.get("/tvlive/es/selecttves", config).then((response) => {
+                const tves = response.data;
+                setSelecttves(tves)
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        mostrarDatos();
+    }, [])
+
+
 
     const [alerta, setAlerta] = useState({});
+
+    const llenarDatos = () => {
+        (editTvEs.length > 0) ?
+            (
+                setCODCATEGORY(editTvEs[0].COD_CAT_CATEGORY),
+                setTITLE(editTvEs[0].TITLE),
+                setPOSTER(editTvEs[0].POSTER),
+                setURL(editTvEs[0].URL_VIDEO),
+                setCOD_CONTENIDO(editTvEs[0].COD_CONTENIDO)) :
+            null
+    }
+
+    useEffect(() => {
+        llenarDatos();
+    }, [editTvEs])
 
     const handleSubmit = async e => {
         e.preventDefault();

@@ -16,6 +16,7 @@ export default function Inicio() {
   const [moviesadult, setMoviesadult] = useState([]);
   const [serieses, setSerieses] = useState([]);
   const [seriesen, setSeriesen] = useState([]);
+  const [events, setEvents] = useState([]);
 
   const mostrarDatos = async () => {
     try {
@@ -50,6 +51,10 @@ export default function Inicio() {
         const sen = response.data;
         setSeriesen(sen)
       })
+      const resultadoevents = await ClienteAxios.get("/mtevent/count/event", config).then((response) => {
+        const ev = response.data;
+        setEvents(ev)
+      })
 
     } catch (error) {
       console.log(error);
@@ -58,8 +63,6 @@ export default function Inicio() {
   useEffect(() => {
     mostrarDatos();
   }, [])
-  //recorrer arreglo de series
-
   return (
     <>
       <div className="flex flex-wrap pb-10">
@@ -71,7 +74,7 @@ export default function Inicio() {
               statSubtitle="Total Películas Español"
               statTitle={item.moviees}
               statIconName={`fas fa-film`}
-              statIconColor="bg-indigo-500"
+              statIconColor="bg-indigo-600"
             />
           ))}
         </div>
@@ -82,7 +85,7 @@ export default function Inicio() {
               statSubtitle="Total Películas Inglés"
               statTitle={item.movieen}
               statIconName="fas fa-video"
-              statIconColor="bg-orange-500"
+              statIconColor="bg-orange-600"
             />
           ))}
         </div>
@@ -93,7 +96,7 @@ export default function Inicio() {
               statSubtitle="Total Películas para Adultos"
               statTitle={item.moviead}
               statIconName="fas fa-tv"
-              statIconColor="bg-green-500"
+              statIconColor="bg-green-600"
 
             />
           ))}
@@ -105,7 +108,7 @@ export default function Inicio() {
               statSubtitle="Total Series en Español"
               statTitle={item.seriees}
               statIconName="fas fa-tv"
-              statIconColor="bg-sky-800"
+              statIconColor="bg-sky-600"
             />
           ))}
         </div>
@@ -116,7 +119,18 @@ export default function Inicio() {
               statSubtitle="Total Series en Inglés"
               statTitle={item.serieen}
               statIconName="fas fa-file-video"
-              statIconColor="bg-red-700"
+              statIconColor="bg-red-600"
+            />
+          ))}
+        </div>
+
+        <div className="w-full lg:w-6/12 xl:w-2/12 px-4">
+          {events.map((item) => (
+            <CardStats
+              statSubtitle="Total Eventos Deportivos"
+              statTitle={item.event}
+              statIconName="fas fa-file-video"
+              statIconColor="bg-gray-600"
             />
           ))}
         </div>

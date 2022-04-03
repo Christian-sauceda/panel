@@ -1,8 +1,11 @@
 const mysqlconnection = require("../../database");
 
 // GET ALL CATALOG OF MOVIE ADULT
-export const getevent = async (req, res) => {
-    mysqlconnection.query("CALL PROC_SEL_MOVIE_ADULT()", (err, rows, fields) => {
+export const getevents = async (req, res) => {
+    const {
+        COD
+    } = req.body;
+    mysqlconnection.query("CALL PROC_SEL_ALL_EVENT(?)", [COD], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -16,7 +19,7 @@ export const geteventById = (req, res) => {
     const {
         COD
     } = req.params;
-    mysqlconnection.query('CALL PROC_SEL_MOVIE_ADULT_COD(?)', [COD], (err,
+    mysqlconnection.query('CALL PROC_SEL_ALL_EVENT_COD(?)', [COD], (err,
         rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
@@ -26,30 +29,33 @@ export const geteventById = (req, res) => {
     });
 };
 
+export const countevent = async (req, res) => {
+    mysqlconnection.query("CALL PROC_COUNTEVENT()" , (err, rows, fields) => {
+        if (!err) {
+            res.status(200).json(rows[0]);
+        } else {
+            console.log(err);
+        }
+    });
+}
+
 // CREATE MOVIE ADULT
 export const createevent = (req, res) => {
     const {
         CODAUDIO,
-        CODQUALITY,
-        CODCATEGORY,
+        CODCATEGORIA,
+        CODCONTENIDO,
         CODUSER,
         TITLE,
-        BACK,
-        POSTER,
-        YEAR,
-        DURATION,
-        CODFORMATVIDEO,
-        URL,
-        SYNOPSIS
+        POSTER
     } = req.body;
-    const query = `CALL PROC_INS_MOVIE_ADULT(?,?,?,?,?,?,?,?,?,?,?,?)`;
-    mysqlconnection.query(query, [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, DURATION,
-            CODFORMATVIDEO, URL, SYNOPSIS
-        ],
+    const query = `CALL PROC_INS_EVENT(?,?,?,?,?,?)`;
+    mysqlconnection.query(query, [ CODAUDIO, CODCATEGORIA,CODCONTENIDO, 
+    CODUSER, TITLE, POSTER ],
         (err, rows, fields) => {
             if (!err) {
                 res.json({
-                    Status: "MOVIE ADULT ADDED"
+                    Status: "EVENT ADDED"
                 });
             } else {
                 console.log(req.body);
@@ -61,29 +67,22 @@ export const createevent = (req, res) => {
 export const updateeventById = (req, res) => {
     const {
         CODAUDIO,
-        CODQUALITY,
-        CODCATEGORY,
+        CODCATEGORIA,
+        CODCONTENIDO,
         CODUSER,
         TITLE,
-        BACK,
-        POSTER,
-        YEAR,
-        DURATION,
-        CODFORMATVIDEO,
-        URL,
-        SYNOPSIS
+        POSTER
     } = req.body;
     const {
         COD
     } = req.params;
-    mysqlconnection.query("CALL PROC_UPD_MOVIE_ADULT(?,?,?,?,?,?,?,?,?,?,?,?)",
-        [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, DURATION,
-            CODFORMATVIDEO, URL, SYNOPSIS, COD
-        ],
+    mysqlconnection.query("CALL PROC_UPD_EVENT(?,?,?,?,?,?,?)",
+        [CODAUDIO, CODCATEGORIA, CODCONTENIDO,
+        CODUSER, TITLE, POSTER, COD],
         (err, rows, fields) => {
             if (!err) {
                 res.json({
-                    Status: "MOVIE ADULT UPDATED"
+                    Status: "EVENT UPDATED"
                 });
             } else {
                 console.log(err);
@@ -96,11 +95,11 @@ export const deleteeventById = (req, res) => {
     const {
         COD
     } = req.params;
-    mysqlconnection.query('CALL PROC_DEL_MOVIE_ADULT(?)', [COD],
+    mysqlconnection.query('CALL PROC_DEL_EVENT(?)', [COD],
         (err, rows, fields) => {
             if (!err) {
                 res.json({
-                    Status: "MOVIE ADULT DELETED"
+                    Status: "EVENT DELETED"
                 });
             } else {
                 console.log(err);

@@ -12,6 +12,7 @@ import catypecontent from "./routes/maintenance.routes/catypecontent.routes";
 import catypeserver from "./routes/maintenance.routes/catypeserver.routes";
 import mtmoviees from "./routes/movie.routes/mtmoviees.routes";
 import mtmovieen from "./routes/movie.routes/mtmovieen.routes";
+import mtevent from "./routes/event.routes/mtevent.routes";
 import mtmovieadult from "./routes/movie.routes/mtmovieadult.routes";
 import mttvshowsen from "./routes/tvshows.routes/mttvshowsen.routes";
 import mttvshowses from "./routes/tvshows.routes/mttvshowses.routes";
@@ -70,6 +71,9 @@ app.use('/catypeserver', checkAuth, catypeserver);
 app.use('/mtmovie/es', checkAuth, mtmoviees);
 app.use('/mtmovie/en', checkAuth, mtmovieen);
 app.use('/mtmovie/adult', checkAuth, mtmovieadult);
+
+// EVENTS
+app.use('/mtevent', checkAuth, mtevent);
 
 // TVSHOWS
 app.use('/mttvshows/en', checkAuth, mttvshowsen);

@@ -31,6 +31,7 @@ import EdirSerieEs from './pages/admin/EditSerieEs'
 import EdiSerieEn from './pages/admin/EditSerieEn'
 import EditCapSerieEs from './pages/admin/EditCapSerieEs'
 import EditCapSerieEn from './pages/admin/EditCapSerieEn'
+import EditEvent from './pages/admin/EditEvent'
 import EditTvEs from './pages/admin/EditTvEs'
 
 //list
@@ -101,9 +102,9 @@ function App() {
                         <Route path="tvshow/en/addcap" element={<AddCapSerieEn />} />
                         <Route path="tvshows/es/capitulos/:COD" element={<ListSeriescapEs />} />
                         <Route path="tvshows/en/capitulos/:COD" element={<ListSeriescapEn />} />
+                        <Route path="event/edit/:COD" element={<EditEvent />} />
                         <Route path="tvshow/en/add" element={<AddSerieEn />} />
                         <Route path="tv/es/edit/:COD" element={<EditTvEs />} />
-
                         <Route path="user/registrar" element={<Registrar />} />
                         <Route path="cat/audio" element={<ManCatAudio />} />
                         <Route path="cat/formato" element={<ManCatFormato />} />

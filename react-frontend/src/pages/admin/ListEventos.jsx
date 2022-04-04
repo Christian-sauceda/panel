@@ -7,6 +7,7 @@ import dateFormat, { masks } from "dateformat";
 import clienteAxios from "../../config/axios";
 
 import BannerListEventos from '../../partials/dashboard/BannerListEventos';
+import Swal from 'sweetalert2'
 
 const AddCapSerieEn = () => {
 
@@ -54,7 +55,9 @@ const AddCapSerieEn = () => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const resultado = await clienteAxios.get("/mtmovie/en", config).then((response) => {
+            const [COD] = import.meta.env.VITE_ID_SPORT;
+            const datos = { COD }
+            const resultado = await clienteAxios.get(`/mtevent`, config).then((response) => {
                 const data = response.data
                 setPeliculas(data)
             })
@@ -96,8 +99,8 @@ const AddCapSerieEn = () => {
             },
         },
         {
-            name: 'CALIDAD',
-            label: 'Calidad',
+            name: 'CATEGORIA',
+            label: 'Categoria',
             options: {
                 filter: true,
             },
@@ -121,14 +124,52 @@ const AddCapSerieEn = () => {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <>
-                            <button className="bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
-                                window.location.href = `/admin/movie/en/edit/${tableMeta.rowData[0]}`
+                            <button className="animate__animated animate__bounceIn bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
+                                window.location.href = `/admin/event/edit/${tableMeta.rowData[0]}`
                             }}>
                                 <i className="fas fa-edit">EDITAR</i>
                             </button>
 
-                            <button className="bg-red-600 font-bold  p-2 text-white" onClick={() => {
-                                window.location.href = `/admin/movie/en/deleted/${tableMeta.rowData[0]}`
+                            <button className="animate__animated animate__bounceIn bg-red-500 hover:bg-red-700 font-bold  p-2 text-white" onClick={(e) => {
+                                // eliminar pelicula con alert
+                                e.preventDefault()
+                                Swal.fire({
+                                    title: 'Estas seguro?',
+                                    text: "No podrás revertir esto!",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: '¡Sí, bórralo!',
+                                    showClass: {
+                                        popup: 'animate__animated animate__bounceInLeft'
+                                    },
+                                    hideClass: {
+                                        popup: 'animate__animated animate__bounceOutRight'
+                                    }
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        const token = localStorage.getItem("token")
+                                        const config = {
+                                            headers: {
+                                                "content-type": "application/json",
+                                                Authorization: `Bearer ${token}`
+                                            }
+                                        }
+                                        clienteAxios.delete(`/mtevent/${tableMeta.rowData[0]}`, config).then(() => {
+                                            // actualizar el state
+                                            consultarApi()
+
+                                        })
+                                        Swal.fire(
+                                            '¡Eliminada!',
+                                            'Evento Deportivo ha sido eliminado',
+                                            'success'
+                                        )
+                                    }
+                                })
+
+
                             }}>
                                 <i className="fas fa-edit">ELIMINAR</i>
                             </button>
@@ -152,11 +193,11 @@ const AddCapSerieEn = () => {
                     <MUIDataTable
                         data={peliculas}
                         columns={columns}
-                        
+
                         options={{
                             responsive: "scroll",
                             selectableRows: "none",
-                            fixedHeader: false ,
+                            fixedHeader: false,
                             elevation: 10,
                             textLabels: {
                                 body: {

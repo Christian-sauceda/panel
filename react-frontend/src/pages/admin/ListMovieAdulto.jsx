@@ -10,8 +10,6 @@ import clienteAxios from "../../config/axios";
 import BannerListMovieAD from '../../partials/dashboard/BannerListMovieAD';
 import Swal from 'sweetalert2'
 
-
-
 const AddCapSerieAdult = () => {
 
     const rotate360 = keyframes`

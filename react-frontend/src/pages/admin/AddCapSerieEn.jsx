@@ -97,6 +97,8 @@ export default function AddCapSerieEs() {
         }
     }
     const { msg } = alerta;
+        //funcion imprima json numero del 1 al 30
+        const numeros = [...Array(31).keys()];
     return (
         <>
             <main>
@@ -149,26 +151,9 @@ export default function AddCapSerieEs() {
                                                             onChange={(e) => setNUMBER_SEASON(e.target.value)}
                                                         >
                                                             <option value="">Seleccione una Temporada</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-                                                            <option value="8">8</option>
-                                                            <option value="9">9</option>
-                                                            <option value="10">10</option>
-                                                            <option value="10">11</option>
-                                                            <option value="10">12</option>
-                                                            <option value="10">13</option>
-                                                            <option value="10">14</option>
-                                                            <option value="10">15</option>
-                                                            <option value="10">16</option>
-                                                            <option value="10">17</option>
-                                                            <option value="10">18</option>
-                                                            <option value="10">19</option>
-                                                            <option value="10">20</option>
+                                                            {numeros.map((n) => ( 
+                                                                <option key={n} value={n}>{n}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </div>

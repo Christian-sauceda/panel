@@ -1,51 +1,13 @@
 import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
+import { useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
 import BannerEvent from '../../partials/dashboard/BannerEvent';
-
 export default function AddSerieEs() {
-    const [selectaudio, setSelectaudio] = useState([]);
-    const [selectcategoria, setSelectcategoria] = useState([]);
-    const [selectformat, setSelectformat] = useState([]);
-
-    const mostrarDatos = async () => {
-        try {
-            const token = localStorage.getItem("token")
-            const config = {
-                headers: {
-                    "content-type": "application/json",
-                    Authorization: `Bearer ${token}`
-                }
-            }
-
-            const resultadosa = await clienteAxios.get("/cataudio", config).then((response) => {
-                const sa = response.data;
-                setSelectaudio(sa)
-            })
-
-            const resultadosf = await clienteAxios.get("/catformatvideo", config).then((response) => {
-                const sf = response.data;
-                setSelectformat(sf)
-            })
-
-            const resultados = await clienteAxios.get("/mtevent/selevent/es", config).then((response) => {
-                const evn = response.data;
-                setSelectcategoria(evn)
-                console.log(evn)
-            })
-
-
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    useEffect(() => {
-        mostrarDatos();
-    }, [])
     const { auth } = useAuth()
     const [COD_AUDIO, setCOD_AUDIO] = useState('');
     const [COD_CATEGORIA, setCODCATEGORIA] = useState("");
@@ -55,9 +17,58 @@ export default function AddSerieEs() {
     const [POSTER, setPOSTER] = useState("");
     const [URL, setURL] = useState("");
     const [COD_FORMAT_VIDEO, setCOD_FORMAT_VIDEO] = useState("");
-
+    const { COD } = useParams();
+    const [selectaudio, setSelectaudio] = useState([]);
+    const [selectcategoria, setSelectcategoria] = useState([]);
+    const [selectformat, setSelectformat] = useState([]);
+    const [EditEvent, setEditEvent] = useState([]);
+    const mostrarDatos = async () => {
+        try {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const resultado = await clienteAxios.get(`/mtevent/${COD}`, config).then((response) => {
+                const data = response.data
+                setEditEvent(data)
+            })
+            const resultadosa = await clienteAxios.get("/cataudio", config).then((response) => {
+                const sa = response.data;
+                setSelectaudio(sa)
+            })
+            const resultadosf = await clienteAxios.get("/catformatvideo", config).then((response) => {
+                const sf = response.data;
+                setSelectformat(sf)
+            })
+            const resultados = await clienteAxios.get("/mtevent/selevent/es", config).then((response) => {
+                const evn = response.data;
+                setSelectcategoria(evn)
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        mostrarDatos();
+    }, [])
+    const llenarDatos = () => {
+        (EditEvent.length > 0) ?
+            (
+                setCOD_AUDIO(EditEvent[0].COD_CAT_AUDIO),
+                setCODCATEGORIA(EditEvent[0].COD_CAT_CATEGORY),
+                setTITLE(EditEvent[0].TITLE),
+                setURL(EditEvent[0].URL_VIDEO),
+                setCOD_FORMAT_VIDEO(EditEvent[0].COD_CAT_FORMAT_VIDEO),
+                setPOSTER(EditEvent[0].POSTER)) :
+            null
+    }
+    useEffect(() => {
+        llenarDatos();
+    }, [EditEvent])
     const [alerta, setAlerta] = useState({});
-
     const handleSubmit = async e => {
         e.preventDefault();
         if ([ COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO, COD_USER, TITLE, POSTER, URL, COD_FORMAT_VIDEO ].includes('')) {
@@ -67,9 +78,7 @@ export default function AddSerieEs() {
             })
             return;
         }
-
         setAlerta({})
-
         try {
             const token = localStorage.getItem("token")
             const config = {
@@ -78,27 +87,18 @@ export default function AddSerieEs() {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const datos = { COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO, COD_USER, TITLE, POSTER, URL, COD_FORMAT_VIDEO }
-            await clienteAxios.post(`/mtevent`, datos, config)
+            const datos = { COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO, COD_USER, TITLE, POSTER, COD_FORMAT_VIDEO, URL }
+            await clienteAxios.put(`/mtevent/${COD}`, datos, config)
             setAlerta({
-                msg: 'Evento Deportivo Agregado Correctamente',
+                msg: 'Evento Deportivo ha sido editado Correctamente',
                 error: false
             })
-            //limpiar los campos
-            setCOD_AUDIO('');
-            setCODCATEGORIA('');
-            setTITLE('');
-            setPOSTER('');
-            setURL('');
-            setCOD_FORMAT_VIDEO('');
-
         } catch (error) {
             setAlerta({
                 msg: error.response.data.message,
                 error: true
             })
         }
-
     }
     const { msg } = alerta;
     return (
@@ -106,19 +106,16 @@ export default function AddSerieEs() {
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                     <BannerEvent />
-                    
-
                     <div className="sm:flex sm:justify-between sm:items-center mb-8">
                         
                         <form
                             onSubmit={handleSubmit}
                         >
                             <div className="flex flex-wrap">
-                                <div className="w-full lg:w-8/12 px-4 pt-10">
+                                <div className="w-full lg:w-8/12 px-4 pt-36">
                                     <div className="relative min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
                                         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                                             <div className="flex flex-wrap pt-4">
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -138,7 +135,6 @@ export default function AddSerieEs() {
                                                         />
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -158,7 +154,6 @@ export default function AddSerieEs() {
                                                         />
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-6/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -181,7 +176,6 @@ export default function AddSerieEs() {
                                                         </select>
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-6/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -205,7 +199,6 @@ export default function AddSerieEs() {
                                                         </select>
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-6/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -229,7 +222,6 @@ export default function AddSerieEs() {
                                                         </select>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -242,7 +234,6 @@ export default function AddSerieEs() {
                                                     alt="..."
                                                     src={`${''}`}
                                                     style={{ minHeight: "300px", maxHeight: "300px", background: "#f3f4f6" }}
-
                                                 />
                                                 <img
                                                     alt="..."
@@ -250,9 +241,7 @@ export default function AddSerieEs() {
                                                     style={{ minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
                                                     className="eye absolute" />
                                             </div>
-
                                             <div className="text-center md:mt-10 ">
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label

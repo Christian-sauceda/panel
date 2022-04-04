@@ -2,10 +2,7 @@ const mysqlconnection = require("../../database");
 
 // GET ALL CATALOG OF MOVIE ADULT
 export const getevents = async (req, res) => {
-    const {
-        COD
-    } = req.body;
-    mysqlconnection.query("CALL PROC_SEL_ALL_EVENT(?)", [COD], (err, rows, fields) => {
+    mysqlconnection.query("CALL PROC_SEL_ALL_EVENT()", (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -29,6 +26,16 @@ export const geteventById = (req, res) => {
     });
 };
 
+export const getselectevent = async (req, res) => {
+    mysqlconnection.query("CALL PROC_SELECT_CAT_CATEGORY_EVENT()", (err, rows, fields) => {
+        if (!err) {
+            res.status(200).json(rows[0]);
+        } else {
+            console.log(err);
+        }
+    });
+}
+
 export const countevent = async (req, res) => {
     mysqlconnection.query("CALL PROC_COUNTEVENT()" , (err, rows, fields) => {
         if (!err) {
@@ -42,16 +49,18 @@ export const countevent = async (req, res) => {
 // CREATE MOVIE ADULT
 export const createevent = (req, res) => {
     const {
-        CODAUDIO,
-        CODCATEGORIA,
-        CODCONTENIDO,
-        CODUSER,
+        COD_AUDIO,
+        COD_CATEGORIA,
+        COD_CONTENIDO,
+        COD_USER,
         TITLE,
-        POSTER
+        POSTER,
+        URL,
+        COD_FORMAT_VIDEO
     } = req.body;
-    const query = `CALL PROC_INS_EVENT(?,?,?,?,?,?)`;
-    mysqlconnection.query(query, [ CODAUDIO, CODCATEGORIA,CODCONTENIDO, 
-    CODUSER, TITLE, POSTER ],
+    const query = `CALL PROC_INS_EVENT(?,?,?,?,?,?,?,?)`;
+    mysqlconnection.query(query, [ COD_AUDIO, COD_CATEGORIA,COD_CONTENIDO, 
+    COD_USER, TITLE, POSTER, URL, COD_FORMAT_VIDEO],
         (err, rows, fields) => {
             if (!err) {
                 res.json({
@@ -66,19 +75,21 @@ export const createevent = (req, res) => {
 // UPDATE MOVIE ADULT
 export const updateeventById = (req, res) => {
     const {
-        CODAUDIO,
-        CODCATEGORIA,
-        CODCONTENIDO,
-        CODUSER,
+        COD_AUDIO,
+        COD_CATEGORIA,
+        COD_CONTENIDO,
+        COD_USER,
         TITLE,
-        POSTER
+        POSTER,
+        COD_FORMAT_VIDEO,
+        URL
     } = req.body;
     const {
         COD
     } = req.params;
-    mysqlconnection.query("CALL PROC_UPD_EVENT(?,?,?,?,?,?,?)",
-        [CODAUDIO, CODCATEGORIA, CODCONTENIDO,
-        CODUSER, TITLE, POSTER, COD],
+    mysqlconnection.query("CALL PROC_UPD_EVENT(?,?,?,?,?,?,?,?,?)",
+        [COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO,
+        COD_USER, TITLE, POSTER, COD_FORMAT_VIDEO, URL, COD],
         (err, rows, fields) => {
             if (!err) {
                 res.json({

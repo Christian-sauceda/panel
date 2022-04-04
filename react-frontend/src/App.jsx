@@ -55,6 +55,7 @@ import ManCatContenido from './pages/admin/Mantenimientos/ManCatContenido'
 import ManCatCalidad from './pages/admin/Mantenimientos/ManCatCalidad'
 import ManCatPlataforma from './pages/admin/Mantenimientos/ManCatPlataforma'
 import ManCatCategoria from './pages/admin/Mantenimientos/ManCatCategoria'
+import ManCatServer from './pages/admin/Mantenimientos/ManCatServer'
 
 //providers
 import { AuthProvider } from './context/AuthProvider'
@@ -64,6 +65,7 @@ import { ContenidosProvider } from './context/ContenidosProvider'
 import { CalidadesProvider } from './context/CalidadesProvider'
 import { PlataformasProvider } from './context/PlataformasProvider'
 import { CategoriasProvider } from './context/CategoriasProvider'
+import { ServersProvider } from './context/ServersProvider'
 
 
 function App() {
@@ -76,6 +78,7 @@ function App() {
               <CalidadesProvider>
                 <PlataformasProvider>
                   <CategoriasProvider>
+                    <ServersProvider>
                     <Routes>
                     <Route path="*" element={<NotFound />} />
                       <Route path="/" element={<AuthLayout />}>
@@ -112,6 +115,7 @@ function App() {
                         <Route path="cat/calidad" element={<ManCatCalidad />} />
                         <Route path="cat/plataforma" element={<ManCatPlataforma />} />
                         <Route path="cat/categoria" element={<ManCatCategoria />} />
+                        <Route path="cat/server" element={<ManCatServer />} />
                         <Route path="tv/es/add" element={<AddTvEs />} />
                         <Route path="tv/en/add" element={<AddTvEn />} />
                         <Route path="tv/inter/add" element={<AddTvInter />} />
@@ -127,6 +131,7 @@ function App() {
                         <Route path="tv/inter/list" element={<ListTvInter />} />
                       </Route>
                     </Routes>
+                    </ServersProvider>
                   </CategoriasProvider>
                 </PlataformasProvider>
               </CalidadesProvider>

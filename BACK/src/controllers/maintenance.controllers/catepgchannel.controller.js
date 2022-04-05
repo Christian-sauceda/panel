@@ -36,9 +36,8 @@ export const createCatepgchannel = (req, res) => {
     const query = `CALL PROC_INS_CAT_EPG_CHANNEL(?,?,?);`;
     mysqlconnection.query(query, [COD_EPG, COD_SERVER, NAME_CHANNEL], (err, rows, fields) => {
         if (!err) {
-            res.json({
-                Status: "CATALOG OF EPG CHANNEL ADDED"
-            });
+            //retornar el registro insertado
+            res.status(200).json(req.body);
         } else {
             console.log(req.body);
         }
@@ -58,9 +57,8 @@ export const updateCatepgchannelById = (req, res) => {
     mysqlconnection.query("CALL PROC_UPD_CAT_EPG_CHANNEL(?,?,?,?)",
         [COD_EPG, COD_SERVER, NAME_CHANNEL, COD], (err, rows, fields) => {
             if (!err) {
-                res.json({
-                    Status: "CATALOG OF EPG CHANNEL UPDATED"
-                });
+                //retornar el registro insertado
+                res.status(200).json(req.body);
             } else {
                 console.log(err);
             }

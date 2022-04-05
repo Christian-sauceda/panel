@@ -1,14 +1,14 @@
 import { createContext, useState, useEffect } from "react";
 import clienteAxios from "../config/axios";
 
-const ServersContext = createContext()
+const EpgsContext = createContext()
 
-export const ServersProvider = ({ children }) => {
-    const [servers, setServers] = useState([])
-    const [server, setServer] = useState({})
+export const EpgsProvider = ({ children }) => {
+    const [epgs, setEpgs] = useState([])
+    const [epg, setEpg] = useState({})
 
     useEffect(() => {
-        const obtenerServers = async () => {
+        const obtenerEpgs = async () => {
             try {
                 const token = localStorage.getItem('token')
                 if (!token) return
@@ -19,16 +19,16 @@ export const ServersProvider = ({ children }) => {
                     }
                 }
                 const { data } = await clienteAxios.get(
-                    "/catypeserver", config)
-                setServers(data)
+                    "/cataudio", config)
+                setEpgs(data)
             } catch (error) {
                 console.log(error)
             }
         }
-        obtenerServers()
+        obtenerEpgs()
     }, [])
 
-    const guardarServer = async (server) => {
+    const guardarEpg = async (epg) => {
         const token = localStorage.getItem("token")
         const config = {
             headers: {
@@ -36,33 +36,33 @@ export const ServersProvider = ({ children }) => {
                 Authorization: `Bearer ${token}`
             }
         }
-        if (server.id) {
+        if (epg.id) {
             try {
-                const { data } = await clienteAxios.put(`/catypeserver/${server.id}`, server, config)
-                const serversActualizados = servers.map( serverState => serverState.COD_TYPE_SERVER ===
-                    data.id ? data : serverState)
-                setServers(serversActualizados)
+                const { data } = await clienteAxios.put(`/cataudio/${epg.id}`, epg, config)
+                const epgsActualizados = epg.map( epgState => epgState.COD_AUDIO ===
+                    data.id ? data : epgState)
+                setEpgs(epgsActualizados)
             } catch (error) {
                 console.log(error)
             }
         } else {
             try {
 
-                const { data } = await clienteAxios.post("/catypeserver", server, config)
-                const { ...serverAlmacenado } = data
-                setServers([serverAlmacenado, ...servers])
+                const { data } = await clienteAxios.post("/cataudio", epg, config)
+                const { ...epgAlmacenado } = data
+                setEpgs([epgAlmacenado, ...epgs])
             } catch (error) {
                 console.log(error.error.data.message)
             }
         }
     }
 
-    const setEdicion = (server) => {
-        setServer(server)
+    const setEdicion = (epg) => {
+        setEpg(epg)
     }
 
-    const EliminarServer = async id => {
-        const confirmar = confirm('¿Estas seguro de eliminar esta Servidor?')
+    const EliminarEpg = async id => {
+        const confirmar = confirm('¿Estas seguro de eliminar este EPG Channel?')
         if(confirmar){
             try {
                 const token = localStorage.getItem("token")
@@ -72,10 +72,10 @@ export const ServersProvider = ({ children }) => {
                         Authorization: `Bearer ${token}`
                     }
                 }
-                const {data} = await clienteAxios.delete(`/catypeserver/${id}`, config)
-                const serversActualizados = servers.filter(serversState => serversState.
-                    COD_TYPE_SERVER !== id)
-                setServers(serversActualizados)
+                const {data} = await clienteAxios.delete(`/cataudio/${id}`, config)
+                const epgsActualizados = epg.filter(epgsState => epgsState.
+                    COD_AUDIO !== id)
+                setEpgs(epgsActualizados)
             } catch (error) {
                 console.log(error)
             }
@@ -84,19 +84,19 @@ export const ServersProvider = ({ children }) => {
 
 
     return (
-        <ServersContext.Provider
+        <EpgsContext.Provider
             value={{
-                servers,
-                guardarServer,
+                epgs,
+                guardarEpg,
                 setEdicion,
-                EliminarServer,
-                server
+                EliminarEpg,
+                epg
 
             }}
         >
             {children}
-        </ServersContext.Provider>
+        </EpgsContext.Provider>
     )
 }
 
-export default ServersContext;
+export default EpgsContext;

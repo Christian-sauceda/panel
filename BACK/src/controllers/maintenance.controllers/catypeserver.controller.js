@@ -29,15 +29,14 @@ export const getCatypeServerById = (req, res) => {
 // CREATE CATALOG OF TYPE SERVER
 export const createCatypeServer = (req, res) => {
     const {
-        NAME_TYPE_SERVER,
+        NAME,
         URL
     } = req.body;
     const query = `CALL PROC_INS_CAT_TYPE_SERVER(?,?);`;
-    mysqlconnection.query(query, [NAME_TYPE_SERVER, URL], (err, rows, fields) => {
+    mysqlconnection.query(query, [NAME, URL], (err, rows, fields) => {
         if (!err) {
-            res.json({
-                Status: "CATALOG OF TYPE SERVER ADDED"
-            });
+            //retornar el registro insertado
+            res.status(200).json(req.body);
         } else {
             console.log(req.body);
         }
@@ -56,9 +55,8 @@ export const updateCatypeServerById = (req, res) => {
     mysqlconnection.query("CALL PROC_UPD_CAT_TYPE_SERVER(?,?,?)",
         [NAME_TYPE_SERVER, URL, COD], (err, rows, fields) => {
             if (!err) {
-                res.json({
-                    Status: "CATALOG OF TYPE SERVER UPDATED"
-                });
+                //retornar el registro insertado
+                res.status(200).json(req.body);
             } else {
                 console.log(err);
             }

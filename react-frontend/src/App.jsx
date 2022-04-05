@@ -56,6 +56,7 @@ import ManCatCalidad from './pages/admin/Mantenimientos/ManCatCalidad'
 import ManCatPlataforma from './pages/admin/Mantenimientos/ManCatPlataforma'
 import ManCatCategoria from './pages/admin/Mantenimientos/ManCatCategoria'
 import ManCatServer from './pages/admin/Mantenimientos/ManCatServer'
+import ManCatEpg from './pages/admin/Mantenimientos/ManCatEpg'
 
 //providers
 import { AuthProvider } from './context/AuthProvider'
@@ -66,6 +67,7 @@ import { CalidadesProvider } from './context/CalidadesProvider'
 import { PlataformasProvider } from './context/PlataformasProvider'
 import { CategoriasProvider } from './context/CategoriasProvider'
 import { ServersProvider } from './context/ServersProvider'
+import { EpgsProvider } from './context/EpgsProvider'
 
 
 function App() {
@@ -79,58 +81,61 @@ function App() {
                 <PlataformasProvider>
                   <CategoriasProvider>
                     <ServersProvider>
-                    <Routes>
-                    <Route path="*" element={<NotFound />} />
-                      <Route path="/" element={<AuthLayout />}>
-                        <Route index element={<Login />} />
-                        <Route path="olvide-password" element={<OlvidePassword />} />
-                        <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
-                      </Route>
+                      <EpgsProvider>
+                        <Routes>
+                          <Route path="*" element={<NotFound />} />
+                          <Route path="/" element={<AuthLayout />}>
+                            <Route index element={<Login />} />
+                            <Route path="olvide-password" element={<OlvidePassword />} />
+                            <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
+                          </Route>
 
-                      <Route path="/admin" element={<AdminLayout />}>
-                        <Route index element={<Inicio />} />
-                        <Route path="movie/es/add" element={<AddMovieEs />} />
-                        <Route path="movie/es/edit/:COD" element={<EditMovieEs />} />
-                        <Route path="movie/en/edit/:COD" element={<EditMovieEn />} />
-                        <Route path="movie/adult/edit/:COD" element={<EditMovieAdults />} />
-                        <Route path="tvshows/es/edit/:COD" element={<EdirSerieEs />} />
-                        <Route path="tvshows/en/edit/:COD" element={<EdiSerieEn />} />
-                        <Route path="tvshows/es/capedit/:COD" element={<EditCapSerieEs />} />
-                        <Route path="tvshows/en/capedit/:COD" element={<EditCapSerieEn />} />
-                        <Route path="movie/en/add" element={<AddMovieEn />} />
-                        <Route path="movie/adult/add" element={<AddMovieAdult />} />
-                        <Route path="events/add" element={<AddEvent />} />
-                        <Route path="series/es/add" element={<AddSerieEs />} />
-                        <Route path="series/es/addcap" element={<AddCapSerieEs />} />
-                        <Route path="tvshow/en/addcap" element={<AddCapSerieEn />} />
-                        <Route path="tvshows/es/capitulos/:COD" element={<ListSeriescapEs />} />
-                        <Route path="tvshows/en/capitulos/:COD" element={<ListSeriescapEn />} />
-                        <Route path="event/edit/:COD" element={<EditEvent />} />
-                        <Route path="tvshow/en/add" element={<AddSerieEn />} />
-                        <Route path="tv/es/edit/:COD" element={<EditTvEs />} />
-                        <Route path="user/registrar" element={<Registrar />} />
-                        <Route path="cat/audio" element={<ManCatAudio />} />
-                        <Route path="cat/formato" element={<ManCatFormato />} />
-                        <Route path="cat/contenido" element={<ManCatContenido />} />
-                        <Route path="cat/calidad" element={<ManCatCalidad />} />
-                        <Route path="cat/plataforma" element={<ManCatPlataforma />} />
-                        <Route path="cat/categoria" element={<ManCatCategoria />} />
-                        <Route path="cat/server" element={<ManCatServer />} />
-                        <Route path="tv/es/add" element={<AddTvEs />} />
-                        <Route path="tv/en/add" element={<AddTvEn />} />
-                        <Route path="tv/inter/add" element={<AddTvInter />} />
-                        <Route path="movie/es/list" element={<ListMovieEs />} />
-                        <Route path="movie/en/list" element={<ListMovieEn />} />
-                        <Route path="movie/adult/list" element={<ListMovieAdult />} />
-                        <Route path="series/es/list" element={<ListSeriesEs />} />
-                        <Route path="tvshow/en/list" element={<ListSeriesEn />} />
-                        <Route path="events/list" element={<ListEventos />} />
-                        <Route path="users/list" element={<ListUsers />} />
-                        <Route path="tv/es/list" element={<ListTvEs />} />
-                        <Route path="tv/en/list" element={<ListTvEn />} />
-                        <Route path="tv/inter/list" element={<ListTvInter />} />
-                      </Route>
-                    </Routes>
+                          <Route path="/admin" element={<AdminLayout />}>
+                            <Route index element={<Inicio />} />
+                            <Route path="movie/es/add" element={<AddMovieEs />} />
+                            <Route path="movie/es/edit/:COD" element={<EditMovieEs />} />
+                            <Route path="movie/en/edit/:COD" element={<EditMovieEn />} />
+                            <Route path="movie/adult/edit/:COD" element={<EditMovieAdults />} />
+                            <Route path="tvshows/es/edit/:COD" element={<EdirSerieEs />} />
+                            <Route path="tvshows/en/edit/:COD" element={<EdiSerieEn />} />
+                            <Route path="tvshows/es/capedit/:COD" element={<EditCapSerieEs />} />
+                            <Route path="tvshows/en/capedit/:COD" element={<EditCapSerieEn />} />
+                            <Route path="movie/en/add" element={<AddMovieEn />} />
+                            <Route path="movie/adult/add" element={<AddMovieAdult />} />
+                            <Route path="events/add" element={<AddEvent />} />
+                            <Route path="series/es/add" element={<AddSerieEs />} />
+                            <Route path="series/es/addcap" element={<AddCapSerieEs />} />
+                            <Route path="tvshow/en/addcap" element={<AddCapSerieEn />} />
+                            <Route path="tvshows/es/capitulos/:COD" element={<ListSeriescapEs />} />
+                            <Route path="tvshows/en/capitulos/:COD" element={<ListSeriescapEn />} />
+                            <Route path="event/edit/:COD" element={<EditEvent />} />
+                            <Route path="tvshow/en/add" element={<AddSerieEn />} />
+                            <Route path="tv/es/edit/:COD" element={<EditTvEs />} />
+                            <Route path="user/registrar" element={<Registrar />} />
+                            <Route path="cat/audio" element={<ManCatAudio />} />
+                            <Route path="cat/formato" element={<ManCatFormato />} />
+                            <Route path="cat/contenido" element={<ManCatContenido />} />
+                            <Route path="cat/calidad" element={<ManCatCalidad />} />
+                            <Route path="cat/plataforma" element={<ManCatPlataforma />} />
+                            <Route path="cat/categoria" element={<ManCatCategoria />} />
+                            <Route path="cat/server" element={<ManCatServer />} />
+                            <Route path="cat/epgchannel" element={<ManCatEpg />} />
+                            <Route path="tv/es/add" element={<AddTvEs />} />
+                            <Route path="tv/en/add" element={<AddTvEn />} />
+                            <Route path="tv/inter/add" element={<AddTvInter />} />
+                            <Route path="movie/es/list" element={<ListMovieEs />} />
+                            <Route path="movie/en/list" element={<ListMovieEn />} />
+                            <Route path="movie/adult/list" element={<ListMovieAdult />} />
+                            <Route path="series/es/list" element={<ListSeriesEs />} />
+                            <Route path="tvshow/en/list" element={<ListSeriesEn />} />
+                            <Route path="events/list" element={<ListEventos />} />
+                            <Route path="users/list" element={<ListUsers />} />
+                            <Route path="tv/es/list" element={<ListTvEs />} />
+                            <Route path="tv/en/list" element={<ListTvEn />} />
+                            <Route path="tv/inter/list" element={<ListTvInter />} />
+                          </Route>
+                        </Routes>
+                      </EpgsProvider>
                     </ServersProvider>
                   </CategoriasProvider>
                 </PlataformasProvider>

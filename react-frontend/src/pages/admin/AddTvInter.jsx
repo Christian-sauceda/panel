@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
 import ReactPlayer from 'react-player'
+import { render } from "react-dom";
+import Select from 'react-select';
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
@@ -9,6 +11,8 @@ import BannerTvInter from '../../partials/dashboard/BannerTvInter';
 
 export default function AddSerieEs() {
     const [selecttvinter, setSelecttvinter] = useState([]);
+    const [selectCser, setSelectCser] = useState([]);
+    const [selectCepg, setSelectCepg] = useState([]);
 
     const mostrarDatos = async () => {
         try {
@@ -20,10 +24,19 @@ export default function AddSerieEs() {
                 }
             }
 
-
             const resultados = await clienteAxios.get("/tvlive/inter/selecttvinter", config).then((response) => {
                 const tves = response.data;
                 setSelecttvinter(tves)
+            })
+
+            const resultadoscs = await clienteAxios.get("/catypeserver", config).then((response) => {
+                const cser = response.data;
+                setSelectCser(cser)
+            })
+
+            const resultadosce = await clienteAxios.get("/catepgchannel", config).then((response) => {
+                const cepg = response.data;
+                setSelectCepg(cepg)
             })
 
         } catch (error) {
@@ -98,6 +111,13 @@ export default function AddSerieEs() {
         }
 
     }
+    let options = selectCser.map(elemento => {
+        let item = {};
+        item.value = elemento.COD_EPG_CHANNEL;
+        item.label = elemento.name;
+
+        return item;
+    });
     const { msg } = alerta;
     return (
         <>
@@ -157,6 +177,8 @@ export default function AddSerieEs() {
                                                     </div>
                                                 </div>
 
+
+
                                                 <div className="w-full lg:w-8/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -173,6 +195,8 @@ export default function AddSerieEs() {
                                                             onChange={e => setCODCATEGORY(e.target.value)}
                                                         >
                                                             <option value="">Selecciona una Categoria</option>
+
+                                                            
                                                             {selecttvinter.map((tves) => (
                                                                 <option key={tves.COD_CATEGORIA} value={tves.COD_CATEGORIA}>{tves.CATEGORIA}</option>
                                                             ))}
@@ -199,10 +223,9 @@ export default function AddSerieEs() {
                                                                 onChange={e => setCOD_SERVER(e.target.value)}
                                                             >
                                                                 <option value="">Selecciona un Servidor</option>
-                                                                <option value="1">Españoles</option>
-                                                                <option value="2">Latinos</option>
-                                                                <option value="3">Dish y DirectTv (EEUU)</option>
-                                                                <option value="4">United Kingdom (UK)</option>
+                                                                {selectCser.map((item) => (
+                                                                <option key={item.COD_TYPE_SERVER} value={item.COD_TYPE_SERVER}>{item.NAME}</option>
+                                                            ))}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -223,20 +246,9 @@ export default function AddSerieEs() {
                                                                 onChange={e => setCOD_EPG_CHANNEL(e.target.value)}
                                                             >
                                                                 <option value="">Selecciona un Canal</option>
-                                                                <option value="1">Discovery Channel</option>
-                                                                <option value="2">History Channel</option>
-                                                                <option value="3">National Geographic Channel</option>
-                                                                <option value="4">Nickelodeon</option>
-                                                                <option value="5">Comedy Central</option>
-                                                                <option value="6">Disney Channel</option>
-                                                                <option value="7">Cartoon Network</option>
-                                                                <option value="8">TLC</option>
-                                                                <option value="9">ESPN</option>
-                                                                <option value="10">Fox</option>
-                                                                <option value="11">Showtime</option>
-                                                                <option value="12">HBO</option>
-                                                                <option value="13">TNT</option>
-                                                                <option value="14">Syfy</option>
+                                                                {selectCepg.map((item) => (
+                                                                <option key={item.COD_EPG_CHANNEL} value={item.COD_EPG_CHANNEL}>{item.NAME_CHANNEL}</option>
+                                                            ))}
                                                             </select>
                                                         </div>
                                                     </div>

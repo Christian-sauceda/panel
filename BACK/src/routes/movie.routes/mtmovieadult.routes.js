@@ -5,12 +5,12 @@ import * as movieadultCtrl from '../../controllers/mtmovie.controllers/mtmoviead
 
 const router = Router();
 
-router.get('/', movieadultCtrl.getmovieadult);
-router.get('/:COD', movieadultCtrl.getmovieadultById);
-router.get('/count/adult', movieadultCtrl.countmovieadult);
-router.get('/getmovieadult/lastday', movieadultCtrl.getmovieadultlastday);
+router.get('/:ID', movieadultCtrl.getmovieadult);
+router.get('/:COD/:ID', movieadultCtrl.getmovieadultById);
+router.get('/count/adult/:ID', movieadultCtrl.countmovieadult);
+router.get('/getmovieadult/lastday/:ID', movieadultCtrl.getmovieadultlastday);
 router.post('/', movieadultCtrl.createmovieadult);
 router.put('/:COD', movieadultCtrl.updatemovieadultById);
-router.delete('/:COD', movieadultCtrl.deletemovieadultById);
+router.delete('/:COD/:ID', movieadultCtrl.deletemovieadultById);
 
 export default router;

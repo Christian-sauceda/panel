@@ -5,7 +5,10 @@ import useAuth from '../../hooks/useAuth';
 import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
-import clienteAxios from "../../config/axios";
+import axios from 'axios';
+import clienteAxios from '../../config/axios';
+
+
 
 export default function AddMovieEs() {
 
@@ -119,6 +122,24 @@ export default function AddMovieEs() {
             })
         }
     }
+
+
+    const [pelis, setPelis] = useState([]);
+    const [selpelis, setSelpelis] = useState([]);
+
+    const peticionGet = async () => {
+        await axios.get(`${import.meta.env.VITE_BASE_API}/search/movie?${import.meta.env.VITE_API_KEY}&query=Capitán%20América%3A%20El%20Primer%20Vengador&language=es-ES`)
+            .then(response => {
+                console.log(response.data.results)
+                setPelis(response.data.results)
+                setSelpelis(response.data.results)
+            }).catch(error => {
+                console.log(error);
+            })
+    }
+    useEffect(() => {
+        peticionGet();
+    }, [])
 
     const { msg } = alerta;
     return (

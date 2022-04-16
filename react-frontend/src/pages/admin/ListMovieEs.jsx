@@ -22,7 +22,7 @@ const AddCapSerieEs = () => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const resultado = await clienteAxios.get("/mtmovie/es", config).then((response) => {
+            const resultado = await clienteAxios.get(`/mtmovie/es/${import.meta.env.VITE_ID_MOVIES_ES}`, config).then((response) => {
                 const data = response.data
                 setPeliculas(data)
             })
@@ -121,14 +121,14 @@ const AddCapSerieEs = () => {
                                                 Authorization: `Bearer ${token}`
                                             }
                                         }
-                                        clienteAxios.delete(`/mtmovie/es/${tableMeta.rowData[0]}`, config).then(() => {
+                                        clienteAxios.delete(`/mtmovie/es/${tableMeta.rowData[0]}/${import.meta.env.VITE_ID_MOVIES_ES}`, config).then(() => {
                                             // actualizar el state
                                             consultarApi()
 
                                         })
                                         Swal.fire(
                                             '¡Eliminada!',
-                                            'Pelicula adulto ha sido eliminada',
+                                            'Pelicula en Español ha sido eliminada',
                                             'success'
                                         )
                                     }

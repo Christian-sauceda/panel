@@ -1,8 +1,9 @@
 const mysqlconnection = require("../../database");
 
-// GET ALL CATALOG OF MOVIE ADULT
+// GET ALL CATALOG OF EVENTS
 export const getevents = async (req, res) => {
-    mysqlconnection.query("CALL PROC_SEL_ALL_EVENT()", (err, rows, fields) => {
+    const { ID } = req.params;
+    mysqlconnection.query("CALL PROC_SEL_ALL_EVENT(?)", [ID], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -14,9 +15,10 @@ export const getevents = async (req, res) => {
 // GET MOVIE ADULT EN BY ID
 export const geteventById = (req, res) => {
     const {
-        COD
+        COD,
+        ID
     } = req.params;
-    mysqlconnection.query('CALL PROC_SEL_ALL_EVENT_COD(?)', [COD], (err,
+    mysqlconnection.query('CALL PROC_SEL_ALL_EVENT_COD(?,?)', [COD,ID], (err,
         rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
@@ -27,7 +29,10 @@ export const geteventById = (req, res) => {
 };
 
 export const getselectevent = async (req, res) => {
-    mysqlconnection.query("CALL PROC_SELECT_CAT_CATEGORY_EVENT()", (err, rows, fields) => {
+    const {
+        ID
+    } = req.params;
+    mysqlconnection.query("CALL PROC_SELECT_CAT_CATEGORY_EVENT(?)", [ID], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -37,11 +42,15 @@ export const getselectevent = async (req, res) => {
 }
 
 export const countevent = async (req, res) => {
-    mysqlconnection.query("CALL PROC_COUNTEVENT()" , (err, rows, fields) => {
+    const {
+        ID
+    } = req.params;
+    mysqlconnection.query("CALL PROC_COUNTEVENT(?)",
+    [ID],(err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
-            console.log(err);
+            console.log(req.body);
         }
     });
 }

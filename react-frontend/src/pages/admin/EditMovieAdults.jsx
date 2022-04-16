@@ -40,7 +40,7 @@ export default function AddMovieAdult() {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const resultado = await clienteAxios.get(`/mtmovie/adult/${COD}`, config).then((response) => {
+            const resultado = await clienteAxios.get(`/mtmovie/adult/${COD}/${import.meta.env.VITE_ID_MOVIES_AD}`, config).then((response) => {
                 const data = response.data
                 setEditMovieAD(data)
             })

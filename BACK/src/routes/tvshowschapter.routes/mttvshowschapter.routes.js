@@ -9,6 +9,6 @@ router.get('/tvshow/:COD', tvshowsChapterCtrl.getchapterBytvShow);
 router.get('/chapter/:COD', tvshowsChapterCtrl.getchapterByChapter);
 router.post('/', tvshowsChapterCtrl.createtvshowChapter);
 router.put('/:COD', tvshowsChapterCtrl.updatetvshowsChapterById);
-router.delete('/:COD', tvshowsChapterCtrl.deletetvshowsChapterById);
+router.delete('/:COD/:ID', tvshowsChapterCtrl.deletetvshowsChapterById);
 
 export default router;

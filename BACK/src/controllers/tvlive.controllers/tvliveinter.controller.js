@@ -2,7 +2,8 @@ const mysqlconnection = require("../../database");
 
 // GET ALL CATALOG OF TV LIVE INTERNACIONAL
 export const gettvliveinter = (req, res) => {
-    mysqlconnection.query("CALL PROC_SEL_LIVE_INTER()", (err, rows, fields) => {
+    const { ID } = req.params;
+    mysqlconnection.query("CALL PROC_SEL_LIVE_INTER(?)", [ID], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -12,7 +13,8 @@ export const gettvliveinter = (req, res) => {
 }
 
 export const getselecttvliveinter = (req, res) => {
-    mysqlconnection.query("CALL PROC_SELECT_CAT_CATEGORY_TVINTER()", (err, rows, fields) => {
+    const { ID } = req.params;
+    mysqlconnection.query("CALL PROC_SELECT_CAT_CATEGORY_TVINTER(?)", [ID], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -23,9 +25,10 @@ export const getselecttvliveinter = (req, res) => {
 // GET CATALOG OF TV LIVE INTERNACIONAL BY ID
 export const gettvliveinterById = (req, res) => {
     const {
-        COD
+        COD,
+        ID
     } = req.params;
-    mysqlconnection.query('CALL PROC_SEL_LIVE_INTER_COD(?)', [COD], (err,
+    mysqlconnection.query('CALL PROC_SEL_LIVE_INTER_COD(?,?)', [COD,ID], (err,
         rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
@@ -92,11 +95,12 @@ export const updatetvliveinterById = (req, res) => {
         ICON
     } = req.body;
     const {
-        COD
+        COD,
+        ID
     } = req.params;
-    mysqlconnection.query("CALL PROC_UPD_LIVETV_INTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    mysqlconnection.query("CALL PROC_UPD_LIVETV_INTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG,
-            COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD
+            COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD, ID
         ],
         (err, rows, fields) => {
             if (!err) {

@@ -53,7 +53,7 @@ const AddCapSerieAdult = () => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const resultado = await clienteAxios.get("/tvlive/inter", config).then((response) => {
+            const resultado = await clienteAxios.get(`/tvlive/inter/${import.meta.env.VITE_ID_LIVE_INTER}`, config).then((response) => {
                 const data = response.data
                 setPeliculas(data)
             })

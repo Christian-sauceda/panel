@@ -5,13 +5,13 @@ import * as tvshowsENCtrl from '../../controllers/mttvshows.controllers/mttvshow
 
 const router = Router();
 
-router.get('/', tvshowsENCtrl.gettvshowsen);
-router.get('/:COD', tvshowsENCtrl.gettvshowsenById);
-router.get('/count/en', tvshowsENCtrl.countserieen);
-router.get('/seltvshow/en', tvshowsENCtrl.getselecttvshowsen);
-router.get('/getseriesen/lastday', tvshowsENCtrl.gettvshowsenlastday);
+router.get('/:ID', tvshowsENCtrl.gettvshowsen);
+router.get('/:COD/:ID', tvshowsENCtrl.gettvshowsenById);
+router.get('/count/en/:ID', tvshowsENCtrl.countserieen);
+router.get('/seltvshow/en/:ID', tvshowsENCtrl.getselecttvshowsen);
+router.get('/getseriesen/lastday/:ID', tvshowsENCtrl.gettvshowsenlastday);
 router.post('/', tvshowsENCtrl.createtvshowsen);
-router.put('/:COD', tvshowsENCtrl.updatetvshowsenById);
+router.put('/:COD/:ID', tvshowsENCtrl.updatetvshowsenById);
 router.delete('/:COD', tvshowsENCtrl.deletetvshowsenById);
 
 

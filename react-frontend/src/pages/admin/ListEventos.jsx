@@ -55,9 +55,7 @@ const AddCapSerieEn = () => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const [COD] = import.meta.env.VITE_ID_SPORT;
-            const datos = { COD }
-            const resultado = await clienteAxios.get(`/mtevent`, config).then((response) => {
+            const resultado = await clienteAxios.get(`/mtevent/${import.meta.env.VITE_ID_SPORT}`, config).then((response) => {
                 const data = response.data
                 setPeliculas(data)
             })

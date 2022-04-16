@@ -27,31 +27,31 @@ export default function Inicio() {
           Authorization: `Bearer ${token}`
         }
       }
-      const resultadomes = await ClienteAxios.get("/mtmovie/es/count/es", config).then((response) => {
+      const resultadomes = await ClienteAxios.get(`/mtmovie/es/count/es/${import.meta.env.VITE_ID_MOVIES_ES}`, config).then((response) => {
         const mes = response.data;
         setMovieses(mes)
       })
 
-      const resultadomen = await ClienteAxios.get("/mtmovie/en/count/en", config).then((response) => {
+      const resultadomen = await ClienteAxios.get(`/mtmovie/en/count/en/${import.meta.env.VITE_ID_MOVIES_EN}`, config).then((response) => {
         const men = response.data;
         setMoviesen(men)
       })
 
-      const resultadomad = await ClienteAxios.get("/mtmovie/adult/count/adult", config).then((response) => {
+      const resultadomad = await ClienteAxios.get(`/mtmovie/adult/count/adult/${import.meta.env.VITE_ID_MOVIES_AD}`, config).then((response) => {
         const mad = response.data;
         setMoviesadult(mad)
       })
 
-      const resultadoses = await ClienteAxios.get("/mttvshows/es/count/es", config).then((response) => {
+      const resultadoses = await ClienteAxios.get(`/mttvshows/es/count/es/${import.meta.env.VITE_ID_SERIES_ES}`, config).then((response) => {
         const ses = response.data;
         setSerieses(ses)
       })
 
-      const resultadosen = await ClienteAxios.get("/mttvshows/en/count/en", config).then((response) => {
+      const resultadosen = await ClienteAxios.get(`/mttvshows/en/count/en/${import.meta.env.VITE_ID_SERIES_EN}`, config).then((response) => {
         const sen = response.data;
         setSeriesen(sen)
       })
-      const resultadoevents = await ClienteAxios.get("/mtevent/count/event", config).then((response) => {
+      const resultadoevents = await ClienteAxios.get(`/mtevent/count/event/${import.meta.env.VITE_ID_SPORT}`, config).then((response) => {
         const ev = response.data;
         setEvents(ev)
       })

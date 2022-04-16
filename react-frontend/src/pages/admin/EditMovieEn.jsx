@@ -46,7 +46,8 @@ export default function AddMovieEs() {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const resultado = await clienteAxios.get(`/mtmovie/en/${COD}`, config).then((response) => {
+
+            const resultado = await clienteAxios.get(`/mtmovie/en/${COD}/${import.meta.env.VITE_ID_MOVIES_EN}`, config).then((response) => {
                 const data = response.data
                 setEditMovieEs(data)
             })
@@ -125,7 +126,7 @@ export default function AddMovieEs() {
                 }
             }
             const datos = { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO }
-            await clienteAxios.put(`/mtmovie/en/${COD}`, datos, config)
+            await clienteAxios.put(`/mtmovie/en/${COD}/${import.meta.env.VITE_ID_MOVIES_EN}`, datos, config)
             setAlerta({
                 msg: 'Película en Ingles ha sido Editada Correctamente',
                 error: false

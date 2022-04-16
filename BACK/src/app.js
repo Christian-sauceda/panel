@@ -22,6 +22,7 @@ import tvlivees from "./routes/tvlive.routes/tvlivees.routes";
 import tvliveen from "./routes/tvlive.routes/tvliveen.routes";
 import tvliveinter from "./routes/tvlive.routes/tvliveinter.routes";
 import checkAuth from "./middlewares/user.middleware.js";
+import imagesRouter from "./routes/images.routes/images.routes";
 const cookieParser = require('cookie-parser')
 
 const app = express();
@@ -37,14 +38,14 @@ const dominiosPermitidos = ["http://localhost:3000", "http://localhost:3001"];
 
 const corsOptions = {
   origin: function(origin, callback) {
-    if (dominiosPermitidos.indexOf(origin) !== -1) {
-      //el origen del request es permitido
+    //permite todos los dominios
+    if (dominiosPermitidos.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
-    } else {
-      callback(new Error('No permitido por CORS'));
     }
-  }
-}
+  },
+  credentials: true
+};
+
 
 app.use(cors(corsOptions));
 
@@ -84,6 +85,9 @@ app.use('/mttvshowschapter', checkAuth, mttvshowschapter);
 app.use('/tvlive/es', checkAuth, tvlivees);
 app.use('/tvlive/en', checkAuth, tvliveen);
 app.use('/tvlive/inter', checkAuth, tvliveinter);
+
+// IMAGENES
+app.use('/images/imgs', imagesRouter);
 
 // AUTH
 app.use('/', sysignup);

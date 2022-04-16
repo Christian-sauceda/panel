@@ -3,7 +3,8 @@ const { downloadmovieadultback, downloadmovieadultposter } = require('../downloa
 
 // GET ALL CATALOG OF MOVIE ADULT
 export const getmovieadult = async (req, res) => {
-    mysqlconnection.query("CALL PROC_SEL_MOVIE_ADULT()", (err, rows, fields) => {
+    const { ID } = req.params;
+    mysqlconnection.query("CALL PROC_SEL_MOVIE_ADULT(?)", [ ID ], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -14,17 +15,22 @@ export const getmovieadult = async (req, res) => {
 
 
 export const countmovieadult = async (req, res) => {
-    mysqlconnection.query("CALL PROC_COUNTMOVIEADULT()", (err, rows, fields) => {
+    const {
+        ID
+    } = req.params;
+    mysqlconnection.query("CALL PROC_COUNTMOVIEADULT(?)",
+    [ID], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
-            console.log(err);
+            console.log(req.body);
         }
     });
 }
 
 export const getmovieadultlastday = async (req, res) => {
-    mysqlconnection.query("CALL PROC_SEL_ADULTLASTDAY()", (err, rows, fields) => {
+    const { ID } = req.params;
+    mysqlconnection.query("CALL PROC_SEL_ADULTLASTDAY(?)", [ID], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -36,9 +42,10 @@ export const getmovieadultlastday = async (req, res) => {
 // GET MOVIE ADULT EN BY ID
 export const getmovieadultById = (req, res) => {
     const {
-        COD
+        COD,
+        ID
     } = req.params;
-    mysqlconnection.query('CALL PROC_SEL_MOVIE_ADULT_COD(?)', [COD], (err,
+    mysqlconnection.query('CALL PROC_SEL_MOVIE_ADULT_COD(?,?)', [COD, ID], (err,
         rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
@@ -139,10 +146,12 @@ export const updatemovieadultById = (req, res) => {
 // DELETE MOVIE ADULT
 export const deletemovieadultById = (req, res) => {
     const {
-        COD
+        COD,
+        ID
     } = req.params;
-    mysqlconnection.query('CALL PROC_DEL_MOVIE_ADULT(?)', [COD],
-        (err, rows, fields) => {
+    mysqlconnection.query('CALL PROC_DEL_MOVIE_ADULT(?,?)',
+    [COD, ID],
+    (err, rows, fields) => {
             if (!err) {
                 res.json({
                     Status: "MOVIE ADULT DELETED"

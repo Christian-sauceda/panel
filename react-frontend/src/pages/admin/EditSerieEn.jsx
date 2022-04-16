@@ -41,7 +41,7 @@ export default function AddSerieEs() {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const resultado = await clienteAxios.get(`/mttvshows/en/${COD}`, config).then((response) => {
+            const resultado = await clienteAxios.get(`/mttvshows/en/${COD}/${import.meta.env.VITE_ID_SERIES_EN}`, config).then((response) => {
                 const data = response.data
                 setEditSerieES(data)
             })
@@ -106,7 +106,7 @@ export default function AddSerieEs() {
                 }
             }
             const datos = { CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS, COD_CONTENIDO }
-            await clienteAxios.put(`/mttvshows/en/${COD}`, datos, config)
+            await clienteAxios.put(`/mttvshows/en/${COD}/${import.meta.env.VITE_ID_SERIES_EN}`, datos, config)
             setAlerta({
                 msg: 'Serie ha sido editada Correctamente',
                 error: false

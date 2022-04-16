@@ -2,7 +2,8 @@ const mysqlconnection = require("../../database");
 
 // GET ALL CATALOG OF TV LIVE ES
 export const gettvlivees = (req, res) => {
-    mysqlconnection.query("CALL PROC_SEL_LIVE_ES()", (err, rows, fields) => {
+    const { ID } = req.params;
+    mysqlconnection.query("CALL PROC_SEL_LIVE_ES(?)", [ID], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -12,7 +13,10 @@ export const gettvlivees = (req, res) => {
 }
 
 export const getselecttvlivees = (req, res) => {
-    mysqlconnection.query("CALL PROC_SELECT_CAT_CATEGORY_TVES()", (err, rows, fields) => {
+    const {
+        ID
+    } = req.params;
+    mysqlconnection.query("CALL PROC_SELECT_CAT_CATEGORY_TVES(?)", [ID], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -24,9 +28,10 @@ export const getselecttvlivees = (req, res) => {
 // GET CATALOG OF TV LIVE ES BY ID 
 export const gettvliveesById = (req, res) => {
     const {
-        COD
+        COD,
+        ID
     } = req.params;
-    mysqlconnection.query('CALL PROC_SEL_LIVE_ES_COD(?)', [COD], (err,
+    mysqlconnection.query('CALL PROC_SEL_LIVE_ES_COD(?,?)', [COD, ID], (err,
         rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
@@ -93,11 +98,12 @@ export const updatetvliveesById = (req, res) => {
         ICON
     } = req.body;
     const {
-        COD
+        COD,
+        ID
     } = req.params;
-    mysqlconnection.query("CALL PROC_UPD_LIVETV_ES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    mysqlconnection.query("CALL PROC_UPD_LIVETV_ES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG,
-            COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD
+            COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD, ID
         ],
         (err, rows, fields) => {
             if (!err) {

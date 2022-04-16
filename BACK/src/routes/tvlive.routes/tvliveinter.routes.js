@@ -5,11 +5,11 @@ import * as tvliveINTERCtrl from '../../controllers/tvlive.controllers/tvliveint
 
 const router = Router();
 
-router.get('/', tvliveINTERCtrl.gettvliveinter);
-router.get('/selecttvinter', tvliveINTERCtrl.getselecttvliveinter);
-router.get('/:COD', tvliveINTERCtrl.gettvliveinterById);
+router.get('/:ID', tvliveINTERCtrl.gettvliveinter);
+router.get('/selecttvinter/:ID', tvliveINTERCtrl.getselecttvliveinter);
+router.get('/:COD/:ID', tvliveINTERCtrl.gettvliveinterById);
 router.post('/', tvliveINTERCtrl.createtvliveinter);
-router.put('/:COD', tvliveINTERCtrl.updatetvliveinterById);
+router.put('/:COD/:ID', tvliveINTERCtrl.updatetvliveinterById);
 router.delete('/:COD', tvliveINTERCtrl.deletetvliveinterById);
 
 export default router;

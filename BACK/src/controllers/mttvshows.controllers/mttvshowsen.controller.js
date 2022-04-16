@@ -3,7 +3,8 @@ const { downloadserieenback, downloadserieenposter } = require('../downloadimage
 
 // GET ALL CATALOG OF TV SHOWS EN
 export const gettvshowsen = (req, res) => {
-    mysqlconnection.query("CALL PROC_SEL_TVSHOW_EN()", (err, rows, fields) => {
+    const { ID } = req.params;
+    mysqlconnection.query("CALL PROC_SEL_TVSHOW_EN(?)", [ID], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -13,7 +14,8 @@ export const gettvshowsen = (req, res) => {
 }
 
 export const getselecttvshowsen = async (req, res) => {
-    mysqlconnection.query("CALL PROC_SELECT_TVSHOW_EN()", (err, rows, fields) => {
+    const { ID } = req.params;
+    mysqlconnection.query("CALL PROC_SELECT_TVSHOW_EN(?)", [ID], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -23,17 +25,22 @@ export const getselecttvshowsen = async (req, res) => {
 }
 
 export const countserieen = async (req, res) => {
-    mysqlconnection.query("CALL PROC_COUNTSERIEEN()", (err, rows, fields) => {
+    const {
+        ID
+    } = req.params;
+    mysqlconnection.query("CALL PROC_COUNTSERIEEN(?)",
+    [ID],(err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
-            console.log(err);
+            console.log(req.body);
         }
     });
 }
 
 export const gettvshowsenlastday = async (req, res) => {
-    mysqlconnection.query("CALL PROC_SEL_SERIESENLASTDAY()", (err, rows, fields) => {
+    const { ID } = req.params;
+    mysqlconnection.query("CALL PROC_SEL_SERIESENLASTDAY(?)",[ID], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -46,9 +53,10 @@ export const gettvshowsenlastday = async (req, res) => {
 // GET CATALOG OF TV SHOW EN BY ID
 export const gettvshowsenById = (req, res) => {
     const {
-        COD
+        COD,
+        ID
     } = req.params;
-    mysqlconnection.query('CALL PROC_SEL_TVSHOW_EN_COD(?)', [COD], (err,
+    mysqlconnection.query('CALL PROC_SEL_TVSHOW_EN_COD(?,?)', [COD, ID], (err,
         rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
@@ -132,11 +140,12 @@ export const updatetvshowsenById = (req, res) => {
         SYNOPSIS
     } = req.body;
     const {
-        COD
+        COD,
+        ID
     } = req.params;
-    mysqlconnection.query("CALL PROC_UPD_TVSHOW_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    mysqlconnection.query("CALL PROC_UPD_TVSHOW_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER,
-            YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS, COD
+            YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS, COD, ID
         ],
         (err, rows, fields) => {
             if (!err) {
@@ -152,9 +161,11 @@ export const updatetvshowsenById = (req, res) => {
 // DELETE CATALOG OF TV SHOW EN
 export const deletetvshowsenById = (req, res) => {
     const {
-        COD
+        COD,
+        ID
     } = req.params;
-    mysqlconnection.query('CALL PROC_DEL_TVSHOW_EN(?)', [COD],
+    mysqlconnection.query('CALL PROC_DEL_TVSHOW_EN(?,?)',
+    [COD, ID],
         (err, rows, fields) => {
             if (!err) {
                 res.json({

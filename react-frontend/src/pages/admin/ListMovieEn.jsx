@@ -48,7 +48,7 @@ const AddCapSerieEn = () => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const resultado = await clienteAxios.get("/mtmovie/en", config).then((response) => {
+            const resultado = await clienteAxios.get(`/mtmovie/en/${import.meta.env.VITE_ID_MOVIES_EN}`, config).then((response) => {
                 const data = response.data
                 setPeliculas(data)
             })
@@ -148,7 +148,7 @@ const AddCapSerieEn = () => {
                                                 Authorization: `Bearer ${token}`
                                             }
                                         }
-                                        clienteAxios.delete(`/mtmovie/en/${tableMeta.rowData[0]}`, config).then(() => {
+                                        clienteAxios.delete(`/mtmovie/en/${tableMeta.rowData[0]}/${import.meta.env.VITE_ID_MOVIES_EN}`, config).then(() => {
                                             // actualizar el state
                                             consultarApi()
 

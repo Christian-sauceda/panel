@@ -17,7 +17,7 @@ const CardUltimasSeriesEs = () => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const resultado = await ClienteAxios.get("/mtmovie/en/getmovieen/lastday", config).then((response) => {
+            const resultado = await ClienteAxios.get(`/mtmovie/en/getmovieen/lastday/${import.meta.env.VITE_ID_MOVIES_EN}`, config).then((response) => {
                 const data = response.data
                 guardarSeries(data)
             })

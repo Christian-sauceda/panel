@@ -56,7 +56,7 @@ const AddCapSerieAdult = () => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const resultado = await clienteAxios.get("/mtmovie/adult", config).then((response) => {
+            const resultado = await clienteAxios.get(`/mtmovie/adult/${import.meta.env.VITE_ID_MOVIES_AD}`, config).then((response) => {
                 const data = response.data
                 setPeliculas(data)
             })
@@ -155,10 +155,9 @@ const AddCapSerieAdult = () => {
                                                 Authorization: `Bearer ${token}`
                                             }
                                         }
-                                        clienteAxios.delete(`/mtmovie/adult/${tableMeta.rowData[0]}`, config).then(() => {
+                                        clienteAxios.delete(`/mtmovie/adult/${tableMeta.rowData[0]}/${import.meta.env.VITE_ID_MOVIES_AD}`, config).then(() => {
                                             // actualizar el state
                                             consultarApi()
-
                                         })
                                         Swal.fire(
                                             '¡Eliminada!',

@@ -31,9 +31,10 @@ export default function AddSerieEs() {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const resultado = await clienteAxios.get(`/mtevent/${COD}`, config).then((response) => {
+            const resultado = await clienteAxios.get(`/mtevent/${COD}/${import.meta.env.VITE_ID_SPORT}`, config).then((response) => {
                 const data = response.data
                 setEditEvent(data)
+                console.log(data)
             })
             const resultadosa = await clienteAxios.get("/cataudio", config).then((response) => {
                 const sa = response.data;
@@ -43,7 +44,7 @@ export default function AddSerieEs() {
                 const sf = response.data;
                 setSelectformat(sf)
             })
-            const resultados = await clienteAxios.get("/mtevent/selevent/es", config).then((response) => {
+            const resultados = await clienteAxios.get(`/mtevent/selevent/es/${import.meta.env.VITE_ID_SPORT}`, config).then((response) => {
                 const evn = response.data;
                 setSelectcategoria(evn)
             })

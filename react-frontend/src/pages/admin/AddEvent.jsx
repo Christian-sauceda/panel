@@ -32,7 +32,7 @@ export default function AddSerieEs() {
                 setSelectformat(sf)
             })
 
-            const resultados = await clienteAxios.get("/mtevent/selevent/es", config).then((response) => {
+            const resultados = await clienteAxios.get(`/mtevent/selevent/es/${import.meta.env.VITE_ID_SPORT}`, config).then((response) => {
                 const evn = response.data;
                 setSelectcategoria(evn)
                 console.log(evn)

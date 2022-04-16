@@ -5,12 +5,12 @@ import * as movieENCtrl from '../../controllers/mtmovie.controllers/mtmovieen.co
 
 const router = Router();
 
-router.get('/', movieENCtrl.getmovieen);
-router.get('/:COD', movieENCtrl.getmovieenById);
-router.get('/count/en', movieENCtrl.countmovieen);
-router.get('/getmovieen/lastday', movieENCtrl.getmovieenlastday);
+router.get('/:ID', movieENCtrl.getmovieen);
+router.get('/:COD/:ID', movieENCtrl.getmovieenById);
+router.get('/count/en/:ID', movieENCtrl.countmovieen);
+router.get('/getmovieen/lastday/:ID', movieENCtrl.getmovieenlastday);
 router.post('/', movieENCtrl.createmovieen);
-router.put('/:COD', movieENCtrl.updatemovieenById);
-router.delete('/:COD', movieENCtrl.deletemovieenById);
+router.put('/:COD/:ID', movieENCtrl.updatemovieenById);
+router.delete('/:COD/:ID', movieENCtrl.deletemovieenById);
 
 export default router;

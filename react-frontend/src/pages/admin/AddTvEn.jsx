@@ -23,7 +23,7 @@ export default function AddSerieEs() {
             }
 
 
-            const resultados = await clienteAxios.get("/tvlive/en/selecttven", config).then((response) => {
+            const resultados = await clienteAxios.get(`/tvlive/en/selecttven/${import.meta.env.VITE_ID_LIVE_EN}`, config).then((response) => {
                 const tves = response.data;
                 setSelecttven(tves)
             })

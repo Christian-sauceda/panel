@@ -53,7 +53,7 @@ const AddCapSerieAdult = () => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const resultado = await clienteAxios.get("/mttvshows/es", config).then((response) => {
+            const resultado = await clienteAxios.get(`/mttvshows/es/${import.meta.env.VITE_ID_SERIES_ES}`, config).then((response) => {
                 const data = response.data
                 setPeliculas(data)
             })

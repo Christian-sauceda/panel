@@ -3,7 +3,8 @@ const { downloadmovieenback, downloadmovieenposter } = require('../downloadimage
 
 // GET ALL CATALOG OF MOVIES EN
 export const getmovieen = async (req, res) => {
-    mysqlconnection.query("CALL PROC_SEL_MOVIE_EN()", (err, rows, fields) => {
+    const { ID } = req.params;
+    mysqlconnection.query("CALL PROC_SEL_MOVIE_EN(?)", [ID], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -13,11 +14,15 @@ export const getmovieen = async (req, res) => {
 }
 
 export const countmovieen = async (req, res) => {
-    mysqlconnection.query("CALL PROC_COUNTMOVIEEN()", (err, rows, fields) => {
+    const {
+        ID
+    } = req.params;
+    mysqlconnection.query("CALL PROC_COUNTMOVIEEN(?)", 
+    [ID],(err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
-            console.log(err);
+            console.log(req.body);
         }
     });
 }
@@ -25,9 +30,10 @@ export const countmovieen = async (req, res) => {
 // GET CATALOG OF MOVIE EN BY ID
 export const getmovieenById = (req, res) => {
     const {
-        COD
+        COD,
+        ID
     } = req.params;
-    mysqlconnection.query('CALL PROC_SEL_MOVIE_EN_COD(?)', [COD], (err,
+    mysqlconnection.query('CALL PROC_SEL_MOVIE_EN_COD(?,?)', [COD,ID], (err,
         rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
@@ -38,7 +44,8 @@ export const getmovieenById = (req, res) => {
 };
 
 export const getmovieenlastday = async (req, res) => {
-    mysqlconnection.query("CALL PROC_SEL_MOVIEENLASTDAY()", (err, rows, fields) => {
+    const { ID } = req.params;
+    mysqlconnection.query("CALL PROC_SEL_MOVIEENLASTDAY(?)", [ID], (err, rows, fields) => {
         if (!err) {
             res.status(200).json(rows[0]);
         } else {
@@ -127,11 +134,12 @@ export const updatemovieenById = (req, res) => {
         SYNOPSIS
     } = req.body;
     const {
-        COD
+        COD,
+        ID
     } = req.params;
-    mysqlconnection.query("CALL PROC_UPD_MOVIE_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    mysqlconnection.query("CALL PROC_UPD_MOVIE_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF,
-            DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD
+            DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD, ID
         ],
         (err, rows, fields) => {
             if (!err) {
@@ -147,9 +155,10 @@ export const updatemovieenById = (req, res) => {
 // DELETE CATALOG OF MOVIE EN
 export const deletemovieenById = (req, res) => {
     const {
-        COD
+        COD,
+        ID
     } = req.params;
-    mysqlconnection.query('CALL PROC_DEL_MOVIE_EN(?)', [COD],
+    mysqlconnection.query('CALL PROC_DEL_MOVIE_EN(?,?)', [COD, ID],
         (err, rows, fields) => {
             if (!err) {
                 res.json({

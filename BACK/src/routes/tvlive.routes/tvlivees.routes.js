@@ -5,12 +5,11 @@ import * as tvliveESCtrl from '../../controllers/tvlive.controllers/tvlivees.con
 
 const router = Router();
 
-router.get('/', tvliveESCtrl.gettvlivees);
-router.get('/selecttves', tvliveESCtrl.getselecttvlivees);
-router.get('/:COD', tvliveESCtrl.gettvliveesById);
+router.get('/:ID', tvliveESCtrl.gettvlivees);
+router.get('/selecttves/:ID', tvliveESCtrl.getselecttvlivees);
+router.get('/:COD/:ID', tvliveESCtrl.gettvliveesById);
 router.post('/', tvliveESCtrl.createtvlivees);
-
-router.put('/:COD', tvliveESCtrl.updatetvliveesById);
+router.put('/:COD/:ID', tvliveESCtrl.updatetvliveesById);
 router.delete('/:COD', tvliveESCtrl.deletetvliveesById);
 
 export default router;

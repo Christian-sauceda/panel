@@ -8,12 +8,12 @@ const imageController = {
         const content = req.params.content;
         const type = req.params.type;
         const image = req.params.image;
-        const pathImage = path.resolve(__dirname, `../../imgs/${content}/${type}/${image}`);
+        const pathImage = path.resolve(__dirname, `../../../images/imgs/${content}/${type}/${image}`);
         //imgs\moviesadult\back\MOVIE XXXback.jpg
         if (await fs.existsSync(pathImage)) {
             res.sendFile(pathImage);
         } else {
-            const pathNoImage = path.resolve(__dirname, `../../imgs/no-image.jpg`);
+            const pathNoImage = path.resolve(__dirname, `../../../images/no-image.png`);
             res.sendFile(pathNoImage);
         }
     }

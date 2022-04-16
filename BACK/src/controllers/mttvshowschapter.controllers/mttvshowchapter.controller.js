@@ -63,8 +63,8 @@ export const createtvshowChapter = (req, res) => {
 
     // ruta de la imagen en el servidor
     const port = process.env.DOMINIO;
-    const imagback = process.env.RUTAIMAGESERIEESBACK
-    const imagposter = process.env.RUTAIMAGESERIEESPOSTER
+    const imagback = process.env.RUTAIMAGECAPSERIEBACK
+    const imagposter = process.env.RUTAIMAGECAPSERIEPOSTER
     const urlback = port + imagback + nameimgback;
     const urlposter = port + imagposter + nameimgposter;
 

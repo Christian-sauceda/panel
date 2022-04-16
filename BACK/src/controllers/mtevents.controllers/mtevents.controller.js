@@ -1,4 +1,5 @@
 const mysqlconnection = require("../../database");
+const { downloadeventposter } = require('../downloadimage.controllers/img.controllers');
 
 // GET ALL CATALOG OF EVENTS
 export const getevents = async (req, res) => {
@@ -57,19 +58,20 @@ export const countevent = async (req, res) => {
 
 // CREATE MOVIE ADULT
 export const createevent = (req, res) => {
-    const {
-        COD_AUDIO,
-        COD_CATEGORIA,
-        COD_CONTENIDO,
-        COD_USER,
-        TITLE,
-        POSTER,
-        URL,
-        COD_FORMAT_VIDEO
-    } = req.body;
+    const { COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO, COD_USER, TITLE,
+        POSTER, URL, COD_FORMAT_VIDEO } = req.body;
+        const urlimgposter = req.body.POSTER
+        const nameimgposter = req.body.COD_AUDIO + req.body.TITLE + 'poster.jpg';
+        // ruta de la imagen en el servidor
+        const port = process.env.DOMINIO;
+        const imagposter = process.env.RUTAIMAGEEVENTPOSTER
+        const urlposter = port + imagposter + nameimgposter;
+        downloadeventposter(urlimgposter, nameimgposter, function () {
+            console.log('done');
+        });
     const query = `CALL PROC_INS_EVENT(?,?,?,?,?,?,?,?)`;
     mysqlconnection.query(query, [ COD_AUDIO, COD_CATEGORIA,COD_CONTENIDO, 
-    COD_USER, TITLE, POSTER, URL, COD_FORMAT_VIDEO],
+    COD_USER, TITLE, urlposter, URL, COD_FORMAT_VIDEO],
         (err, rows, fields) => {
             if (!err) {
                 res.json({
@@ -83,22 +85,19 @@ export const createevent = (req, res) => {
 
 // UPDATE MOVIE ADULT
 export const updateeventById = (req, res) => {
-    const {
-        COD_AUDIO,
-        COD_CATEGORIA,
-        COD_CONTENIDO,
-        COD_USER,
-        TITLE,
-        POSTER,
-        COD_FORMAT_VIDEO,
-        URL
-    } = req.body;
-    const {
-        COD
-    } = req.params;
+    const { COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO, COD_USER, TITLE, POSTER, COD_FORMAT_VIDEO, URL } = req.body;
+    const { COD } = req.params;
+    const urlimgposter = req.body.POSTER
+        const nameimgposter = req.body.COD_AUDIO + req.body.TITLE + 'poster.jpg';
+        // ruta de la imagen en el servidor
+        const port = process.env.DOMINIO;
+        const imagposter = process.env.RUTAIMAGEEVENTPOSTER
+        const urlposter = port + imagposter + nameimgposter;
+        downloadeventposter(urlimgposter, nameimgposter, function () {
+            console.log('done');
+        });
     mysqlconnection.query("CALL PROC_UPD_EVENT(?,?,?,?,?,?,?,?,?)",
-        [COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO,
-        COD_USER, TITLE, POSTER, COD_FORMAT_VIDEO, URL, COD],
+        [COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO, COD_USER, TITLE, urlposter, COD_FORMAT_VIDEO, URL, COD],
         (err, rows, fields) => {
             if (!err) {
                 res.json({

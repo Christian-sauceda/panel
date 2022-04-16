@@ -72,7 +72,7 @@ export default function AddSerieEs() {
     const [alerta, setAlerta] = useState({});
     const handleSubmit = async e => {
         e.preventDefault();
-        if ([ COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO, COD_USER, TITLE, POSTER, URL, COD_FORMAT_VIDEO ].includes('')) {
+        if ([COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO, COD_USER, TITLE, POSTER, URL, COD_FORMAT_VIDEO].includes('')) {
             setAlerta({
                 msg: "Todos los campos son obligatorios",
                 error: true
@@ -108,12 +108,12 @@ export default function AddSerieEs() {
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                     <BannerEvent />
                     <div className="sm:flex sm:justify-between sm:items-center mb-8">
-                        
+
                         <form
                             onSubmit={handleSubmit}
                         >
                             <div className="flex flex-wrap">
-                                <div className="w-full lg:w-8/12 px-4 pt-36">
+                                <div className="w-full lg:w-8/12 px-4 pt-24">
                                     <div className="relative min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
                                         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                                             <div className="flex flex-wrap pt-4">
@@ -196,7 +196,7 @@ export default function AddSerieEs() {
                                                             {selectformat.map(format => (
                                                                 <option key={format.COD_FORMATO} value={format.COD_FORMATO}>{format.FORMATO}</option>
                                                             ))}
-                                                            
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -219,11 +219,19 @@ export default function AddSerieEs() {
                                                             {selectaudio.map(format => (
                                                                 <option key={format.COD_AUDIO} value={format.COD_AUDIO}>{format.AUDIO}</option>
                                                             ))}
-                                                            
+
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        {msg && <Alerta alerta={alerta} />}
+                                        <div className="">
+                                            <input type="submit"
+                                                value="añadir"
+                                                className="cla"
+                                                to="#"
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -234,7 +242,7 @@ export default function AddSerieEs() {
                                                 <img
                                                     alt="..."
                                                     src={`${''}`}
-                                                    style={{ minHeight: "300px", maxHeight: "300px", background: "#f3f4f6" }}
+                                                    style={{ minHeight: "230px", maxHeight: "230px", background: "#f3f4f6" }}
                                                 />
                                                 <img
                                                     alt="..."
@@ -275,19 +283,11 @@ export default function AddSerieEs() {
                                     </div>
                                 </div>
                             </div>
-                            {msg && <Alerta alerta={alerta} />}
-                            <div className="">
-                                <input type="submit"
-                                    value="añadir"
-                                    className="cla"
-                                    to="#"
-                                />
-                            </div>
                         </form>
                     </div>
-                    
+
                 </div>
-                
+
             </main>
         </>
     );

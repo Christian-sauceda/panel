@@ -233,6 +233,14 @@ export default function AddSerieEs() {
                                             </div>
                                         </div>
                                     </div>
+                                    {msg && <Alerta alerta={alerta} />}
+                            <div className="">
+                                <input type="submit"
+                                    value="añadir"
+                                    className="cla"
+                                    to="#"
+                                />
+                            </div>
                                 </div>
                                 <div className="w-full lg:w-4/12 px-4">
                                     <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
@@ -241,13 +249,13 @@ export default function AddSerieEs() {
                                                 <img
                                                     alt="..."
                                                     src={`${''}`}
-                                                    style={{ minHeight: "300px", maxHeight: "300px", background: "#f3f4f6" }}
+                                                    style={{ minHeight: "230px", maxHeight: "230px", background: "#e5e7eb" }}
 
                                                 />
                                                 <img
                                                     alt="..."
                                                     src={`${POSTER}`}
-                                                    style={{ minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
+                                                    style={{ minHeight: "200px", margin: 0, minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
                                                     className="eye absolute" />
                                             </div>
 
@@ -284,14 +292,6 @@ export default function AddSerieEs() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            {msg && <Alerta alerta={alerta} />}
-                            <div className="">
-                                <input type="submit"
-                                    value="añadir"
-                                    className="cla"
-                                    to="#"
-                                />
                             </div>
                         </form>
                     </div>

@@ -1,4 +1,5 @@
 const mysqlconnection = require("../../database");
+const { downloadtvinterposter } = require('../downloadimage.controllers/img.controllers');
 
 // GET ALL CATALOG OF TV LIVE INTERNACIONAL
 export const gettvliveinter = (req, res) => {
@@ -40,28 +41,21 @@ export const gettvliveinterById = (req, res) => {
 
 // CREATE CATALOG OF TV LIVE INTERNACIONAL
 export const createtvliveinter = (req, res) => {
-    const {
-        COD_EPG_CHANNEL,
-        COD_CATEGORY,
-        COD_SERVER,
-        COD_USER,
-        COD_CHANNEL_EPG,
-        COD_SERVER_EPG,
-        COD_EPG,
-        TITLE,
-        POSTER,
-        URL,
-        SERVER_EPG,
-        EPG_NOW,
-        EPG_NEXT,
-        STATTUS,
-        ORDER_LIVE_TV,
-        ICON,
-        COD_CONTENIDO
-    } = req.body;
+    const { COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG,
+        COD_SERVER_EPG, COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW,
+        EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD_CONTENIDO } = req.body;
+        const urlimgposter = req.body.POSTER
+        const nameimgposter = req.body.COD_CATEGORY + req.body.TITLE + 'poster.jpg';
+        // ruta de la imagen en el servidor
+        const port = process.env.DOMINIO;
+        const imagposter = process.env.RUTAIMAGETVINTERPOSTER
+        const urlposter = port + imagposter + nameimgposter;
+        downloadtvinterposter(urlimgposter, nameimgposter, function () {
+            console.log('done');
+        });
     const query = 'CALL PROC_INS_LIVETV_INTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
     mysqlconnection.query(query, [COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG,
-        COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD_CONTENIDO
+        COD_EPG, TITLE, urlposter, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD_CONTENIDO
         ],
         (err, rows, fields) => {
             if (!err) {
@@ -76,31 +70,22 @@ export const createtvliveinter = (req, res) => {
 
 // UPDATE CATALOG OF TV LIVE INTERNACIONAL
 export const updatetvliveinterById = (req, res) => {
-    const {
-        COD_EPG_CHANNEL,
-        COD_CATEGORY,
-        COD_SERVER,
-        COD_USER,
-        COD_CHANNEL_EPG,
-        COD_SERVER_EPG,
-        COD_EPG,
-        TITLE,
-        POSTER,
-        URL,
-        SERVER_EPG,
-        EPG_NOW,
-        EPG_NEXT,
-        STATTUS,
-        ORDER_LIVE_TV,
-        ICON
-    } = req.body;
-    const {
-        COD,
-        ID
-    } = req.params;
+    const { COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG,
+        COD_SERVER_EPG, COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW,
+        EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON } = req.body;
+    const { COD, ID } = req.params;
+    const urlimgposter = req.body.POSTER
+    const nameimgposter = req.body.COD + req.body.TITLE + 'poster.jpg';
+    // ruta de la imagen en el servidor
+    const port = process.env.DOMINIO;
+    const imagposter = process.env.RUTAIMAGETVINTERPOSTER
+    const urlposter = port + imagposter + nameimgposter;
+    downloadtvinterposter(urlimgposter, nameimgposter, function () {
+        console.log('done');
+    });
     mysqlconnection.query("CALL PROC_UPD_LIVETV_INTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG,
-            COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD, ID
+            COD_EPG, TITLE, urlposter, URL, SERVER_EPG, EPG_NOW, EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD, ID
         ],
         (err, rows, fields) => {
             if (!err) {

@@ -35,7 +35,6 @@ export const gettvshowseslastday = async (req, res) => {
     });
 }
 
-
 // GET CATALOG OF TV SHOW ES BY ID
 export const gettvshowsesById = (req, res) => {
     const {
@@ -68,44 +67,24 @@ export const countseriees = async (req, res) => {
 
 // CREATE CATALOG OF TV SHOW ES
 export const createtvshowses = (req, res) => {
-    const {
-        CODAUDIO,
-        CODCATEGORY,
-        CODUSER,
-        TITLE,
-        TITLE_LATIN,
-        BACK,
-        POSTER,
-        YEAR,
-        CLASIF,
-        COUNTRY,
-        CALIF,
-        DIRECTOR,
-        CAST,
-        SYNOPSIS,
-        COD_CONTENIDO
-    } = req.body;
-
+    const { CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER, YEAR,
+        CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS, COD_CONTENIDO } = req.body;
     const urlimgback = req.body.BACK
     const nameimgback = req.body.TITLE + 'back.jpg';
     const urlimgposter = req.body.POSTER
     const nameimgposter = req.body.TITLE + 'poster.jpg';
-
     downloadserieesback(urlimgback, nameimgback, function () {
         console.log('done');
     });
-
     // ruta de la imagen en el servidor
     const port = process.env.DOMINIO;
     const imagback = process.env.RUTAIMAGESERIEESBACK
     const imagposter = process.env.RUTAIMAGESERIEESPOSTER
     const urlback = port + imagback + nameimgback;
     const urlposter = port + imagposter + nameimgposter;
-
     downloadserieesposter(urlimgposter, nameimgposter, function () {
         console.log('done');
     });
-
     const query = 'CALL PROC_INS_TVSHOW_ES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
     mysqlconnection.query(query, [CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, urlback,
         urlposter, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS, COD_CONTENIDO
@@ -123,28 +102,27 @@ export const createtvshowses = (req, res) => {
 
 // UPDATE CATALOG OF TV SHOW ES
 export const updatetvshowsesById = (req, res) => {
-    const {
-        CODAUDIO,
-        CODCATEGORY,
-        CODUSER,
-        TITLE,
-        TITLE_LATIN,
-        BACK,
-        POSTER,
-        YEAR,
-        CLASIF,
-        COUNTRY,
-        CALIF,
-        DIRECTOR,
-        CAST,
-        SYNOPSIS
-    } = req.body;
-    const {
-        COD,
-        ID
-    } = req.params;
+    const { CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER, YEAR,
+        CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS } = req.body;
+    const { COD, ID } = req.params;
+    const urlimgback = req.body.BACK
+    const nameimgback = req.body.TITLE + 'back.jpg';
+    const urlimgposter = req.body.POSTER
+    const nameimgposter = req.body.TITLE + 'poster.jpg';
+    downloadserieesback(urlimgback, nameimgback, function () {
+        console.log('done');
+    });
+    // ruta de la imagen en el servidor
+    const port = process.env.DOMINIO;
+    const imagback = process.env.RUTAIMAGESERIEESBACK
+    const imagposter = process.env.RUTAIMAGESERIEESPOSTER
+    const urlback = port + imagback + nameimgback;
+    const urlposter = port + imagposter + nameimgposter;
+    downloadserieesposter(urlimgposter, nameimgposter, function () {
+        console.log('done');
+    });
     mysqlconnection.query("CALL PROC_UPD_TVSHOW_ES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER,
+        [CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, urlback, urlposter,
             YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS, COD, ID
         ],
         (err, rows, fields) => {

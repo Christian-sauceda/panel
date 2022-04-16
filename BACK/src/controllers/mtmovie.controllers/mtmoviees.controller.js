@@ -54,36 +54,16 @@ export const getmovieesById = (req, res) => {
 
 // CREATE CATALOG OF MOVIE
 export const createmoviees = (req, res) => {
-    const {
-        CODAUDIO,
-        CODQUALITY,
-        CODCATEGORY,
-        CODUSER,
-        TITLE,
-        BACK,
-        POSTER,
-        YEAR,
-        CLASIF,
-        DURATION,
-        COUNTRY,
-        CALIF,
-        DIRECTOR,
-        CAST,
-        ASKPIN,
-        CODFORMATVIDEO,
-        URL,
-        SYNOPSIS,
-        COD_CONTENIDO
-    } = req.body;
+    const { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF,
+        DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO } = req.body;
+
     const urlimgback = req.body.BACK
     const nameimgback = req.body.TITLE + 'back.jpg';
     const urlimgposter = req.body.POSTER
     const nameimgposter = req.body.TITLE + 'poster.jpg';
-
     downloadmovieesback(urlimgback, nameimgback, function () {
         console.log('done');
     });
-
     // ruta de la imagen en el servidor
     const port = process.env.DOMINIO;
     const imagback = process.env.RUTAIMAGEMOVIESBACK
@@ -113,31 +93,30 @@ export const createmoviees = (req, res) => {
 // UPDATE CATALOG OF MOVIE
 export const updatemovieesById = (req, res) => {
     const {
-        CODAUDIO,
-        CODQUALITY,
-        CODCATEGORY,
-        CODUSER,
-        TITLE,
-        BACK,
-        POSTER,
-        YEAR,
-        CLASIF,
-        DURATION,
-        COUNTRY,
-        CALIF,
-        DIRECTOR,
-        CAST,
-        ASKPIN,
-        CODFORMATVIDEO,
-        URL,
-        SYNOPSIS
-    } = req.body;
-    const {
-        COD,
-        ID
-    } = req.params;
+        CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION,
+        COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS } = req.body;
+    const { COD, ID } = req.params;
+
+    const urlimgback = req.body.BACK
+    const nameimgback = req.body.TITLE + 'back.jpg';
+    const urlimgposter = req.body.POSTER
+    const nameimgposter = req.body.TITLE + 'poster.jpg';
+    downloadmovieesback(urlimgback, nameimgback, function () {
+        console.log('done');
+    });
+    // ruta de la imagen en el servidor
+    const port = process.env.DOMINIO;
+    const imagback = process.env.RUTAIMAGEMOVIESBACK
+    const imagposter = process.env.RUTAIMAGEMOVIESPOSTER
+    const urlback = port + imagback + nameimgback;
+    const urlposter = port + imagposter + nameimgposter;
+
+    downloadmovieesposter(urlimgposter, nameimgposter, function () {
+        console.log('done');
+    });
+
     mysqlconnection.query("CALL PROC_UPD_MOVIE_ES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF,
+        [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, urlback, urlposter, YEAR, CLASIF, DURATION, COUNTRY, CALIF,
             DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD, ID
         ],
         (err, rows, fields) => {

@@ -30,7 +30,7 @@ export default function AddSerieEs() {
                 const cser = response.data;
                 setSelectCser(cser)
             })
-            
+
             const resultadosce = await clienteAxios.get("/catepgchannel", config).then((response) => {
                 const cepg = response.data;
                 setSelectCepg(cepg)
@@ -207,8 +207,8 @@ export default function AddSerieEs() {
                                                             >
                                                                 <option value="">Selecciona un Servidor</option>
                                                                 {selectCser.map((item) => (
-                                                                <option key={item.COD_TYPE_SERVER} value={item.COD_TYPE_SERVER}>{item.NAME}</option>
-                                                            ))}
+                                                                    <option key={item.COD_TYPE_SERVER} value={item.COD_TYPE_SERVER}>{item.NAME}</option>
+                                                                ))}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -230,14 +230,22 @@ export default function AddSerieEs() {
                                                             >
                                                                 <option value="">Selecciona un Canal</option>
                                                                 {selectCepg.map((item) => (
-                                                                <option key={item.COD_EPG_CHANNEL} value={item.COD_EPG_CHANNEL}>{item.NAME_CHANNEL}</option>
-                                                            ))}
+                                                                    <option key={item.COD_EPG_CHANNEL} value={item.COD_EPG_CHANNEL}>{item.NAME_CHANNEL}</option>
+                                                                ))}
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    {msg && <Alerta alerta={alerta} />}
+                                    <div className="">
+                                        <input type="submit"
+                                            value="añadir"
+                                            className="cla"
+                                            to="#"
+                                        />
                                     </div>
                                 </div>
                                 <div className="w-full lg:w-4/12 px-4">
@@ -248,7 +256,6 @@ export default function AddSerieEs() {
                                                     alt="..."
                                                     src={`${''}`}
                                                     style={{ minHeight: "300px", maxHeight: "300px", background: "#f3f4f6" }}
-
                                                 />
                                                 <img
                                                     alt="..."
@@ -256,9 +263,7 @@ export default function AddSerieEs() {
                                                     style={{ minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
                                                     className="eye absolute" />
                                             </div>
-
                                             <div className="text-center md:mt-10 mt-20">
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -290,14 +295,6 @@ export default function AddSerieEs() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            {msg && <Alerta alerta={alerta} />}
-                            <div className="">
-                                <input type="submit"
-                                    value="añadir"
-                                    className="cla"
-                                    to="#"
-                                />
                             </div>
                         </form>
                     </div>

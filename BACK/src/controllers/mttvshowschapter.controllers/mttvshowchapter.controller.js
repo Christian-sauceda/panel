@@ -38,55 +38,28 @@ export const getchapterByChapter = (req, res) => {
 
 // CREATE CHAPTER FOR TV SHOW
 export const createtvshowChapter = (req, res) => {
-    const {
-        COD_CONTENT,
-        COD_FORMAT_VIDEO,
-        COD_USER,
-        NAME_CHAPTER,
-        NUMBER_SEASON,
-        NUMBER_CHAPTER,
-        SYNOSIS,
-        URL,
-        SUPTITLE,
-        BACK,
-        POSTER
-    } = req.body;
-
+    const { COD_CONTENT, COD_FORMAT_VIDEO, COD_USER, NAME_CHAPTER, NUMBER_SEASON, NUMBER_CHAPTER,
+        SYNOSIS, URL, SUPTITLE, BACK, POSTER } = req.body;
     const urlimgback = req.body.BACK
     const nameimgback = req.body.COD_CONTENT + req.body.NAME_CHAPTER + 'back.jpg';
     const urlimgposter = req.body.POSTER
     const nameimgposter = req.body.COD_CONTENT + req.body.NAME_CHAPTER + 'poster.jpg';
-
     downloadcapserieback(urlimgback, nameimgback, function () {
         console.log('done');
     });
-
     // ruta de la imagen en el servidor
     const port = process.env.DOMINIO;
     const imagback = process.env.RUTAIMAGECAPSERIEBACK
     const imagposter = process.env.RUTAIMAGECAPSERIEPOSTER
     const urlback = port + imagback + nameimgback;
     const urlposter = port + imagposter + nameimgposter;
-
     downloadcapserieposter(urlimgposter, nameimgposter, function () {
         console.log('done');
     });
     const query = "CALL PROC_INS_CHAPTER(?,?,?,?,?,?,?,?,?,?,?)";
     mysqlconnection.query(
-        query,
-        [
-            COD_CONTENT,
-            COD_FORMAT_VIDEO,
-            COD_USER,
-            NAME_CHAPTER,
-            NUMBER_SEASON,
-            NUMBER_CHAPTER,
-            SYNOSIS,
-            URL,
-            SUPTITLE,
-            urlback,
-            urlposter
-        ],
+        query, [ COD_CONTENT, COD_FORMAT_VIDEO, COD_USER, NAME_CHAPTER, NUMBER_SEASON,
+            NUMBER_CHAPTER, SYNOSIS, URL, SUPTITLE, urlback, urlposter ],
         (err, rows, fields) => {
             if (!err) {
                 res.json({
@@ -101,36 +74,27 @@ export const createtvshowChapter = (req, res) => {
 
 // UPDATE CHAPTER FOR TV SHOW
 export const updatetvshowsChapterById = (req, res) => {
-    const {
-        COD_CONTENT,
-        NAME_CHAPTER,
-        NUMBER_SEASON,
-        NUMBER_CHAPTER,
-        COD_FORMAT_VIDEO,
-        COD_USER,
-        SYNOSIS,
-        URL,
-        BACK,
-        POSTER
-    } = req.body;
-    const {
-        COD
-    } = req.params;
-    mysqlconnection.query(
-        "CALL PROC_UPD_CHAPTER(?,?,?,?,?,?,?,?,?,?,?)",
-        [
-            COD_CONTENT,
-            NAME_CHAPTER,
-            NUMBER_SEASON,
-            NUMBER_CHAPTER,
-            COD_FORMAT_VIDEO,
-            COD_USER,
-            SYNOSIS,
-            URL,
-            COD,
-            BACK,
-            POSTER,
-        ],
+    const { COD_CONTENT, NAME_CHAPTER, NUMBER_SEASON, NUMBER_CHAPTER, COD_FORMAT_VIDEO,
+        COD_USER, SYNOSIS, URL, BACK, POSTER } = req.body;
+    const { COD } = req.params;
+    const urlimgback = req.body.BACK
+    const nameimgback = req.body.COD_CONTENT + req.body.NAME_CHAPTER + 'back.jpg';
+    const urlimgposter = req.body.POSTER
+    const nameimgposter = req.body.COD_CONTENT + req.body.NAME_CHAPTER + 'poster.jpg';
+    downloadcapserieback(urlimgback, nameimgback, function () {
+        console.log('done');
+    });
+    // ruta de la imagen en el servidor
+    const port = process.env.DOMINIO;
+    const imagback = process.env.RUTAIMAGECAPSERIEBACK
+    const imagposter = process.env.RUTAIMAGECAPSERIEPOSTER
+    const urlback = port + imagback + nameimgback;
+    const urlposter = port + imagposter + nameimgposter;
+    downloadcapserieposter(urlimgposter, nameimgposter, function () {
+        console.log('done');
+    });
+    mysqlconnection.query("CALL PROC_UPD_CHAPTER(?,?,?,?,?,?,?,?,?,?,?)", [ COD_CONTENT, NAME_CHAPTER,
+        NUMBER_SEASON, NUMBER_CHAPTER, COD_FORMAT_VIDEO, COD_USER, SYNOSIS, URL, COD, urlback, urlposter ],
         (err, rows, fields) => {
             if (!err) {
                 res.json({

@@ -21,23 +21,19 @@ export default function AddSerieEs() {
                     Authorization: `Bearer ${token}`
                 }
             }
-
-
             const resultados = await clienteAxios.get(`/tvlive/en/selecttven/${import.meta.env.VITE_ID_LIVE_EN}`, config).then((response) => {
                 const tves = response.data;
                 setSelecttven(tves)
             })
-
             const resultadoscs = await clienteAxios.get("/catypeserver", config).then((response) => {
                 const cser = response.data;
                 setSelectCser(cser)
             })
-            
+
             const resultadosce = await clienteAxios.get("/catepgchannel", config).then((response) => {
                 const cepg = response.data;
                 setSelectCepg(cepg)
             })
-
         } catch (error) {
             console.log(error);
         }
@@ -45,8 +41,6 @@ export default function AddSerieEs() {
     useEffect(() => {
         mostrarDatos();
     }, [])
-
-
     const { auth } = useAuth()
     const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_LIVE_EN}`);
     const [COD_EPG_CHANNEL, setCOD_EPG_CHANNEL] = useState("");
@@ -65,9 +59,7 @@ export default function AddSerieEs() {
     const [STATTUS, setSTATTUS] = useState("1");
     const [ORDER_LIVE_TV, setORDER_LIVE_TV] = useState("1");
     const [ICON, setICON] = useState("NULL");
-
     const [alerta, setAlerta] = useState({});
-
     const handleSubmit = async e => {
         e.preventDefault();
         if ([COD_EPG_CHANNEL, COD_CATEGORY, COD_SERVER, COD_USER, COD_CHANNEL_EPG, COD_SERVER_EPG, COD_EPG,
@@ -78,9 +70,7 @@ export default function AddSerieEs() {
             })
             return;
         }
-
         setAlerta({})
-
         try {
             const token = localStorage.getItem("token")
             const config = {
@@ -102,14 +92,12 @@ export default function AddSerieEs() {
             setTITLE("");
             setPOSTER("");
             setURL("");
-
         } catch (error) {
             setAlerta({
                 msg: error.response.data.message,
                 error: true
             })
         }
-
     }
     const { msg } = alerta;
     return (
@@ -122,14 +110,10 @@ export default function AddSerieEs() {
                             onSubmit={handleSubmit}
                         >
                             <div className="flex flex-wrap">
-
                                 <div className="w-full lg:w-8/12 px-4">
                                     <div className="relative min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
-
                                         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-
                                             <div className="flex flex-wrap pt-4">
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -149,7 +133,6 @@ export default function AddSerieEs() {
                                                         />
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -169,7 +152,6 @@ export default function AddSerieEs() {
                                                         />
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-8/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -213,12 +195,11 @@ export default function AddSerieEs() {
                                                             >
                                                                 <option value="">Selecciona un Servidor</option>
                                                                 {selectCser.map((item) => (
-                                                                <option key={item.COD_TYPE_SERVER} value={item.COD_TYPE_SERVER}>{item.NAME}</option>
-                                                            ))}
+                                                                    <option key={item.COD_TYPE_SERVER} value={item.COD_TYPE_SERVER}>{item.NAME}</option>
+                                                                ))}
                                                             </select>
                                                         </div>
                                                     </div>
-
                                                     <div className="w-full lg:w-4/12 px-4">
                                                         <div className="relative w-full mb-3">
                                                             <label
@@ -236,14 +217,22 @@ export default function AddSerieEs() {
                                                             >
                                                                 <option value="">Selecciona un Canal</option>
                                                                 {selectCepg.map((item) => (
-                                                                <option key={item.COD_EPG_CHANNEL} value={item.COD_EPG_CHANNEL}>{item.NAME_CHANNEL}</option>
-                                                            ))}
+                                                                    <option key={item.COD_EPG_CHANNEL} value={item.COD_EPG_CHANNEL}>{item.NAME_CHANNEL}</option>
+                                                                ))}
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    {msg && <Alerta alerta={alerta} />}
+                                    <div className="">
+                                        <input type="submit"
+                                            value="añadir"
+                                            className="cla"
+                                            to="#"
+                                        />
                                     </div>
                                 </div>
                                 <div className="w-full lg:w-4/12 px-4">
@@ -254,7 +243,6 @@ export default function AddSerieEs() {
                                                     alt="..."
                                                     src={`${''}`}
                                                     style={{ minHeight: "300px", maxHeight: "300px", background: "#f3f4f6" }}
-
                                                 />
                                                 <img
                                                     alt="..."
@@ -262,9 +250,7 @@ export default function AddSerieEs() {
                                                     style={{ minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
                                                     className="eye absolute" />
                                             </div>
-
                                             <div className="text-center md:mt-10 mt-20">
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -296,14 +282,6 @@ export default function AddSerieEs() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            {msg && <Alerta alerta={alerta} />}
-                            <div className="">
-                                <input type="submit"
-                                    value="añadir"
-                                    className="cla"
-                                    to="#"
-                                />
                             </div>
                         </form>
                     </div>

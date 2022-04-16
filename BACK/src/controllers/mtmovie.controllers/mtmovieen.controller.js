@@ -56,46 +56,27 @@ export const getmovieenlastday = async (req, res) => {
 
 // CREATE CATALOG OF MOVIE EN
 export const createmovieen = (req, res) => {
-    const {
-        CODAUDIO,
-        CODQUALITY,
-        CODCATEGORY,
-        CODUSER,
-        TITLE,
-        BACK,
-        POSTER,
-        YEAR,
-        CLASIF,
-        DURATION,
-        COUNTRY,
-        CALIF,
-        DIRECTOR,
-        CAST,
-        ASKPIN,
-        CODFORMATVIDEO,
-        URL,
-        SYNOPSIS,
-        COD_CONTENIDO
-    } = req.body;
+    const { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER,
+        YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN,
+        CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO } = req.body;
+
     const urlimgback = req.body.BACK
     const nameimgback = req.body.TITLE + 'back.jpg';
     const urlimgposter = req.body.POSTER
     const nameimgposter = req.body.TITLE + 'poster.jpg';
-
     downloadmovieenback(urlimgback, nameimgback, function () {
         console.log('done');
     });
-
     // ruta de la imagen en el servidor
     const port = process.env.DOMINIO;
     const imagback = process.env.RUTAIMAGEMOVIEENBACK
     const imagposter = process.env.RUTAIMAGEMOVIEENPOSTER
     const urlback = port + imagback + nameimgback;
     const urlposter = port + imagposter + nameimgposter;
-
     downloadmovieenposter(urlimgposter, nameimgposter, function () {
         console.log('done');
     });
+
     const query = `CALL PROC_INS_MOVIE_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
     mysqlconnection.query(query, [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, urlback, urlposter,
         YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO
@@ -114,31 +95,29 @@ export const createmovieen = (req, res) => {
 // UPDATE CATALOG OF MOVIE EN
 export const updatemovieenById = (req, res) => {
     const {
-        CODAUDIO,
-        CODQUALITY,
-        CODCATEGORY,
-        CODUSER,
-        TITLE,
-        BACK,
-        POSTER,
-        YEAR,
-        CLASIF,
-        DURATION,
-        COUNTRY,
-        CALIF,
-        DIRECTOR,
-        CAST,
-        ASKPIN,
-        CODFORMATVIDEO,
-        URL,
-        SYNOPSIS
-    } = req.body;
-    const {
-        COD,
-        ID
-    } = req.params;
+        CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR,
+        CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN,
+        CODFORMATVIDEO, URL, SYNOPSIS } = req.body;
+    const { COD, ID } = req.params;
+
+    const urlimgback = req.body.BACK
+    const nameimgback = req.body.TITLE + 'back.jpg';
+    const urlimgposter = req.body.POSTER
+    const nameimgposter = req.body.TITLE + 'poster.jpg';
+    downloadmovieenback(urlimgback, nameimgback, function () {
+        console.log('done');
+    });
+    // ruta de la imagen en el servidor
+    const port = process.env.DOMINIO;
+    const imagback = process.env.RUTAIMAGEMOVIEENBACK
+    const imagposter = process.env.RUTAIMAGEMOVIEENPOSTER
+    const urlback = port + imagback + nameimgback;
+    const urlposter = port + imagposter + nameimgposter;
+    downloadmovieenposter(urlimgposter, nameimgposter, function () {
+        console.log('done');
+    });
     mysqlconnection.query("CALL PROC_UPD_MOVIE_EN(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF,
+        [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, urlback, urlposter, YEAR, CLASIF, DURATION, COUNTRY, CALIF,
             DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD, ID
         ],
         (err, rows, fields) => {

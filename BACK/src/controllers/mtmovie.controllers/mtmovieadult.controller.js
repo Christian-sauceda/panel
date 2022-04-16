@@ -13,7 +13,6 @@ export const getmovieadult = async (req, res) => {
     });
 }
 
-
 export const countmovieadult = async (req, res) => {
     const {
         ID
@@ -58,37 +57,22 @@ export const getmovieadultById = (req, res) => {
 // CREATE MOVIE ADULT
 export const createmovieadult = (req, res) => {
     const {
-        CODAUDIO,
-        CODQUALITY,
-        CODCATEGORY,
-        CODUSER,
-        TITLE,
-        BACK,
-        POSTER,
-        YEAR,
-        DURATION,
-        CODFORMATVIDEO,
-        URL,
-        SYNOPSIS,
-        COD_CONTENIDO
-    } = req.body;
+        CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR,
+        DURATION, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO } = req.body;
 
     const urlimgback = req.body.BACK
     const nameimgback = req.body.TITLE + 'back.jpg';
     const urlimgposter = req.body.POSTER
     const nameimgposter = req.body.TITLE + 'poster.jpg';
-
     downloadmovieadultback(urlimgback, nameimgback, function () {
         console.log('done');
     });
-
     // ruta de la imagen en el servidor
     const port = process.env.DOMINIO;
     const imagback = process.env.RUTAIMAGEMOVIEADULTBACK
     const imagposter = process.env.RUTAIMAGEMOVIEADULTPOSTER
     const urlback = port + imagback + nameimgback;
     const urlposter = port + imagposter + nameimgposter;
-
     downloadmovieadultposter(urlimgposter, nameimgposter, function () {
         console.log('done');
     });
@@ -110,26 +94,27 @@ export const createmovieadult = (req, res) => {
 
 // UPDATE MOVIE ADULT
 export const updatemovieadultById = (req, res) => {
-    const {
-        CODAUDIO,
-        CODQUALITY,
-        CODCATEGORY,
-        CODUSER,
-        TITLE,
-        BACK,
-        POSTER,
-        YEAR,
-        DURATION,
-        CODFORMATVIDEO,
-        URL,
-        SYNOPSIS,
-        COD_CONTENIDO
-    } = req.body;
-    const {
-        COD
-    } = req.params;
+    const { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR,
+        DURATION, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO } = req.body;
+    const { COD } = req.params;
+    const urlimgback = req.body.BACK
+    const nameimgback = req.body.TITLE + 'back.jpg';
+    const urlimgposter = req.body.POSTER
+    const nameimgposter = req.body.TITLE + 'poster.jpg';
+    downloadmovieadultback(urlimgback, nameimgback, function () {
+        console.log('done');
+    });
+    // ruta de la imagen en el servidor
+    const port = process.env.DOMINIO;
+    const imagback = process.env.RUTAIMAGEMOVIEADULTBACK
+    const imagposter = process.env.RUTAIMAGEMOVIEADULTPOSTER
+    const urlback = port + imagback + nameimgback;
+    const urlposter = port + imagposter + nameimgposter;
+    downloadmovieadultposter(urlimgposter, nameimgposter, function () {
+        console.log('done');
+    });
     mysqlconnection.query("CALL PROC_UPD_MOVIE_ADULT(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, DURATION,
+        [CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, urlback, urlposter, YEAR, DURATION,
             CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO, COD
         ],
         (err, rows, fields) => {

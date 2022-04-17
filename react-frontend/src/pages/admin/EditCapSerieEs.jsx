@@ -46,7 +46,7 @@ export default function AddCapSerieEs() {
                 setSelectformato(sf)
             })
 
-            const resultados = await clienteAxios.get("/mttvshows/es/seltvshow/es", config).then((response) => {
+            const resultados = await clienteAxios.get(`/mttvshows/es/seltvshow/es/${import.meta.env.VITE_ID_SERIES_ES}`, config).then((response) => {
                 const s = response.data;
                 setSelectSeriees(s)
             })

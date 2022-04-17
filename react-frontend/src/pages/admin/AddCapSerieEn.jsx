@@ -267,6 +267,14 @@ export default function AddCapSerieEs() {
                                             </div>
                                         </div>
                                     </div>
+                                    {msg && <Alerta alerta={alerta} />}
+                            <div className="">
+                                <input type="submit"
+                                    value="añadir"
+                                    className="cla"
+                                    to="#"
+                                />
+                            </div>
                                 </div>
 
                                 <div className="w-full lg:w-4/12 px-4">
@@ -338,14 +346,6 @@ export default function AddCapSerieEs() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            {msg && <Alerta alerta={alerta} />}
-                            <div className="">
-                                <input type="submit"
-                                    value="añadir"
-                                    className="cla"
-                                    to="#"
-                                />
                             </div>
                         </form>
                     </div>

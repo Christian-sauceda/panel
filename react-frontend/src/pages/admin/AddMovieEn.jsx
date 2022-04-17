@@ -8,9 +8,36 @@ import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
 
 export default function AddMovieEn() {
+    /* ------------------------------------------------- */
+    const [cateinfo, setCateInfo] = useState({
+        categories: [],
+        response: [],
+    });
+
+    const handleChange = (e) => {
+        // Destructuring
+        const { value, checked } = e.target;
+        const { categories } = cateinfo;
+        // Caso 1: La usuario marca la casilla
+        if (checked) {
+            setCateInfo({
+                categories: [...categories, value],
+                response: [...categories, value],
+            });
+        }
+        // Caso 2: el usuario desmarca la casilla
+        else {
+            setCateInfo({
+                categories: categories.filter((e) => e !== value),
+                response: categories.filter((e) => e !== value),
+            });
+        }
+    };
+    /* ------------------------------------------------- */
     const [selectcalidad, setSelectcalidad] = useState([]);
     const [selectaudio, setSelectaudio] = useState([]);
     const [selectformato, setSelectformato] = useState([]);
+    const [selectcategoria, setSelectcategoria] = useState([]);
 
     const mostrarDatos = async () => {
         try {
@@ -34,6 +61,11 @@ export default function AddMovieEn() {
             const resultadosa = await clienteAxios.get("/cataudio", config).then((response) => {
                 const sa = response.data;
                 setSelectaudio(sa)
+            })
+
+            const resultadoscate = await clienteAxios.get(`/catcategory/type/${import.meta.env.VITE_ID_MOVIES_EN}`, config).then((response) => {
+                const scate = response.data;
+                setSelectcategoria(scate)
             })
 
         } catch (error) {
@@ -64,8 +96,16 @@ export default function AddMovieEn() {
     const [CODFORMATVIDEO, setCODFORMATVIDEO] = useState("");
     const [URL, setURL] = useState("");
     const [SYNOPSIS, setSYNOPSIS] = useState("");
-
     const [alerta, setAlerta] = useState({});
+
+    const llenarDatoCategoria = () => {
+        (cateinfo.response.length > 0) ?
+            setCODCATEGORY(`${cateinfo.response}`) :
+            null
+    }
+    useEffect(() => {
+        llenarDatoCategoria();
+    }, [cateinfo.response])
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -415,26 +455,64 @@ export default function AddMovieEn() {
                                                             <option value="2">Si</option>
                                                         </select>
                                                     </div>
-
-
                                                 </div>
+                                        
                                                 {/* checkboxs de generos */}
                                                 <div className="relative w-full mb-3">
                                                     <label
                                                         className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                     >
-                                                        GENRE:
+                                                        Generos:
                                                     </label>
                                                     <input
                                                         type="number"
                                                         id="genero"
                                                         name="genero"
                                                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                        placeholder="genero del video"
                                                         value={CODCATEGORY}
+                                                        style={{
+                                                            display: "none"
+                                                        }}
                                                         onChange={(e) => setCODCATEGORY(e.target.value)}
                                                     />
+                                                    {/*  */}
+                                                    <div className="container-fluid top ">
+                                                        <div className="form-check m-3">
+                                                            {selectcategoria.map((item) => (
+                                                                <>
+                                                                    <label
+                                                                        className="inline-flex items-start p-2"
+                                                                        htmlFor={item.COD_CATEGORIA}
+                                                                        
+                                                                    >
+                                                                        <input
+                                                                            className="bg-sky-800 w-7 h-7 mr-2"
+                                                                            type="checkbox"
+                                                                            name="categories"
+                                                                            key={item.COD_CATEGORIA}
+                                                                            value={item.COD_CATEGORIA}
+                                                                            id={item.COD_CATEGORIA}
+                                                                            onChange={handleChange}
+                                                                        />
+                                                                        {item.CATEGORIA}
+                                                                    </label>
+                                                                </>
+                                                            ))}
+                                                        </div>
+                                                        <input
+                                                            type="text"
+                                                            name="response"
+                                                            value={cateinfo.response}
+                                                            id="floatingTextarea2"
+                                                            style={{
+                                                                display: "none"
+                                                            }}
+                                                            onChange={handleChange}
+                                                        />
+                                                    </div>
+                                                    {/*  */}
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>

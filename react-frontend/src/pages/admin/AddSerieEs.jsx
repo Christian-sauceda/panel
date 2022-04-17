@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
 // components
@@ -7,11 +7,41 @@ import clienteAxios from "../../config/axios";
 import BanneMovieEs from '../../partials/dashboard/BannerSeriesEs';
 
 export default function AddSerieEs() {
+    /* ------------------------------------------------- */
+
+    const [cateinfo, setCateInfo] = useState({
+        categories: [],
+        response: [],
+    });
+
+    const handleChange = (e) => {
+        // Destructuring
+        const { value, checked } = e.target;
+        const { categories } = cateinfo;
+
+        // Case 1 : The user checks the box
+        if (checked) {
+            setCateInfo({
+                categories: [...categories, value],
+                response: [...categories, value],
+            });
+        }
+
+        // Case 2  : The user unchecks the box
+        else {
+            setCateInfo({
+                categories: categories.filter((e) => e !== value),
+                response: categories.filter((e) => e !== value),
+            });
+        }
+    };
+
+    /* ------------------------------------------------- */
 
     const { auth } = useAuth()
     const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_SERIES_ES}`);
     const [CODAUDIO, setCODAUDIO] = useState("1");
-    const [CODCATEGORY, setCODCATEGORY] = useState("1");
+    const [CODCATEGORY, setCODCATEGORY] = useState("");
     const [CODUSER, setCODUSER] = useState(`${auth.COD}`);
     const [TITLE, setTITLE] = useState("");
     const [TITLE_LATIN, setTITLE_LATIN] = useState("");
@@ -25,8 +55,41 @@ export default function AddSerieEs() {
     const [CAST, setCAST] = useState("");
     const [SYNOPSIS, setSYNOPSIS] = useState("");
 
+    const [selectcategoria, setSelectcategoria] = useState([]);
     const [alerta, setAlerta] = useState({});
 
+    const mostrarDatos = async () => {
+        try {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+            const resultadoscate = await clienteAxios.get(`/catcategory/type/${import.meta.env.VITE_ID_SERIES_ES}`, config).then((response) => {
+                const scate = response.data;
+                setSelectcategoria(scate)
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        mostrarDatos();
+    }, [])
+
+    const llenarDatoCategoria = () => {
+        (cateinfo.response.length > 0) ?
+            setCODCATEGORY(`${cateinfo.response}`) :
+            null
+    }
+    useEffect(() => {
+        llenarDatoCategoria();
+    }, [cateinfo.response])
+    
     const handleSubmit = async e => {
         e.preventDefault();
         if ([CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS, COD_CONTENIDO].includes('')) {
@@ -281,44 +344,63 @@ export default function AddSerieEs() {
 
                                             </div>
                                             <div className="flex flex-wrap">
-                                                {/* checkboxes */}
-                                                <label className="block uppercase text-gray-600 text-xs font-bold mb-2">
-                                                    Generos:
-                                                </label>
-                                                <div class="max-w-xs p-2 mx-auto">
-                                                    <label class="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="genero"
-                                                        />
-                                                        Accion
+
+                                                {/* checkboxs de generos */}
+                                                <div className="relative w-full mb-3">
+                                                    <label
+                                                        className="block uppercase text-gray-600 text-xs font-bold mb-2"
+                                                    >
+                                                        Generos:
                                                     </label>
-                                                    <label class="inline-flex items-start p-2">
+                                                    <input
+                                                        type="number"
+                                                        id="genero"
+                                                        name="genero"
+                                                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                        value={CODCATEGORY}
+                                                        style={{
+                                                            display: "none"
+                                                        }}
+                                                        onChange={(e) => setCODCATEGORY(e.target.value)}
+                                                    />
+                                                    {/*  */}
+                                                    <div className="container-fluid top ">
+                                                        <div className="form-check m-3">
+                                                            {selectcategoria.map((item) => (
+                                                                <>
+                                                                    <label
+                                                                        className="inline-flex items-start p-2"
+                                                                        htmlFor={item.COD_CATEGORIA}
+                                                                        
+                                                                    >
+                                                                        <input
+                                                                            className="bg-sky-800 w-7 h-7 mr-2"
+                                                                            type="checkbox"
+                                                                            name="categories"
+                                                                            key={item.COD_CATEGORIA}
+                                                                            value={item.COD_CATEGORIA}
+                                                                            id={item.COD_CATEGORIA}
+                                                                            onChange={handleChange}
+                                                                        />
+                                                                        {item.CATEGORIA}
+                                                                    </label>
+                                                                </>
+                                                            ))}
+                                                        </div>
                                                         <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="genero"
+                                                            type="text"
+                                                            name="response"
+                                                            value={cateinfo.response}
+                                                            id="floatingTextarea2"
+                                                            style={{
+                                                                display: "none"
+                                                            }}
+                                                            onChange={handleChange}
                                                         />
-                                                        Aventura
-                                                    </label>
-                                                    <label class="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="genero"
-                                                        />
-                                                        Comedia
-                                                    </label>
-                                                    <label class="inline-flex items-start p-2">
-                                                        <input
-                                                            className="text-sky-800 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-                                                            type="checkbox"
-                                                            name="genero"
-                                                        />
-                                                        Drama
-                                                    </label>
+                                                    </div>
+                                                    {/*  */}
                                                 </div>
+
                                             </div>
 
                                         </div>

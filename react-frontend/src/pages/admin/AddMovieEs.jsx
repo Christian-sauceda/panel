@@ -37,7 +37,6 @@ export default function AddMovieEs() {
         }
     };
 
-
     /* ------------------------------------------------- */
 
     const [selectcalidad, setSelectcalidad] = useState([]);
@@ -171,23 +170,29 @@ export default function AddMovieEs() {
         }
     }
 
+ 
 
-    const [pelis, setPelis] = useState([]);
     const [selpelis, setSelpelis] = useState([]);
 
-    const peticionGet = async () => {
-        await axios.get(`${import.meta.env.VITE_BASE_API}/search/movie?${import.meta.env.VITE_API_KEY}&query=Capitán%20América%3A%20El%20Primer%20Vengador&language=es-ES`)
-            .then(response => {
-                console.log(response.data.results)
-                setPelis(response.data.results)
-                setSelpelis(response.data.results)
-            }).catch(error => {
-                console.log(error);
-            })
+    //funcion para obtener las peliculas mediante valor del input de busqueda
+    const obtenerPeliculas = async (e) => {
+        try {
+            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API}/search/movie?${import.meta.env.VITE_API_KEY}&query=${TITLE}&language=es-ES`)
+                .then(response => {
+                    const sap = response.data.results;
+                    setSelpelis(sap)
+                    console.log(sap);
+                })
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
+
     useEffect(() => {
-        peticionGet();
+        obtenerPeliculas();
     }, [])
+
     const { msg } = alerta;
     return (
         <>
@@ -202,26 +207,56 @@ export default function AddMovieEs() {
                                 <div className="w-full lg:w-8/12 px-4">
                                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
                                         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                                            <div className="flex flex-wrap">
-                                                <div className="w-full lg:w-12/12 px-4">
-                                                    <div className="relative w-full mb-3">
-                                                        <label
-                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2 pt-2"
-                                                        >
-                                                            Título:
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            id="title"
-                                                            name="title"
-                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Título de la Película"
-                                                            value={TITLE}
-                                                            onChange={(e) => setTITLE(e.target.value)}
-                                                        />
+
+                                            <div className="w-full lg:w-7/12 px-4">
+                                                <div className="relative w-full mb-3">
+                                                    <label
+                                                        className="block uppercase text-gray-600 text-xs font-bold mb-2 pt-2"
+                                                    >
+                                                        Título:
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        id="title"
+                                                        name="title"
+                                                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                        placeholder="Título de la Película"
+                                                        value={TITLE}
+                                                        onChange={(e) => setTITLE(e.target.value)}
+                                                    />
+                                                    <div className='search-list' style={{ display: "block" }} id='search-list'>
+                                                        {selpelis.map((item) => (
+                                                            <>
+
+                                                                <div className='search-list-item'>
+                                                                    <div className='search-item-thumbnail'>
+                                                                        <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}`} />
+                                                                    </div>
+                                                                    <div className='search-item-info'>
+                                                                        <h3>{item.title}</h3>
+                                                                    </div>
+                                                                </div>
+                                                            </>
+                                                        ))}
+
                                                     </div>
                                                 </div>
-
+                                            </div>
+                                            {/* 
+                                            <select
+                                                            name="calidad"
+                                                            id="calidad"
+                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            value={CODQUALITY}
+                                                            onChange={(e) => setCODQUALITY(e.target.value)}
+                                                        >
+                                                            <option value="">Seleccione</option>
+                                                            {selectcalidad.map((item) => (
+                                                                <option key={item.COD_CALIDAD} value={item.COD_CALIDAD}>{item.CALIDAD}</option>
+                                                            ))}
+                                                        </select>
+                                            */}
+                                            <div className="flex flex-wrap">
                                                 <div className="w-full lg:w-3/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -513,7 +548,7 @@ export default function AddMovieEs() {
                                                                     <label
                                                                         className="inline-flex items-start p-2"
                                                                         htmlFor={item.COD_CATEGORIA}
-                                                                        
+
                                                                     >
                                                                         <input
                                                                             className="bg-sky-800 w-7 h-7 mr-2"

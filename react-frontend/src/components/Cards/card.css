@@ -1,3 +1,81 @@
+:root {
+    --md-dark-color: #1d1d1d;
+    --dark-color: #171717;
+    --ligth-dark-color: #292929;
+    --sky-color: #d4aa11;
+}
+
+ /* sobreponer div .search list*/
+.search-list {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: #fff;
+    z-index: 10;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    max-height: 500px;
+}
+
+.search-list .search-list-item {
+    background-color: var(--ligth-dark-color);
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--dark-color);
+    width: calc(350px - 8px);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 200s ease;
+    -webkit-transition: background-color 200s ease;
+    -moz-transition: background-color 200s ease;
+    -ms-transition: background-color 200s ease;
+    -o-transition: background-color 200s ease;
+}
+
+.search-list-item {
+    display: flex;
+    align-items: center;
+}
+
+.search-item-thumbnail img {
+    width: 55px;
+    margin-right: 1rem;
+}
+
+.search-item-info h3{
+    font-weight: 600;
+    font-size: 1rem;
+    opacity: 0.6;
+}
+
+.search-item-info:hover h3{
+    opacity: 1;
+}
+
+/* thumbnail */
+.search-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+.search-list::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.search-list::-webkit-scrollbar-thumb {
+    background-color: var(--sky-color);
+    outline: none;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+/* js releted class */
+.hide-search-list {
+    display: none;
+}
+
 .cla {
     padding: 1.3em 3em;
     font-size: 12px;

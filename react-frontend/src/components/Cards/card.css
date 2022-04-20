@@ -7,7 +7,6 @@
 
  /* sobreponer div .search list*/
 .search-list {
-    position: absolute;
     right: 0;
     top: 100%;
     background: #fff;
@@ -37,13 +36,13 @@
 }
 
 .search-item-thumbnail img {
-    width: 55px;
-    margin-right: 1rem;
+    width: 50px;
+    margin-right: 0.8rem;
 }
 
 .search-item-info h3{
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.8rem;
     opacity: 0.6;
 }
 
@@ -53,7 +52,7 @@
 
 /* thumbnail */
 .search-list::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 

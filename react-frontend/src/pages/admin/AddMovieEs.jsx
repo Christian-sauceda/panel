@@ -174,10 +174,10 @@ export default function AddMovieEs() {
 
     const [selpelis, setSelpelis] = useState([]);
 
-    //funcion para obtener las peliculas mediante valor del input de busqueda
+    // si el input TITLE tiene contenido, buscar las peliculas
     const obtenerPeliculas = async (e) => {
         try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API}/search/movie?${import.meta.env.VITE_API_KEY}&query=${TITLE}&language=es-ES`)
+            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API}/search/multi?${import.meta.env.VITE_API_KEY}&query=${TITLE}&language=es-ES&year=${YEAR}&page=1&include_adult=false`)
                 .then(response => {
                     const sap = response.data.results;
                     setSelpelis(sap)
@@ -189,9 +189,25 @@ export default function AddMovieEs() {
         }
     }
 
+
+    const llenarDatos = () => {
+        (selpelis.length > 0) ?
+            (setBACK(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].backdrop_path}`),
+                setPOSTER(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].poster_path}`),
+                setCALIF(selpelis[0].vote_average),
+                setSYNOPSIS(selpelis[0].overview)) :
+            null
+    }
+    
     useEffect(() => {
-        obtenerPeliculas();
-    }, [])
+        if (TITLE.length >= 3 && YEAR.length == 4) {
+            obtenerPeliculas();
+            llenarDatos();
+        } else {
+            setSelpelis([]);
+        }
+    }, [TITLE])
+    
 
     const { msg } = alerta;
     return (
@@ -222,6 +238,7 @@ export default function AddMovieEs() {
                                                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                         placeholder="Título de la Película"
                                                         value={TITLE}
+                                                        autoComplete="off"
                                                         onChange={(e) => setTITLE(e.target.value)}
                                                     />
                                                     <div className='search-list' style={{ display: "block" }} id='search-list'>

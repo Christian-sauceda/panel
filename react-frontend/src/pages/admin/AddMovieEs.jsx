@@ -185,7 +185,6 @@ export default function AddMovieEs() {
                     setSelpelis(sap)
                     const titleen = response.data.results[0].original_title;
                     setTITLEEN(titleen);
-                    console.log(sap);
                 })
         }
         catch (error) {
@@ -199,7 +198,6 @@ export default function AddMovieEs() {
                 .then(response => {
                     const sap = response.data;
                     setSelpelis2(sap)
-                    console.log(sap);
                 })
         }
         catch (error) {
@@ -207,8 +205,9 @@ export default function AddMovieEs() {
         }
     }
 
-    const llenarDatos = () => {
+    const llenarDatos = () => { 
         (selpelis.length > 0) ?
+    
             (setBACK(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].backdrop_path}`),
                 setPOSTER(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].poster_path}`),
                 setCALIF(selpelis[0].vote_average),
@@ -247,7 +246,7 @@ export default function AddMovieEs() {
                                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
                                         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
 
-                                            <div className="w-full lg:w-7/12 px-4">
+                                            <div className="w-full lg:w-12/12 px-4">
                                                 <div className="relative w-full mb-3">
                                                     <label
                                                         className="block uppercase text-gray-600 text-xs font-bold mb-2 pt-2"
@@ -313,6 +312,7 @@ export default function AddMovieEs() {
                                                             type="number"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={YEAR}
+                                                            autoComplete="off"
                                                             onChange={(e) => setYEAR(e.target.value)}
                                                         />
                                                     </div>
@@ -331,8 +331,10 @@ export default function AddMovieEs() {
                                                             type="text"
                                                             placeholder="Duración en minutos"
                                                             min={10}
+                                                            maxlength="3"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={DURATION}
+                                                            autoComplete="off"
                                                             onChange={(e) => setDURATION(e.target.value)}
                                                         />
                                                     </div>

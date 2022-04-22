@@ -76,13 +76,13 @@ const Login = () => {
                         className="bg-sky-600 w-full py-3 px-10 rounded-xl mt-6 text-white uppercase font-bold hover:cursor-pointer hover:bg-sky-700 md:w-auto "
                     />
                 </form>
-                <nav className="mt-10 lg:flex lg:justify-end">
+                {/* <nav className="mt-10 lg:flex lg:justify-end">
                     <Link
                         className="block text-center my-5 text-gray-500"
                         to="olvide-password"
                     >Recuperar Contraseña
                     </Link>
-                </nav>
+                </nav> */}
             </div>
         </>
     )

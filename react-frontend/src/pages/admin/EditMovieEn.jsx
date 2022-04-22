@@ -6,35 +6,36 @@ import useAuth from '../../hooks/useAuth';
 import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
+import axios from 'axios';
 import clienteAxios from "../../config/axios";
 
 export default function AddMovieEs() {
-        /* ------------------------------------------------- */
-        const [cateinfo, setCateInfo] = useState({
-            categories: [],
-            response: [],
-        });
-        const handleChange = (e) => {
-            // Destructuring
-            const { value, checked } = e.target;
-            const { categories } = cateinfo;
-            // Case 1 : The user checks the box
-            if (checked) {
-                setCateInfo({
-                    categories: [...categories, value],
-                    response: [...categories, value],
-                });
-            }
-            // Case 2  : The user unchecks the box
-            else {
-                setCateInfo({
-                    categories: categories.filter((e) => e !== value),
-                    response: categories.filter((e) => e !== value),
-                });
-            }
-        };
-        /* ------------------------------------------------- */
-    
+    /* ------------------------------------------------- */
+    const [cateinfo, setCateInfo] = useState({
+        categories: [],
+        response: [],
+    });
+    const handleChange = (e) => {
+        // Destructuring
+        const { value, checked } = e.target;
+        const { categories } = cateinfo;
+        // Case 1 : The user checks the box
+        if (checked) {
+            setCateInfo({
+                categories: [...categories, value],
+                response: [...categories, value],
+            });
+        }
+        // Case 2  : The user unchecks the box
+        else {
+            setCateInfo({
+                categories: categories.filter((e) => e !== value),
+                response: categories.filter((e) => e !== value),
+            });
+        }
+    };
+    /* ------------------------------------------------- */
+
     const { auth } = useAuth()
     const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_MOVIES_ES}`);
     const [CODAUDIO, setCODAUDIO] = useState("");
@@ -180,6 +181,66 @@ export default function AddMovieEs() {
         }
     }
 
+    const [selpelis, setSelpelis] = useState([]);
+    const [selpelis2, setSelpelis2] = useState([]);
+    const [TITLEEN, setTITLEEN] = useState("");
+
+    // si el input TITLE tiene contenido, buscar las peliculas
+    const obtenerPeliculas = async (e) => {
+        try {
+            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/movie?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=en-EN&year=${YEAR}&page=1&include_adult=false`)
+                .then(response => {
+                    const sap = response.data.results;
+                    setSelpelis(sap)
+                    console.log(sap);
+                    const titleen = response.data.results[0].original_title;
+                    setTITLEEN(titleen);
+                })
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    const obtenerPeliculas2 = async (e) => {
+        try {
+            const resultados = await axios.get(`${import.meta.env.VITE_BASE_API_OMDB}?t=${TITLEEN}${import.meta.env.VITE_API_KEY_OMDB}`)
+                .then(response => {
+                    const sap = response.data;
+                    setSelpelis2(sap)
+                })
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    const llenarDatoss = () => {
+        (selpelis.length > 0) ?
+
+            (setBACK(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].backdrop_path}`),
+                setPOSTER(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].poster_path}`),
+                setCALIF(selpelis[0].vote_average),
+                setSYNOPSIS(selpelis[0].overview),
+                setCLASIF(selpelis2.Rated),
+                setDURATION(selpelis2.Runtime),
+                setCOUNTRY(selpelis2.Country),
+                setDIRECTOR(selpelis2.Director),
+                setCAST(selpelis2.Actors)) :
+            null
+    }
+
+    useEffect(() => {
+        if (TITLE.length >= 3 && YEAR.length == 4) {
+            obtenerPeliculas();
+            obtenerPeliculas2();
+            llenarDatoss();
+        } else {
+            setSelpelis([]);
+        }
+    }, [TITLE])
+
+
     const { msg } = alerta;
     //extraer parámetros de la ruta
 
@@ -208,11 +269,28 @@ export default function AddMovieEs() {
                                                             type="text"
                                                             id="title"
                                                             name="title"
+                                                            autoComplete="off"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Título de la Película"
                                                             value={TITLE}
                                                             onChange={(e) => setTITLE(e.target.value)}
                                                         />
+                                                        <div className='search-list' style={{ display: "block" }} id='search-list'>
+                                                            {selpelis.map((item) => (
+                                                                <>
+
+                                                                    <div className='search-list-item'>
+                                                                        <div className='search-item-thumbnail'>
+                                                                            <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}`} />
+                                                                        </div>
+                                                                        <div className='search-item-info'>
+                                                                            <h3>{item.title}</h3>
+                                                                        </div>
+                                                                    </div>
+                                                                </>
+                                                            ))}
+
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -230,6 +308,7 @@ export default function AddMovieEs() {
                                                             min={1970}
                                                             max={2030}
                                                             type="number"
+                                                            autoComplete="off"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={YEAR}
                                                             onChange={(e) => setYEAR(e.target.value)}
@@ -247,7 +326,7 @@ export default function AddMovieEs() {
                                                         <input
                                                             name="duration"
                                                             id="duration"
-                                                            type="number"
+                                                            type="text"
                                                             placeholder="Duración en minutos"
                                                             min={10}
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -507,7 +586,7 @@ export default function AddMovieEs() {
                                                                     <label
                                                                         className="inline-flex items-start p-2"
                                                                         htmlFor={item.COD_CATEGORIA}
-                                                                        
+
                                                                     >
                                                                         <input
                                                                             className="bg-sky-800 w-7 h-7 mr-2"

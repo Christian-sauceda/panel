@@ -32,9 +32,9 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.use(cookieParser());
-
+let FRONTEND = process.env.FRONTEND;
 //dominios permitidos por variables de entorno
-const dominiosPermitidos = ["http://localhost:3000", "http://localhost:3001"];
+const dominiosPermitidos = [`${FRONTEND}`];
 
 const corsOptions = {
   origin: function(origin, callback) {
@@ -46,9 +46,7 @@ const corsOptions = {
   credentials: true
 };
 
-
 app.use(cors(corsOptions));
-
 app.get("/", checkAuth, (req, res) => {
   res.json({
     name: app.get("pkg").name,

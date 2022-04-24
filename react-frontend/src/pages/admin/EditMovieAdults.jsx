@@ -1,4 +1,4 @@
-import BanneMovieAdult from '../../partials/dashboard/BannerMovieAdult';
+import BanneMovieAdult from '../../partials/dashboard/BannerMovieAdultedit';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import "../../components/Cards/Card.css";
@@ -6,6 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
+import axios from 'axios';
 import clienteAxios from "../../config/axios";
 
 export default function AddMovieAdult() {
@@ -168,6 +169,45 @@ export default function AddMovieAdult() {
         }
 
     }
+
+
+    const [selpelis, setSelpelis] = useState([]);
+    const [TITLEEN, setTITLEEN] = useState("");
+
+    // si el input TITLE tiene contenido, buscar las peliculas
+    const obtenerPeliculas = async (e) => {
+        try {
+            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/movie?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=en-US&page=1&include_adult=true`)
+                .then(response => {
+                    const sap = response.data.results;
+                    setSelpelis(sap)
+                    const titleen = response.data.results[0].original_title;
+                    setTITLEEN(titleen);
+                })
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    const llenarDatosa = () => {
+        (selpelis.length > 0) ?
+
+            (setBACK(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].backdrop_path}`),
+                setPOSTER(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].poster_path}`),
+                setSYNOPSIS(selpelis[0].overview)) :
+            null
+    }
+
+    useEffect(() => {
+        if (TITLE.length >= 3) {
+            obtenerPeliculas();
+            llenarDatosa();
+        } else {
+            setSelpelis([]);
+        }
+    }, [TITLE])
+
     const { msg } = alerta;
     return (
         <>
@@ -202,6 +242,22 @@ export default function AddMovieAdult() {
                                                             value={TITLE}
                                                             onChange={(e) => setTITLE(e.target.value)}
                                                         />
+                                                        <div className='search-list' style={{ display: "block" }} id='search-list'>
+                                                            {selpelis.map((item) => (
+                                                                <>
+
+                                                                    <div className='search-list-item'>
+                                                                        <div className='search-item-thumbnail'>
+                                                                            <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}`} />
+                                                                        </div>
+                                                                        <div className='search-item-info'>
+                                                                            <h3>{item.title}</h3>
+                                                                        </div>
+                                                                    </div>
+                                                                </>
+                                                            ))}
+
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -386,7 +442,7 @@ export default function AddMovieAdult() {
                                                                     <label
                                                                         className="inline-flex items-start p-2"
                                                                         htmlFor={item.COD_CATEGORIA}
-                                                                        
+
                                                                     >
                                                                         <input
                                                                             className="bg-sky-800 w-7 h-7 mr-2"

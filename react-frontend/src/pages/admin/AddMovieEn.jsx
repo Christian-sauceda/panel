@@ -167,7 +167,7 @@ export default function AddMovieEn() {
     // si el input TITLE tiene contenido, buscar las peliculas
     const obtenerPeliculas = async (e) => {
         try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/movie?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=en-EN&year=${YEAR}&page=1&include_adult=false`)
+            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/movie?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=en-US&year=${YEAR}&page=1&include_adult=false`)
                 .then(response => {
                     const sap = response.data.results;
                     setSelpelis(sap)
@@ -274,7 +274,7 @@ export default function AddMovieEn() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            YEAR:
+                                                            YEAR: <span className='font-bold text-red-700'>{selpelis2.Year}</span>
                                                         </label>
                                                         <input
                                                             name="year"
@@ -296,7 +296,7 @@ export default function AddMovieEn() {
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            DURATION:
+                                                            DURATION: <span className='font-bold text-red-700'>{selpelis2.Runtime}</span>
                                                         </label>
                                                         <input
                                                             name="duration"
@@ -540,9 +540,8 @@ export default function AddMovieEn() {
                                                     <label
                                                         className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                     >
-                                                        Generos:
+                                                        Generos: <span className='font-bold text-red-700'>{selpelis2.Genre}</span>
                                                     </label>
-                                                    <p className='font-bold text-red-700'>{selpelis2.Genre}</p>
                                                     <input
                                                         type="number"
                                                         id="genero"

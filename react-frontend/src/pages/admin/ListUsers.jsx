@@ -129,33 +129,33 @@ const AddCapSerieAdult = () => {
                 }
             },
         },
-        {
-            name: 'Acciones',
-            label: 'Acciones',
-            options: {
-                filter: true,
+        // {
+            // name: 'Acciones',
+            // label: 'Acciones',
+            // options: {
+            //     filter: true,
 
-                customBodyRender: (value, tableMeta, updateValue) => {
-                    return (
-                        <>
-                            <button className="animate__animated animate__bounceIn bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
-                                window.location.href = `/admin/user/edit/${tableMeta.rowData[0]}`
-                            }}>
-                                <i className="fas fa-edit">EDITAR</i>
-                            </button>
+            //     customBodyRender: (value, tableMeta, updateValue) => {
+            //         return (
+            //             <>
+            //                 <button className="animate__animated animate__bounceIn bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
+            //                     window.location.href = `/admin/user/edit/${tableMeta.rowData[0]}`
+            //                 }}>
+            //                     <i className="fas fa-edit">EDITAR</i>
+            //                 </button>
 
-                            <button className="animate__animated animate__bounceIn bg-red-600 font-bold  p-2 text-white" onClick={() => {
-                                window.location.href = `/admin/user/deleted/${tableMeta.rowData[0]}`
-                            }}>
-                                <i className="fas fa-edit">ELIMINAR</i>
-                            </button>
+            //                 <button className="animate__animated animate__bounceIn bg-red-600 font-bold  p-2 text-white" onClick={() => {
+            //                     window.location.href = `/admin/user/deleted/${tableMeta.rowData[0]}`
+            //                 }}>
+            //                     <i className="fas fa-edit">ELIMINAR</i>
+            //                 </button>
 
-                        </>
-                    )
-                }
-            },
+            //             </>
+            //         )
+            //     }
+            // },
 
-        },
+        //},
     ]
 
     // 4 mostrar el data table

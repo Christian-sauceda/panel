@@ -6,7 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
 import axios from 'axios';
-import BanneMovieEs from '../../partials/dashboard/BannerSeriesEs';
+import BanneMovieEs from '../../partials/dashboard/BannerSeriesEsedit';
 
 export default function AddSerieEs() {
     /* ------------------------------------------------- */
@@ -173,7 +173,7 @@ export default function AddSerieEs() {
     // si el input TITLE tiene contenido, buscar las peliculas
     const obtenerPeliculas = async (e) => {
         try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=es-ES&year=${YEAR}&page=1&include_adult=false`)
+            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=es-MX&year=${YEAR}&page=1&include_adult=false`)
                 .then(response => {
                     const sap = response.data.results;
                     setSelpelis(sap)

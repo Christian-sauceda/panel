@@ -5,6 +5,7 @@ import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
+import axios from 'axios';
 import BannerSerieCapEn from '../../partials/dashboard/BannerSerieCapEn';
 
 export default function AddCapSerieEs() {
@@ -98,6 +99,97 @@ export default function AddCapSerieEs() {
     }
     const { msg } = alerta;
         //funcion imprima json numero del 1 al 30
+
+        const [idserie, setIdserie] = useState("");
+        const idseriees = COD_CONTENT;
+    
+        const obtenerserieid = async (e) => {
+            try {
+                const token = localStorage.getItem("token")
+                const config = {
+                    headers: {
+                        "content-type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+                const resultados = await clienteAxios.get(`/mttvshows/en/${idseriees}/${import.meta.env.VITE_ID_SERIES_EN}`, config).then((response) => {
+                    const idess = response.data[0].TITLE;
+                    setIdserie(idess)
+                })
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+        useEffect(() => {
+            obtenerserieid();
+        }, [idseriees])
+    
+        const [idserietmdb, setIdserietmdb] = useState("");
+    
+        const obteneridseri = async (e) => {
+            try {
+                const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${idserie}&language=es-MX&page=1&include_adult=false`)
+                    .then(response => {
+                        const sap = response.data.results[0].id;
+                        setIdserietmdb(sap)
+                    })
+            } catch (error) {
+                console.log(error);
+    
+            }
+        }
+        useEffect(() => {
+            if (idserie !== "") {
+                obteneridseri();
+            }
+        }, [idserie])
+    
+        const [infocap, setInfocap] = useState({});
+        const [infotemp, setInfotemp] = useState({});
+    
+        const obtenercap = async (e) => {
+            try {
+                const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}/episode/${NUMBER_CHAPTER}?${import.meta.env.VITE_API_KEY_TMDB}&language=en-US`)
+                    .then(response => {
+                        const cap = response.data;
+                        setInfocap(cap)
+                    })
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+    
+        const obtenertemp = async (e) => {
+            try {
+                const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}?${import.meta.env.VITE_API_KEY_TMDB}&language=en-US`)
+                    .then(response => {
+                        const captemp = response.data;
+                        setInfotemp(captemp)
+                    })
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    
+        const llenardatoscap = async () => {
+            (setInfocap.length > 0) ?
+                (setNAME_CHAPTER(infocap.episode_number + ' - ' + infocap.name),
+                    setSYNOSIS(infocap.overview),
+                    setBACK(`${import.meta.env.VITE_API_IMAGE}${infocap.still_path}`),
+                    setPOSTER(`${import.meta.env.VITE_API_IMAGE}${infotemp.poster_path}`)) :
+                null
+        }
+    
+        useEffect(() => {
+            if (NUMBER_CHAPTER.length >= 1) {
+                obtenercap();
+                obtenertemp();
+                llenardatoscap();
+            }
+        }, [NUMBER_CHAPTER])
+    
         const numeros = [...Array(31).keys()];
     return (
         <>

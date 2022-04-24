@@ -1,4 +1,4 @@
-import BanneMovieEs from '../../partials/dashboard/BannerEditMovieEs';
+import BanneMovieEs from '../../partials/dashboard/BannerEditMovieEn';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
@@ -188,7 +188,7 @@ export default function AddMovieEs() {
     // si el input TITLE tiene contenido, buscar las peliculas
     const obtenerPeliculas = async (e) => {
         try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/movie?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=en-EN&year=${YEAR}&page=1&include_adult=false`)
+            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/movie?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=en-US&year=${YEAR}&page=1&include_adult=false`)
                 .then(response => {
                     const sap = response.data.results;
                     setSelpelis(sap)

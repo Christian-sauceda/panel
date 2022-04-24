@@ -41,7 +41,7 @@ export default function AddSerieEs() {
 
     const { auth } = useAuth()
     const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_SERIES_ES}`);
-    const [CODAUDIO, setCODAUDIO] = useState("1");
+    const [CODAUDIO, setCODAUDIO] = useState("");
     const [CODCATEGORY, setCODCATEGORY] = useState("");
     const [CODUSER, setCODUSER] = useState(`${auth.COD}`);
     const [TITLE, setTITLE] = useState("");
@@ -57,6 +57,7 @@ export default function AddSerieEs() {
     const [SYNOPSIS, setSYNOPSIS] = useState("");
 
     const [selectcategoria, setSelectcategoria] = useState([]);
+    const [selectaudio, setSelectaudio] = useState([]);
     const [alerta, setAlerta] = useState({});
 
     const mostrarDatos = async () => {
@@ -72,6 +73,11 @@ export default function AddSerieEs() {
             const resultadoscate = await clienteAxios.get(`/catcategory/type/${import.meta.env.VITE_ID_SERIES_ES}`, config).then((response) => {
                 const scate = response.data;
                 setSelectcategoria(scate)
+            })
+
+            const resultadosa = await clienteAxios.get("/cataudio", config).then((response) => {
+                const sa = response.data;
+                setSelectaudio(sa)
             })
 
         } catch (error) {
@@ -147,7 +153,7 @@ export default function AddSerieEs() {
     // si el input TITLE tiene contenido, buscar las peliculas
     const obtenerPeliculas = async (e) => {
         try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=es-ES&year=${YEAR}&page=1&include_adult=false`)
+            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=es-MX&year=${YEAR}&page=1&include_adult=false`)
                 .then(response => {
                     const sap = response.data.results;
                     setSelpelis(sap)
@@ -274,7 +280,7 @@ export default function AddSerieEs() {
                                                     </div>
                                                 </div>
 
-                                                <div className="w-full lg:w-4/12 px-4">
+                                                <div className="w-full lg:w-3/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
                                                             for="year"
@@ -299,7 +305,7 @@ export default function AddSerieEs() {
                                                 </div>
 
 
-                                                <div className="w-full lg:w-4/12 px-4">
+                                                <div className="w-full lg:w-3/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
                                                             for="clasificacion"
@@ -320,7 +326,7 @@ export default function AddSerieEs() {
                                                     </div>
                                                 </div>
 
-                                                <div className="w-full lg:w-4/12 px-4">
+                                                <div className="w-full lg:w-3/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
                                                             for="clasificacion"
@@ -338,6 +344,28 @@ export default function AddSerieEs() {
                                                             value={CALIF}
                                                             onChange={(e) => setCALIF(e.target.value)}
                                                         />
+                                                    </div>
+                                                </div>
+
+                                                <div className="w-full lg:w-3/12 px-4">
+                                                    <div className="relative w-full mb-3">
+                                                        <label
+                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2"
+                                                        >
+                                                            Audio:
+                                                        </label>
+                                                        <select
+                                                            name="audio"
+                                                            id="audio"
+                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            value={CODAUDIO}
+                                                            onChange={(e) => setCODAUDIO(e.target.value)}
+                                                        >
+                                                            <option value="">Seleccione</option>
+                                                            {selectaudio.map((item) => (
+                                                                <option key={item.COD_AUDIO} value={item.COD_AUDIO}>{item.AUDIO}</option>
+                                                            ))}
+                                                        </select>
                                                     </div>
                                                 </div>
 

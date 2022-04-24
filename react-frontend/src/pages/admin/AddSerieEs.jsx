@@ -162,7 +162,7 @@ export default function AddSerieEs() {
 
     const obtenerPeliculas2 = async (e) => {
         try {
-            const resultados = await axios.get(`${import.meta.env.VITE_BASE_API_OMDB}?t=${TITLEEN}${import.meta.env.VITE_API_KEY_OMDB}`)
+            const resultados = await axios.get(`${import.meta.env.VITE_BASE_API_OMDB}?t=${TITLEEN}${import.meta.env.VITE_API_KEY_OMDB}&type=series`)
                 .then(response => {
                     const sap = response.data;
                     setSelpelis2(sap)
@@ -230,6 +230,7 @@ export default function AddSerieEs() {
                                                             type="text"
                                                             id="title"
                                                             name="title"
+                                                            autoComplete="off"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Título Original de la Serie"
                                                             value={TITLE}
@@ -249,11 +250,9 @@ export default function AddSerieEs() {
                                                                 </div>
                                                             </>
                                                         ))}
-
                                                     </div>
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-6/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -269,6 +268,7 @@ export default function AddSerieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Título latino de la Serie"
                                                             value={TITLE_LATIN}
+                                                            autoComplete="off"
                                                             onChange={(e) => setTITLE_LATIN(e.target.value)}
                                                         />
                                                     </div>
@@ -280,8 +280,9 @@ export default function AddSerieEs() {
                                                             for="year"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Año:
+                                                            Año: <span className='font-bold text-red-700'> {selpelis2.Year}</span>
                                                         </label>
+                                                        
                                                         <input
                                                             name="year"
                                                             id="year"
@@ -289,6 +290,7 @@ export default function AddSerieEs() {
                                                             min={1970}
                                                             max={2030}
                                                             type="number"
+                                                            autoComplete="off"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={YEAR}
                                                             onChange={(e) => setYEAR(e.target.value)}
@@ -429,9 +431,8 @@ export default function AddSerieEs() {
                                                     <label
                                                         className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                     >
-                                                        Generos:
+                                                        Generos: <span className='font-bold text-red-700'> {selpelis2.Genre}</span>
                                                     </label>
-                                                    <p className='font-bold text-red-700'>{selpelis2.Genre}</p>
                                                     <input
                                                         type="number"
                                                         id="genero"

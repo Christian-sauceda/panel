@@ -5,6 +5,7 @@ import useAuth from '../../hooks/useAuth';
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
+import axios from 'axios';
 import BanneMovieEs from '../../partials/dashboard/BannerSeriesEs';
 
 export default function AddSerieEs() {
@@ -162,6 +163,66 @@ export default function AddSerieEs() {
         }
 
     }
+
+    const [selpelis, setSelpelis] = useState([]);
+    const [selpelis2, setSelpelis2] = useState([]);
+    const [TITLEEN, setTITLEEN] = useState("");
+
+    // si el input TITLE tiene contenido, buscar las peliculas
+    const obtenerPeliculas = async (e) => {
+        try {
+            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=es-ES&year=${YEAR}&page=1&include_adult=false`)
+                .then(response => {
+                    const sap = response.data.results;
+                    setSelpelis(sap)
+                    console.log(sap);
+                    const titleen = response.data.results[0].original_name;
+                    setTITLEEN(titleen);
+                })
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    const obtenerPeliculas2 = async (e) => {
+        try {
+            const resultados = await axios.get(`${import.meta.env.VITE_BASE_API_OMDB}?t=${TITLEEN}${import.meta.env.VITE_API_KEY_OMDB}&type=series`)
+                .then(response => {
+                    const sap = response.data;
+                    setSelpelis2(sap)
+                })
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    const llenarDatoss = () => { 
+        (selpelis.length > 0) ?
+    
+            (setBACK(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].backdrop_path}`),
+                setPOSTER(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].poster_path}`),
+                setCALIF(selpelis[0].vote_average),
+                setTITLE_LATIN(selpelis[0].name),
+                setSYNOPSIS(selpelis[0].overview),
+                setCLASIF(selpelis2.Rated),
+                setCOUNTRY(selpelis2.Country),
+                setDIRECTOR(selpelis2.Director),
+                setCAST(selpelis2.Actors)) :
+            null
+    }
+    
+    useEffect(() => {
+        if (TITLE.length >= 3 && YEAR.length == 4) {
+            obtenerPeliculas();
+            obtenerPeliculas2();
+            llenarDatoss();
+        } else {
+            setSelpelis([]);
+        }
+    }, [TITLE])
+    
     const { msg } = alerta;
     return (
         <>
@@ -192,11 +253,27 @@ export default function AddSerieEs() {
                                                             type="text"
                                                             id="title"
                                                             name="title"
+                                                            autoComplete="off"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Título Original de la Serie"
                                                             value={TITLE}
                                                             onChange={(e) => setTITLE(e.target.value)}
                                                         />
+                                                        <div className='search-list' style={{ display: "block" }} id='search-list'>
+                                                        {selpelis.map((item) => (
+                                                            <>
+
+                                                                <div className='search-list-item'>
+                                                                    <div className='search-item-thumbnail'>
+                                                                        <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}`} />
+                                                                    </div>
+                                                                    <div className='search-item-info'>
+                                                                        <h3>{item.original_name}</h3>
+                                                                    </div>
+                                                                </div>
+                                                            </>
+                                                        ))}
+                                                    </div>
                                                     </div>
                                                 </div>
 
@@ -212,6 +289,7 @@ export default function AddSerieEs() {
                                                             type="text"
                                                             id="titlelatin"
                                                             name="titlelatin"
+                                                            autoComplete="off"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Título latino de la Serie"
                                                             value={TITLE_LATIN}
@@ -226,7 +304,7 @@ export default function AddSerieEs() {
                                                             for="year"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
-                                                            Año:
+                                                            Año: <span className='font-bold text-red-700'> {selpelis2.Year}</span>
                                                         </label>
                                                         <input
                                                             name="year"
@@ -235,6 +313,7 @@ export default function AddSerieEs() {
                                                             min={1970}
                                                             max={2030}
                                                             type="number"
+                                                            autoComplete="off"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={YEAR}
                                                             onChange={(e) => setYEAR(e.target.value)}
@@ -396,7 +475,7 @@ export default function AddSerieEs() {
                                                     <label
                                                         className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                     >
-                                                        Generos:
+                                                        Generos:  <span className='font-bold text-red-700'> {selpelis2.Genre}</span>
                                                     </label>
                                                     <input
                                                         type="number"

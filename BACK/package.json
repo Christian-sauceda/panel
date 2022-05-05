@@ -4,7 +4,6 @@
   "description": "API for the back the TopMedia+",
   "main": "index.js",
   "scripts": {
-    "build": "babel src --out-dir build",
     "babel-node": "babel-node --presets=@babel/preset-env",
     "dev": "nodemon --exec npm run babel-node src/index.js",
     "start": "node build/index.js"

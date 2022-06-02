@@ -82,6 +82,22 @@ const AddCapSerieAdult = () => {
             }
         },
         {
+            name: "BACK",
+            label: "Poster",
+            options: {
+                filter: false,
+                sort: false,
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <img src={value} alt="poster" width="100" height="100" />
+                    )
+                },
+                download: false,
+                viewColumns: false,
+                
+            }
+        },
+        {
             name: 'NAME_CHAPTERS',
             label: 'Nombre Capitulo',
             options: {

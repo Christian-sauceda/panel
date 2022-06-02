@@ -1,5 +1,6 @@
 import express from "express";
 const cors = require("cors");
+
 import morgan from "morgan";
 import pkg from "../package.json";
 import cataudio from "./routes/maintenance.routes/cataudio.routes";
@@ -89,5 +90,8 @@ app.use('/images/imgs', imagesRouter);
 
 // AUTH
 app.use('/', sysignup);
+
+
+
 
 export default app;

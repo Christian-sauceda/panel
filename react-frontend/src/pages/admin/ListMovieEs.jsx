@@ -50,6 +50,20 @@ const AddCapSerieEs = () => {
             }
         },
         {
+            name: "POSTER",
+            label: "Poster",
+            options: {
+                filter: false,
+                sort: false,
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <img src={value} alt="poster" width="50" height="100" />
+                    )
+                },
+                download: false
+            }
+        },
+        {
             name: 'TITLE',
             label: 'Titulo',
             options: {

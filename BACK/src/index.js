@@ -12,50 +12,50 @@ console.log(`Server is running on http://localhost:${port}`);
 
 
 
-cron.schedule('49 16 * * *', () => {
+cron.schedule('07 17 * * *', () => {
   //ENVIA EMAIL AUTOMATICO
-    const transporter = nodemailer.createTransport({
-      host: "mail.appteck.com",
-      port: 465,
-      secure: true,
-      pool: true,
-      auth: {
-        user: "csauceda@appteck.com",
-        pass: "Crisssf96@"
-      }
-    });
-  
+  const transporter = nodemailer.createTransport({
+    host: "mail.appteck.com",
+    port: 465,
+    secure: true,
+    pool: true,
+    auth: {
+      user: "csauceda@appteck.com",
+      pass: "Crisssf96@"
+    }
+  });
 
-  // adjuntar lista de correos desde la base de datos
-  mysqlconnection.query(`SELECT EMAIL_USER FROM SYS_USER t1 WHERE t1.TYPE_USER = 1 `, (err, rows) => {
-    if (err) {
-      console.log(err);
-    } else {
-      const emails = rows.map(row => row.EMAIL_USER);
-      console.log(emails);
-      const listapeliculas = [
-        {
-          title: "El señor de los anillos",
-          year: "2001",
-          rating: "9.3",
-        },
-        {
-          title: "The Matrix",
-          year: "1999",
-          rating: "8.7",
-        },
-        {
-          title: "The Matrix Reloaded",
-          year: "2003",
-          rating: "8.7",
-        },
-      ];
-      const info = transporter.sendMail({
-        from: "TM+ - Sistema de Gestión de Contenido",
-        to: "csauceda@appteck.com",
-        subject: "Reporte contenido subido a TopMedia+",
-        text: `Reporte contenido subido a TopMedia+`,
-        html: `
+
+    mysqlconnection.query(`SELECT EMAIL_USER FROM SYS_USER t1 WHERE t1.TYPE_USER = 1 `, (err, rows) => {
+      if (!err) {
+        //guardar en variable como json
+        var json = JSON.stringify(rows);
+        console.log(json);
+        
+          //enviar email
+        const listapeliculas = [
+          {
+            title: "El señor de los anillos",
+            year: "2001",
+            rating: "9.3",
+          },
+          {
+            title: "The Matrix",
+            year: "1999",
+            rating: "8.7",
+          },
+          {
+            title: "The Matrix Reloaded",
+            year: "2003",
+            rating: "8.7",
+          },
+        ];
+        const info = transporter.sendMail({
+          from: "TM+ - Sistema de Gestión de Contenido",
+          to: "csauceda@appteck.com",
+          subject: "Reporte contenido subido a TopMedia+",
+          text: `Reporte contenido subido a TopMedia+`,
+          html: `
                     <!DOCTYPE html>
                     <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
                     <head>
@@ -167,9 +167,12 @@ cron.schedule('49 16 * * *', () => {
                     </body>
                     </html>
       `,
-      });
-    }
-  });
+        });
+      } else {
+        console.log(err);
+      }
+    });
+  
 }, {
   scheduled: true,
   timezone: "America/Tegucigalpa"

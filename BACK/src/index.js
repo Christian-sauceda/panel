@@ -12,8 +12,8 @@ console.log(`Server is running on http://localhost:${port}`);
 
 
 
-cron.schedule('07 17 * * *', () => {
-  //ENVIA EMAIL AUTOMATICO
+cron.schedule('48 20 * * *', () => {
+  //ENVIA EMAIAUTOMATICO
   const transporter = nodemailer.createTransport({
     host: "mail.appteck.com",
     port: 465,
@@ -25,31 +25,14 @@ cron.schedule('07 17 * * *', () => {
     }
   });
 
-
-    mysqlconnection.query(`SELECT EMAIL_USER FROM SYS_USER t1 WHERE t1.TYPE_USER = 1 `, (err, rows) => {
+    mysqlconnection.query(`SELECT TITLE as title, YEAR as year FROM MT_CONTENTS `, (err, rows) => {
+      //otra consulta para obtener los emails de los usuarios
       if (!err) {
         //guardar en variable como json
         var json = JSON.stringify(rows);
-        console.log(json);
-        
           //enviar email
-        const listapeliculas = [
-          {
-            title: "El señor de los anillos",
-            year: "2001",
-            rating: "9.3",
-          },
-          {
-            title: "The Matrix",
-            year: "1999",
-            rating: "8.7",
-          },
-          {
-            title: "The Matrix Reloaded",
-            year: "2003",
-            rating: "8.7",
-          },
-        ];
+        const listapeliculas = JSON.parse(json);
+
         const info = transporter.sendMail({
           from: "TM+ - Sistema de Gestión de Contenido",
           to: "csauceda@appteck.com",
@@ -118,15 +101,17 @@ cron.schedule('07 17 * * *', () => {
                               <table role="presentation" style="width:94%;max-width:600px;border:none;border-spacing:0;text-align:left;font-family:Arial,sans-serif;font-size:16px;line-height:22px;color:#363636;">
                                 <tr>
                                   <td style="padding:40px 30px 30px 30px;text-align:center;font-size:24px;font-weight:bold;">
-                                    <a href="#" style="text-decoration:none;"><img src="https://www.topmedia.app/assets/img/logo/f-logo.png" width="130" alt="Logo" style="width:130px;max-width:80%;height:auto;border:none;text-decoration:none;color:#ffffff;"></a>
+                                  <span lang="ES-US" style="font-size: 36.0pt">TOPMEDIA+</span>
+                                  <p align="center" style="margin: 0in; margin-bottom: .0001pt; text-align: center"><b><span lang="es-419" style="font-size: 16.0pt; font-family: &quot;Verdana&quot;,sans-serif">________________________</span></b><span lang="ES-HN" style="font-size: 16.0pt"><!-- o ignored --></span></p>
                                   </td>
                                 </tr>
+                                <p align="center" style="text-align: center"><span lang="es-419" style="font-size: 18.0pt; font-family: &quot;Verdana&quot;,sans-serif">Reporte Semanal de Contenido Subido<span style="color: red"><strong><span lang="es-419" style="font-size: 16.0pt; font-family: &quot;Verdana&quot;,sans-serif"> 2022</span></strong><strong><span lang="es-419" style="font-size: 10.0pt; font-family: &quot;Verdana&quot;,sans-serif">.</span></strong></p>
                                 <tr>
                                   <td style="padding:30px;background-color:#ffffff;">
                                     <h3 style="margin:0;">Series en Inglés</h3>
                                       <ol>
-                                          ${listapeliculas.map((pelicula) => `<li>${pelicula.title} (${pelicula.year}) - Rating: ${pelicula.rating}</li>`).join("")}
-                                      </ol
+                                          ${listapeliculas.map((pelicula) => `<li>${pelicula.title} <span style="color: red">(${pelicula.year})</span></li>`).join("")}
+                                      </ol>
                                   </td>
                                 </tr>
                                 <tr>

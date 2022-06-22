@@ -9,36 +9,46 @@ app.listen(port);
 
 console.log(`Server is running on http://localhost:${port}`);
 
-
-
-
-cron.schedule('48 20 * * *', () => {
+cron.schedule('8 15 * * *', () => {
   //ENVIA EMAIAUTOMATICO
   const transporter = nodemailer.createTransport({
-    host: "mail.appteck.com",
-    port: 465,
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
     secure: true,
     pool: true,
     auth: {
-      user: "csauceda@appteck.com",
-      pass: "Crisssf96@"
+      user: process.env.EMAIL_FROM,
+      pass: process.env.PASS_EMAIL_FROM
     }
   });
 
-    mysqlconnection.query(`SELECT TITLE as title, YEAR as year FROM MT_CONTENTS `, (err, rows) => {
-      //otra consulta para obtener los emails de los usuarios
-      if (!err) {
-        //guardar en variable como json
-        var json = JSON.stringify(rows);
-          //enviar email
-        const listapeliculas = JSON.parse(json);
+  mysqlconnection.query(`SELECT TITLE as title, YEAR as year FROM MT_CONTENTS; SELECT COD_AUDIO AS cod, AUDIO AS audio FROM CAT_AUDIO`, [1, 2], (err, result) => {
+    //otra consulta para obtener los emails de los usuarios
+    
+    if (!err) {
+      //guardar en variable como json
 
-        const info = transporter.sendMail({
-          from: "TM+ - Sistema de Gestión de Contenido",
-          to: "csauceda@appteck.com",
-          subject: "Reporte contenido subido a TopMedia+",
-          text: `Reporte contenido subido a TopMedia+`,
-          html: `
+      var json = JSON.stringify(result[0]);
+      var audio = JSON.stringify(result[1]);
+
+      let dateantes = new Date();
+      let santes = String(dateantes.getDate() - 5).padStart(2, '0') + '/' + String(dateantes.getMonth() + 1).padStart(2, '0') + '/' + dateantes.getFullYear();
+
+      let datedespues = new Date();
+      let sactual = String(datedespues.getDate()).padStart(2, '0') + '/' + String(datedespues.getMonth() + 1).padStart(2, '0') + '/' + datedespues.getFullYear();
+
+      
+      
+      //enviar email
+      const listapeliculas = JSON.parse(json);
+      const listaaudios = JSON.parse(audio);
+      
+      const info = transporter.sendMail({
+        from: "TM+ - Sistema de Gestión de Contenido",
+        to: process.env.EMAIL_CEO,
+        subject: "Reporte contenido subido a TopMedia+",
+        text: `Reporte contenido subido a TopMedia+`,
+        html: `
                     <!DOCTYPE html>
                     <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
                     <head>
@@ -105,33 +115,37 @@ cron.schedule('48 20 * * *', () => {
                                   <p align="center" style="margin: 0in; margin-bottom: .0001pt; text-align: center"><b><span lang="es-419" style="font-size: 16.0pt; font-family: &quot;Verdana&quot;,sans-serif">________________________</span></b><span lang="ES-HN" style="font-size: 16.0pt"><!-- o ignored --></span></p>
                                   </td>
                                 </tr>
-                                <p align="center" style="text-align: center"><span lang="es-419" style="font-size: 18.0pt; font-family: &quot;Verdana&quot;,sans-serif">Reporte Semanal de Contenido Subido<span style="color: red"><strong><span lang="es-419" style="font-size: 16.0pt; font-family: &quot;Verdana&quot;,sans-serif"> 2022</span></strong><strong><span lang="es-419" style="font-size: 10.0pt; font-family: &quot;Verdana&quot;,sans-serif">.</span></strong></p>
+                                <p style="padding:25px;text-align:center;font-size:24px;font-weight:bold;"></p>
+                                <p align="center" style="text-align: center"><span lang="es-419" style="font-size: 18.0pt; padding-top: 15px; font-family: &quot;Verdana&quot;,sans-serif">Reporte Semanal de Contenido Subido del<span style="color: red"><strong><span lang="es-419" style="font-size: 16.0pt; font-family: &quot;Verdana&quot;,sans-serif"> ${santes} <span style="color: black" >al</span> <span> ${sactual}</span></strong><strong><span lang="es-419" style="font-size: 10.0pt; font-family: &quot;Verdana&quot;,sans-serif">.</span></strong></p>
                                 <tr>
-                                  <td style="padding:30px;background-color:#ffffff;">
-                                    <h3 style="margin:0;">Series en Inglés</h3>
-                                      <ol>
-                                          ${listapeliculas.map((pelicula) => `<li>${pelicula.title} <span style="color: red">(${pelicula.year})</span></li>`).join("")}
-                                      </ol>
+                                  <td style="padding:30px; background-color:#ffffff;">
+                                    <h3 style="margin:0; color:black;">Series en Inglés</h3>
+                                      <ul>
+                                          ${listapeliculas.map((pelicula) => `<li><span style="color: black">${pelicula.title}</span> <span style="color: red">(${pelicula.year})</span></li>`).join("")}
+                                      </ul>
                                   </td>
                                 </tr>
                                 <tr>
                                   <td style="padding:30px;background-color:#ffffff;">
-                                    <h3 style="margin:0;">Series en Español</h3>
+                                    <h3 style="margin:0;color:black;">Series en Español</h3>
+                                    <ul>
+                                          ${listaaudios.map((audio) => `<li>${audio.audio} <span style="color: red">(${audio.audio})</span></li>`).join("")}
+                                      </ul>
                                   </td>
                                 </tr>           
                                 <tr>
                                   <td style="padding:30px;background-color:#ffffff;">
-                                    <h3 style="margin:0;">Películas en Español</h3>
+                                    <h3 style="margin:0;color:black;">Películas en Español</h3>
                                   </td>
                                 </tr>
                                 <tr>
                                 <td style="padding:30px;background-color:#ffffff;">
-                                  <h3 style="margin:0;">Películas en Inglés</h3>
+                                  <h3 style="margin:0;color:black;">Películas en Inglés</h3>
                                 </td>
                               </tr>
                               <tr>
                               <td style="padding:30px;background-color:#ffffff;">
-                                <h3 style="margin:0;">Eventos Deportivos</h3>
+                                <h3 style="margin:0;color:black;">Eventos Deportivos</h3>
                               </td>
                             </tr>
                                 <tr>
@@ -152,12 +166,12 @@ cron.schedule('48 20 * * *', () => {
                     </body>
                     </html>
       `,
-        });
-      } else {
-        console.log(err);
-      }
     });
-  
+    } else {
+      console.log(err);
+    }
+  });
+
 }, {
   scheduled: true,
   timezone: "America/Tegucigalpa"

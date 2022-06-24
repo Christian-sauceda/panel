@@ -27,14 +27,14 @@ const CardUltimasSeriesEs = () => {
     //definir columnas
     const columns = [
         {
-            name: "TITLE",
+            name: "title",
             label: "Titulo",
             options: {
                 filter: true,
             },
         },
         {
-            name: "UPLOAD_DATE",
+            name: "upload_date",
             label: "Fecha",
             options: {
                 filter: true,

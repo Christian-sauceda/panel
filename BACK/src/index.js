@@ -9,7 +9,7 @@ app.listen(port);
 
 console.log(`Server is running on http://localhost:${port}`);
 
-cron.schedule('8 15 * * *', () => {
+cron.schedule('37 15 * * *', () => {
   //ENVIA EMAIAUTOMATICO
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -22,26 +22,40 @@ cron.schedule('8 15 * * *', () => {
     }
   });
 
-  mysqlconnection.query(`SELECT TITLE as title, YEAR as year FROM MT_CONTENTS; SELECT COD_AUDIO AS cod, AUDIO AS audio FROM CAT_AUDIO`, [1, 2], (err, result) => {
+  mysqlconnection.query(`
+  SELECT t1.TITLE AS title, t1.YEAR AS upload_date FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_MOVIESES}; 
+  SELECT t1.TITLE AS title, t1.YEAR AS upload_date FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_MOVIESEN};
+  SELECT t1.TITLE AS title, t1.YEAR AS upload_date FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_MOVIESAD};
+  SELECT t1.TITLE AS title, t1.YEAR AS upload_date FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_SERIESES};  
+  SELECT t1.TITLE AS title, t1.YEAR AS upload_date FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_SERIESEN};
+  SELECT t1.TITLE AS title, t1.YEAR AS upload_date FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_SPORT}`, 
+  [1, 2], (err, result) => {
     //otra consulta para obtener los emails de los usuarios
     
     if (!err) {
       //guardar en variable como json
 
-      var json = JSON.stringify(result[0]);
-      var audio = JSON.stringify(result[1]);
+      var moviees = JSON.stringify(result[0]);
+      var movieen = JSON.stringify(result[1]);
+      var moviead = JSON.stringify(result[2]);
+      var seriees = JSON.stringify(result[3]);
+      var serisen = JSON.stringify(result[4]);
+      var sport = JSON.stringify(result[5]);
 
       let dateantes = new Date();
       let santes = String(dateantes.getDate() - 5).padStart(2, '0') + '/' + String(dateantes.getMonth() + 1).padStart(2, '0') + '/' + dateantes.getFullYear();
 
       let datedespues = new Date();
       let sactual = String(datedespues.getDate()).padStart(2, '0') + '/' + String(datedespues.getMonth() + 1).padStart(2, '0') + '/' + datedespues.getFullYear();
-
-      
+      let anio = datedespues.getFullYear();
       
       //enviar email
-      const listapeliculas = JSON.parse(json);
-      const listaaudios = JSON.parse(audio);
+      const listapeliculases = JSON.parse(moviees);
+      const listapeliculasen = JSON.parse(movieen);
+      const listapeliculasad = JSON.parse(moviead);
+      const listaserieses = JSON.parse(seriees);
+      const listaseriesen = JSON.parse(serisen);
+      const listasport = JSON.parse(sport);
       
       const info = transporter.sendMail({
         from: "TM+ - Sistema de Gestión de Contenido",
@@ -121,36 +135,53 @@ cron.schedule('8 15 * * *', () => {
                                   <td style="padding:30px; background-color:#ffffff;">
                                     <h3 style="margin:0; color:black;">Series en Inglés</h3>
                                       <ul>
-                                          ${listapeliculas.map((pelicula) => `<li><span style="color: black">${pelicula.title}</span> <span style="color: red">(${pelicula.year})</span></li>`).join("")}
+                                          ${listaseriesen.map((seriesen) => `<li><span style="color: black">${seriesen.title} <span style="color: red">(${seriesen.upload_date})</span></li>`).join("")}
                                       </ul>
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td style="padding:30px;background-color:#ffffff;">
-                                    <h3 style="margin:0;color:black;">Series en Español</h3>
-                                    <ul>
-                                          ${listaaudios.map((audio) => `<li>${audio.audio} <span style="color: red">(${audio.audio})</span></li>`).join("")}
+                                  <td style="padding:30px; background-color:#ffffff;">
+                                    <h3 style="margin:0; color:black;">Series en Español</h3>
+                                      <ul>
+                                          ${listaserieses.map((serieses) => `<li><span style="color: black">${serieses.title} <span style="color: red">(${serieses.upload_date})</span></li>`).join("")}
                                       </ul>
                                   </td>
                                 </tr>           
                                 <tr>
                                   <td style="padding:30px;background-color:#ffffff;">
                                     <h3 style="margin:0;color:black;">Películas en Español</h3>
+                                    <ul>
+                                        ${listapeliculases.map((peliculaes) => `<li><span style="color: black">${peliculaes.title}</span> <span style="color: red">(${peliculaes.upload_date})</span></li>`).join("")}
+                                    </ul>
                                   </td>
                                 </tr>
                                 <tr>
                                 <td style="padding:30px;background-color:#ffffff;">
                                   <h3 style="margin:0;color:black;">Películas en Inglés</h3>
+                                  <ul>
+                                      ${listapeliculasen.map((peliculaen) => `<li><span style="color: black">${peliculaen.title}</span> <span style="color: red">(${peliculaen.upload_date})</span></li>`).join("")}
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="padding:30px;background-color:#ffffff;">
+                                  <h3 style="margin:0;color:black;">Películas Adultos</h3>
+                                  <ul>
+                                  ${listapeliculasad.map((peliculaad) => `<li><span style="color: black">${peliculaad.title}</span> <span style="color: red">(${peliculaad.upload_date})</span></li>`).join("")}
+                                  </ul>
                                 </td>
                               </tr>
                               <tr>
                               <td style="padding:30px;background-color:#ffffff;">
                                 <h3 style="margin:0;color:black;">Eventos Deportivos</h3>
+                                <ul>
+                                ${listasport.map((eventosdep) => `<li><span style="color: black">${eventosdep.title}</span> <span style="color: red">(${eventosdep.upload_date})</span></li>`).join("")}
+                                </ul>
                               </td>
                             </tr>
                                 <tr>
                                   <td style="padding:30px;text-align:center;font-size:12px;background-color:#404040;color:#cccccc;">
-                                    <p style="margin:0;">© 2022 TopMedia. All rights reserved.</p>
+                                    <p style="margin:0;">© ${anio} TopMedia. All rights reserved.</p>
                                   </td>
                                 </tr>
                               </table>

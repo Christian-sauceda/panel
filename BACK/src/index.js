@@ -9,7 +9,7 @@ app.listen(port);
 
 console.log(`Server is running on http://localhost:${port}`);
 
-cron.schedule('37 15 * * *', () => {
+cron.schedule('19 22 * * *', () => {
   //ENVIA EMAIAUTOMATICO
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -26,9 +26,15 @@ cron.schedule('37 15 * * *', () => {
   SELECT t1.TITLE AS title, t1.YEAR AS upload_date FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_MOVIESES}; 
   SELECT t1.TITLE AS title, t1.YEAR AS upload_date FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_MOVIESEN};
   SELECT t1.TITLE AS title, t1.YEAR AS upload_date FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_MOVIESAD};
-  SELECT t1.TITLE AS title, t1.YEAR AS upload_date FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_SERIESES};  
-  SELECT t1.TITLE AS title, t1.YEAR AS upload_date FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_SERIESEN};
-  SELECT t1.TITLE AS title, t1.YEAR AS upload_date FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_SPORT}`, 
+  SELECT t2.TITLE AS title, COUNT(t1.CHAPTER_NUMBER) AS total FROM MT_CHAPTERS_SERIES t1 INNER JOIN MT_CONTENTS t2 ON t2.COD_CONTENT = t1.COD_CONTENT WHERE t1.DATE_ADD BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t2.COD_CAT_TYPE_CONTENT = ${process.env.ID_SERIESES} GROUP BY t2.TITLE;  
+  SELECT t2.TITLE AS title, COUNT(t1.CHAPTER_NUMBER) AS total FROM MT_CHAPTERS_SERIES t1 INNER JOIN MT_CONTENTS t2 ON t2.COD_CONTENT = t1.COD_CONTENT WHERE t1.DATE_ADD BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t2.COD_CAT_TYPE_CONTENT = ${process.env.ID_SERIESEN} GROUP BY t2.TITLE;
+  SELECT t1.TITLE AS title, t1.YEAR AS upload_date FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_SPORT};
+  SELECT COUNT(t1.TITLE) AS total FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_MOVIESES};
+  SELECT COUNT(t1.TITLE) AS total FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_MOVIESEN};
+  SELECT COUNT(t1.TITLE) AS total FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_MOVIESAD};
+  SELECT COUNT(t1.TITLE) AS total FROM MT_CONTENTS t1 WHERE upload_date BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t1.COD_CAT_TYPE_CONTENT = ${process.env.ID_SPORT};
+  SELECT COUNT(t2.TITLE) AS serie, SUM(t1.CHAPTER_NUMBER) AS capitulo FROM MT_CHAPTERS_SERIES t1 INNER JOIN MT_CONTENTS t2 ON t2.COD_CONTENT = t1.COD_CONTENT WHERE t1.DATE_ADD BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t2.COD_CAT_TYPE_CONTENT = ${process.env.ID_SERIESES} GROUP BY t2.COD_CONTENT ORDER BY capitulo DESC LIMIT 1;
+  SELECT COUNT(t2.TITLE) AS serie, SUM(t1.CHAPTER_NUMBER) AS capitulo FROM MT_CHAPTERS_SERIES t1 INNER JOIN MT_CONTENTS t2 ON t2.COD_CONTENT = t1.COD_CONTENT WHERE t1.DATE_ADD BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t2.COD_CAT_TYPE_CONTENT = ${process.env.ID_SERIESEN} GROUP BY t2.COD_CONTENT ORDER BY capitulo DESC LIMIT 1`, 
   [1, 2], (err, result) => {
     //otra consulta para obtener los emails de los usuarios
     
@@ -41,6 +47,12 @@ cron.schedule('37 15 * * *', () => {
       var seriees = JSON.stringify(result[3]);
       var serisen = JSON.stringify(result[4]);
       var sport = JSON.stringify(result[5]);
+      var sumes = JSON.stringify(result[6]);
+      var sumen = JSON.stringify(result[7]);
+      var sumad = JSON.stringify(result[8]);
+      var sumsport = JSON.stringify(result[9]);
+      var sumseries = JSON.stringify(result[10]);
+      var sumserien = JSON.stringify(result[11]);
 
       let dateantes = new Date();
       let santes = String(dateantes.getDate() - 5).padStart(2, '0') + '/' + String(dateantes.getMonth() + 1).padStart(2, '0') + '/' + dateantes.getFullYear();
@@ -56,6 +68,12 @@ cron.schedule('37 15 * * *', () => {
       const listaserieses = JSON.parse(seriees);
       const listaseriesen = JSON.parse(serisen);
       const listasport = JSON.parse(sport);
+      const sumapelises = JSON.parse(sumes);
+      const sumapelisen = JSON.parse(sumen);
+      const sumapelisad = JSON.parse(sumad);
+      const sumsports = JSON.parse(sumsport);
+      const sumaserieses = JSON.parse(sumseries);
+      const sumaseriesen = JSON.parse(sumserien);
       
       const info = transporter.sendMail({
         from: "TM+ - Sistema de Gestión de Contenido",
@@ -135,24 +153,28 @@ cron.schedule('37 15 * * *', () => {
                                   <td style="padding:30px; background-color:#ffffff;">
                                     <h3 style="margin:0; color:black;">Series en Inglés</h3>
                                       <ul>
-                                          ${listaseriesen.map((seriesen) => `<li><span style="color: black">${seriesen.title} <span style="color: red">(${seriesen.upload_date})</span></li>`).join("")}
+                                          ${listaseriesen.map((seriesen) => `<li><span style="color: black">${seriesen.title} <span style="color: red">(${seriesen.total} Capítulos)</span></li>`).join("")}
                                       </ul>
+                                      ${sumaserieses.map((totalseries) => `<span style="font-weight: bold;"> TOTAL: ${totalseries.serie} SERIES, ${totalseries.capitulo} Capítulos</span> `).join("")}
                                   </td>
                                 </tr>
                                 <tr>
                                   <td style="padding:30px; background-color:#ffffff;">
                                     <h3 style="margin:0; color:black;">Series en Español</h3>
                                       <ul>
-                                          ${listaserieses.map((serieses) => `<li><span style="color: black">${serieses.title} <span style="color: red">(${serieses.upload_date})</span></li>`).join("")}
+                                          ${listaserieses.map((serieses) => `<li><span style="color: black">${serieses.title} <span style="color: red">(${serieses.total} Capítulos)</span></li>`).join("")}
                                       </ul>
+                                      ${sumaseriesen.map((totalserien) => `<span style="font-weight: bold;"> TOTAL: ${totalserien.serie} SERIES, ${totalserien.capitulo} Capítulos</span> `).join("")}
                                   </td>
                                 </tr>           
                                 <tr>
+                                
                                   <td style="padding:30px;background-color:#ffffff;">
                                     <h3 style="margin:0;color:black;">Películas en Español</h3>
                                     <ul>
                                         ${listapeliculases.map((peliculaes) => `<li><span style="color: black">${peliculaes.title}</span> <span style="color: red">(${peliculaes.upload_date})</span></li>`).join("")}
                                     </ul>
+                                    ${sumapelises.map((totales) => `<span style="font-weight: bold;"> TOTAL: ${totales.total} PELÍCULAS ESPAÑOL</span> `).join("")}
                                   </td>
                                 </tr>
                                 <tr>
@@ -161,6 +183,7 @@ cron.schedule('37 15 * * *', () => {
                                   <ul>
                                       ${listapeliculasen.map((peliculaen) => `<li><span style="color: black">${peliculaen.title}</span> <span style="color: red">(${peliculaen.upload_date})</span></li>`).join("")}
                                   </ul>
+                                  ${sumapelisen.map((totalen) => `<span style="font-weight: bold;"> TOTAL: ${totalen.total} PELÍCULAS INGLÉS</span> `).join("")}
                                 </td>
                               </tr>
                               <tr>
@@ -169,6 +192,7 @@ cron.schedule('37 15 * * *', () => {
                                   <ul>
                                   ${listapeliculasad.map((peliculaad) => `<li><span style="color: black">${peliculaad.title}</span> <span style="color: red">(${peliculaad.upload_date})</span></li>`).join("")}
                                   </ul>
+                                  ${sumapelisad.map((totalad) => `<span style="font-weight: bold;"> TOTAL: ${totalad.total} PELÍCULAS ADULTOS</span> `).join("")}
                                 </td>
                               </tr>
                               <tr>
@@ -177,6 +201,7 @@ cron.schedule('37 15 * * *', () => {
                                 <ul>
                                 ${listasport.map((eventosdep) => `<li><span style="color: black">${eventosdep.title}</span> <span style="color: red">(${eventosdep.upload_date})</span></li>`).join("")}
                                 </ul>
+                                ${sumsports.map((totalsports) => `<span style="font-weight: bold;"> TOTAL: ${totalsports.total} EVENTOS DEPORTIVOS</span> `).join("")}
                               </td>
                             </tr>
                                 <tr>

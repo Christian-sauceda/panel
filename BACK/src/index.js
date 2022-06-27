@@ -9,7 +9,7 @@ app.listen(port);
 
 console.log(`Server is running on http://localhost:${port}`);
 
-cron.schedule('19 22 * * *', () => {
+cron.schedule('00 15 * * 6', () => {
   //ENVIA EMAIAUTOMATICO
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -36,11 +36,8 @@ cron.schedule('19 22 * * *', () => {
   SELECT COUNT(t2.TITLE) AS serie, SUM(t1.CHAPTER_NUMBER) AS capitulo FROM MT_CHAPTERS_SERIES t1 INNER JOIN MT_CONTENTS t2 ON t2.COD_CONTENT = t1.COD_CONTENT WHERE t1.DATE_ADD BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t2.COD_CAT_TYPE_CONTENT = ${process.env.ID_SERIESES} GROUP BY t2.COD_CONTENT ORDER BY capitulo DESC LIMIT 1;
   SELECT COUNT(t2.TITLE) AS serie, SUM(t1.CHAPTER_NUMBER) AS capitulo FROM MT_CHAPTERS_SERIES t1 INNER JOIN MT_CONTENTS t2 ON t2.COD_CONTENT = t1.COD_CONTENT WHERE t1.DATE_ADD BETWEEN DATE_SUB(NOW(), INTERVAL 6 DAY) AND NOW() AND t2.COD_CAT_TYPE_CONTENT = ${process.env.ID_SERIESEN} GROUP BY t2.COD_CONTENT ORDER BY capitulo DESC LIMIT 1`, 
   [1, 2], (err, result) => {
-    //otra consulta para obtener los emails de los usuarios
     
     if (!err) {
-      //guardar en variable como json
-
       var moviees = JSON.stringify(result[0]);
       var movieen = JSON.stringify(result[1]);
       var moviead = JSON.stringify(result[2]);
@@ -155,7 +152,6 @@ cron.schedule('19 22 * * *', () => {
                                       <ul>
                                           ${listaseriesen.map((seriesen) => `<li><span style="color: black">${seriesen.title} <span style="color: red">(${seriesen.total} Capítulos)</span></li>`).join("")}
                                       </ul>
-                                      ${sumaserieses.map((totalseries) => `<span style="font-weight: bold;"> TOTAL: ${totalseries.serie} SERIES, ${totalseries.capitulo} Capítulos</span> `).join("")}
                                   </td>
                                 </tr>
                                 <tr>
@@ -164,7 +160,6 @@ cron.schedule('19 22 * * *', () => {
                                       <ul>
                                           ${listaserieses.map((serieses) => `<li><span style="color: black">${serieses.title} <span style="color: red">(${serieses.total} Capítulos)</span></li>`).join("")}
                                       </ul>
-                                      ${sumaseriesen.map((totalserien) => `<span style="font-weight: bold;"> TOTAL: ${totalserien.serie} SERIES, ${totalserien.capitulo} Capítulos</span> `).join("")}
                                   </td>
                                 </tr>           
                                 <tr>

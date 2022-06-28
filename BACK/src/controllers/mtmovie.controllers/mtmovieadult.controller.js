@@ -61,9 +61,11 @@ export const createmovieadult = (req, res) => {
         DURATION, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO } = req.body;
 
     const urlimgback = req.body.BACK
-    const nameimgback = req.body.TITLE + 'back.jpg';
+    const extensionback = 'back.jpg';
+    const extensionfront = 'poster.jpg';
+    const nameimgback = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionback);
     const urlimgposter = req.body.POSTER
-    const nameimgposter = req.body.TITLE + 'poster.jpg';
+    const nameimgposter = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionfront);
     downloadmovieadultback(urlimgback, nameimgback, function () {
         console.log('done');
     });
@@ -98,9 +100,11 @@ export const updatemovieadultById = (req, res) => {
         DURATION, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO } = req.body;
     const { COD } = req.params;
     const urlimgback = req.body.BACK
-    const nameimgback = req.body.TITLE + 'back.jpg';
+    const extensionback = 'back.jpg';
+    const extensionfront = 'poster.jpg';
+    const nameimgback = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionback);
     const urlimgposter = req.body.POSTER
-    const nameimgposter = req.body.TITLE + 'poster.jpg';
+    const nameimgposter = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionfront);
     downloadmovieadultback(urlimgback, nameimgback, function () {
         console.log('done');
     });

@@ -355,7 +355,6 @@ export default function AddCapSerieEs() {
                                                             value={COD_FORMAT_VIDEO}
                                                             onChange={(e) => setCOD_FORMAT_VIDEO(e.target.value)}
                                                         >
-                                                            <option value="">Seleccione Formato</option>
                                                             {selectformato.map((item) => (
                                                                 <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO === 1}>{item.FORMATO}</option>
                                                             ))}

@@ -487,7 +487,6 @@ export default function AddMovieEs() {
                                                             value={CODQUALITY}
                                                             onChange={(e) => setCODQUALITY(e.target.value)}
                                                         >
-                                                            <option value="">Seleccione</option>
                                                             {selectcalidad.map((item) => (
                                                                 <option key={item.COD_CALIDAD} value={item.COD_CALIDAD}>{item.CALIDAD}</option>
                                                             ))}
@@ -509,7 +508,6 @@ export default function AddMovieEs() {
                                                             value={CODAUDIO}
                                                             onChange={(e) => setCODAUDIO(e.target.value)}
                                                         >
-                                                            <option value="">Seleccione</option>
                                                             {selectaudio.map((item) => (
                                                                 <option key={item.COD_AUDIO} value={item.COD_AUDIO}>{item.AUDIO}</option>
                                                             ))}
@@ -531,7 +529,6 @@ export default function AddMovieEs() {
                                                             value={CODFORMATVIDEO}
                                                             onChange={(e) => setCODFORMATVIDEO(e.target.value)}
                                                         >
-                                                            <option value="">Seleccione</option>
                                                             {selectformato.map((item) => (
                                                                 <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO === 1}>{item.FORMATO}</option>
                                                             ))}
@@ -553,7 +550,6 @@ export default function AddMovieEs() {
                                                             value={ASKPIN}
                                                             onChange={(e) => setASKPIN(e.target.value)}
                                                         >
-                                                            <option value="">Seleccione</option>
                                                             <option value="1">No</option>
                                                             <option value="2">Si</option>
                                                         </select>

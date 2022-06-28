@@ -41,9 +41,11 @@ export const createtvshowChapter = (req, res) => {
     const { COD_CONTENT, COD_FORMAT_VIDEO, COD_USER, NAME_CHAPTER, NUMBER_SEASON, NUMBER_CHAPTER,
         SYNOSIS, URL, SUPTITLE, BACK, POSTER } = req.body;
     const urlimgback = req.body.BACK
-    const nameimgback = req.body.COD_CONTENT + req.body.NAME_CHAPTER + 'back.jpg';
+    const extensionback = 'back.jpg';
+    const extensionfront = 'poster.jpg';
+    const nameimgback = req.body.COD_CONTENT + req.body.NAME_CHAPTER.split("?").join("").split("¿").join("").concat(extensionback);
     const urlimgposter = req.body.POSTER
-    const nameimgposter = req.body.COD_CONTENT + req.body.NAME_CHAPTER + 'poster.jpg';
+    const nameimgposter = req.body.COD_CONTENT + req.body.NAME_CHAPTER.split("?").join("").split("¿").join("").concat(extensionfront);
     downloadcapserieback(urlimgback, nameimgback, function () {
         console.log('done');
     });
@@ -78,9 +80,11 @@ export const updatetvshowsChapterById = (req, res) => {
         COD_USER, SYNOSIS, URL, BACK, POSTER } = req.body;
     const { COD } = req.params;
     const urlimgback = req.body.BACK
-    const nameimgback = req.body.COD_CONTENT + req.body.NAME_CHAPTER + 'back.jpg';
+    const extensionback = 'back.jpg';
+    const extensionfront = 'poster.jpg';
+    const nameimgback = req.body.COD_CONTENT + req.body.NAME_CHAPTER.split("?").join("").split("¿").join("").concat(extensionback);
     const urlimgposter = req.body.POSTER
-    const nameimgposter = req.body.COD_CONTENT + req.body.NAME_CHAPTER + 'poster.jpg';
+    const nameimgposter = req.body.COD_CONTENT + req.body.NAME_CHAPTER.split("?").join("").split("¿").join("").concat(extensionfront);
     downloadcapserieback(urlimgback, nameimgback, function () {
         console.log('done');
     });

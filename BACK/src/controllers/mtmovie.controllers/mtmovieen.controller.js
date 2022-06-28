@@ -60,10 +60,12 @@ export const createmovieen = (req, res) => {
         YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN,
         CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO } = req.body;
 
-    const urlimgback = req.body.BACK
-    const nameimgback = req.body.TITLE + 'back.jpg';
+    const urlimgback = req.body.BACK;
+    const extensionback = 'back.jpg';
+    const extensionfront = 'poster.jpg';
+    const nameimgback = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionback);
     const urlimgposter = req.body.POSTER
-    const nameimgposter = req.body.TITLE + 'poster.jpg';
+    const nameimgposter = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionfront);
     downloadmovieenback(urlimgback, nameimgback, function () {
         console.log('done');
     });
@@ -101,9 +103,12 @@ export const updatemovieenById = (req, res) => {
     const { COD, ID } = req.params;
 
     const urlimgback = req.body.BACK
-    const nameimgback = req.body.TITLE + 'back.jpg';
+    const extensionback = 'back.jpg';
+    const extensionfront = 'poster.jpg';
+    // REMPLAZAR EL ¿ Y ? POR UN ESPACIO EN BLANCO
+    const nameimgback = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionback);
     const urlimgposter = req.body.POSTER
-    const nameimgposter = req.body.TITLE + 'poster.jpg';
+    const nameimgposter = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionfront);
     downloadmovieenback(urlimgback, nameimgback, function () {
         console.log('done');
     });

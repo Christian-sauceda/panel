@@ -61,7 +61,8 @@ export const createevent = (req, res) => {
     const { COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO, COD_USER, TITLE,
         POSTER, URL, COD_FORMAT_VIDEO } = req.body;
         const urlimgposter = req.body.POSTER
-        const nameimgposter = req.body.COD_AUDIO + req.body.TITLE + 'poster.jpg';
+        const extensionfront = 'poster.jpg';
+        const nameimgposter = req.body.COD_AUDIO + req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionfront);
         // ruta de la imagen en el servidor
         const port = process.env.DOMINIO;
         const imagposter = process.env.RUTAIMAGEEVENTPOSTER
@@ -88,7 +89,8 @@ export const updateeventById = (req, res) => {
     const { COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO, COD_USER, TITLE, POSTER, COD_FORMAT_VIDEO, URL } = req.body;
     const { COD } = req.params;
     const urlimgposter = req.body.POSTER
-        const nameimgposter = req.body.COD_AUDIO + req.body.TITLE + 'poster.jpg';
+    const extensionfront = 'poster.jpg';
+        const nameimgposter = req.body.COD_AUDIO + req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionfront);
         // ruta de la imagen en el servidor
         const port = process.env.DOMINIO;
         const imagposter = process.env.RUTAIMAGEEVENTPOSTER

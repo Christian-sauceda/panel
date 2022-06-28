@@ -57,10 +57,14 @@ export const createmoviees = (req, res) => {
     const { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF,
         DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO } = req.body;
 
-    const urlimgback = req.body.BACK
-    const nameimgback = req.body.TITLE + 'back.jpg';
+    const urlimgback = req.body.BACK;
+
+        const extensionback = 'back.jpg';
+        const extensionfront = 'poster.jpg';
+
+    const nameimgback = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionback);
     const urlimgposter = req.body.POSTER
-    const nameimgposter = req.body.TITLE + 'poster.jpg';
+    const nameimgposter = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionfront);
     downloadmovieesback(urlimgback, nameimgback, function () {
         console.log('done');
     });
@@ -98,9 +102,11 @@ export const updatemovieesById = (req, res) => {
     const { COD, ID } = req.params;
 
     const urlimgback = req.body.BACK
-    const nameimgback = req.body.TITLE + 'back.jpg';
+    const extensionback = 'back.jpg';
+    const extensionfront = 'poster.jpg';
+    const nameimgback = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionback);
     const urlimgposter = req.body.POSTER
-    const nameimgposter = req.body.TITLE + 'poster.jpg';
+    const nameimgposter = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionfront);
     downloadmovieesback(urlimgback, nameimgback, function () {
         console.log('done');
     });

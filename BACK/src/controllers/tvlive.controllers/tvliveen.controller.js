@@ -48,7 +48,8 @@ export const createtvliveen = (req, res) => {
         COD_SERVER_EPG, COD_EPG, TITLE, POSTER, URL, SERVER_EPG, EPG_NOW,
         EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON, COD_CONTENIDO } = req.body;
         const urlimgposter = req.body.POSTER
-        const nameimgposter = req.body.COD_CATEGORY + req.body.TITLE + 'poster.jpg';
+        const extensionfront = 'poster.jpg';
+        const nameimgposter = req.body.COD_CATEGORY + req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionfront);
         // ruta de la imagen en el servidor
         const port = process.env.DOMINIO;
         const imagposter = process.env.RUTAIMAGETVENPOSTER
@@ -78,7 +79,8 @@ export const updatetvliveenById = (req, res) => {
         EPG_NEXT, STATTUS, ORDER_LIVE_TV, ICON } = req.body;
     const { COD, ID } = req.params;
     const urlimgposter = req.body.POSTER
-    const nameimgposter = req.body.COD + req.body.TITLE + 'poster.jpg';
+    const extensionfront = 'poster.jpg';
+    const nameimgposter = req.body.COD + req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionfront);
     // ruta de la imagen en el servidor
     const port = process.env.DOMINIO;
     const imagposter = process.env.RUTAIMAGETVENPOSTER

@@ -174,7 +174,6 @@ export default function AddSerieEs() {
                                                             value={COD_CATEGORIA}
                                                             onChange={e => setCODCATEGORIA(e.target.value)}
                                                         >
-                                                            <option value="">Selecciona una Categoria</option>
                                                             {selectcategoria.map(categoria => (
                                                                 <option key={categoria.COD_CATEGORIA} value={categoria.COD_CATEGORIA}>{categoria.CATEGORIA}</option>
                                                             ))}
@@ -197,7 +196,6 @@ export default function AddSerieEs() {
                                                             value={COD_FORMAT_VIDEO}
                                                             onChange={(e) => setCOD_FORMAT_VIDEO(e.target.value)}
                                                         >
-                                                            <option value="">Seleccione Formato</option>
                                                             {selectformat.map(format => (
                                                                 <option key={format.COD_FORMATO} value={format.COD_FORMATO}>{format.FORMATO}</option>
                                                             ))}
@@ -221,7 +219,6 @@ export default function AddSerieEs() {
                                                             value={COD_AUDIO}
                                                             onChange={(e) => setCOD_AUDIO(e.target.value)}
                                                         >
-                                                            <option value="">Seleccione Formato</option>
                                                             {selectaudio.map(format => (
                                                                 <option key={format.COD_AUDIO} value={format.COD_AUDIO}>{format.AUDIO}</option>
                                                             ))}

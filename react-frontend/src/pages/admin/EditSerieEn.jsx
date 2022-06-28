@@ -377,7 +377,6 @@ export default function AddSerieEs() {
                                                             value={CODAUDIO}
                                                             onChange={(e) => setCODAUDIO(e.target.value)}
                                                         >
-                                                            <option value="">Seleccione</option>
                                                             {selectaudio.map((item) => (
                                                                 <option key={item.COD_AUDIO} value={item.COD_AUDIO}>{item.AUDIO}</option>
                                                             ))}

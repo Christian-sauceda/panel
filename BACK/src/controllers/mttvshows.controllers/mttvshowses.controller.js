@@ -70,9 +70,11 @@ export const createtvshowses = (req, res) => {
     const { CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER, YEAR,
         CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS, COD_CONTENIDO } = req.body;
     const urlimgback = req.body.BACK
-    const nameimgback = req.body.TITLE + 'back.jpg';
+    const extensionback = 'back.jpg';
+    const extensionfront = 'poster.jpg';
+    const nameimgback = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionback);
     const urlimgposter = req.body.POSTER
-    const nameimgposter = req.body.TITLE + 'poster.jpg';
+    const nameimgposter = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionfront);
     downloadserieesback(urlimgback, nameimgback, function () {
         console.log('done');
     });
@@ -106,9 +108,11 @@ export const updatetvshowsesById = (req, res) => {
         CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS } = req.body;
     const { COD, ID } = req.params;
     const urlimgback = req.body.BACK
-    const nameimgback = req.body.TITLE + 'back.jpg';
+    const extensionback = 'back.jpg';
+    const extensionfront = 'poster.jpg';
+    const nameimgback = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionback);
     const urlimgposter = req.body.POSTER
-    const nameimgposter = req.body.TITLE + 'poster.jpg';
+    const nameimgposter = req.body.TITLE.split("?").join("").split("¿").join("").concat(extensionfront);
     downloadserieesback(urlimgback, nameimgback, function () {
         console.log('done');
     });

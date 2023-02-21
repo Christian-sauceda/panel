@@ -179,6 +179,7 @@ export default function AddMovieEn() {
             console.log(error);
         }
     }
+    
 
     const obtenerPeliculas2 = async (e) => {
         try {
@@ -209,14 +210,14 @@ export default function AddMovieEn() {
     }
     
     useEffect(() => {
-        if (TITLE.length >= 3 && YEAR.length == 4) {
+        if (TITLE.length >= 3 || YEAR.length == 4) {
             obtenerPeliculas();
             obtenerPeliculas2();
             llenarDatos();
         } else {
             setSelpelis([]);
         }
-    }, [TITLE])
+    }, [YEAR,TITLE])
 
     const { msg } = alerta;
     return (

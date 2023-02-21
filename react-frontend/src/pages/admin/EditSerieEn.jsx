@@ -214,7 +214,7 @@ export default function AddSerieEs() {
     }
     
     useEffect(() => {
-        if (TITLE.length >= 3 && YEAR.length == 4) {
+        if (TITLE.length >= 3 || YEAR.length == 4) {
             obtenerPeliculas();
             obtenerPeliculas2();
             llenarDatoss();

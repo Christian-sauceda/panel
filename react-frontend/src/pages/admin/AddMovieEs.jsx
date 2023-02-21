@@ -120,6 +120,7 @@ export default function AddMovieEs() {
                 msg: "Todos los campos son obligatorios",
                 error: true
             })
+
             return;
         }
 
@@ -230,6 +231,10 @@ export default function AddMovieEs() {
         }
     }, [TITLE])
     
+    // useEffect si el input TITLE esta vacio, cambiar de color el input
+    
+
+
 
     const { msg } = alerta;
     return (
@@ -262,6 +267,7 @@ export default function AddMovieEs() {
                                                         value={TITLE}
                                                         autoComplete="off"
                                                         onChange={(e) => setTITLE(e.target.value)}
+                                                        required
                                                     />
                                                     <div className='search-list' style={{ display: "block" }} id='search-list'>
                                                         {selpelis.map((item) => (
@@ -314,6 +320,7 @@ export default function AddMovieEs() {
                                                             value={YEAR}
                                                             autoComplete="off"
                                                             onChange={(e) => setYEAR(e.target.value)}
+                                                            required
                                                         />
                                                     </div>
                                                 </div>
@@ -336,6 +343,7 @@ export default function AddMovieEs() {
                                                             value={DURATION}
                                                             autoComplete="off"
                                                             onChange={(e) => setDURATION(e.target.value)}
+                                                            required
                                                         />
                                                     </div>
                                                 </div>
@@ -356,6 +364,7 @@ export default function AddMovieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={CLASIF}
                                                             onChange={(e) => setCLASIF(e.target.value)}
+                                                            required
                                                         />
                                                     </div>
                                                 </div>
@@ -376,6 +385,7 @@ export default function AddMovieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={CALIF}
                                                             onChange={(e) => setCALIF(e.target.value)}
+                                                            required
                                                         />
                                                     </div>
                                                 </div>
@@ -395,6 +405,7 @@ export default function AddMovieEs() {
                                                             placeholder="Director de la Película"
                                                             value={DIRECTOR}
                                                             onChange={(e) => setDIRECTOR(e.target.value)}
+                                                            required
                                                         />
                                                     </div>
                                                 </div>
@@ -415,6 +426,7 @@ export default function AddMovieEs() {
                                                             rows="4"
                                                             value={CAST}
                                                             onChange={(e) => setCAST(e.target.value)}
+                                                            required
                                                         ></textarea>
                                                     </div>
                                                 </div>
@@ -434,6 +446,7 @@ export default function AddMovieEs() {
                                                             placeholder="Pais donde filmo la Película"
                                                             value={COUNTRY}
                                                             onChange={(e) => setCOUNTRY(e.target.value)}
+                                                            required
                                                         />
                                                     </div>
                                                 </div>
@@ -454,6 +467,7 @@ export default function AddMovieEs() {
                                                             rows="4"
                                                             value={SYNOPSIS}
                                                             onChange={(e) => setSYNOPSIS(e.target.value)}
+                                                            required
                                                         ></textarea>
                                                     </div>
                                                 </div>
@@ -473,6 +487,7 @@ export default function AddMovieEs() {
                                                             placeholder="Link del video"
                                                             value={URL}
                                                             onChange={(e) => setURL(e.target.value)}
+                                                            required
                                                         />
                                                     </div>
                                                 </div>
@@ -490,7 +505,9 @@ export default function AddMovieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={CODQUALITY}
                                                             onChange={(e) => setCODQUALITY(e.target.value)}
-                                                        >
+                                                            required
+                                                        >   
+                                                            <option value="">Seleccione una Calidad</option>
                                                             {selectcalidad.map((item) => (
                                                                 <option key={item.COD_CALIDAD} value={item.COD_CALIDAD}>{item.CALIDAD}</option>
                                                             ))}
@@ -511,7 +528,9 @@ export default function AddMovieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={CODAUDIO}
                                                             onChange={(e) => setCODAUDIO(e.target.value)}
+                                                            required
                                                         >
+                                                            <option value="">Seleccione tipo Audio</option>
                                                             {selectaudio.map((item) => (
                                                                 <option key={item.COD_AUDIO} value={item.COD_AUDIO}>{item.AUDIO}</option>
                                                             ))}
@@ -532,7 +551,9 @@ export default function AddMovieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={CODFORMATVIDEO}
                                                             onChange={(e) => setCODFORMATVIDEO(e.target.value)}
+                                                            required
                                                         >
+                                                            <option value="">Seleccione Formato</option>
                                                             {selectformato.map((item) => (
                                                                 <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO === 1}>{item.FORMATO}</option>
                                                             ))}
@@ -553,7 +574,9 @@ export default function AddMovieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={ASKPIN}
                                                             onChange={(e) => setASKPIN(e.target.value)}
+                                                            required
                                                         >
+                                                            <option value="">Seleccione una Opción</option>
                                                             <option value="1">No</option>
                                                             <option value="2">Si</option>
                                                         </select>

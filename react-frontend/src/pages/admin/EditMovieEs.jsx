@@ -159,6 +159,8 @@ export default function AddMovieEs() {
                 msg: "Todos los campos son obligatorios",
                 error: true
             })
+
+            //mostrar en consola los campos vacios
             return;
         }
         setAlerta({})

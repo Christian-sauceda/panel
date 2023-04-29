@@ -281,7 +281,7 @@ export default function AddMovieEs() {
                                                                         <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${pelicula.poster_path}`} />
                                                                     </div>
                                                                     <div className='search-item-info'>
-                                                                    <h3 key={pelicula.id} onClick={() => handleExpedienteClick(pelicula)}>{pelicula.title}</h3>
+                                                                    <h3 key={pelicula.id} onClick={() => handleExpedienteClick(pelicula)}>{pelicula.title} - {pelicula.release_date.split('-')[0]}</h3>
                                                                     </div>
                                                                 </div>
                                                             </>

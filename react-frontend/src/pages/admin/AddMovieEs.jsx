@@ -171,70 +171,73 @@ export default function AddMovieEs() {
         }
     }
 
- 
-
-    const [selpelis, setSelpelis] = useState([]);
-    const [selpelis2, setSelpelis2] = useState([]);
+    const [peliculas, setPeliculas] = useState([]);
+    const [peliculas2, setPeliculas2] = useState([]);
     const [TITLEEN, setTITLEEN] = useState("");
+    const [expediente, setExpediente] = useState({});
 
-    // si el input TITLE tiene contenido, buscar las peliculas
-    const obtenerPeliculas = async (e) => {
-        try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/movie?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=es-MX&year=${YEAR}&page=1&include_adult=false`)
-                .then(response => {
-                    const sap = response.data.results;
-                    setSelpelis(sap)
-                    const titleen = response.data.results[0].original_title;
-                    setTITLEEN(titleen);
-                })
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-
-    const obtenerPeliculas2 = async (e) => {
-        try {
-            const resultados = await axios.get(`${import.meta.env.VITE_BASE_API_OMDB}?t=${TITLEEN}${import.meta.env.VITE_API_KEY_OMDB}`)
-                .then(response => {
-                    const sap = response.data;
-                    setSelpelis2(sap)
-                })
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-
-    const llenarDatos = () => { 
-        (selpelis.length > 0) ?
-    
-            (setBACK(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].backdrop_path}`),
-                setPOSTER(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].poster_path}`),
-                setCALIF(selpelis[0].vote_average),
-                setSYNOPSIS(selpelis[0].overview),
-                setCLASIF(selpelis2.Rated),
-                setDURATION(selpelis2.Runtime),
-                setCOUNTRY(selpelis2.Country),
-                setDIRECTOR(selpelis2.Director),
-                setCAST(selpelis2.Actors)) :
-            null
-    }
-    
     useEffect(() => {
-        if (TITLE.length >= 3 || YEAR.length == 4) {
-            obtenerPeliculas();
-            obtenerPeliculas2();
-            llenarDatos();
-        } else {
-            setSelpelis([]);
+        if (TITLE) {
+            axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/movie?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=es-MX&year=${YEAR}&page=1&include_adult=false`)
+                .then((response) => {
+                    setPeliculas(response.data.results)
+                })
+                .catch(err => console.log(err));
         }
-    }, [TITLE])
-    
-    // useEffect si el input TITLE esta vacio, cambiar de color el input
-    
+    }, [TITLE]);
+
+    useEffect(() => {
+        if (TITLEEN) {
+            axios.get(`${import.meta.env.VITE_BASE_API_OMDB}?t=${TITLEEN}${import.meta.env.VITE_API_KEY_OMDB}`)
+                .then((response) => {
+                    setPeliculas2(response.data)
+                    console.log(response.data)
+                    setExpediente({
+                        ...expediente,
+                        cast: response.data.Actors,
+                        director: response.data.Director,
+                        rated: response.data.Rated,
+                        runtime: response.data.Runtime.slice(0, -3),
+                        country: response.data.Country,
+                    })
+                })
+                .catch(err => console.log(err));
+        }
+    }, [TITLEEN]);
 
 
+    useEffect(() => {
+        if (expediente.id) {
+            setTITLE(expediente.title)
+            setBACK(`${import.meta.env.VITE_API_IMAGE}${expediente.backdrop_path}`)
+            setPOSTER(`${import.meta.env.VITE_API_IMAGE}${expediente.poster_path}`)
+            setDURATION(expediente.runtime)
+            setCALIF(expediente.vote_average)
+            setSYNOPSIS(expediente.overview)
+            setYEAR(expediente.year)
+            setTITLEEN(expediente.original_title)
+            setDIRECTOR(expediente.director)
+            setCAST(expediente.cast)
+            setCLASIF(expediente.rated)
+            setCOUNTRY(expediente.country)
+        }
+    }, [expediente]);
+
+    const handleExpedienteClick = (pelicula) => {
+        setExpediente({
+            id: pelicula.id,
+            title: pelicula.title,
+            original_title: pelicula.original_title,
+            year: pelicula.release_date.split('-')[0],
+            backdrop_path: pelicula.backdrop_path,
+            poster_path: pelicula.poster_path,
+            vote_average: Math.round(pelicula.vote_average),
+            overview: pelicula.overview,
+            cast: pelicula.cast,
+            director: pelicula.director,
+            country: pelicula.country,
+        })
+    }
 
     const { msg } = alerta;
     return (
@@ -270,23 +273,24 @@ export default function AddMovieEs() {
                                                         required
                                                     />
                                                     <div className='search-list' style={{ display: "block" }} id='search-list'>
-                                                        {selpelis.map((item) => (
+                                                        {peliculas.map((pelicula) => (
                                                             <>
 
                                                                 <div className='search-list-item'>
                                                                     <div className='search-item-thumbnail'>
-                                                                        <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}`} />
+                                                                        <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${pelicula.poster_path}`} />
                                                                     </div>
                                                                     <div className='search-item-info'>
-                                                                        <h3>{item.title}</h3>
+                                                                    <h3 key={pelicula.id} onClick={() => handleExpedienteClick(pelicula)}>{pelicula.title}</h3>
                                                                     </div>
                                                                 </div>
                                                             </>
                                                         ))}
-
                                                     </div>
+
                                                 </div>
                                             </div>
+
                                             {/* 
                                             <select
                                                             name="calidad"
@@ -506,7 +510,7 @@ export default function AddMovieEs() {
                                                             value={CODQUALITY}
                                                             onChange={(e) => setCODQUALITY(e.target.value)}
                                                             required
-                                                        >   
+                                                        >
                                                             <option value="">Seleccione una Calidad</option>
                                                             {selectcalidad.map((item) => (
                                                                 <option key={item.COD_CALIDAD} value={item.COD_CALIDAD}>{item.CALIDAD}</option>
@@ -588,9 +592,8 @@ export default function AddMovieEs() {
                                                     <label
                                                         className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                     >
-                                                        Generos:
+                                                         Generos: <span className='font-bold text-red-700'>{peliculas2.Genre}</span>
                                                     </label>
-                                                    <p className='font-bold text-red-700'>{selpelis2.Genre}</p>
                                                     <input
                                                         type="number"
                                                         id="genero"

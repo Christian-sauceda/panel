@@ -54,6 +54,7 @@ export default function AddCapSerieEs() {
     const [POSTER, setPOSTER] = useState("");
 
     const [alerta, setAlerta] = useState({});
+    const [idioma, setIdioma] = useState("es-MX");
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -81,7 +82,6 @@ export default function AddCapSerieEs() {
                 error: false
             })
             //LIMPIAR CAMPOS
-            setCOD_CONTENT("");
             setCOD_FORMAT_VIDEO("");
             setNAME_CHAPTER("");
             setNUMBER_SEASON("");
@@ -130,7 +130,7 @@ export default function AddCapSerieEs() {
 
     const obteneridseri = async (e) => {
         try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${idserie}&language=es-MX&page=1&include_adult=false`)
+            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${idserie}&language=${idioma}&page=1&include_adult=false`)
                 .then(response => {
                     const sap = response.data.results[0].id;
                     setIdserietmdb(sap)
@@ -153,11 +153,11 @@ export default function AddCapSerieEs() {
             try {
                 if (idserietmdb && NUMBER_SEASON && NUMBER_CHAPTER) {
                     const episodeResponse = await axios.get(
-                        `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}/episode/${NUMBER_CHAPTER}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`
+                        `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}/episode/${NUMBER_CHAPTER}?${import.meta.env.VITE_API_KEY_TMDB}&language=${idioma}`
                     );
 
                     const seasonResponse = await axios.get(
-                        `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`
+                        `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}?${import.meta.env.VITE_API_KEY_TMDB}&language=${idioma}`
                     );
 
                     const { overview, name, episode_number, still_path } = episodeResponse.data;
@@ -176,9 +176,21 @@ export default function AddCapSerieEs() {
                     setSYNOSIS(overview);
                     setBACK(`${import.meta.env.VITE_API_IMAGE}${still_path}`);
                     setPOSTER(`${import.meta.env.VITE_API_IMAGE}${poster_path}`);
+
+                    //ocultar el alerta
+                    setAlerta({});
                 }
             } catch (error) {
-                console.error('Error fetching data:', error);
+                // limpiar los campos
+                setNAME_CHAPTER('');
+                setSYNOSIS('');
+                setBACK('');
+                setPOSTER('');
+
+                setAlerta({
+                    msg: 'Temporada o Capitulo no encontrada',
+                    error: true
+                })
             }
         };
 
@@ -188,7 +200,7 @@ export default function AddCapSerieEs() {
     // Funciones para manejar los cambios en los estados
 
     const handleNumberSeasonChange = (event) => {
-        setuseEffect(() => {
+        useEffect(() => {
             const fetchData = async () => {
                 try {
                     if (idserietmdb && NUMBER_SEASON && NUMBER_CHAPTER) {
@@ -265,10 +277,10 @@ export default function AddCapSerieEs() {
 
                                             <div className="flex flex-wrap pt-4">
 
-                                                <div className="w-full lg:w-6/12 px-4 ">
+                                                <div className="w-full lg:w-10/12 px-4 ">
                                                     <div className="relative w-full  mb-3">
                                                         <label
-                                                            for="serie"
+                                                            htmlFor="serie"
                                                             className="block  uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Serie:
@@ -287,11 +299,23 @@ export default function AddCapSerieEs() {
                                                         </select>
                                                     </div>
                                                 </div>
-
+                                                <div className="pt-6">
+                                                        <select
+                                                            name="idioma"
+                                                            id="idioma"
+                                                            value={idioma}
+                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            onChange={(e) => setIdioma(e.target.value)}
+                                                        >
+                                                            <option value="es-MX">Latino</option>
+                                                            <option value="es-ES">Castellano</option>
+                                                            
+                                                        </select>
+                                                        </div>
                                                 <div className="w-full lg:w-6/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="temp"
+                                                            htmlFor="temp"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Temporada:
@@ -308,13 +332,14 @@ export default function AddCapSerieEs() {
                                                                 <option key={n} value={n}>{n}</option>
                                                             ))}
                                                         </select>
+                                                        
                                                     </div>
                                                 </div>
 
                                                 <div className="w-full lg:w-4/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="ncapitulo"
+                                                            htmlFor="ncapitulo"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Numero de Capitulo:
@@ -336,7 +361,7 @@ export default function AddCapSerieEs() {
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="year"
+                                                            htmlFor="year"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Título del Capítulo:
@@ -357,7 +382,7 @@ export default function AddCapSerieEs() {
                                                     <div className="relative w-full mb-3">
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
-                                                            for="sinopsis"
+                                                            htmlFor="sinopsis"
                                                         >
                                                             Sinopsis
                                                         </label>
@@ -378,7 +403,7 @@ export default function AddCapSerieEs() {
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="enlace"
+                                                            htmlFor="enlace"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Enlace del Capítulo:
@@ -398,7 +423,7 @@ export default function AddCapSerieEs() {
                                                 <div className="w-full lg:w-6/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="format"
+                                                            htmlFor="format"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Formato:
@@ -410,6 +435,7 @@ export default function AddCapSerieEs() {
                                                             value={COD_FORMAT_VIDEO}
                                                             onChange={(e) => setCOD_FORMAT_VIDEO(e.target.value)}
                                                         >
+                                                            <option value="">Seleccione un Formato</option>
                                                             {selectformato.map((item) => (
                                                                 <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO === 1}>{item.FORMATO}</option>
                                                             ))}
@@ -430,8 +456,11 @@ export default function AddCapSerieEs() {
                                 </div>
 
                                 <div className="w-full lg:w-4/12 px-4">
+                                    
                                     <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
+                                        
                                         <div>
+                                            
                                             <div className="relative left0 top0">
                                                 <img
                                                     alt="..."

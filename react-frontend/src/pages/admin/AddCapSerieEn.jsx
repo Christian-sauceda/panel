@@ -81,7 +81,6 @@ export default function AddCapSerieEs() {
                 error: false
             })
             //LIMPIAR CAMPOS
-            setCOD_CONTENT("");
             setCOD_FORMAT_VIDEO("");
             setNAME_CHAPTER("");
             setNUMBER_SEASON("");
@@ -129,7 +128,7 @@ export default function AddCapSerieEs() {
 
     const obteneridseri = async (e) => {
         try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${idserie}&language=es-MX&page=1&include_adult=false`)
+            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${idserie}&language=en-US&page=1&include_adult=false`)
                 .then(response => {
                     const sap = response.data.results[0].id;
                     setIdserietmdb(sap)
@@ -144,7 +143,8 @@ export default function AddCapSerieEs() {
             obteneridseri();
         }
     }, [idserie])
-    /* aqui empiezaaaaaaaaaaaaaaaa */
+
+
     const [expediente, setExpediente] = useState({});
 
     useEffect(() => {
@@ -152,11 +152,11 @@ export default function AddCapSerieEs() {
             try {
                 if (idserietmdb && NUMBER_SEASON && NUMBER_CHAPTER) {
                     const episodeResponse = await axios.get(
-                        `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}/episode/${NUMBER_CHAPTER}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`
+                        `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}/episode/${NUMBER_CHAPTER}?${import.meta.env.VITE_API_KEY_TMDB}&language=en-US`
                     );
 
                     const seasonResponse = await axios.get(
-                        `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`
+                        `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}?${import.meta.env.VITE_API_KEY_TMDB}&language=en-US`
                     );
 
                     const { overview, name, episode_number, still_path } = episodeResponse.data;
@@ -175,9 +175,20 @@ export default function AddCapSerieEs() {
                     setSYNOSIS(overview);
                     setBACK(`${import.meta.env.VITE_API_IMAGE}${still_path}`);
                     setPOSTER(`${import.meta.env.VITE_API_IMAGE}${poster_path}`);
+                    //ocultar el alerta
+                    setAlerta({})
                 }
             } catch (error) {
-                console.error('Error fetching data:', error);
+                // limpiar los campos
+                setNAME_CHAPTER('');
+                setSYNOSIS('');
+                setBACK('');
+                setPOSTER('');
+
+                setAlerta({
+                    msg: 'Temporada o Capitulo no encontrada',
+                    error: true
+                })
             }
         };
 
@@ -187,11 +198,11 @@ export default function AddCapSerieEs() {
     // Funciones para manejar los cambios en los estados
 
     const handleNumberSeasonChange = (event) => {
-        setuseEffect(() => {
+        useEffect(() => {
             const fetchData = async () => {
                 try {
                     if (idserietmdb && NUMBER_SEASON && NUMBER_CHAPTER) {
-                        const episodeResponse = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${idserie}&language=es-MX&page=1&include_adult=false`);
+                        const episodeResponse = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${idserie}&language=en-US&page=1&include_adult=false`);
                         const seasonResponse = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}?${import.meta.env.VITE_API_KEY_TMDB}&language=en-US`);
                         console.log(episodeResponse);
                         const { overview, name, episode_number, still_path } = episodeResponse.data;
@@ -258,7 +269,7 @@ export default function AddCapSerieEs() {
                                                 <div className="w-full lg:w-6/12 px-4 ">
                                                     <div className="relative w-full  mb-3">
                                                         <label
-                                                            for="serie"
+                                                            htmlFor="serie"
                                                             className="block  uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Serie:
@@ -280,7 +291,7 @@ export default function AddCapSerieEs() {
                                                 <div className="w-full lg:w-6/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="temp"
+                                                            htmlFor="temp"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Temporada:
@@ -303,7 +314,7 @@ export default function AddCapSerieEs() {
                                                 <div className="w-full lg:w-4/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="ncapitulo"
+                                                            htmlFor="ncapitulo"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Numero de Capitulo:
@@ -325,7 +336,7 @@ export default function AddCapSerieEs() {
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="year"
+                                                            htmlFor="year"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Título del Capítulo:
@@ -346,7 +357,7 @@ export default function AddCapSerieEs() {
                                                     <div className="relative w-full mb-3">
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
-                                                            for="sinopsis"
+                                                            htmlFor="sinopsis"
                                                         >
                                                             Sinopsis
                                                         </label>
@@ -367,7 +378,7 @@ export default function AddCapSerieEs() {
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="enlace"
+                                                            htmlFor="enlace"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Enlace del Capítulo:
@@ -387,7 +398,7 @@ export default function AddCapSerieEs() {
                                                 <div className="w-full lg:w-6/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
-                                                            for="format"
+                                                            htmlFor="format"
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                         >
                                                             Formato:

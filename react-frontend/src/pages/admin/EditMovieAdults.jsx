@@ -167,46 +167,7 @@ export default function AddMovieAdult() {
                 error: true
             })
         }
-
     }
-
-
-    const [selpelis, setSelpelis] = useState([]);
-    const [TITLEEN, setTITLEEN] = useState("");
-
-    // si el input TITLE tiene contenido, buscar las peliculas
-    const obtenerPeliculas = async (e) => {
-        try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/movie?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=en-US&page=1&include_adult=true`)
-                .then(response => {
-                    const sap = response.data.results;
-                    setSelpelis(sap)
-                    const titleen = response.data.results[0].original_title;
-                    setTITLEEN(titleen);
-                })
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-
-    const llenarDatosa = () => {
-        (selpelis.length > 0) ?
-
-            (setBACK(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].backdrop_path}`),
-                setPOSTER(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].poster_path}`),
-                setSYNOPSIS(selpelis[0].overview)) :
-            null
-    }
-
-    useEffect(() => {
-        if (TITLE.length >= 3) {
-            obtenerPeliculas();
-            llenarDatosa();
-        } else {
-            setSelpelis([]);
-        }
-    }, [TITLE])
 
     const { msg } = alerta;
     return (
@@ -242,22 +203,6 @@ export default function AddMovieAdult() {
                                                             value={TITLE}
                                                             onChange={(e) => setTITLE(e.target.value)}
                                                         />
-                                                        <div className='search-list' style={{ display: "block" }} id='search-list'>
-                                                            {selpelis.map((item) => (
-                                                                <>
-
-                                                                    <div className='search-list-item'>
-                                                                        <div className='search-item-thumbnail'>
-                                                                            <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}`} />
-                                                                        </div>
-                                                                        <div className='search-item-info'>
-                                                                            <h3>{item.title}</h3>
-                                                                        </div>
-                                                                    </div>
-                                                                </>
-                                                            ))}
-
-                                                        </div>
                                                     </div>
                                                 </div>
 

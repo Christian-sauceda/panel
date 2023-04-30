@@ -112,7 +112,7 @@ export default function AddMovieAdult() {
         //validar formulario
         if ([ CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, POSTER, YEAR, DURATION, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO ].includes("")) {
             setAlerta({
-                msg: "Todos los campos son obligatorios",
+                msg: "No ha Seleccionado los Generos",
                 error: true
             })
             return;
@@ -154,44 +154,6 @@ export default function AddMovieAdult() {
 
     }
 
-    
-    const [selpelis, setSelpelis] = useState([]);
-    const [TITLEEN, setTITLEEN] = useState("");
-
-    // si el input TITLE tiene contenido, buscar las peliculas
-    const obtenerPeliculas = async (e) => {
-        try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/movie?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=en-US&page=1&include_adult=true`)
-                .then(response => {
-                    const sap = response.data.results;
-                    setSelpelis(sap)
-                    const titleen = response.data.results[0].original_title;
-                    setTITLEEN(titleen);
-                })
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-
-    const llenarDatos = () => { 
-        (selpelis.length > 0) ?
-    
-            (setBACK(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].backdrop_path}`),
-                setPOSTER(`${import.meta.env.VITE_API_IMAGE}${selpelis[0].poster_path}`),
-                setSYNOPSIS(selpelis[0].overview)) :
-            null
-    }
-    
-    useEffect(() => {
-        if (TITLE.length >= 3) {
-            obtenerPeliculas();
-            llenarDatos();
-        } else {
-            setSelpelis([]);
-        }
-    }, [TITLE])
-
     const { msg } = alerta;
     return (
         <>
@@ -226,23 +188,8 @@ export default function AddMovieAdult() {
                                                             placeholder="Título de la Película "
                                                             value={TITLE}
                                                             onChange={(e) => setTITLE(e.target.value)}
+                                                            required
                                                         />
-                                                        <div className='search-list' style={{ display: "block" }} id='search-list'>
-                                                        {selpelis.map((item) => (
-                                                            <>
-
-                                                                <div className='search-list-item'>
-                                                                    <div className='search-item-thumbnail'>
-                                                                        <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}`} />
-                                                                    </div>
-                                                                    <div className='search-item-info'>
-                                                                        <h3>{item.title}</h3>
-                                                                    </div>
-                                                                </div>
-                                                            </>
-                                                        ))}
-
-                                                    </div>
                                                     </div>
                                                 </div>
 
@@ -264,6 +211,7 @@ export default function AddMovieAdult() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={YEAR}
                                                             onChange={(e) => setYEAR(e.target.value)}
+                                                            required
                                                         />
                                                     </div>
                                                 </div>
@@ -285,6 +233,7 @@ export default function AddMovieAdult() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={DURATION}
                                                             onChange={(e) => setDURATION(e.target.value)}
+                                                            required
                                                         />
                                                     </div>
                                                 </div>
@@ -306,6 +255,7 @@ export default function AddMovieAdult() {
                                                             rows="4"
                                                             value={SYNOPSIS}
                                                             onChange={(e) => setSYNOPSIS(e.target.value)}
+                                                            required
                                                         ></textarea>
                                                     </div>
                                                 </div>
@@ -326,6 +276,7 @@ export default function AddMovieAdult() {
                                                             placeholder="Link del video"
                                                             value={URL}
                                                             onChange={(e) => setURL(e.target.value)}
+                                                            required
                                                         />
                                                     </div>
                                                 </div>
@@ -344,7 +295,9 @@ export default function AddMovieAdult() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={CODQUALITY}
                                                             onChange={(e) => setCODQUALITY(e.target.value)}
+                                                            required
                                                         >
+                                                            <option value="">Seleccione una calidad</option>
                                                             {selectcalidad.map((item) => (
                                                                 <option key={item.COD_CALIDAD} value={item.COD_CALIDAD}>{item.CALIDAD}</option>
                                                             ))}
@@ -366,7 +319,9 @@ export default function AddMovieAdult() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={CODAUDIO}
                                                             onChange={(e) => setCODAUDIO(e.target.value)}
+                                                            required
                                                         >
+                                                            <option value="">Seleccione un audio</option>
                                                             {selectaudio.map((item) => (
                                                                 <option key={item.COD_AUDIO} value={item.COD_AUDIO}>{item.AUDIO}</option>
                                                             ))}
@@ -388,7 +343,9 @@ export default function AddMovieAdult() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={CODFORMATVIDEO}
                                                             onChange={(e) => setCODFORMATVIDEO(e.target.value)}
+                                                            required
                                                         >
+                                                            <option value="">Seleccione un formato</option>
                                                             {selectformato.map((item) => (
                                                                 <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO===1 }>{item.FORMATO}</option>
                                                             ))}
@@ -493,6 +450,7 @@ export default function AddMovieAdult() {
                                                             placeholder="Fondo de la Película"
                                                             value={BACK}
                                                             onChange={(e) => setBACK(e.target.value)}
+                                                            required
                                                         />
                                                     </div>
                                                 </div>
@@ -512,6 +470,7 @@ export default function AddMovieAdult() {
                                                             placeholder="Poster de la Película"
                                                             value={POSTER}
                                                             onChange={(e) => setPOSTER(e.target.value)}
+                                                            required
                                                         />
                                                     </div>
                                                 </div>

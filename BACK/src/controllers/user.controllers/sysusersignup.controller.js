@@ -139,7 +139,7 @@ export const login = (req, res, next) => {
                             TYPE: result[0].TYPE_USER,
                         },
                             "secret", {
-                            expiresIn: "1h"
+                            expiresIn: "8h"
                         }
                         );
                         return res.json({

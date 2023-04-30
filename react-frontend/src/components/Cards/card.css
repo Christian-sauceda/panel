@@ -16,11 +16,18 @@
     max-height: 500px;
 }
 
+
+.negrita {
+    font-weight: bold;
+    color: var(--sky-color);
+}
+
+
+
 .search-list .search-list-item {
     background-color: var(--ligth-dark-color);
     padding: 0.5rem;
     border-bottom: 1px solid var(--dark-color);
-    width: calc(350px - 8px);
     color: #fff;
     cursor: pointer;
     transition: background-color 200s ease;
@@ -28,6 +35,7 @@
     -moz-transition: background-color 200s ease;
     -ms-transition: background-color 200s ease;
     -o-transition: background-color 200s ease;
+    min-width: 100%;
 }
 
 .search-list-item {

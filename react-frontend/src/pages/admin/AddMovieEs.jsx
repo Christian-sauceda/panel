@@ -102,6 +102,7 @@ export default function AddMovieEs() {
     const [URL, setURL] = useState("");
     const [SYNOPSIS, setSYNOPSIS] = useState("");
     const [alerta, setAlerta] = useState({});
+    const [idioma, setIdioma] = useState("es-MX");
 
     const llenarDatoCategoria = () => {
         (cateinfo.response.length > 0) ?
@@ -120,10 +121,8 @@ export default function AddMovieEs() {
                 msg: "Todos los campos son obligatorios",
                 error: true
             })
-
             return;
         }
-
         setAlerta({})
 
         try {
@@ -159,6 +158,10 @@ export default function AddMovieEs() {
             setCODFORMATVIDEO("");
             setURL("");
             setSYNOPSIS("");
+            setPeliculas([]);
+            setPeliculas2([]);
+            setTITLEEN("");
+            setExpediente({});
             setCateInfo({
                 categories: [],
                 response: []
@@ -178,7 +181,7 @@ export default function AddMovieEs() {
 
     useEffect(() => {
         if (TITLE) {
-            axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/movie?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=es-MX&year=${YEAR}&page=1&include_adult=false`)
+            axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/movie?${import.meta.env.VITE_API_KEY_TMDB}&query=${TITLE}&language=${idioma}&year=${YEAR}&page=1&include_adult=false`)
                 .then((response) => {
                     setPeliculas(response.data.results)
                 })
@@ -187,11 +190,10 @@ export default function AddMovieEs() {
     }, [TITLE]);
 
     useEffect(() => {
-        if (TITLEEN) {
-            axios.get(`${import.meta.env.VITE_BASE_API_OMDB}?t=${TITLEEN}${import.meta.env.VITE_API_KEY_OMDB}`)
+        if (TITLEEN || YEAR) {
+            axios.get(`${import.meta.env.VITE_BASE_API_OMDB}?t=${TITLEEN}&y=${YEAR}${import.meta.env.VITE_API_KEY_OMDB}`)
                 .then((response) => {
                     setPeliculas2(response.data)
-                    console.log(response.data)
                     setExpediente({
                         ...expediente,
                         cast: response.data.Actors,
@@ -203,7 +205,7 @@ export default function AddMovieEs() {
                 })
                 .catch(err => console.log(err));
         }
-    }, [TITLEEN]);
+    }, [TITLEEN, idioma, YEAR]);
 
 
     useEffect(() => {
@@ -237,6 +239,8 @@ export default function AddMovieEs() {
             director: pelicula.director,
             country: pelicula.country,
         })
+        //ocultar el listado de peliculas
+        setPeliculas([])
     }
 
     const { msg } = alerta;
@@ -252,9 +256,10 @@ export default function AddMovieEs() {
                             <div className="flex flex-wrap">
                                 <div className="w-full lg:w-8/12 px-4">
                                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
-                                        <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-
-                                            <div className="w-full lg:w-12/12 px-4">
+                                        <div className="flex-auto px-4 lg:px-10 py-10 pt-2">
+                                        <div className="flex flex-wrap">
+                                            
+                                            <div className="w-full lg:w-10/12 px-4">
                                                 <div className="relative w-full mb-3">
                                                     <label
                                                         className="block uppercase text-gray-600 text-xs font-bold mb-2 pt-2"
@@ -266,12 +271,13 @@ export default function AddMovieEs() {
                                                         id="title"
                                                         name="title"
                                                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                        placeholder="Título de la Película"
+                                                        placeholder="Ej. El Padrino"
                                                         value={TITLE}
                                                         autoComplete="off"
                                                         onChange={(e) => setTITLE(e.target.value)}
                                                         required
                                                     />
+
                                                     <div className='search-list' style={{ display: "block" }} id='search-list'>
                                                         {peliculas.map((pelicula) => (
                                                             <>
@@ -281,13 +287,38 @@ export default function AddMovieEs() {
                                                                         <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${pelicula.poster_path}`} />
                                                                     </div>
                                                                     <div className='search-item-info'>
-                                                                    <h3 key={pelicula.id} onClick={() => handleExpedienteClick(pelicula)}>{pelicula.title} - {pelicula.release_date.split('-')[0]}</h3>
+                                                                        <h3 key={pelicula.id} onClick={() => handleExpedienteClick(pelicula)}>{pelicula.title} <span className='negrita'>({pelicula.release_date.split('-')[0]})</span></h3>
                                                                     </div>
                                                                 </div>
                                                             </>
                                                         ))}
+                                                        
                                                     </div>
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                            <div className="w-full lg:w-2/12 px-3 pt-2">
+                                                    <div className="relative w-full mb-3">
+                                                        <label
+                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2"
+                                                        >
+                                                            Idioma:
+                                                        </label>
+                                                        <select
+                                                            name="idioma"
+                                                            id="idioma"
+                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            value={idioma}
+                                                            onChange={(e) => setIdioma(e.target.value)}
+                                                        >
+                                                            <option value="es-MX">Latino</option>
+                                                            <option value="es-ES">Español</option>
+                                                            <option value="en-US">Inglés</option>
+                                                        </select>
 
+                                                        
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -316,7 +347,7 @@ export default function AddMovieEs() {
                                                         <input
                                                             name="year"
                                                             id="year"
-                                                            placeholder="Año de la Película"
+                                                            placeholder="Ej. 1972"
                                                             min={1970}
                                                             max={2030}
                                                             type="number"
@@ -340,7 +371,7 @@ export default function AddMovieEs() {
                                                             name="duration"
                                                             id="duration"
                                                             type="text"
-                                                            placeholder="Duración en minutos"
+                                                            placeholder="Ej. 175"
                                                             min={10}
                                                             maxlength="3"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -363,7 +394,7 @@ export default function AddMovieEs() {
                                                             name="clasificacion"
                                                             id="clasificacion"
                                                             type="text"
-                                                            placeholder="Clasificacion de la Película"
+                                                            placeholder="Ej. R"
                                                             min={10}
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={CLASIF}
@@ -384,7 +415,7 @@ export default function AddMovieEs() {
                                                             name="calificacion"
                                                             id="calificacion"
                                                             type="text"
-                                                            placeholder="Calificacion de la Película"
+                                                            placeholder="Ej. 8"
                                                             min={10}
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={CALIF}
@@ -406,7 +437,7 @@ export default function AddMovieEs() {
                                                             id="director"
                                                             name="director"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Director de la Película"
+                                                            placeholder="Ej. Steven Spielberg"
                                                             value={DIRECTOR}
                                                             onChange={(e) => setDIRECTOR(e.target.value)}
                                                             required
@@ -426,7 +457,7 @@ export default function AddMovieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             name="reparto"
                                                             id="reparto"
-                                                            placeholder="Reparto de la Película"
+                                                            placeholder="Ej. Marlon Brando, Al Pacino, James Caan"
                                                             rows="4"
                                                             value={CAST}
                                                             onChange={(e) => setCAST(e.target.value)}
@@ -447,7 +478,7 @@ export default function AddMovieEs() {
                                                             id="pais"
                                                             name="pais"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Pais donde filmo la Película"
+                                                            placeholder="Ej. Estados Unidos"
                                                             value={COUNTRY}
                                                             onChange={(e) => setCOUNTRY(e.target.value)}
                                                             required
@@ -467,7 +498,7 @@ export default function AddMovieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             name="sinopsis"
                                                             id="sinopsis"
-                                                            placeholder="Sinopsis de la Película"
+                                                            placeholder="Ej. Don Vito Corleone es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York."
                                                             rows="4"
                                                             value={SYNOPSIS}
                                                             onChange={(e) => setSYNOPSIS(e.target.value)}
@@ -488,7 +519,7 @@ export default function AddMovieEs() {
                                                             id="link"
                                                             name="link"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Link del video"
+                                                            placeholder="Ej. https://www.youtube.com/watch?v=5DO-nDW43Ik"
                                                             value={URL}
                                                             onChange={(e) => setURL(e.target.value)}
                                                             required
@@ -592,7 +623,7 @@ export default function AddMovieEs() {
                                                     <label
                                                         className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                     >
-                                                         Generos: <span className='font-bold text-red-700'>{peliculas2.Genre}</span>
+                                                        Generos: <span className='font-bold text-red-700'>{peliculas2.Genre}</span>
                                                     </label>
                                                     <input
                                                         type="number"

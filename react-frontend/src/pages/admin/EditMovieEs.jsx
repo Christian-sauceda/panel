@@ -180,6 +180,10 @@ export default function AddMovieEs() {
                 msg: 'Película en Español ha sido Editada Correctamente',
                 error: false
             })
+            //redireccionar a inicio
+            setTimeout(() => {
+                window.location.href = "/admin/movie/es/list"
+            }, 1500);
         } catch (error) {
             setAlerta({
                 msg: error.response.data.message,

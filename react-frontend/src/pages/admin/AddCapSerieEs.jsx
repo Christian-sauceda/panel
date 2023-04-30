@@ -126,7 +126,7 @@ export default function AddCapSerieEs() {
         obtenerserieid();
     }, [idseriees])
 
-    const [idserietmdb, setIdserietmdb] = useState("");
+    const [idserietmdb, setIdserietmdb] = useState('');
 
     const obteneridseri = async (e) => {
         try {
@@ -145,54 +145,109 @@ export default function AddCapSerieEs() {
             obteneridseri();
         }
     }, [idserie])
-
-    const [infocap, setInfocap] = useState({});
-    const [infotemp, setInfotemp] = useState({});
-
-    const obtenercap = async (e) => {
-        try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}/episode/${NUMBER_CHAPTER}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`)
-                .then(response => {
-                    const cap = response.data;
-                    setInfocap(cap)
-                })
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-
-    const obtenertemp = async (e) => {
-        try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`)
-                .then(response => {
-                    const captemp = response.data;
-                    setInfotemp(captemp)
-                })
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    const llenardatoscap = async () => {
-        (setInfocap.length > 0) ?
-            (setNAME_CHAPTER(infocap.episode_number + ' - ' + infocap.name),
-                setSYNOSIS(infocap.overview),
-                setBACK(`${import.meta.env.VITE_API_IMAGE}${infocap.still_path}`),
-                setPOSTER(`${import.meta.env.VITE_API_IMAGE}${infotemp.poster_path}`)) :
-            null
-    }
+    /* aqui empiezaaaaaaaaaaaaaaaa */
+    const [expediente, setExpediente] = useState({});
 
     useEffect(() => {
-        if (NUMBER_CHAPTER.length >= 1) {
-            obtenercap();
-            obtenertemp();
-            llenardatoscap();
-        }
-    }, [NUMBER_CHAPTER])
+        const fetchData = async () => {
+            try {
+                if (idserietmdb && NUMBER_SEASON && NUMBER_CHAPTER) {
+                    const episodeResponse = await axios.get(
+                        `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}/episode/${NUMBER_CHAPTER}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`
+                    );
+
+                    const seasonResponse = await axios.get(
+                        `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`
+                    );
+
+                    const { overview, name, episode_number, still_path } = episodeResponse.data;
+                    const { poster_path } = seasonResponse.data;
+
+                    const expedienteData = {
+                        overview,
+                        name,
+                        season_number: NUMBER_SEASON,
+                        still_path,
+                        poster_path
+                    };
+
+                    setExpediente(expedienteData);
+                    setNAME_CHAPTER(`${episode_number} - ${name}`);
+                    setSYNOSIS(overview);
+                    setBACK(`${import.meta.env.VITE_API_IMAGE}${still_path}`);
+                    setPOSTER(`${import.meta.env.VITE_API_IMAGE}${poster_path}`);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, [idserietmdb, NUMBER_SEASON, NUMBER_CHAPTER]);
+
+    // Funciones para manejar los cambios en los estados
+
+    const handleNumberSeasonChange = (event) => {
+        setuseEffect(() => {
+            const fetchData = async () => {
+                try {
+                    if (idserietmdb && NUMBER_SEASON && NUMBER_CHAPTER) {
+                        const episodeResponse = await axios.get(
+                            `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}/episode/${NUMBER_CHAPTER}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`
+                        );
+
+                        const seasonResponse = await axios.get(
+                            `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`
+                        );
+
+                        const { overview, name, episode_number, still_path } = episodeResponse.data;
+                        const { poster_path } = seasonResponse.data;
+
+                        const expedienteData = {
+                            overview,
+                            name,
+                            season_number: NUMBER_SEASON,
+                            still_path,
+                            poster_path
+    
+                        };
+                        
+                        setExpediente(expedienteData);
+                        setNAME_CHAPTER(`${episode_number} - ${name}`);
+                        setSYNOSIS(overview);
+                        setBACK(`${import.meta.env.VITE_API_IMAGE}${still_path}`);
+                        setPOSTER(`${import.meta.env.VITE_API_IMAGE}${poster_path}`);
+                    }
+                    
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            };
+
+            fetchData();
+        }, [idserietmdb, NUMBER_SEASON, NUMBER_CHAPTER]);
+
+
+        // Funciones para manejar los cambios en los estados
+        const handleIdserietmdbChange = (event) => {
+            setIdserietmdb(event.target.value);
+        };
+
+        const handleNumberSeasonChange = (event) => {
+            setNUMBER_SEASON(event.target.value);
+        };
+
+        const handleNumberChapterChange = (event) => {
+            setNUMBER_CHAPTER(event.target.value);
+        }; (event.target.value);
+    };
+
+    const handleNumberChapterChange = (event) => {
+        setNUMBER_CHAPTER(event.target.value);
+    };
 
     //funcion imprima json numero del 1 al 30
-    const numeros = [...Array(31).keys()];
+    const numeros = [...Array(41).keys()];
 
     return (
         <>

@@ -140,32 +140,10 @@ export default function AddMovieEs() {
                 msg: 'Película en Español Agregada Correctamente',
                 error: false
             })
-            //limpiar los campos
-            setCODAUDIO("");
-            setCODQUALITY("");
-            setCODCATEGORY("");
-            setTITLE("");
-            setBACK("");
-            setPOSTER("");
-            setYEAR("");
-            setCLASIF("");
-            setDURATION("");
-            setCOUNTRY("");
-            setCALIF("");
-            setDIRECTOR("");
-            setCAST("");
-            setASKPIN("");
-            setCODFORMATVIDEO("");
-            setURL("");
-            setSYNOPSIS("");
-            setPeliculas([]);
-            setPeliculas2([]);
-            setTITLEEN("");
-            setExpediente({});
-            setCateInfo({
-                categories: [],
-                response: []
-            });
+            //reload sin recargar la pagina
+            setTimeout(() => {
+                window.location.reload()
+            }, 1500);
         } catch (error) {
             setAlerta({
                 msg: error.response.data.message,

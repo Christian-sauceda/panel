@@ -160,7 +160,6 @@ export default function AddMovieAdult() {
                 msg: "Película Adulto ha sido Editada Correctamente",
                 error: false
             })
-
         } catch (error) {
             setAlerta({
                 msg: error.response.data.message,
@@ -168,6 +167,13 @@ export default function AddMovieAdult() {
             })
         }
     }
+
+    const handleInputChange = (event) => {
+        let value = event.target.value;
+        value = value.replace(/\./g, ' '); // borra los puntos
+        value = value.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' '); // convierte la primera letra de cada palabra en mayúscula
+        setTITLE(value);
+    };
 
     const { msg } = alerta;
     return (
@@ -201,7 +207,7 @@ export default function AddMovieAdult() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Título de la Película "
                                                             value={TITLE}
-                                                            onChange={(e) => setTITLE(e.target.value)}
+                                                            onChange={handleInputChange}
                                                         />
                                                     </div>
                                                 </div>

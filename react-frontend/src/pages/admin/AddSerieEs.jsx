@@ -123,20 +123,9 @@ export default function AddSerieEs() {
                 msg: 'Serie Agregada Correctamente',
                 error: false
             })
-            //limpiar los campos
-            setTITLE("");
-            setTITLE_LATIN("");
-            setBACK("");
-            setPOSTER("");
-            setYEAR("");
-            setCLASIF("");
-            setCOUNTRY("");
-            setCALIF("");
-            setDIRECTOR("");
-            setCAST("");
-            setSYNOPSIS("");
-            setPeliculas([]);
-            setPeliculas2([]);
+            setTimeout(() => {
+                window.location.href = "/admin/series/es/addcap"
+            }, 2000);
 
         } catch (error) {
             setAlerta({

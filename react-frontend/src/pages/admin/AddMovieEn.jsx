@@ -134,24 +134,10 @@ export default function AddMovieEn() {
                 msg: 'Película en Inglés Agregada Correctamente',
                 error: false
             })
-            //limpiar los campos
-            setCODCATEGORY("");
-            setTITLE("");
-            setBACK("");
-            setPOSTER("");
-            setYEAR("");
-            setCLASIF("");
-            setDURATION("");
-            setCOUNTRY("");
-            setCALIF("");
-            setDIRECTOR("");
-            setCAST("");
-            setURL("");
-            setSYNOPSIS("");
-            setPeliculas([]);
-            setPeliculas2([]);
-            setTITLEEN("");
-            setExpediente({});
+            //reload sin recargar la pagina
+            setTimeout(() => {
+                window.location.reload()
+            }, 1500);
         } catch (error) {
             setAlerta({
                 msg: error.response.data.message,

@@ -96,7 +96,7 @@ export default function AddSerieEs() {
     useEffect(() => {
         llenarDatoCategoria();
     }, [cateinfo.response])
-    
+
     const handleSubmit = async e => {
         e.preventDefault();
         if ([CODAUDIO, CODCATEGORY, CODUSER, TITLE, TITLE_LATIN, BACK, POSTER, YEAR, CLASIF, COUNTRY, CALIF, DIRECTOR, CAST, SYNOPSIS, COD_CONTENIDO].includes('')) {
@@ -241,23 +241,23 @@ export default function AddSerieEs() {
                                                             value={TITLE}
                                                             onChange={(e) => setTITLE(e.target.value)}
                                                         />
-                                                        
-                                                                                                            <div className='search-list' style={{ display: "block" }} id='search-list'>
-                                                        {peliculas.map((pelicula) => (
-                                                            <>
 
-                                                                <div className='search-list-item'>
-                                                                    <div className='search-item-thumbnail'>
-                                                                        <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${pelicula.poster_path}`} />
+                                                        <div className='search-list' style={{ display: "block" }} id='search-list'>
+                                                            {peliculas.map((pelicula) => (
+                                                                <>
+
+                                                                    <div className='search-list-item'>
+                                                                        <div className='search-item-thumbnail'>
+                                                                            <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${pelicula.poster_path}`} />
+                                                                        </div>
+                                                                        <div className='search-item-info'>
+                                                                            <h3 key={pelicula.id} onClick={() => handleExpedienteClick(pelicula)}>{pelicula.original_name} <span className='negrita'>({pelicula.first_air_date.split('-')[0]})</span></h3>
+                                                                        </div>
                                                                     </div>
-                                                                    <div className='search-item-info'>
-                                                                        <h3 key={pelicula.id} onClick={() => handleExpedienteClick(pelicula)}>{pelicula.original_name} <span className='negrita'>({pelicula.first_air_date.split('-')[0]})</span></h3>
-                                                                    </div>
-                                                                </div>
-                                                            </>
-                                                        ))}
-                                                        
-                                                    </div>
+                                                                </>
+                                                            ))}
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div className="w-full lg:w-6/12 px-4">
@@ -289,7 +289,7 @@ export default function AddSerieEs() {
                                                         >
                                                             Año: <span className='font-bold text-red-700'> {peliculas2.Year}</span>
                                                         </label>
-                                                        
+
                                                         <input
                                                             name="year"
                                                             id="year"
@@ -482,7 +482,7 @@ export default function AddSerieEs() {
                                                                     <label
                                                                         className="inline-flex items-start p-2"
                                                                         htmlFor={item.COD_CATEGORIA}
-                                                                        
+
                                                                     >
                                                                         <input
                                                                             className="bg-sky-800 w-7 h-7 mr-2"

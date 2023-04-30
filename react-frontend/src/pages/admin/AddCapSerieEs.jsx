@@ -82,15 +82,20 @@ export default function AddCapSerieEs() {
                 error: false
             })
             //LIMPIAR CAMPOS
-            setCOD_FORMAT_VIDEO("");
             setNAME_CHAPTER("");
-            setNUMBER_SEASON("");
-            setNUMBER_CHAPTER("");
             setSYNOSIS("");
             setURL("");
             setBACK("");
             setPOSTER("");
-
+            //convertir de texto a numero el state de NUMBER_CHAPTER
+            const numberchapter = parseInt(NUMBER_CHAPTER);
+            setNUMBER_CHAPTER(numberchapter);
+            //sumar 1 al state de NUMBER_CHAPTER
+            const sumarchapter = numberchapter + 1;
+            setNUMBER_CHAPTER(sumarchapter);
+            //convertir de numero a texto el state de NUMBER_CHAPTER
+            const numberchaptertext = sumarchapter.toString();
+            setNUMBER_CHAPTER(numberchaptertext);
         } catch (error) {
             setAlerta({
                 msg: error.response.data.message,
@@ -434,6 +439,7 @@ export default function AddCapSerieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={COD_FORMAT_VIDEO}
                                                             onChange={(e) => setCOD_FORMAT_VIDEO(e.target.value)}
+                                                            required
                                                         >
                                                             <option value="">Seleccione un Formato</option>
                                                             {selectformato.map((item) => (

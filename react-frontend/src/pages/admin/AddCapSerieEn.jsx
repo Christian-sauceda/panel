@@ -257,7 +257,7 @@ export default function AddCapSerieEs() {
         setNUMBER_CHAPTER(event.target.value);
     };
 
-    const numeros = [...Array(31).keys()];
+    const numeros = [...Array(41).keys()];
     return (
         <>
             <main>

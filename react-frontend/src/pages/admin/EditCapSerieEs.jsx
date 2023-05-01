@@ -22,7 +22,7 @@ export default function AddCapSerieEs() {
     const [SUPTITLE, setSUPTITLE] = useState("Español");
     const [BACK, setBACK] = useState("");
     const [POSTER, setPOSTER] = useState("");
-
+    const [idioma, setIdioma] = useState("es-MX");
     const [selectformato, setSelectformato] = useState([]);
     const [selectSeriees, setSelectSeriees] = useState([]);
     const [editCapSerieEs, setEditCapSerieEs] = useState([]);
@@ -144,7 +144,7 @@ export default function AddCapSerieEs() {
 
     const obteneridseri = async (e) => {
         try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${idserie}&language=es-MX&page=1&include_adult=false`)
+            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/search/tv?${import.meta.env.VITE_API_KEY_TMDB}&query=${idserie}&language=${idioma}&page=1&include_adult=false`)
                 .then(response => {
                     const sap = response.data.results[0].id;
                     setIdserietmdb(sap)
@@ -160,54 +160,122 @@ export default function AddCapSerieEs() {
         }
     }, [idserie])
 
-    const [infocap, setInfocap] = useState({});
-    const [infotemp, setInfotemp] = useState({});
-
-    const obtenercap = async (e) => {
-        try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}/episode/${NUMBER_CHAPTER}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`)
-                .then(response => {
-                    const cap = response.data;
-                    setInfocap(cap)
-                })
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-
-    const obtenertemp = async (e) => {
-        try {
-            const resultado = await axios.get(`${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`)
-                .then(response => {
-                    const captemp = response.data;
-                    setInfotemp(captemp)
-                })
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    const llenardatoscap = async () => {
-        (setInfocap.length > 0) ?
-            (setNAME_CHAPTER(infocap.episode_number + ' - ' + infocap.name),
-                setSYNOSIS(infocap.overview),
-                setBACK(`${import.meta.env.VITE_API_IMAGE}${infocap.still_path}`),
-                setPOSTER(`${import.meta.env.VITE_API_IMAGE}${infotemp.poster_path}`)) :
-            null
-    }
+    /* aqui empiezaaaaaaaaaaaaaaaa */
+    const [expediente, setExpediente] = useState({});
 
     useEffect(() => {
-        if (NUMBER_CHAPTER.length >= 1) {
-            obtenercap();
-            obtenertemp();
-            llenardatoscap();
-        }
-    }, [NUMBER_CHAPTER])
+        const fetchData = async () => {
+            try {
+                if (idserietmdb && NUMBER_SEASON && NUMBER_CHAPTER) {
+                    const episodeResponse = await axios.get(
+                        `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}/episode/${NUMBER_CHAPTER}?${import.meta.env.VITE_API_KEY_TMDB}&language=${idioma}`
+                    );
+
+                    const seasonResponse = await axios.get(
+                        `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}?${import.meta.env.VITE_API_KEY_TMDB}&language=${idioma}`
+                    );
+
+                    const { overview, name, episode_number, still_path } = episodeResponse.data;
+                    const { poster_path } = seasonResponse.data;
+
+                    const expedienteData = {
+                        overview,
+                        name,
+                        season_number: NUMBER_SEASON,
+                        still_path,
+                        poster_path
+                    };
+
+                    setExpediente(expedienteData);
+                    setNAME_CHAPTER(`${episode_number} - ${name}`);
+                    setSYNOSIS(overview);
+                    setBACK(`${import.meta.env.VITE_API_IMAGE}${still_path}`);
+                    setPOSTER(`${import.meta.env.VITE_API_IMAGE}${poster_path}`);
+
+                    //ocultar el alerta
+                    setAlerta({});
+                }
+            } catch (error) {
+                // limpiar los campos
+                setNAME_CHAPTER('');
+                setSYNOSIS('');
+                setBACK('');
+                setPOSTER('');
+
+                setAlerta({
+                    msg: 'Temporada o Capitulo no encontrada',
+                    error: true
+                })
+            }
+        };
+
+        fetchData();
+    }, [idserietmdb, NUMBER_SEASON, NUMBER_CHAPTER]);
+
+    // Funciones para manejar los cambios en los estados
+
+    const handleNumberSeasonChange = (event) => {
+        useEffect(() => {
+            const fetchData = async () => {
+                try {
+                    if (idserietmdb && NUMBER_SEASON && NUMBER_CHAPTER) {
+                        const episodeResponse = await axios.get(
+                            `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}/episode/${NUMBER_CHAPTER}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`
+                        );
+
+                        const seasonResponse = await axios.get(
+                            `${import.meta.env.VITE_BASE_API_TMDB}/tv/${idserietmdb}/season/${NUMBER_SEASON}?${import.meta.env.VITE_API_KEY_TMDB}&language=es-MX`
+                        );
+
+                        const { overview, name, episode_number, still_path } = episodeResponse.data;
+                        const { poster_path } = seasonResponse.data;
+
+                        const expedienteData = {
+                            overview,
+                            name,
+                            season_number: NUMBER_SEASON,
+                            still_path,
+                            poster_path
+
+                        };
+
+                        setExpediente(expedienteData);
+                        setNAME_CHAPTER(`${episode_number} - ${name}`);
+                        setSYNOSIS(overview);
+                        setBACK(`${import.meta.env.VITE_API_IMAGE}${still_path}`);
+                        setPOSTER(`${import.meta.env.VITE_API_IMAGE}${poster_path}`);
+                    }
+
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            };
+
+            fetchData();
+        }, [idserietmdb, NUMBER_SEASON, NUMBER_CHAPTER]);
+
+
+        // Funciones para manejar los cambios en los estados
+        const handleIdserietmdbChange = (event) => {
+            setIdserietmdb(event.target.value);
+        };
+
+        const handleNumberSeasonChange = (event) => {
+            setNUMBER_SEASON(event.target.value);
+        };
+
+        const handleNumberChapterChange = (event) => {
+            setNUMBER_CHAPTER(event.target.value);
+        }; (event.target.value);
+    };
+
+    const handleNumberChapterChange = (event) => {
+        setNUMBER_CHAPTER(event.target.value);
+    };
 
 
     //funcion imprima json numero del 1 al 30
-    const numeros = [...Array(31).keys()];
+    const numeros = [...Array(41).keys()];
 
     return (
         <>
@@ -247,7 +315,19 @@ export default function AddCapSerieEs() {
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <div className="pt-6">
+                                                    <select
+                                                        name="idioma"
+                                                        id="idioma"
+                                                        value={idioma}
+                                                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                        onChange={(e) => setIdioma(e.target.value)}
+                                                    >
+                                                        <option value="es-MX">Latino</option>
+                                                        <option value="es-ES">Castellano</option>
 
+                                                    </select>
+                                                </div>
                                                 <div className="w-full lg:w-6/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label

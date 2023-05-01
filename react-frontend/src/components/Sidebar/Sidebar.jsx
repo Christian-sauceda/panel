@@ -302,7 +302,7 @@ function Sidebar({
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
                           <i class="fi fi-rr-football"></i>
-                            <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Eventos Deportivos</span>
+                            <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Eventos</span>
                           </div>
                           {/* Icon */}
                           <div className="flex shrink-0 ml-2">
@@ -331,12 +331,12 @@ function Sidebar({
                   );
                 }}
               </SidebarLinkGroup>
-
+                {/*
               <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3 p-5">
                 <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">•••</span>
                 <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">Contenido Live</span>
               </h3>
-              {/* tv Es */}
+              {/* tv Es */}{/*
               <SidebarLinkGroup activecondition={pathname.includes('tvEs')}>
                 {(handleClick, open) => {
                   return (
@@ -348,7 +348,7 @@ function Sidebar({
                             <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tv en Vivo</span>
                           </div>
                           {/* Icon */}
-                          <div className="flex shrink-0 ml-2">
+                          {/*<div className="flex shrink-0 ml-2">
                             <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
                               <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
                             </svg>
@@ -375,7 +375,7 @@ function Sidebar({
                 }}
               </SidebarLinkGroup>
               {/* tv En */}
-              <SidebarLinkGroup activecondition={pathname.includes('tvEn')}>
+              {/*<SidebarLinkGroup activecondition={pathname.includes('tvEn')}>
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
@@ -386,7 +386,7 @@ function Sidebar({
                             <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tv Live</span>
                           </div>
                           {/* Icon */}
-                          <div className="flex shrink-0 ml-2">
+                        {/*  <div className="flex shrink-0 ml-2">
                             <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
                               <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
                             </svg>
@@ -412,7 +412,7 @@ function Sidebar({
                   );
                 }}
               </SidebarLinkGroup>
-              {/* tv Internacional */}
+              {/* tv Internacional */}{/*
               <SidebarLinkGroup activecondition={pathname.includes('tvInter')}>
                 {(handleClick, open) => {
                   return (
@@ -424,7 +424,7 @@ function Sidebar({
                             <span className="text-base font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"> Tv Internacional</span>
                           </div>
                           {/* Icon */}
-                          <div className="flex shrink-0 ml-2">
+                          {/*<div className="flex shrink-0 ml-2">
                             <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${open && 'transform rotate-180'}`} viewBox="0 0 12 12">
                               <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
                             </svg>
@@ -450,8 +450,7 @@ function Sidebar({
                   );
                 }}
               </SidebarLinkGroup>
-
-
+*/}
               <h3 className="text-xs uppercase text-slate-500 font-semibold pl-3 p-5">
                 <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">•••</span>
                 <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">Configuraciones</span>

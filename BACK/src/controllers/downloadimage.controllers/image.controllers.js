@@ -10,20 +10,6 @@ const imageController = {
         const image = req.params.image;
         const pathImage = path.resolve(__dirname, `../../../images/imgs/${content}/${type}/${image}`);
 
-        // Verificar si la imagen existe
-        if (fs.existsSync(pathImage)) {
-            // Eliminar la imagen existente
-            try {
-                fs.unlinkSync(pathImage);
-            } catch (error) {
-                console.error('Error deleting existing image:', error);
-                // Puedes manejar el error de eliminación de imagen de alguna manera específica
-                // por ejemplo, enviar una respuesta de error al cliente
-                return res.status(500).send('Internal Server Error');
-            }
-        }
-
-        // Crear el directorio si no existe
         if (!fs.existsSync(pathImage)) {
             try {
                 fs.mkdirSync(path.dirname(pathImage), { recursive: true });

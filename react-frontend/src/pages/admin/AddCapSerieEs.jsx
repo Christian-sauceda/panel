@@ -226,16 +226,16 @@ export default function AddCapSerieEs() {
                             season_number: NUMBER_SEASON,
                             still_path,
                             poster_path
-    
+
                         };
-                        
+
                         setExpediente(expedienteData);
                         setNAME_CHAPTER(`${episode_number} - ${name}`);
                         setSYNOSIS(overview);
                         setBACK(`${import.meta.env.VITE_API_IMAGE}${still_path}`);
                         setPOSTER(`${import.meta.env.VITE_API_IMAGE}${poster_path}`);
                     }
-                    
+
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 }
@@ -305,18 +305,18 @@ export default function AddCapSerieEs() {
                                                     </div>
                                                 </div>
                                                 <div className="pt-6">
-                                                        <select
-                                                            name="idioma"
-                                                            id="idioma"
-                                                            value={idioma}
-                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            onChange={(e) => setIdioma(e.target.value)}
-                                                        >
-                                                            <option value="es-MX">Latino</option>
-                                                            <option value="es-ES">Castellano</option>
-                                                            
-                                                        </select>
-                                                        </div>
+                                                    <select
+                                                        name="idioma"
+                                                        id="idioma"
+                                                        value={idioma}
+                                                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                        onChange={(e) => setIdioma(e.target.value)}
+                                                    >
+                                                        <option value="es-MX">Latino</option>
+                                                        <option value="es-ES">Castellano</option>
+
+                                                    </select>
+                                                </div>
                                                 <div className="w-full lg:w-6/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -337,7 +337,7 @@ export default function AddCapSerieEs() {
                                                                 <option key={n} value={n}>{n}</option>
                                                             ))}
                                                         </select>
-                                                        
+
                                                     </div>
                                                 </div>
 
@@ -462,11 +462,11 @@ export default function AddCapSerieEs() {
                                 </div>
 
                                 <div className="w-full lg:w-4/12 px-4">
-                                    
+
                                     <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
-                                        
+
                                         <div>
-                                            
+
                                             <div className="relative left0 top0">
                                                 <img
                                                     alt="..."

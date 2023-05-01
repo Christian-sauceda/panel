@@ -18,26 +18,33 @@ export default function AddMovieEs() {
     });
 
     const handleChange = (e) => {
-        // Destructuring
         const { value, checked } = e.target;
         const { categories } = cateinfo;
 
-        // Case 1 : The user checks the box
+        let newCategories;
         if (checked) {
-            setCateInfo({
-                categories: [...categories, value],
-                response: [...categories, value],
-            });
+            newCategories = [...categories, value]; // Agregar el valor a las categorías seleccionadas
+        } else {
+            newCategories = categories.filter((item) => item !== value); // Quitar el valor de las categorías seleccionadas
         }
 
-        // Case 2  : The user unchecks the box
-        else {
-            setCateInfo({
-                categories: categories.filter((e) => e !== value),
-                response: categories.filter((e) => e !== value),
-            });
-        }
+        setCateInfo((prevState) => ({
+            ...prevState, // Mantener la propiedad "response" del estado anterior
+            categories: newCategories,
+            response: newCategories,
+        }));
     };
+
+    // Restablecer los checkboxes cuando el estado cambie
+    useEffect(() => {
+        const { categories } = cateinfo;
+
+        // Desmarcar los checkboxes
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = categories.includes(checkbox.value);
+        });
+    }, [cateinfo]);
 
     /* ------------------------------------------------- */
 
@@ -260,6 +267,8 @@ export default function AddMovieEs() {
         })
         //ocultar el listado de peliculas
         setPeliculas([])
+        console.log(CODCATEGORY)
+
     }
 
 
@@ -296,22 +305,22 @@ export default function AddMovieEs() {
                                                             value={TITLE}
                                                             onChange={(e) => setTITLE(e.target.value)}
                                                         />
-                                                        
-                                                    <div className='search-list' style={{ display: "block" }} id='search-list'>
-                                                        {peliculas.map((pelicula) => (
-                                                            <>
 
-                                                                <div className='search-list-item'>
-                                                                    <div className='search-item-thumbnail'>
-                                                                        <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${pelicula.poster_path}`} />
+                                                        <div className='search-list' style={{ display: "block" }} id='search-list'>
+                                                            {peliculas.map((pelicula) => (
+                                                                <>
+
+                                                                    <div className='search-list-item'>
+                                                                        <div className='search-item-thumbnail'>
+                                                                            <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${pelicula.poster_path}`} />
+                                                                        </div>
+                                                                        <div className='search-item-info'>
+                                                                            <h3 key={pelicula.id} onClick={() => handleExpedienteClick(pelicula)}>{pelicula.title} <span className='negrita'>({pelicula.release_date.split('-')[0]})</span></h3>
+                                                                        </div>
                                                                     </div>
-                                                                    <div className='search-item-info'>
-                                                                        <h3 key={pelicula.id} onClick={() => handleExpedienteClick(pelicula)}>{pelicula.title} <span className='negrita'>({pelicula.release_date.split('-')[0]})</span></h3>
-                                                                    </div>
-                                                                </div>
-                                                            </>
-                                                        ))}
-                                                    </div>
+                                                                </>
+                                                            ))}
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div className="w-full lg:w-2/12 px-3 pt-2">
@@ -332,7 +341,7 @@ export default function AddMovieEs() {
                                                             <option value="es-ES">Español</option>
                                                         </select>
 
-                                                        
+
                                                     </div>
                                                 </div>
                                                 <div className="w-full lg:w-3/12 px-4">
@@ -602,7 +611,7 @@ export default function AddMovieEs() {
                                                     <label
                                                         className="block uppercase text-gray-600 text-xs font-bold mb-2"
                                                     >
-                                                         Generos: <span className='font-bold text-red-700'>{peliculas2.Genre}</span>
+                                                        Generos: <span className='font-bold text-red-700'>{peliculas2.Genre}</span>
                                                     </label>
                                                     <input
                                                         type="number"
@@ -623,7 +632,7 @@ export default function AddMovieEs() {
                                                                     <label
                                                                         className="inline-flex items-start p-2"
                                                                         htmlFor={item.COD_CATEGORIA}
-                                                                        
+
                                                                     >
                                                                         <input
                                                                             className="bg-sky-800 w-7 h-7 mr-2"

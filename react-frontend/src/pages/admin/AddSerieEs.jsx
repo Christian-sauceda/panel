@@ -16,25 +16,14 @@ export default function AddSerieEs() {
     });
 
     const handleChange = (e) => {
-        // Destructuring
         const { value, checked } = e.target;
         const { categories } = cateinfo;
 
-        // Case 1 : The user checks the box
-        if (checked) {
-            setCateInfo({
-                categories: [...categories, value],
-                response: [...categories, value],
-            });
-        }
-
-        // Case 2  : The user unchecks the box
-        else {
-            setCateInfo({
-                categories: categories.filter((e) => e !== value),
-                response: categories.filter((e) => e !== value),
-            });
-        }
+        const newCategories = checked ? [...categories, value] : categories.filter(e => e !== value);
+        setCateInfo(prevState => ({
+            categories: newCategories,
+            response: newCategories,
+        }));
     };
 
     /* ------------------------------------------------- */

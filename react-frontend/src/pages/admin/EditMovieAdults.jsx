@@ -18,26 +18,33 @@ export default function AddMovieAdult() {
     });
 
     const handleChange = (e) => {
-        // Destructuring
         const { value, checked } = e.target;
         const { categories } = cateinfo;
 
-        // Case 1 : The user checks the box
+        let newCategories;
         if (checked) {
-            setCateInfo({
-                categories: [...categories, value],
-                response: [...categories, value],
-            });
+            newCategories = [...categories, value]; // Agregar el valor a las categorías seleccionadas
+        } else {
+            newCategories = categories.filter((item) => item !== value); // Quitar el valor de las categorías seleccionadas
         }
 
-        // Case 2  : The user unchecks the box
-        else {
-            setCateInfo({
-                categories: categories.filter((e) => e !== value),
-                response: categories.filter((e) => e !== value),
-            });
-        }
+        setCateInfo((prevState) => ({
+            ...prevState, // Mantener la propiedad "response" del estado anterior
+            categories: newCategories,
+            response: newCategories,
+        }));
     };
+
+    // Restablecer los checkboxes cuando el estado cambie
+    useEffect(() => {
+        const { categories } = cateinfo;
+
+        // Desmarcar los checkboxes
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = categories.includes(checkbox.value);
+        });
+    }, [cateinfo]);
 
     /* ------------------------------------------------- */
 
@@ -160,6 +167,9 @@ export default function AddMovieAdult() {
                 msg: "Película Adulto ha sido Editada Correctamente",
                 error: false
             })
+            setTimeout(() => {
+                window.location.href = "/admin/movie/adult/list"
+            }, 1200);
         } catch (error) {
             setAlerta({
                 msg: error.response.data.message,

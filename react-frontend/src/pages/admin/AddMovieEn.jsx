@@ -16,23 +16,14 @@ export default function AddMovieEn() {
     });
 
     const handleChange = (e) => {
-        // Destructuring
         const { value, checked } = e.target;
         const { categories } = cateinfo;
-        // Caso 1: La usuario marca la casilla
-        if (checked) {
-            setCateInfo({
-                categories: [...categories, value],
-                response: [...categories, value],
-            });
-        }
-        // Caso 2: el usuario desmarca la casilla
-        else {
-            setCateInfo({
-                categories: categories.filter((e) => e !== value),
-                response: categories.filter((e) => e !== value),
-            });
-        }
+
+        const newCategories = checked ? [...categories, value] : categories.filter(e => e !== value);
+        setCateInfo(prevState => ({
+            categories: newCategories,
+            response: newCategories,
+        }));
     };
     /* ------------------------------------------------- */
     const [selectcalidad, setSelectcalidad] = useState([]);

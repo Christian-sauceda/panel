@@ -15,25 +15,36 @@ export default function AddMovieEs() {
         categories: [],
         response: [],
     });
+
     const handleChange = (e) => {
-        // Destructuring
         const { value, checked } = e.target;
         const { categories } = cateinfo;
-        // Case 1 : The user checks the box
+
+        let newCategories;
         if (checked) {
-            setCateInfo({
-                categories: [...categories, value],
-                response: [...categories, value],
-            });
+            newCategories = [...categories, value]; // Agregar el valor a las categorías seleccionadas
+        } else {
+            newCategories = categories.filter((item) => item !== value); // Quitar el valor de las categorías seleccionadas
         }
-        // Case 2  : The user unchecks the box
-        else {
-            setCateInfo({
-                categories: categories.filter((e) => e !== value),
-                response: categories.filter((e) => e !== value),
-            });
-        }
+
+        setCateInfo((prevState) => ({
+            ...prevState, // Mantener la propiedad "response" del estado anterior
+            categories: newCategories,
+            response: newCategories,
+        }));
     };
+
+    // Restablecer los checkboxes cuando el estado cambie
+    useEffect(() => {
+        const { categories } = cateinfo;
+
+        // Desmarcar los checkboxes
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = categories.includes(checkbox.value);
+        });
+    }, [cateinfo]);
+
     /* ------------------------------------------------- */
 
     const { auth } = useAuth()

@@ -16,25 +16,14 @@ export default function AddMovieEs() {
     });
 
     const handleChange = (e) => {
-        // Destructuring
         const { value, checked } = e.target;
         const { categories } = cateinfo;
 
-        // Caso 1: La usuario marca la casilla
-        if (checked) {
-            setCateInfo({
-                categories: [...categories, value],
-                response: [...categories, value],
-            });
-        }
-
-        // Caso 2: el usuario desmarca la casilla
-        else {
-            setCateInfo({
-                categories: categories.filter((e) => e !== value),
-                response: categories.filter((e) => e !== value),
-            });
-        }
+        const newCategories = checked ? [...categories, value] : categories.filter(e => e !== value);
+        setCateInfo(prevState => ({
+            categories: newCategories,
+            response: newCategories,
+        }));
     };
 
     /* ------------------------------------------------- */
@@ -235,48 +224,48 @@ export default function AddMovieEs() {
                                 <div className="w-full lg:w-8/12 px-4">
                                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
                                         <div className="flex-auto px-4 lg:px-10 py-10 pt-2">
-                                        <div className="flex flex-wrap">
-                                            
-                                            <div className="w-full lg:w-10/12 px-4">
-                                                <div className="relative w-full mb-3">
-                                                    <label
-                                                        className="block uppercase text-gray-600 text-xs font-bold mb-2 pt-2"
-                                                    >
-                                                        Título:
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        id="title"
-                                                        name="title"
-                                                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                        placeholder="Ej. El Padrino"
-                                                        value={TITLE}
-                                                        autoComplete="off"
-                                                        onChange={(e) => setTITLE(e.target.value)}
-                                                        required
-                                                    />
+                                            <div className="flex flex-wrap">
 
-                                                    <div className='search-list' style={{ display: "block" }} id='search-list'>
-                                                        {peliculas.map((pelicula) => (
-                                                            <>
+                                                <div className="w-full lg:w-10/12 px-4">
+                                                    <div className="relative w-full mb-3">
+                                                        <label
+                                                            className="block uppercase text-gray-600 text-xs font-bold mb-2 pt-2"
+                                                        >
+                                                            Título:
+                                                        </label>
+                                                        <input
+                                                            type="text"
+                                                            id="title"
+                                                            name="title"
+                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            placeholder="Ej. El Padrino"
+                                                            value={TITLE}
+                                                            autoComplete="off"
+                                                            onChange={(e) => setTITLE(e.target.value)}
+                                                            required
+                                                        />
 
-                                                                <div className='search-list-item'>
-                                                                    <div className='search-item-thumbnail'>
-                                                                        <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${pelicula.poster_path}`} />
+                                                        <div className='search-list' style={{ display: "block" }} id='search-list'>
+                                                            {peliculas.map((pelicula) => (
+                                                                <>
+
+                                                                    <div className='search-list-item'>
+                                                                        <div className='search-item-thumbnail'>
+                                                                            <img src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${pelicula.poster_path}`} />
+                                                                        </div>
+                                                                        <div className='search-item-info'>
+                                                                            <h3 key={pelicula.id} onClick={() => handleExpedienteClick(pelicula)}>{pelicula.title} <span className='negrita'>({pelicula.release_date.split('-')[0]})</span></h3>
+                                                                        </div>
                                                                     </div>
-                                                                    <div className='search-item-info'>
-                                                                        <h3 key={pelicula.id} onClick={() => handleExpedienteClick(pelicula)}>{pelicula.title} <span className='negrita'>({pelicula.release_date.split('-')[0]})</span></h3>
-                                                                    </div>
-                                                                </div>
-                                                            </>
-                                                        ))}
-                                                        
+                                                                </>
+                                                            ))}
+
+                                                        </div>
+
                                                     </div>
-                                                    
+
                                                 </div>
-                                                
-                                            </div>
-                                            <div className="w-full lg:w-2/12 px-3 pt-2">
+                                                <div className="w-full lg:w-2/12 px-3 pt-2">
                                                     <div className="relative w-full mb-3">
                                                         <label
                                                             className="block uppercase text-gray-600 text-xs font-bold mb-2"
@@ -295,7 +284,7 @@ export default function AddMovieEs() {
                                                             <option value="en-US">Inglés</option>
                                                         </select>
 
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>

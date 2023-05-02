@@ -269,7 +269,7 @@ const handleNumberSeasonChange = (event) => {
     return (
         <>
             <main>
-                <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+                <div className="px-4 sm:px-6 lg:px-8 pt-0  py-8 w-full max-w-9xl mx-auto">
                     <BannerSerieCapEn />
                     <div className="sm:flex sm:justify-between sm:items-center mb-8">
                         <form
@@ -491,13 +491,13 @@ const handleNumberSeasonChange = (event) => {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className="grid place-items-center pt-6 pb-6">
+                                                <div className="grid place-items-center pt-0 pb-6">
                                                     <ReactPlayer
                                                         playing={true}
                                                         url={`${URL}`}
                                                         controls={true}
-                                                        width="95%"
-                                                        height="95%"
+                                                        width="100%"
+                                                        height="100%"
                                                     />
                                                 </div>
                                             </div>

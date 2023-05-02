@@ -198,7 +198,7 @@ export default function AddSerieEn() {
     return (
         <>
             <main>
-                <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+                <div className="px-4 sm:px-6 lg:px-8 pt-0  py-8 w-full max-w-9xl mx-auto">
                     <BanneMovieEn />
                     <div className="sm:flex sm:justify-between sm:items-center mb-8">
                         <form

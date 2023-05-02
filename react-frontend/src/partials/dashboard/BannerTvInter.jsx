@@ -49,7 +49,6 @@ function BannerTvInter() {
       {/* Content */}
       <div className="relative">
         <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Agregar Tv En Vivo Internacional</h1>
-        <p>Información General</p>
       </div>
 
     </div>

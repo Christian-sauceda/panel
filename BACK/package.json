@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "babel-node": "babel-node --presets=@babel/preset-env",
-    "start": "nodemon --exec npm run babel-node src/index.js",
-    "build": "node build/index.js"
+    "dev": "nodemon --exec npm run babel-node src/index.js",
+    "start": "node build/index.js"
   },
   "keywords": [],
   "author": "Christian-Sauceda",

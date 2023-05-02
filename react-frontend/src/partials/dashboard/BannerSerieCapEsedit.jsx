@@ -49,6 +49,7 @@ function BannerMovieEs() {
       {/* Content */}
       <div className="relative">
         <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">Editar Capítulo Serie En Español</h1>
+        <p>Información General</p>
       </div>
 
     </div>

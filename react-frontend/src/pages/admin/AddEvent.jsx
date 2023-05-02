@@ -85,12 +85,9 @@ export default function AddSerieEs() {
                 error: false
             })
             //limpiar los campos
-            setCOD_AUDIO('');
-            setCODCATEGORIA('');
             setTITLE('');
             setPOSTER('');
             setURL('');
-            setCOD_FORMAT_VIDEO('');
 
         } catch (error) {
             setAlerta({
@@ -173,7 +170,9 @@ export default function AddSerieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={COD_CATEGORIA}
                                                             onChange={e => setCODCATEGORIA(e.target.value)}
+                                                            required
                                                         >
+                                                            <option value="">-- Seleccione --</option>
                                                             {selectcategoria.map(categoria => (
                                                                 <option key={categoria.COD_CATEGORIA} value={categoria.COD_CATEGORIA}>{categoria.CATEGORIA}</option>
                                                             ))}
@@ -195,7 +194,9 @@ export default function AddSerieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={COD_FORMAT_VIDEO}
                                                             onChange={(e) => setCOD_FORMAT_VIDEO(e.target.value)}
+                                                            required
                                                         >
+                                                            <option value="">-- Seleccione --</option>
                                                             {selectformat.map(format => (
                                                                 <option key={format.COD_FORMATO} value={format.COD_FORMATO}>{format.FORMATO}</option>
                                                             ))}
@@ -218,7 +219,9 @@ export default function AddSerieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={COD_AUDIO}
                                                             onChange={(e) => setCOD_AUDIO(e.target.value)}
+                                                            required
                                                         >
+                                                            <option value="">-- Seleccione --</option>
                                                             {selectaudio.map(format => (
                                                                 <option key={format.COD_AUDIO} value={format.COD_AUDIO}>{format.AUDIO}</option>
                                                             ))}

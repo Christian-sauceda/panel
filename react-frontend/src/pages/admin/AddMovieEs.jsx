@@ -490,6 +490,7 @@ export default function AddMovieEs() {
                                                             value={URL}
                                                             onChange={(e) => setURL(e.target.value)}
                                                             required
+                                                            autoComplete='on'
                                                         />
                                                     </div>
                                                 </div>

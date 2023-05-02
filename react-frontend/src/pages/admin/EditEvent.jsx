@@ -94,6 +94,9 @@ export default function AddSerieEs() {
                 msg: 'Evento Deportivo ha sido editado Correctamente',
                 error: false
             })
+            setTimeout(() => {
+                window.location.href = "/admin/events/list"
+            }, 1200);
         } catch (error) {
             setAlerta({
                 msg: error.response.data.message,

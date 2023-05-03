@@ -1,7 +1,7 @@
 import BanneMovieAdult from '../../partials/dashboard/BannerMovieAdultedit.jsx';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import "../../components/Cards/Card.css";
+import "../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
 import ReactPlayer from 'react-player'
 // components

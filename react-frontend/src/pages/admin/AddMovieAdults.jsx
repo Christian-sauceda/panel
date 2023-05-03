@@ -1,6 +1,6 @@
 import BanneMovieAdult from '../../partials/dashboard/BannerMovieAdult.jsx';
 import { useState, useEffect } from "react";
-import "../../components/Cards/Card.css";
+import "../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
 import ReactPlayer from 'react-player'
 // components

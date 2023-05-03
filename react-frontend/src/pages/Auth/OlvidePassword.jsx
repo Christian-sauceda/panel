@@ -30,7 +30,7 @@ const OlvidePassword = () => {
         <nav className="mt-10 lg:flex lg:justify-end">
                     <Link
                     className="block text-center my-5 text-gray-500"
-                        to="/"
+                        to="/auth"
                     >Regresar
                     </Link>
                 </nav>

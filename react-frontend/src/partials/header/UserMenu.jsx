@@ -76,7 +76,7 @@ function UserMenu() {
             <li>
               <a
                 className="font-medium text-sm text-indigo-600 hover:text-indigo-800 flex items-center py-1 px-3"
-                href="/"
+                href="/auth"
                 onClick={() => setDropdownOpen(!dropdownOpen, localStorage.removeItem('token'), setAuth({}))}
               >
               <span className='uppercase text-center'> Cerrar sesión</span>

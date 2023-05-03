@@ -84,7 +84,7 @@ function App() {
                       <EpgsProvider>
                         <Routes>
                           <Route path="*" element={<NotFound />} />
-                          <Route path="/auth" element={<AuthLayout />}>
+                          <Route path="/" element={<AuthLayout />}>
                             <Route index element={<Login />} />
                             <Route path="olvide-password" element={<OlvidePassword />} />
                             <Route path="confirmar/:id" element={<ConfirmarCuenta />} />

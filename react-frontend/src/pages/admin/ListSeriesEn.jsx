@@ -5,7 +5,7 @@ import MUIDataTable from "mui-datatables";
 // components
 import clienteAxios from "../../config/axios";
 
-//import BannerListSerieEN from '../../partials/dashboard/BannerListSerieEN.jsx';
+import BannerListSerieEN from "../../partials/dashboard/BannerListSerieEN.jsx";
 
 const AddCapSerieAdult = () => {
 

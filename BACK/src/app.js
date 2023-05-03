@@ -48,7 +48,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.get("/", checkAuth, (req, res) => {
+app.get("/api/info", (req, res) => {
   res.json({
     name: app.get("pkg").name,
     author: app.get("pkg").author,
@@ -58,38 +58,38 @@ app.get("/", checkAuth, (req, res) => {
 });
 
 // MAINTENANCE
-app.use('/cataudio', checkAuth, cataudio);
-app.use('/catcategory', checkAuth, catcategory);
-app.use('/catepgchannel', checkAuth, catepgchannel);
-app.use('/catformatvideo', checkAuth, catformatvideo);
-app.use('/catplataform', checkAuth, catplataform);
-app.use('/catquality', checkAuth, catquality);
-app.use('/catypecontent', checkAuth, catypecontent);
-app.use('/catypeserver', checkAuth, catypeserver);
+app.use('/api/cataudio', checkAuth, cataudio);
+app.use('/api/catcategory', checkAuth, catcategory);
+app.use('/api/catepgchannel', checkAuth, catepgchannel);
+app.use('/api/catformatvideo', checkAuth, catformatvideo);
+app.use('/api/catplataform', checkAuth, catplataform);
+app.use('/api/catquality', checkAuth, catquality);
+app.use('/api/catypecontent', checkAuth, catypecontent);
+app.use('/api/catypeserver', checkAuth, catypeserver);
 
 // MOVIE
-app.use('/mtmovie/es', checkAuth, mtmoviees);
-app.use('/mtmovie/en', checkAuth, mtmovieen);
-app.use('/mtmovie/adult', checkAuth, mtmovieadult);
+app.use('/api/mtmovie/es', checkAuth, mtmoviees);
+app.use('/api/mtmovie/en', checkAuth, mtmovieen);
+app.use('/api/mtmovie/adult', checkAuth, mtmovieadult);
 
 // EVENTS
 app.use('/mtevent', checkAuth, mtevent);
 
 // TVSHOWS
-app.use('/mttvshows/en', checkAuth, mttvshowsen);
-app.use('/mttvshows/es', checkAuth, mttvshowses);
-app.use('/mttvshowschapter', checkAuth, mttvshowschapter);
+app.use('/api/mttvshows/en', checkAuth, mttvshowsen);
+app.use('/api/mttvshows/es', checkAuth, mttvshowses);
+app.use('/api/mttvshowschapter', checkAuth, mttvshowschapter);
 
 // TV LIVE
-app.use('/tvlive/es', checkAuth, tvlivees);
-app.use('/tvlive/en', checkAuth, tvliveen);
-app.use('/tvlive/inter', checkAuth, tvliveinter);
+app.use('/api/tvlive/es', checkAuth, tvlivees);
+app.use('/api/tvlive/en', checkAuth, tvliveen);
+app.use('/api/tvlive/inter', checkAuth, tvliveinter);
 
 // IMAGENES
-app.use('/images/imgs', imagesRouter);
+app.use('/api/images/imgs', imagesRouter);
 
 // AUTH
-app.use('/', sysignup);
+app.use('/api/', sysignup);
 
 
 

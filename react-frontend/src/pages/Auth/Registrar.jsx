@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import clienteAxios from '../../config/axios';
 import Alerta from '../../components/Alerts/Alerts';
-import BannerUser from '../../partials/dashboard/BannerUser';
+import BannerUser from '../../partials/dashboard/BannerUser.jsx';
 import "../../components/Cards/card.css";
 
 const Registrar = () => {

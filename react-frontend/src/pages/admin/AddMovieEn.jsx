@@ -1,4 +1,4 @@
-import BanneMovieEn from '../../partials/dashboard/BannerMovieEn';
+import BanneMovieEn from '../../partials/dashboard/BannerMovieEn.jsx';
 import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';

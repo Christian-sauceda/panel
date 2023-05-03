@@ -1,4 +1,4 @@
-import BanneMovieEs from '../../partials/dashboard/BannerEditMovieEn';
+import BanneMovieEs from '../../partials/dashboard/BannerEditMovieEn.jsx';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";

@@ -6,7 +6,7 @@ import dateFormat, { masks } from "dateformat";
 // components
 import clienteAxios from "../../config/axios";
 
-import BannerTvEs from '../../partials/dashboard/BannerListTvEs';
+import BannerTvEs from '../../partials/dashboard/BannerListTvEs.jsx';
 
 const AddCapSerieAdult = () => {
 

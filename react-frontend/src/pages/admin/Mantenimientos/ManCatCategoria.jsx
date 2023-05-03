@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Banner from '../../../partials/dashboard/BannerCatCategoria';
+import Banner from '../../../partials/dashboard/BannerCatCategoria.jsx';
 
 //components
 import Formulario from '../../../components/Forms/FormularioCategoria';

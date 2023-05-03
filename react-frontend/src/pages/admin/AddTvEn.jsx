@@ -5,7 +5,7 @@ import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
-import BannerTvEn from '../../partials/dashboard/BannerTvEn';
+import BannerTvEn from '../../partials/dashboard/BannerTvEn.jsx';
 
 export default function AddSerieEs() {
     const [selecttven, setSelecttven] = useState([]);

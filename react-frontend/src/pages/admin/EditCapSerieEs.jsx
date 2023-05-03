@@ -7,7 +7,7 @@ import ReactPlayer from 'react-player'
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
 import axios from 'axios';
-import BannerSerieCapEs from '../../partials/dashboard/BannerSerieCapEsedit';
+import BannerSerieCapEs from '../../partials/dashboard/BannerSerieCapEsedit.jsx';
 //SEL_CHAPTER_CHAPTER
 export default function AddCapSerieEs() {
     const { auth } = useAuth()

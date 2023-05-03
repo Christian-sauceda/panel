@@ -5,7 +5,7 @@ import dateFormat, { masks } from "dateformat";
 import 'animate.css';
 // components
 import clienteAxios from "../../config/axios";
-import BannerListMovieEs from '../../partials/dashboard/BannerListMovieEs';
+import BannerListMovieEs from '../../partials/dashboard/BannerListMovieEs.jsx';
 
 const AddCapSerieEs = () => {
 

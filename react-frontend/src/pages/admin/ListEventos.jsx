@@ -6,7 +6,7 @@ import dateFormat, { masks } from "dateformat";
 // components
 import clienteAxios from "../../config/axios";
 
-import BannerListEventos from '../../partials/dashboard/BannerListEventos';
+import BannerListEventos from '../../partials/dashboard/BannerListEventos.jsx';
 import Swal from 'sweetalert2'
 
 const AddCapSerieEn = () => {

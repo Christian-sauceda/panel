@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
-import BannerEvent from '../../partials/dashboard/BannerEventedit';
+import BannerEvent from '../../partials/dashboard/BannerEventedit.jsx';
 export default function AddSerieEs() {
     const { auth } = useAuth()
     const [COD_AUDIO, setCOD_AUDIO] = useState('');

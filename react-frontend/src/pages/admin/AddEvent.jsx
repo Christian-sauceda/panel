@@ -5,7 +5,7 @@ import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
-import BannerEvent from '../../partials/dashboard/BannerEvent';
+import BannerEvent from '../../partials/dashboard/BannerEvent.jsx';
 
 export default function AddSerieEs() {
     const [selectaudio, setSelectaudio] = useState([]);

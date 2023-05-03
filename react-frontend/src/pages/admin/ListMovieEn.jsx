@@ -5,7 +5,7 @@ import MUIDataTable from "mui-datatables";
 import dateFormat, { masks } from "dateformat";
 // components
 import clienteAxios from "../../config/axios";
-import BannerListMovieEn from '../../partials/dashboard/BannerListMovieEn';
+import BannerListMovieEn from '../../partials/dashboard/BannerListMovieEn.jsx';
 
 const AddCapSerieEn = () => {
 

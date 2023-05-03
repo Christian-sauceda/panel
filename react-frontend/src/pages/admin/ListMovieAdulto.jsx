@@ -7,7 +7,7 @@ import dateFormat, { masks } from "dateformat";
 // components
 import clienteAxios from "../../config/axios";
 
-import BannerListMovieAD from '../../partials/dashboard/BannerListMovieAD';
+import BannerListMovieAD from '../../partials/dashboard/BannerListMovieAD.jsx';
 import Swal from 'sweetalert2'
 
 const AddCapSerieAdult = () => {

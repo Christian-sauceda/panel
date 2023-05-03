@@ -7,7 +7,7 @@ import Select from 'react-select';
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
-import BannerTvInter from '../../partials/dashboard/BannerTvInter';
+import BannerTvInter from '../../partials/dashboard/BannerTvInter.jsx';
 export default function AddSerieEs() {
     const [selecttvinter, setSelecttvinter] = useState([]);
     const [selectCser, setSelectCser] = useState([]);

@@ -7,7 +7,7 @@ import Registrar from './pages/Auth/Registrar'
 import OlvidePassword from './pages/Auth/OlvidePassword'
 import ConfirmarCuenta from './pages/Auth/ConfirmarCuenta'
 
-import Inicio from './pages/admin/Inicio.jsx'
+import Inicio from './pages/admin/inicio.jsx'
 import NotFound from './pages/admin/NotFound'
 
 //add

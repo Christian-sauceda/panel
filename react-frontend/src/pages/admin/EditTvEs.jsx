@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player'
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
-import BannerTvEs from '../../partials/dashboard/BannerTvEs';
+import BannerTvEs from '../../partials/dashboard/BannerTvEs.jsx';
 
 export default function AddSerieEs() {
     const { auth } = useAuth()

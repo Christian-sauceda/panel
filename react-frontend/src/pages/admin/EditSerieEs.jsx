@@ -6,7 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
 import axios from 'axios';
-import BanneMovieEs from '../../partials/dashboard/BannerSeriesEsedit';
+import BanneMovieEs from '../../partials/dashboard/BannerSeriesEsedit.jsx';
 
 export default function AddSerieEs() {
     /* ------------------------------------------------- */

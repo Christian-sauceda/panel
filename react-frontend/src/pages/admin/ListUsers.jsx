@@ -5,7 +5,7 @@ import MUIDataTable from "mui-datatables";
 // components
 import clienteAxios from "../../config/axios";
 
-//import BannerListSerieES from "../../partials/dashboard/BannerListSerieEs";
+//import BannerListSerieEs from "../../partials/dashboard/BannerListSerieEs";
 
 const AddCapSerieAdult = () => {
 
@@ -130,30 +130,30 @@ const AddCapSerieAdult = () => {
             },
         },
         // {
-        // name: 'Acciones',
-        // label: 'Acciones',
-        // options: {
-        //     filter: true,
+            // name: 'Acciones',
+            // label: 'Acciones',
+            // options: {
+            //     filter: true,
 
-        //     customBodyRender: (value, tableMeta, updateValue) => {
-        //         return (
-        //             <>
-        //                 <button className="animate__animated animate__bounceIn bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
-        //                     window.location.href = `/admin/user/edit/${tableMeta.rowData[0]}`
-        //                 }}>
-        //                     <i className="fas fa-edit">EDITAR</i>
-        //                 </button>
+            //     customBodyRender: (value, tableMeta, updateValue) => {
+            //         return (
+            //             <>
+            //                 <button className="animate__animated animate__bounceIn bg-green-600 font-bold mr-1 p-2 text-white" onClick={() => {
+            //                     window.location.href = `/admin/user/edit/${tableMeta.rowData[0]}`
+            //                 }}>
+            //                     <i className="fas fa-edit">EDITAR</i>
+            //                 </button>
 
-        //                 <button className="animate__animated animate__bounceIn bg-red-600 font-bold  p-2 text-white" onClick={() => {
-        //                     window.location.href = `/admin/user/deleted/${tableMeta.rowData[0]}`
-        //                 }}>
-        //                     <i className="fas fa-edit">ELIMINAR</i>
-        //                 </button>
+            //                 <button className="animate__animated animate__bounceIn bg-red-600 font-bold  p-2 text-white" onClick={() => {
+            //                     window.location.href = `/admin/user/deleted/${tableMeta.rowData[0]}`
+            //                 }}>
+            //                     <i className="fas fa-edit">ELIMINAR</i>
+            //                 </button>
 
-        //             </>
-        //         )
-        //     }
-        // },
+            //             </>
+            //         )
+            //     }
+            // },
 
         //},
     ]
@@ -164,17 +164,16 @@ const AddCapSerieAdult = () => {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    {/* Replace with your content 
-                    <BannerListSerieES />
-                    */}
+                    {/* <BannerListSerieEs /> */}
+
                     <MUIDataTable
                         data={peliculas}
                         columns={columns}
-
+                        
                         options={{
                             responsive: "scroll",
                             selectableRows: "none",
-                            fixedHeader: false,
+                            fixedHeader: false ,
                             elevation: 10,
                             textLabels: {
                                 body: {

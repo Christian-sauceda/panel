@@ -1,9 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.jetcargo-color {
-  background-color: #00aeef;
-}
-
-/* "jetcargo-color-secundario": "#161136", */

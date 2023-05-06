@@ -48,13 +48,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.get("/", checkAuth, (req, res) => {
-  res.json({
-    name: app.get("pkg").name,
-    author: app.get("pkg").author,
-    version: app.get("pkg").version,
-    description: app.get("pkg").description,
-  });
+app.get("/", (req, res) => {
+  res.redirect("http://142.44.160.208/auth");
 });
 
 // MAINTENANCE

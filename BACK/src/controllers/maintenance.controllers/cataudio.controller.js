@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 const mysqlconnection = require("../../database");
 
 // GET ALL CATALOG OF AUDIO

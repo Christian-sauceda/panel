@@ -16,7 +16,7 @@ const fail404 = () => {
                             La página que buscas no existe.
                         </p>
                         <Link
-                            to="/auth"
+                            to="/"
                             className="px-6 py-2 text-sm font-semibold text-sky-800 hover:text-white hover:bg-sky-900 bg-blue-100"
                         >Ir a inicio</Link>
                     </div>

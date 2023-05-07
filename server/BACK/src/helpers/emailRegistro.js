@@ -98,7 +98,7 @@ const emailRegistro = async (datos) => {
                                   <br/>
                                   <br/>
                                   <p>Tu cuenta esta lista, solo debes comprobarla en el siguiente enlace:
-                                  <b><a href="${process.env.FRONTEND}/confirmar/${tokenunico}">Comprobar cuenta</a></b></p>
+                                  <b><a href="${process.env.FRONTEND}/confirm/${tokenunico}">Comprobar cuenta</a></b></p>
                                   <br/>
                                   <br/>
                                   <b><p>Si tu no solicitaste una cuenta, puedes ignorar este mensaje</p></b>

@@ -87,7 +87,7 @@ function App() {
                           <Route path="/" element={<AuthLayout />}>
                             <Route index element={<Login />} />
                             <Route path="olvide-password" element={<OlvidePassword />} />
-                            <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
+                            <Route path="confirm/:id" element={<ConfirmarCuenta />} />
                           </Route>
 
                           <Route path="/admin" element={<AdminLayout />}>

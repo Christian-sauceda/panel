@@ -38,19 +38,19 @@ let FRONTEND = process.env.FRONTEND;
 const dominiosPermitidos = [`${FRONTEND}`];
 
 const corsOptions = {
-  origin: function(origin, callback) {
-    //permite todos los dominios
-    if (dominiosPermitidos.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    }
-  },
-  credentials: true
-};
+  //  origin: function(origin, callback) {
+      //permite todos los dominios
+    //  if (dominiosPermitidos.indexOf(origin) !== -1 || !origin) {
+      //  callback(null, true);
+     // }
+   // },
+    origin: true,
+    credentials: true
+  };
+  
+  app.use(cors(corsOptions));
+  
 
-app.use(cors(corsOptions));
-app.get("/", (req, res) => {
-  res.redirect("http://142.44.160.208/auth");
-});
 
 // MAINTENANCE
 app.use('/cataudio', checkAuth, cataudio);

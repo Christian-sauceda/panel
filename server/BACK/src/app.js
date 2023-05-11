@@ -24,6 +24,7 @@ import tvliveen from "./routes/tvlive.routes/tvliveen.routes";
 import tvliveinter from "./routes/tvlive.routes/tvliveinter.routes";
 import checkAuth from "./middlewares/user.middleware.js";
 import imagesRouter from "./routes/images.routes/images.routes";
+import reporte from "./routes/report.routes/report.routes";
 const cookieParser = require('cookie-parser')
 
 const app = express();
@@ -86,6 +87,9 @@ app.use('/images/imgs', imagesRouter);
 
 // AUTH
 app.use('/', sysignup);
+
+// REPORTES
+app.use('/reporte', reporte);
 
 
 

@@ -58,6 +58,9 @@ import ManCatCategoria from './pages/admin/Mantenimientos/ManCatCategoria'
 import ManCatServer from './pages/admin/Mantenimientos/ManCatServer'
 import ManCatEpg from './pages/admin/Mantenimientos/ManCatEpg'
 
+//reportes
+import Reporte from './pages/admin/GenerarReport'
+
 //providers
 import { AuthProvider } from './context/AuthProvider'
 import { AudiosProvider } from './context/AudiosProvider'
@@ -133,6 +136,7 @@ function App() {
                             <Route path="tv/es/list" element={<ListTvEs />} />
                             <Route path="tv/en/list" element={<ListTvEn />} />
                             <Route path="tv/inter/list" element={<ListTvInter />} />
+                            <Route path="reportes" element={<Reporte />} />
                           </Route>
                         </Routes>
                       </EpgsProvider>

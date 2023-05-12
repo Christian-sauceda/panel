@@ -7,42 +7,52 @@ import clienteAxios from '../../config/axios';
 
 const styles = StyleSheet.create({
     page: {
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
         padding: 50,
+        fontFamily: 'Helvetica',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
+        lineHeight: 1,
+        color: '#444444',
+        textAlign: 'justify',
     },
     title: {
-        fontSize: '32px',
+        fontSize: '18px',
         fontWeight: '600',
-        textAlign: 'center',
+        margin: '0 auto',
+        alignItems: 'center',
         marginBottom: '60px',
+        color: '#0073AC',
     },
     movieTitle: {
-        fontSize: '18px',
-        fontWeight: '500',
+        fontSize: '14px',
         marginBottom: '10px',
     },
     pageNumber: {
-        fontSize: 14,
+        fontSize: 10,
         position: 'absolute',
         bottom: 30,
         left: 0,
         right: 0,
         textAlign: 'center',
-        color: 'grey',
-      },
+        color: '#444444',
+    },
+    spam: {
+        color: '#00608F',
+        fontStyle: 'italic',
+        fontWeight: '600',
+    }
 });
 
 export default function AddMovieEs() {
     const { auth } = useAuth()
     const [CODUSER, setCODUSER] = useState(`${auth.COD}`);
-    const [Tipo, setTipo] = useState("NULL");
+    const [Tipo, setTipo] = useState({ value: "", label: "" });
     const [SelectType, setSelectType] = useState([]);
-    const [fechaDesde, setFechaDesde] = useState("NULL");
-    const [fechaHasta, setFechaHasta] = useState("NULL");
+    const [fechaDesde, setFechaDesde] = useState(null);
+    const [fechaHasta, setFechaHasta] = useState(null);
     const [pdfDocument, setPdfDocument] = useState(null);
     const [showPdf, setShowPdf] = useState(false);
 
@@ -77,7 +87,11 @@ export default function AddMovieEs() {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const datos = { fechaDesde, fechaHasta, Tipo };
+            const datos = { fechaDesde, fechaHasta, tipo: Tipo.value };
+
+            const label = Tipo.label.charAt(0).toUpperCase() + Tipo.label.slice(1).toLowerCase();
+
+            console.log(datos);
             const resultado = await clienteAxios.get(`/mtmovie/es/${import.meta.env.VITE_ID_MOVIES_ES}`, config).then((response) => {
                 const Consulta = response.data;
                 const total = Consulta.length;
@@ -86,7 +100,10 @@ export default function AddMovieEs() {
                 const MyDocument = () => (
                     <Document>
                         <Page style={styles.page}>
-                            <Text style={styles.title}>Listado de Contenido</Text>
+                            <Text style={styles.title}>
+                                Reporte de <Text style={styles.spam}>{label}</Text> {fechaDesde ? `del ${fechaDesde}` : ''} {fechaDesde && fechaHasta ? `al ${fechaHasta}` : ''}
+                            </Text>
+
                             {Consulta.map((pelicula, index) => (
                                 <View key={pelicula.COD_CONTENT}>
                                     <Text style={styles.movieTitle}>{`${index + 1}.- ${pelicula.TITLE}`}</Text>
@@ -117,7 +134,7 @@ export default function AddMovieEs() {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <div className="sm:flex sm:justify-between sm:items-center mb-8">
+                    <div className="sm:justify-between sm:items-center mb-8">
                         <form
                             onSubmit={handleSubmit}
                         >
@@ -131,9 +148,8 @@ export default function AddMovieEs() {
                                             >
                                             </div>
                                             <div className="flex flex-wrap">
-
                                                 {/* tipo */}
-                                                <div className="w-full lg:w-8/12 px-4 mb-6">
+                                                <div className="w-full lg:w-5/12 px-4 mb-6">
                                                     <div className="relative w-full mb-3">
                                                         <label
                                                             className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -144,94 +160,104 @@ export default function AddMovieEs() {
                                                             name="TYPE"
                                                             id="TYPE"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            value={Tipo}
-                                                            onChange={(e) => setTipo(e.target.value)}
+                                                            value={Tipo.value}
+                                                            onChange={(e) => {
+                                                                const selectedIndex = e.target.options.selectedIndex;
+                                                                setTipo({
+                                                                    value: e.target.value,
+                                                                    label: e.target.options[selectedIndex].text
+                                                                });
+                                                            }}
+                                                            required
+
                                                         >
                                                             <option value="">Selecciona el Tipo de reporte</option>
-                                                            <option value="0">Todos el contenido multimedia</option>
                                                             {SelectType.map((item) => (
                                                                 <option key={item.COD_CONTENIDO} value={item.COD_CONTENIDO}>{item.CONTENIDO}</option>
                                                             ))}
                                                         </select>
                                                     </div>
                                                 </div>
-
-                                                {/* desde */}
-                                                <div className="w-full lg:w-6/12 px-4 mb-6">
-                                                    <div className="relative w-full mb-3">
-                                                        <label
-                                                            className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                        >
-                                                            Desde:
-                                                        </label>
-                                                        <input
-                                                            type="date"
-                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            value={fechaDesde}
-                                                            onChange={(e) => setFechaDesde(e.target.value)}
-                                                        />
+                                                    {/* desde */}
+                                                    <div className="w-full lg:w-3/12 px-4 mb-6">
+                                                        <div className="relative w-full mb-3">
+                                                            <label
+                                                                className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            >
+                                                                Desde:
+                                                            </label>
+                                                            <input
+                                                                type="date"
+                                                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                                value={fechaDesde}
+                                                                onChange={(e) => setFechaDesde(e.target.value)}
+                                                                max={new Date().toISOString().split("T")[0]}
+                                                            />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                {/* hasta */}
-                                                <div className="w-full lg:w-6/12 px-4 mb-6">
-                                                    <div className="relative w-full mb-3">
-                                                        <label
-                                                            className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                        >
-                                                            Hasta:
-                                                        </label>
-                                                        <input
-                                                            type="date"
-                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            value={fechaHasta}
-                                                            onChange={(e) => setFechaHasta(e.target.value)}
-                                                        />
+                                                    {/* hasta */}
+                                                    <div className="w-full lg:w-3/12 px-4 mb-6">
+                                                        <div className="relative w-full mb-3">
+                                                            <label
+                                                                className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            >
+                                                                Hasta:
+                                                            </label>
+                                                            <input
+                                                                type="date"
+                                                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                                value={fechaHasta}
+                                                                onChange={(e) => setFechaHasta(e.target.value)}
+                                                                max={new Date().toISOString().split("T")[0]}
+                                                            />
+                                                        </div>
                                                     </div>
-                                                </div>
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
-                            {pdfDocument && showPdf && (
-                                <>
-                                    <PDFDownloadLink document={pdfDocument} fileName="reporte.pdf">
-                                        {({ blob, url, loading, error }) => (
-                                            <a href={url} download="documento.pdf">
-                                                {loading ? (
-                                                    <span style={{ color: 'gray' }}>Generando PDF...</span>
-                                                ) : (
-                                                    <span style={{ color: 'blue', textDecoration: 'underline' }}>Descargar PDF</span>
-                                                )}
-                                            </a>
-                                        )}
-                                    </PDFDownloadLink>
+                            <div className="pt-5 w-f">
+                                {pdfDocument && showPdf && (
+                                    <>
+                                        <PDFDownloadLink document={pdfDocument} fileName="reporte.pdf">
+                                            {({ blob, url, loading, error }) => (
+                                                <a href={url} download="documento.pdf">
+                                                    {loading ? (
+                                                        <span style={{ color: 'gray' }}>Generando PDF...</span>
+                                                    ) : (
+                                                        <span style={{ color: 'blue', textDecoration: 'underline' }}>Descargar PDF</span>
+                                                    )}
+                                                </a>
+                                            )}
+                                        </PDFDownloadLink>
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowPdf(false)}
+                                            className="ml-2 py-2 px-4 bg-red-500 hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md"
+                                        >
+                                            Cerrar
+                                        </button>
+                                        <PDFViewer className="mt-4" width="100%" height="850">
+                                            {pdfDocument}
+                                        </PDFViewer>
+                                    </>
+                                )}
+                                {!showPdf && (
                                     <button
-                                        type="button"
-                                        onClick={() => setShowPdf(false)}
-                                        className="ml-2 py-2 px-4 bg-red-500 hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md"
+                                        type="submit"
+                                        className="bg-green-500 hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md py-2 px-4"
                                     >
-                                        Cerrar
+                                        Generar reporte
                                     </button>
-                                    <PDFViewer className="mt-4" width="1000" height="600">
-                                        {pdfDocument}
-                                    </PDFViewer>
-                                </>
-                            )}
-                            {!showPdf && (
-                                <button
-                                    type="submit"
-                                    className="bg-green-500 hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md py-2 px-4"
-                                >
-                                    Generar reporte
-                                </button>
-                            )}
+                                )}
+                            </div>
                         </form>
                     </div>
                 </div>
             </main>
+
         </>
     )
 }

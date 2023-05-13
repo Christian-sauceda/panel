@@ -24,6 +24,7 @@ import tvliveen from "./routes/tvlive.routes/tvliveen.routes";
 import tvliveinter from "./routes/tvlive.routes/tvliveinter.routes";
 import checkAuth from "./middlewares/user.middleware.js";
 import imagesRouter from "./routes/images.routes/images.routes";
+import reporte from "./routes/report.routes/report.routes";
 const cookieParser = require('cookie-parser')
 
 const app = express();
@@ -48,8 +49,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.get("/", (req, res) => {
-  res.redirect("http://142.44.160.208/auth");
+
+app.get('/', (req, res) => {
+  res.redirect("http://localhost/auth");
 });
 
 // MAINTENANCE
@@ -85,6 +87,9 @@ app.use('/images/imgs', imagesRouter);
 
 // AUTH
 app.use('/', sysignup);
+
+// REPORTES
+app.use('/reporte', reporte);
 
 
 

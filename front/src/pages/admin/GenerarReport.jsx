@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
 import { PDFDownloadLink, PDFViewer, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+
 // components
 import clienteAxios from '../../config/axios';
 
@@ -55,6 +56,7 @@ export default function AddMovieEs() {
     const [fechaHasta, setFechaHasta] = useState(null);
     const [pdfDocument, setPdfDocument] = useState(null);
     const [showPdf, setShowPdf] = useState(false);
+    const [correo, setCorreo] = useState("");
 
     const mostrarDatos = async () => {
         try {
@@ -123,6 +125,8 @@ export default function AddMovieEs() {
                 const pdfDocument = <MyDocument />;
                 setPdfDocument(pdfDocument);
                 setShowPdf(true);
+
+
             });
         } catch (error) {
             console.log(error);
@@ -178,47 +182,65 @@ export default function AddMovieEs() {
                                                         </select>
                                                     </div>
                                                 </div>
-                                                    {/* desde */}
-                                                    <div className="w-full lg:w-3/12 px-4 mb-6">
-                                                        <div className="relative w-full mb-3">
-                                                            <label
-                                                                className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            >
-                                                                Desde:
-                                                            </label>
-                                                            <input
-                                                                type="date"
-                                                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                                value={fechaDesde}
-                                                                onChange={(e) => setFechaDesde(e.target.value)}
-                                                                max={new Date().toISOString().split("T")[0]}
-                                                            />
-                                                        </div>
+                                                {/* desde */}
+                                                <div className="w-full lg:w-3/12 px-4 mb-6">
+                                                    <div className="relative w-full mb-3">
+                                                        <label
+                                                            className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                        >
+                                                            Desde:
+                                                        </label>
+                                                        <input
+                                                            type="date"
+                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            value={fechaDesde}
+                                                            onChange={(e) => setFechaDesde(e.target.value)}
+                                                            max={new Date().toISOString().split("T")[0]}
+                                                        />
                                                     </div>
-                                                    {/* hasta */}
-                                                    <div className="w-full lg:w-3/12 px-4 mb-6">
-                                                        <div className="relative w-full mb-3">
-                                                            <label
-                                                                className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            >
-                                                                Hasta:
-                                                            </label>
-                                                            <input
-                                                                type="date"
-                                                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                                value={fechaHasta}
-                                                                onChange={(e) => setFechaHasta(e.target.value)}
-                                                                max={new Date().toISOString().split("T")[0]}
-                                                            />
-                                                        </div>
+                                                </div>
+                                                {/* hasta */}
+                                                <div className="w-full lg:w-3/12 px-4 mb-6">
+                                                    <div className="relative w-full mb-3">
+                                                        <label
+                                                            className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                        >
+                                                            Hasta:
+                                                        </label>
+                                                        <input
+                                                            type="date"
+                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            value={fechaHasta}
+                                                            onChange={(e) => setFechaHasta(e.target.value)}
+                                                            max={new Date().toISOString().split("T")[0]}
+                                                        />
                                                     </div>
-                                            </div>
-                                        </div>
+                                                </div>
+                                                <div className="w-full lg:w-full px-4 mb-6">
+                                    <div className="relative w-8/12 mb-3">
+                                        <label
+                                            className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                        >
+                                            Correo:
+                                        </label>
+                                        <input
+                                            type="email"
+                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                            value={correo}
+                                            onChange={(e) => setCorreo(e.target.value)}
+                                        />
                                     </div>
+                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                    
                                 </div>
 
                             </div>
-                            <div className="pt-5 w-f">
+                            <div className="pt-8 w-f">
                                 {pdfDocument && showPdf && (
                                     <>
                                         <PDFDownloadLink document={pdfDocument} fileName="reporte.pdf">

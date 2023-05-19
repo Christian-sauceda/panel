@@ -93,41 +93,83 @@ export default function AddMovieEs() {
 
             const label = Tipo.label.charAt(0).toUpperCase() + Tipo.label.slice(1).toLowerCase();
 
-            console.log(datos);
-            const resultado = await clienteAxios.get(`/mtmovie/es/${import.meta.env.VITE_ID_MOVIES_ES}`, config).then((response) => {
-                const Consulta = response.data;
-                const total = Consulta.length;
+            console.log(datos.tipo);
+            //si Tipo tiene valor, y fecha_inicio y fecha_fin son null entonces se ejecuta la consulta de tipo
+            if (datos.tipo && !datos.fechaDesde && !datos.fechaHasta) {
+                const resultado = await clienteAxios.get(`/reporte/${datos.tipo}`, config).then((response) => {
+                    const Consulta = response.data;
+                    const total = Consulta.length;
+                    console.log(Consulta);
 
-                // Generar el documento PDF con los datos de la consulta
-                const MyDocument = () => (
-                    <Document>
-                        <Page style={styles.page}>
-                            <Text style={styles.title}>
-                                Reporte de <Text style={styles.spam}>{label}</Text> {fechaDesde ? `del ${fechaDesde}` : ''} {fechaDesde && fechaHasta ? `al ${fechaHasta}` : ''}
-                            </Text>
+                    // Generar el documento PDF con los datos de la consulta
+                    const MyDocument = () => (
+                        <Document>
+                            <Page style={styles.page}>
+                                <Text style={styles.title}>
+                                    Reporte de <Text style={styles.spam}>{label}</Text> {fechaDesde ? `del ${fechaDesde}` : ''} {fechaDesde && fechaHasta ? `al ${fechaHasta}` : ''}
+                                </Text>
 
-                            {Consulta.map((pelicula, index) => (
-                                <View key={pelicula.COD_CONTENT}>
-                                    <Text style={styles.movieTitle}>{`${index + 1}.- ${pelicula.TITLE}`}</Text>
+                                {Consulta.map((pelicula, index) => (
+                                    <View key={pelicula.COD_CONTENT}>
+                                        <Text style={styles.movieTitle}>{`${index + 1}.- ${pelicula.TITLE}`}</Text>
+                                    </View>
+                                ))}
+                                <View style={{ marginTop: '20px' }}>
+                                    <Text style={{ fontSize: '18px', fontWeight: '500', color: 'red' }}>{`Total: ${total}`}</Text>
                                 </View>
-                            ))}
-                            <View style={{ marginTop: '20px' }}>
-                                <Text style={{ fontSize: '18px', fontWeight: '500', color: 'red' }}>{`Total: ${total}`}</Text>
-                            </View>
-                            <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
-                                `${pageNumber} / ${totalPages}`
-                            )} fixed />
-                        </Page>
-                    </Document>
-                );
+                                <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
+                                    `${pageNumber} / ${totalPages}`
+                                )} fixed />
+                            </Page>
+                        </Document>
+                    );
 
-                // Almacenar el documento en una variable
-                const pdfDocument = <MyDocument />;
-                setPdfDocument(pdfDocument);
-                setShowPdf(true);
+                    // Almacenar el documento en una variable
+                    const pdfDocument = <MyDocument />;
+                    setPdfDocument(pdfDocument);
+                    setShowPdf(true);
 
 
-            });
+                });
+            } // si esta lleno Tipo, fecha_inicio y fecha_fin se ejecuta la consulta de tipo y fecha
+            else if (datos.tipo && datos.fechaDesde && datos.fechaHasta) {
+                
+                const resultado = await clienteAxios.get(`/reporte/date/${datos.tipo}/${datos.fechaDesde}/${datos.fechaHasta}`, config).then((response) => {
+                    const Consulta = response.data;
+                    const total = Consulta.length;
+                    console.log(Consulta);
+
+                    // Generar el documento PDF con los datos de la consulta
+                    const MyDocument = () => (
+                        <Document>
+                            <Page style={styles.page}>
+                                <Text style={styles.title}>
+                                    Reporte de <Text style={styles.spam}>{label}</Text> {fechaDesde ? `del ${fechaDesde}` : ''} {fechaDesde && fechaHasta ? `al ${fechaHasta}` : ''}
+                                </Text>
+
+                                {Consulta.map((pelicula, index) => (
+                                    <View key={pelicula.COD_CONTENT}>
+                                        <Text style={styles.movieTitle}>{`${index + 1}.- ${pelicula.TITLE}`}</Text>
+                                    </View>
+                                ))}
+                                <View style={{ marginTop: '20px' }}>
+                                    <Text style={{ fontSize: '18px', fontWeight: '500', color: 'red' }}>{`Total: ${total}`}</Text>
+                                </View>
+                                <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
+                                    `${pageNumber} / ${totalPages}`
+                                )} fixed />
+                            </Page>
+                        </Document>
+                    );
+
+                    // Almacenar el documento en una variable
+                    const pdfDocument = <MyDocument />;
+                    setPdfDocument(pdfDocument);
+                    setShowPdf(true);
+
+
+                });
+            } 
         } catch (error) {
             console.log(error);
         }
@@ -217,26 +259,26 @@ export default function AddMovieEs() {
                                                     </div>
                                                 </div>
                                                 <div className="w-full lg:w-full px-4 mb-6">
-                                    <div className="relative w-8/12 mb-3">
-                                        <label
-                                            className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                        >
-                                            Correo:
-                                        </label>
-                                        <input
-                                            type="email"
-                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            value={correo}
-                                            onChange={(e) => setCorreo(e.target.value)}
-                                        />
-                                    </div>
-                                </div>
+                                                    <div className="relative w-8/12 mb-3">
+                                                        <label
+                                                            className="appearance-none block w-full text-gray-700 borde rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                        >
+                                                            Correo:
+                                                        </label>
+                                                        <input
+                                                            type="email"
+                                                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            value={correo}
+                                                            onChange={(e) => setCorreo(e.target.value)}
+                                                        />
+                                                    </div>
+                                                </div>
                                             </div>
-                                            
+
                                         </div>
-                                        
+
                                     </div>
-                                    
+
                                 </div>
 
                             </div>

@@ -92,14 +92,11 @@ export default function AddMovieEs() {
             const datos = { fechaDesde, fechaHasta, tipo: Tipo.value };
 
             const label = Tipo.label.charAt(0).toUpperCase() + Tipo.label.slice(1).toLowerCase();
-
-            console.log(datos.tipo);
             //si Tipo tiene valor, y fecha_inicio y fecha_fin son null entonces se ejecuta la consulta de tipo
             if (datos.tipo && !datos.fechaDesde && !datos.fechaHasta) {
                 const resultado = await clienteAxios.get(`/reporte/${datos.tipo}`, config).then((response) => {
                     const Consulta = response.data;
                     const total = Consulta.length;
-                    console.log(Consulta);
 
                     // Generar el documento PDF con los datos de la consulta
                     const MyDocument = () => (
@@ -109,17 +106,24 @@ export default function AddMovieEs() {
                                     Reporte de <Text style={styles.spam}>{label}</Text> {fechaDesde ? `del ${fechaDesde}` : ''} {fechaDesde && fechaHasta ? `al ${fechaHasta}` : ''}
                                 </Text>
 
-                                {Consulta.map((pelicula, index) => (
-                                    <View key={pelicula.COD_CONTENT}>
-                                        <Text style={styles.movieTitle}>{`${index + 1}.- ${pelicula.TITLE}`}</Text>
-                                    </View>
-                                ))}
-                                <View style={{ marginTop: '20px' }}>
-                                    <Text style={{ fontSize: '18px', fontWeight: '500', color: 'red' }}>{`Total: ${total}`}</Text>
-                                </View>
-                                <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
-                                    `${pageNumber} / ${totalPages}`
-                                )} fixed />
+                                {Consulta.length > 0 ? (
+                                    <>
+                                        {Consulta.map((pelicula, index) => (
+                                            <View key={pelicula.COD_CONTENT}>
+                                                <Text style={styles.movieTitle}>{`${index + 1}.- ${pelicula.TITLE}`}</Text>
+                                            </View>
+                                        ))}
+                                        <View style={{ marginTop: '20px' }}>
+                                            <Text style={{ fontSize: '18px', fontWeight: '500', color: 'red' }}>{`Total: ${total}`}</Text>
+                                        </View>
+                                        <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
+                                            `${pageNumber} / ${totalPages}`
+                                        )} fixed />
+                                    </>
+                                ) : (
+                                    <Text style={styles.noContentText}>¡No hay contenido de <Text style={styles.spam}>{label}</Text> con el filtro de búsqueda definido!</Text>
+                                )}
+
                             </Page>
                         </Document>
                     );
@@ -133,31 +137,37 @@ export default function AddMovieEs() {
                 });
             } // si esta lleno Tipo, fecha_inicio y fecha_fin se ejecuta la consulta de tipo y fecha
             else if (datos.tipo && datos.fechaDesde && datos.fechaHasta) {
-                
+
                 const resultado = await clienteAxios.get(`/reporte/date/${datos.tipo}/${datos.fechaDesde}/${datos.fechaHasta}`, config).then((response) => {
                     const Consulta = response.data;
                     const total = Consulta.length;
-                    console.log(Consulta);
 
                     // Generar el documento PDF con los datos de la consulta
                     const MyDocument = () => (
                         <Document>
-                            <Page style={styles.page}>
+                            <Page size={A4} style={styles.page}>
                                 <Text style={styles.title}>
                                     Reporte de <Text style={styles.spam}>{label}</Text> {fechaDesde ? `del ${fechaDesde}` : ''} {fechaDesde && fechaHasta ? `al ${fechaHasta}` : ''}
                                 </Text>
 
-                                {Consulta.map((pelicula, index) => (
-                                    <View key={pelicula.COD_CONTENT}>
-                                        <Text style={styles.movieTitle}>{`${index + 1}.- ${pelicula.TITLE}`}</Text>
-                                    </View>
-                                ))}
-                                <View style={{ marginTop: '20px' }}>
-                                    <Text style={{ fontSize: '18px', fontWeight: '500', color: 'red' }}>{`Total: ${total}`}</Text>
-                                </View>
-                                <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
-                                    `${pageNumber} / ${totalPages}`
-                                )} fixed />
+                                {Consulta.length > 0 ? (
+                                    <>
+                                        {Consulta.map((pelicula, index) => (
+                                            <View key={pelicula.COD_CONTENT}>
+                                                <Text style={styles.movieTitle}>{`${index + 1}.- ${pelicula.TITLE}`}</Text>
+                                            </View>
+                                        ))}
+                                        <View style={{ marginTop: '20px' }}>
+                                            <Text style={{ fontSize: '18px', fontWeight: '500', color: 'red' }}>{`Total: ${total}`}</Text>
+                                        </View>
+                                        <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
+                                            `${pageNumber} / ${totalPages}`
+                                        )} fixed />
+                                    </>
+                                ) : (
+                                    <Text style={styles.noContentText}>¡No hay contenido de <Text style={styles.spam}>{label}</Text> con el filtro de búsqueda definido!</Text>
+                                )}
+
                             </Page>
                         </Document>
                     );
@@ -166,10 +176,22 @@ export default function AddMovieEs() {
                     const pdfDocument = <MyDocument />;
                     setPdfDocument(pdfDocument);
                     setShowPdf(true);
-
-
                 });
-            } 
+            }
+            if (correo) {
+                const pdfBlob = new Blob([pdfDocument], { type: 'application/pdf' });
+                const formData = new FormData();
+                formData.append('correoDestino', correo);
+                formData.append('pdfDocumento', pdfBlob, 'documento.pdf');
+
+                const resultado = clienteAxios.post('/reporte/send', formData, config)
+                    .then((response) => {
+                        console.log(response);
+                    });
+            } else {
+                console.log('el archivo PDF no esta listo para enviar');
+            }
+
         } catch (error) {
             console.log(error);
         }

@@ -145,7 +145,7 @@ export default function AddMovieEs() {
                     // Generar el documento PDF con los datos de la consulta
                     const MyDocument = () => (
                         <Document>
-                            <Page size={A4} style={styles.page}>
+                            <Page style={styles.page}>
                                 <Text style={styles.title}>
                                     Reporte de <Text style={styles.spam}>{label}</Text> {fechaDesde ? `del ${fechaDesde}` : ''} {fechaDesde && fechaHasta ? `al ${fechaHasta}` : ''}
                                 </Text>

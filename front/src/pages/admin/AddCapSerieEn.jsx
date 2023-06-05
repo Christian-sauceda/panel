@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
 import ReactPlayer from 'react-player'
+import Select from 'react-select';
 // components
 import Alerta from "../../components/Alerts/Alerts";
 import clienteAxios from "../../config/axios";
@@ -280,21 +281,17 @@ export default function AddCapSerieEs() {
                                                         >
                                                             Serie:
                                                         </label>
-                                                        <select
+                                                        <Select
                                                             name="serie"
                                                             id="serie"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            value={COD_CONTENT}
-                                                            onChange={(e) => setCOD_CONTENT(e.target.value)}
-                                                        >
-                                                            <option value="">Seleccione una Serie</option>
-                                                            {selectSerieen.map((s) => (
-                                                                <option key={s.COD_CONTENT} value={s.COD_CONTENT}>{s.TITLE_LATIN}</option>
-                                                            ))}
-                                                        </select>
+                                                            value={{ value: COD_CONTENT, label: idserie }} // Asignar el valor seleccionado a la prop value
+                                                            onChange={(selectedOption) => setCOD_CONTENT(selectedOption.value)}
+                                                            options={selectSerieen.map((s) => ({ value: s.COD_CONTENT, label: s.TITLE_LATIN }))}
+                                                        />
                                                     </div>
                                                 </div>
-                                                <div className="w-full lg:w-6/12 px-4">
+                                                <div className="w-full lg:w-6/12 px-4 pt-3 pl-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
                                                             htmlFor="temp"

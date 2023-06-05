@@ -301,10 +301,6 @@ export default function AddCapSerieEs() {
                                                             onChange={(selectedOption) => setCOD_CONTENT(selectedOption.value)}
                                                             options={selectSeriees.map((s) => ({ value: s.COD_CONTENT, label: s.TITLE_LATIN }))}
                                                         />
-
-
-
-
                                                     </div>
                                                 </div>
                                                 <div className="pt-8 pl-4">

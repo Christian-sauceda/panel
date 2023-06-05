@@ -1,5 +1,5 @@
 import BanneMovieAdult from '../../partials/dashboard/BannerMovieAdult.jsx';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../../components/Cards/card.css";
 import useAuth from '../../hooks/useAuth';
 import ReactPlayer from 'react-player'
@@ -7,33 +7,26 @@ import ReactPlayer from 'react-player'
 import Alerta from "../../components/Alerts/Alerts";
 import axios from 'axios';
 import clienteAxios from "../../config/axios";
-
 export default function AddMovieAdult() {
     /* ------------------------------------------------- */
     const [cateinfo, setCateInfo] = useState({
         categories: [],
         response: [],
     });
-
     const handleChange = (e) => {
         const { value, checked } = e.target;
         const { categories } = cateinfo;
-
         const newCategories = checked ? [...categories, value] : categories.filter(e => e !== value);
         setCateInfo(prevState => ({
             categories: newCategories,
             response: newCategories,
         }));
     };
-
-
     /* ------------------------------------------------- */
-
     const [selectcalidad, setSelectcalidad] = useState([]);
     const [selectaudio, setSelectaudio] = useState([]);
     const [selectformato, setSelectformato] = useState([]);
     const [selectcategoria, setSelectcategoria] = useState([]);
-
     const mostrarDatos = async () => {
         try {
             const token = localStorage.getItem("token")
@@ -47,22 +40,18 @@ export default function AddMovieAdult() {
                 const sc = response.data;
                 setSelectcalidad(sc)
             })
-
             const resultadosf = await clienteAxios.get("/catformatvideo", config).then((response) => {
                 const sf = response.data;
                 setSelectformato(sf)
             })
-
             const resultadosa = await clienteAxios.get("/cataudio", config).then((response) => {
                 const sa = response.data;
                 setSelectaudio(sa)
             })
-
             const resultadoscate = await clienteAxios.get(`/catcategory/type/${import.meta.env.VITE_ID_MOVIES_AD}`, config).then((response) => {
                 const scate = response.data;
                 setSelectcategoria(scate)
             })
-
         } catch (error) {
             console.log(error);
         }
@@ -70,7 +59,6 @@ export default function AddMovieAdult() {
     useEffect(() => {
         mostrarDatos();
     }, [])
-
     const { auth } = useAuth()
     const [COD_CONTENIDO, setCOD_CONTENIDO] = useState(`${import.meta.env.VITE_ID_MOVIES_AD}`);
     const [CODAUDIO, setCODAUDIO] = useState("");
@@ -86,7 +74,7 @@ export default function AddMovieAdult() {
     const [URL, setURL] = useState("");
     const [SYNOPSIS, setSYNOPSIS] = useState("");
     const [alerta, setAlerta] = useState({});
-
+    const playerRef = useRef(null);
     const llenarDatoCategoria = () => {
         (cateinfo.response.length > 0) ?
             setCODCATEGORY(`${cateinfo.response}`) :
@@ -95,11 +83,10 @@ export default function AddMovieAdult() {
     useEffect(() => {
         llenarDatoCategoria();
     }, [cateinfo.response])
-
     const handleSubmit = async e => {
         e.preventDefault();
         //validar formulario
-        if ([ CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, POSTER, YEAR, DURATION, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO ].includes("")) {
+        if ([CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, POSTER, YEAR, DURATION, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO].includes("")) {
             setAlerta({
                 msg: "No ha Seleccionado los Generos",
                 error: true
@@ -138,31 +125,35 @@ export default function AddMovieAdult() {
             })
         }
     }
-
     const handleInputChange = (event) => {
         let value = event.target.value;
         value = value.replace(/\./g, ' '); // borra los puntos
         value = value.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' '); // convierte la primera letra de cada palabra en mayúscula
         setTITLE(value);
     };
-    
     const { msg } = alerta;
+    const handleURLBlur = () => {
+        setDURATION("");
+        if (playerRef.current) {
+            const duration = playerRef.current.getDuration();
+            const videoDurationInMinutes = Math.floor(duration / 60);
+            setDURATION(videoDurationInMinutes.toString());
+        }
+    };
     return (
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                     <BanneMovieAdult />
                     <div className="sm:flex sm:justify-between sm:items-center mb-8">
-                    <form
+                        <form
                             onSubmit={handleSubmit}
                         >
                             <div className="flex flex-wrap ">
                                 <div className="w-full lg:w-8/12 px-4 pt-2">
                                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
-
                                         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                                             <div className="flex flex-wrap">
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -184,7 +175,6 @@ export default function AddMovieAdult() {
                                                         />
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-6/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -207,7 +197,6 @@ export default function AddMovieAdult() {
                                                         />
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-6/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -229,7 +218,6 @@ export default function AddMovieAdult() {
                                                         />
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -251,7 +239,6 @@ export default function AddMovieAdult() {
                                                         ></textarea>
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -268,11 +255,11 @@ export default function AddMovieAdult() {
                                                             placeholder="Link del video"
                                                             value={URL}
                                                             onChange={(e) => setURL(e.target.value)}
+                                                            onBlur={handleURLBlur}
                                                             required
                                                         />
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-4/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -296,7 +283,6 @@ export default function AddMovieAdult() {
                                                         </select>
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-4/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -320,7 +306,6 @@ export default function AddMovieAdult() {
                                                         </select>
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-4/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -339,15 +324,13 @@ export default function AddMovieAdult() {
                                                         >
                                                             <option value="">Seleccione un formato</option>
                                                             {selectformato.map((item) => (
-                                                                <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO===1 }>{item.FORMATO}</option>
+                                                                <option key={item.COD_FORMATO} value={item.COD_FORMATO} defaultValue={item.COD_FORMATO === 1}>{item.FORMATO}</option>
                                                             ))}
                                                         </select>
                                                     </div>
                                                 </div>
-
                                             </div>
                                             <div className="flex flex-wrap">
-
                                                 {/* checkboxs de generos */}
                                                 <div className="relative w-full mb-3">
                                                     <label
@@ -374,7 +357,6 @@ export default function AddMovieAdult() {
                                                                     <label
                                                                         className="inline-flex items-start p-2"
                                                                         htmlFor={item.COD_CATEGORIA}
-                                                                        
                                                                     >
                                                                         <input
                                                                             className="bg-sky-800 w-7 h-7 mr-2"
@@ -403,7 +385,6 @@ export default function AddMovieAdult() {
                                                     </div>
                                                     {/*  */}
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -416,7 +397,6 @@ export default function AddMovieAdult() {
                                                     alt="..."
                                                     src={`${BACK}`}
                                                     style={{ minHeight: "300px", maxHeight: "300px", background: "#f3f4f6" }}
-
                                                 />
                                                 <img
                                                     alt="..."
@@ -424,9 +404,7 @@ export default function AddMovieAdult() {
                                                     style={{ minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
                                                     className="eye absolute" />
                                             </div>
-
                                             <div className="text-center md:mt-10 mt-20">
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -446,7 +424,6 @@ export default function AddMovieAdult() {
                                                         />
                                                     </div>
                                                 </div>
-
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
                                                         <label
@@ -468,11 +445,18 @@ export default function AddMovieAdult() {
                                                 </div>
                                                 <div className="grid place-items-center pt-6 pb-6">
                                                     <ReactPlayer
+                                                        ref={playerRef}
                                                         playing={true}
                                                         url={`${URL}`}
                                                         controls={true}
-                                                        width="95%"
-                                                        height="95%"
+                                                        style={{
+                                                            maxWidth: '450px',
+                                                            maxHeight: '350px',
+                                                            width: '95%',
+                                                            height: '95%',
+                                                            minWidth: '450px',
+                                                            minHeight: '350px'
+                                                        }}
                                                     />
                                                 </div>
                                             </div>
@@ -489,7 +473,7 @@ export default function AddMovieAdult() {
                                 />
                             </div>
                         </form>
-                        </div>
+                    </div>
                 </div>
             </main>
         </>

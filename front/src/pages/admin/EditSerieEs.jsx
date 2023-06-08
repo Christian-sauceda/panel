@@ -605,7 +605,14 @@ export default function AddSerieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Fondo de la Serie"
                                                             value={BACK}
-                                                            onChange={(e) => setBACK(e.target.value)}
+                                                            onChange={(e) => {
+                                                                const linkValue = e.target.value;
+                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
+                                                                    setBACK(linkValue);
+                                                                } else {
+                                                                    setBACK('');
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                 </div>
@@ -624,7 +631,14 @@ export default function AddSerieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Poster de la Serie"
                                                             value={POSTER}
-                                                            onChange={(e) => setPOSTER(e.target.value)}
+                                                            onChange={(e) => {
+                                                                const linkValue = e.target.value;
+                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
+                                                                    setPOSTER(linkValue);
+                                                                } else {
+                                                                    setPOSTER('');
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                 </div>

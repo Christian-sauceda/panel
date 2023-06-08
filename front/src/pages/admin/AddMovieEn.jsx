@@ -238,8 +238,9 @@ export default function AddMovieEn() {
                                                             id="title"
                                                             name="title"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Título de la Película"
+                                                            placeholder="Ej. El Padrino"
                                                             value={TITLE}
+                                                            maxLength={150}
                                                             autoComplete="off"
                                                             onChange={(e) => setTITLE(e.target.value)}
                                                         />
@@ -272,9 +273,10 @@ export default function AddMovieEn() {
                                                         <input
                                                             name="year"
                                                             id="year"
-                                                            placeholder="Año de la Película"
+                                                            placeholder="Ej. 1972"
                                                             min={1970}
                                                             max={2030}
+                                                            maxLength={4}
                                                             type="number"
                                                             autoComplete="off"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -295,9 +297,10 @@ export default function AddMovieEn() {
                                                             name="duration"
                                                             id="duration"
                                                             type="text"
-                                                            placeholder="Duración en minutos"
+                                                            placeholder="Ej. 175"
                                                             min={10}
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                            maxLength={3}
                                                             value={DURATION}
                                                             onChange={(e) => setDURATION(e.target.value)}
                                                         />
@@ -315,8 +318,9 @@ export default function AddMovieEn() {
                                                             name="clasificacion"
                                                             id="clasificacion"
                                                             type="text"
-                                                            placeholder="Clasificacion de la Película"
+                                                            placeholder="Ej. R"
                                                             min={10}
+                                                            maxLength={3}
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={CLASIF}
                                                             onChange={(e) => setCLASIF(e.target.value)}
@@ -335,10 +339,11 @@ export default function AddMovieEn() {
                                                             name="calificacion"
                                                             id="calificacion"
                                                             type="text"
-                                                            placeholder="Calificacion de la Película"
+                                                            placeholder="Ej. 8"
                                                             min={10}
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             value={CALIF}
+                                                            maxLength={6}
                                                             onChange={(e) => setCALIF(e.target.value)}
                                                         />
                                                     </div>
@@ -356,8 +361,9 @@ export default function AddMovieEn() {
                                                             id="director"
                                                             name="director"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Director de la Película"
+                                                            placeholder="Ej. Steven Spielberg"
                                                             value={DIRECTOR}
+                                                            maxLength={255}
                                                             onChange={(e) => setDIRECTOR(e.target.value)}
                                                         />
                                                     </div>
@@ -375,9 +381,10 @@ export default function AddMovieEn() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             name="reparto"
                                                             id="reparto"
-                                                            placeholder="Reparto de la Película"
+                                                            placeholder="Ej. Marlon Brando, Al Pacino, James Caan"
                                                             rows="4"
                                                             value={CAST}
+                                                            maxLength={500}
                                                             onChange={(e) => setCAST(e.target.value)}
                                                         ></textarea>
                                                     </div>
@@ -395,8 +402,9 @@ export default function AddMovieEn() {
                                                             id="pais"
                                                             name="pais"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Pais donde filmo la Película"
+                                                            placeholder="Ej. Estados Unidos"
                                                             value={COUNTRY}
+                                                            maxLength={55}
                                                             onChange={(e) => setCOUNTRY(e.target.value)}
                                                         />
                                                     </div>
@@ -414,9 +422,10 @@ export default function AddMovieEn() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             name="sinopsis"
                                                             id="sinopsis"
-                                                            placeholder="Sinopsis de la Película"
+                                                            placeholder="Ej. Don Vito Corleone es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York."
                                                             rows="4"
                                                             value={SYNOPSIS}
+                                                            maxLength={1000}
                                                             onChange={(e) => setSYNOPSIS(e.target.value)}
                                                         ></textarea>
                                                     </div>
@@ -434,9 +443,17 @@ export default function AddMovieEn() {
                                                             id="link"
                                                             name="link"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Link del video"
+                                                            maxLength={255}
+                                                            placeholder="Ej. https://www.youtube.com/watch?v=5DO-nDW43Ik"
                                                             value={URL}
-                                                            onChange={(e) => setURL(e.target.value)}
+                                                            onChange={(e) => {
+                                                                const linkValue = e.target.value;
+                                                                if (linkValue.endsWith('.mp4') || linkValue.endsWith('.mkv')) {
+                                                                    setURL(linkValue);
+                                                                } else {
+                                                                    setURL('');
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                 </div>
@@ -622,7 +639,15 @@ export default function AddMovieEn() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Fondo de la Serie"
                                                             value={BACK}
-                                                            onChange={(e) => setBACK(e.target.value)}
+                                                            maxLength={255}
+                                                            onChange={(e) => {
+                                                                const linkValue = e.target.value;
+                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
+                                                                    setBACK(linkValue);
+                                                                } else {
+                                                                    setBACK('');
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                 </div>
@@ -641,7 +666,15 @@ export default function AddMovieEn() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Poster de la Serie"
                                                             value={POSTER}
-                                                            onChange={(e) => setPOSTER(e.target.value)}
+                                                            maxLength={255}
+                                                            onChange={(e) => {
+                                                                const linkValue = e.target.value;
+                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
+                                                                    setPOSTER(linkValue);
+                                                                } else {
+                                                                    setPOSTER('');
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                 </div>

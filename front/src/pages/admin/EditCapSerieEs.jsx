@@ -430,7 +430,14 @@ export default function AddCapSerieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Enlace del Capítulo"
                                                             value={URL}
-                                                            onChange={(e) => setURL(e.target.value)}
+                                                            onChange={(e) => {
+                                                                const linkValue = e.target.value;
+                                                                if (linkValue.endsWith('.mp4') || linkValue.endsWith('.mkv')) {
+                                                                    setURL(linkValue);
+                                                                } else {
+                                                                    setURL('');
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                 </div>
@@ -494,7 +501,14 @@ export default function AddCapSerieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Fondo de la Serie"
                                                             value={BACK}
-                                                            onChange={(e) => setBACK(e.target.value)}
+                                                            onChange={(e) => {
+                                                                const linkValue = e.target.value;
+                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
+                                                                    setBACK(linkValue);
+                                                                } else {
+                                                                    setBACK('');
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                 </div>
@@ -513,7 +527,14 @@ export default function AddCapSerieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Poster de la Serie"
                                                             value={POSTER}
-                                                            onChange={(e) => setPOSTER(e.target.value)}
+                                                            onChange={(e) => {
+                                                                const linkValue = e.target.value;
+                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
+                                                                    setPOSTER(linkValue);
+                                                                } else {
+                                                                    setPOSTER('');
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                 </div>

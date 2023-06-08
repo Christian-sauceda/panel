@@ -151,7 +151,14 @@ export default function AddSerieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Enlace del Canal"
                                                             value={URL}
-                                                            onChange={e => setURL(e.target.value)}
+                                                            onChange={(e) => {
+                                                                const linkValue = e.target.value;
+                                                                if (linkValue.endsWith('.mp4') || linkValue.endsWith('.mkv')) {
+                                                                    setURL(linkValue);
+                                                                } else {
+                                                                    setURL('');
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                 </div>
@@ -275,7 +282,14 @@ export default function AddSerieEs() {
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                             placeholder="Poster del Canal"
                                                             value={POSTER}
-                                                            onChange={(e) => setPOSTER(e.target.value)}
+                                                            onChange={(e) => {
+                                                                const linkValue = e.target.value;
+                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
+                                                                    setPOSTER(linkValue);
+                                                                } else {
+                                                                    setPOSTER('');
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                 </div>

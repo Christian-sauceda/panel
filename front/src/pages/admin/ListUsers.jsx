@@ -5,9 +5,9 @@ import MUIDataTable from "mui-datatables";
 // components
 import clienteAxios from "../../config/axios";
 
-//import BannerListSerieEs from "../../partials/dashboard/BannerListSerieEs";
+import BannerListUser from "../../partials/dashboard/BannerUser.jsx";
 
-const AddCapSerieAdult = () => {
+const ListUser = () => {
 
     const rotate360 = keyframes`
     from {
@@ -164,7 +164,7 @@ const AddCapSerieAdult = () => {
         <>
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    {/* <BannerListSerieEs /> */}
+                    <BannerListUser /> 
 
                     <MUIDataTable
                         data={peliculas}
@@ -215,6 +215,6 @@ const AddCapSerieAdult = () => {
         </>
     );
 }
-export default AddCapSerieAdult;
+export default ListUser;
 
 

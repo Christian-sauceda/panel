@@ -17,7 +17,7 @@ const emailRegistro = async (datos) => {
     const { EMAIL_USER, USER_NAME, tokenunico } = datos;
     // Enviar Email
     const info = await transporter.sendMail({
-        from: process.env.EMAIL_FROM,
+        from: "TopMedia+ - Confirmación de registro <" + process.env.EMAIL_FROM + ">",
         to: EMAIL_USER,
         subject: "Confirmación de registro",
         text: `Comprueba tu cuenta en TM+`,
@@ -101,7 +101,7 @@ const emailRegistro = async (datos) => {
                                   <b><a href="${process.env.FRONTEND}/confirm/${tokenunico}">Comprobar cuenta</a></b></p>
                                   <br/>
                                   <br/>
-                                  <b><p>Si tu no solicitaste una cuenta, puedes ignorar este mensaje</p></b>
+                                  <b><p>Si tú no solicitaste una cuenta, puedes ignorar este mensaje</p></b>
                                   </td>
                                   <br/>
                                   <br/>

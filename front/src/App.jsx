@@ -6,6 +6,7 @@ import Login from './pages/Auth/Login'
 import Registrar from './pages/Auth/Registrar'
 import OlvidePassword from './pages/Auth/OlvidePassword'
 import ConfirmarCuenta from './pages/Auth/ConfirmarCuenta'
+import NuevoPassword from './pages/Auth/NuevoPassword'
 
 import Inicio from './pages/admin/inicio.jsx'
 import NotFound from './pages/admin/NotFound'
@@ -90,6 +91,7 @@ function App() {
                           <Route path="/" element={<AuthLayout />}>
                             <Route index element={<Login />} />
                             <Route path="olvide-password" element={<OlvidePassword />} />
+                            <Route path="olvide-password/:token" element={<NuevoPassword />} />
                             <Route path="confirm/:id" element={<ConfirmarCuenta />} />
                           </Route>
 

@@ -4,7 +4,8 @@ const mysqlconnection = require("../../database");
 const jwt = require("jsonwebtoken");
 import generarId from "../../helpers/generarId";
 import emailRegistro from "../../helpers/emailRegistro.js";
-
+import emailOlvidePassword from "../../helpers/emailOlvidePassword.js";
+import e from "express";
 
 // get all users
 export const getuser = async (req, res) => {
@@ -165,3 +166,124 @@ export const perfil = (req, res) => {
     res.json(user);
 };
 
+export const olvidePassword = async (req, res) => {
+    const { EMAIL_USER } = req.body;
+    const existeUsuario = await mysqlconnection.query(`SELECT USER_NAME,EMAIL_USER FROM SYS_USER WHERE EMAIL_USER = '${EMAIL_USER}'`, (err, rows) => {
+        // si hay error
+        if (err) {
+            return res.status(400).json({
+                message: "Error al Consultar el Usuario",
+                err
+            });
+        } else {
+            // si no existe el usuario
+            if (rows.length === 0) {
+                return res.status(400).json({
+                    message: "El Usuario no Existe"
+                });
+            } else {
+                try {
+                    // si existe el usuario
+                    const tokenunico = generarId();
+                    const { USER_NAME } = rows[0];
+                    mysqlconnection.query(`UPDATE SYS_USER SET TOKEN = '${tokenunico}' WHERE EMAIL_USER = '${EMAIL_USER}'`, (err, rows) => {
+                        if (err) {
+                            return res.status(500).json({
+                                message: "Error al Actualizar el Usuario",
+                                err
+                            });
+                        } else {
+                            emailOlvidePassword({
+                                EMAIL_USER,
+                                USER_NAME,
+                                tokenunico
+                            });
+                            res.status(200).json({
+                                message: "Hemos Enviado un Correo con las Instrucciones"
+                            });
+                        }
+                    });
+                } catch (error) {
+                    return res.status(500).json({
+                        message: "Error al Enviar el Correo",
+                        error
+                    });
+                }
+            }
+        }
+    });
+};
+
+export const comprobarToken = async (req, res) => {
+    const { token } = req.params;
+    const tokenValido = await mysqlconnection.query(`SELECT EMAIL_USER FROM SYS_USER WHERE TOKEN = '${token}'`, (err, rows) => {
+        if (err) {
+            return res.status(500).json({
+                message: "Error al Consultar el Usuario",
+                err
+            });
+        } else {
+            if (rows.length > 0) {
+                return res.status(200).json({
+                    message: "Token Valido"
+                });
+            } else {
+                return res.status(400).json({
+                    message: "El Token no es Válido"
+                });
+            }
+        }
+    });
+};
+
+export const nuevoPassword = async (req, res) => {
+    const { token } = req.params;
+    const { password } = req.body;
+    const usuario = await mysqlconnection.query(`SELECT EMAIL_USER FROM SYS_USER WHERE TOKEN = '${token}'`, (err, rows) => {
+        if (err) {
+            return res.status(500).json({
+                message: "Error al Consultar el Usuario",
+                err
+            });
+        }
+        if (rows.length > 0) {
+            try {
+                // Encriptar la nueva contraseña
+                bcryptjs.hash(password, 10, (err, hash) => {
+                    if (err) {
+                        res.status(500).json({
+                            message: "Error al encriptar la contraseña",
+                            err
+                        });
+                    } else {
+                        // Actualizar la contraseña y eliminar el token
+                        mysqlconnection.query(
+                            `UPDATE SYS_USER SET PASSWORD = '${hash}', TOKEN = '' WHERE TOKEN = '${token}'`,
+                            (err, result) => {
+                                if (err) {
+                                    res.status(500).json({
+                                        message: "Error al actualizar la contraseña",
+                                        err
+                                    });
+                                } else {
+                                    res.status(200).json({
+                                        message: "Contraseña modificado correctamente"
+                                    });
+                                }
+                            }
+                        );
+                    }
+                });
+            } catch (error) {
+                return res.status(500).json({
+                    message: "Error al Encriptar la Contraseña",
+                    error
+                });
+            }
+        } else {
+            return res.status(400).json({
+                message: "El Token no es Válido"
+            });
+        }
+    });
+};

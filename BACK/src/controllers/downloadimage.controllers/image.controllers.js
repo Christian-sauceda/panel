@@ -1,7 +1,10 @@
-
 import { Request, Response } from 'express';
 import path from 'path';
-const fs = require('fs');
+import fs from 'fs';
+import { promisify } from 'util';
+
+const fsExists = promisify(fs.exists);
+const fsMkdir = promisify(fs.mkdir);
 
 const imageController = {
     async getImage(req, res) {
@@ -9,26 +12,20 @@ const imageController = {
         const type = req.params.type;
         const image = req.params.image;
         const pathImage = path.resolve(__dirname, `../../../images/imgs/${content}/${type}/${image}`);
+        
+        try {
+            const pathExists = await fsExists(pathImage);
 
-        if (!fs.existsSync(pathImage)) {
-            try {
-                fs.mkdirSync(path.dirname(pathImage), { recursive: true });
-            } catch (error) {
-                console.error('Error creating directory:', error);
-                // Puedes manejar el error de creación de directorio de alguna manera específica
-                // por ejemplo, enviar una respuesta de error al cliente
-                return res.status(500).send('Internal Server Error');
+            if (!pathExists) {
+                await fsMkdir(path.dirname(pathImage), { recursive: true });
             }
-        }
-
-        if (fs.existsSync(pathImage)) {
+            
             res.sendFile(pathImage);
-        } else {
-            const pathNoImage = path.resolve(__dirname, `../../../images/no-image.png`);
-            res.sendFile(pathNoImage);
+        } catch (error) {
+            console.error('Error creating directory:', error);
+            return res.status(500).send('Internal Server Error');
         }
     }
 };
 
 export default imageController;
-

@@ -579,13 +579,13 @@ export default function AddSerieEs() {
                                                 <img
                                                     alt="..."
                                                     src={`${BACK}`}
-                                                    style={{ minHeight: "300px", maxHeight: "300px", background: "#f3f4f6" }}
+                                                    style={{marginLeft:"10px", minHeight: "285px", maxHeight: "285px", minWidth:"410px", maxWidth:"410px",  background: "#f3f4f6" }}
 
                                                 />
                                                 <img
                                                     alt="..."
                                                     src={`${POSTER}`}
-                                                    style={{ minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
+                                                    style={{marginLeft:"10px", minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
                                                     className="eye absolute" />
                                             </div>
 
@@ -607,10 +607,12 @@ export default function AddSerieEs() {
                                                             value={BACK}
                                                             onChange={(e) => {
                                                                 const linkValue = e.target.value;
-                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
+                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg') || linkValue.endsWith('.png')) {
                                                                     setBACK(linkValue);
+                                                                } else if (linkValue.includes('https://image.tmdb.org/t/p/w500null')) {
+                                                                    setBACK(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/serieses/back/no-image.jpg`);
                                                                 } else {
-                                                                    setBACK('');
+                                                                    setBACK(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/serieses/back/no-image.jpg`);
                                                                 }
                                                             }}
                                                         />
@@ -635,8 +637,10 @@ export default function AddSerieEs() {
                                                                 const linkValue = e.target.value;
                                                                 if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
                                                                     setPOSTER(linkValue);
+                                                                }else if (linkValue.includes('https://image.tmdb.org/t/p/w500null')) {
+                                                                    setPOSTER(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/serieses/poster/no-image.jpg`);
                                                                 } else {
-                                                                    setPOSTER('');
+                                                                    setPOSTER(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/serieses/poster/no-image.jpg`);
                                                                 }
                                                             }}
                                                         />

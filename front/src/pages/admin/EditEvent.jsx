@@ -116,9 +116,9 @@ export default function AddSerieEs() {
                             onSubmit={handleSubmit}
                         >
                             <div className="flex flex-wrap">
-                                <div className="w-full lg:w-8/12 px-4 pt-24">
+                                <div className="w-full lg:w-8/12 px-4 pt-4">
                                     <div className="relative min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
-                                        <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+                                        <div className="flex-auto px-4 lg:px-10 py-10 pt-8">
                                             <div className="flex flex-wrap pt-4">
                                                 <div className="w-full lg:w-12/12 px-4">
                                                     <div className="relative w-full mb-3">
@@ -233,14 +233,15 @@ export default function AddSerieEs() {
                                             </div>
                                         </div>
                                         {msg && <Alerta alerta={alerta} />}
-                                        <div className="">
+                                        
+                                    </div>
+                                    <div className="pb-5 m-5">
                                             <input type="submit"
                                                 value="añadir"
                                                 className="cla"
                                                 to="#"
                                             />
                                         </div>
-                                    </div>
                                 </div>
                                 <div className="w-full lg:w-4/12 px-4">
                                     <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
@@ -249,12 +250,12 @@ export default function AddSerieEs() {
                                                 <img
                                                     alt="..."
                                                     src={`${''}`}
-                                                    style={{ minHeight: "230px", maxHeight: "230px", background: "#f3f4f6" }}
+                                                    style={{marginLeft:"10px", minHeight: "285px", maxHeight: "285px", minWidth:"410px", maxWidth:"410px",  background: "#f3f4f6" }}
                                                 />
                                                 <img
                                                     alt="..."
                                                     src={`${POSTER}`}
-                                                    style={{ minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
+                                                    style={{marginLeft:"10px", minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
                                                     className="eye absolute" />
                                             </div>
                                             <div className="text-center md:mt-10 ">
@@ -276,8 +277,10 @@ export default function AddSerieEs() {
                                                                 const linkValue = e.target.value;
                                                                 if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
                                                                     setPOSTER(linkValue);
+                                                                }else if (linkValue.includes('https://image.tmdb.org/t/p/w500null')) {
+                                                                    setPOSTER(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/serieses/poster/no-image.jpg`);
                                                                 } else {
-                                                                    setPOSTER('');
+                                                                    setPOSTER(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/serieses/poster/no-image.jpg`);
                                                                 }
                                                             }}
                                                         />

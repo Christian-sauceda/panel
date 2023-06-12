@@ -196,10 +196,10 @@ export default function AddMovieAdult() {
                             onSubmit={handleSubmit}
                         >
                             <div className="flex flex-wrap pt-0">
-                                <div className="w-full lg:w-8/12 px-4 pt-28">
+                                <div className="w-full lg:w-8/12 px-4 pt-0">
                                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
 
-                                        <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+                                        <div className="flex-auto px-4 lg:px-10 py-10 pt-8">
                                             <div className="flex flex-wrap">
 
                                                 <div className="w-full lg:w-12/12 px-4">
@@ -442,20 +442,20 @@ export default function AddMovieAdult() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="w-full lg:w-4/12 px-4">
+                                <div className="w-full lg:w-4/12 px-2 pt-0">
                                     <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
                                         <div>
                                             <div className="relative left0 top0">
                                                 <img
                                                     alt="..."
                                                     src={`${BACK}`}
-                                                    style={{ minHeight: "300px", maxHeight: "300px", background: "#f3f4f6" }}
+                                                    style={{marginLeft:"10px", minHeight: "285px", maxHeight: "285px", minWidth:"410px", maxWidth:"410px",  background: "#f3f4f6" }}
 
                                                 />
                                                 <img
                                                     alt="..."
                                                     src={`${POSTER}`}
-                                                    style={{ minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
+                                                    style={{marginLeft:"10px", minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
                                                     className="eye absolute" />
                                             </div>
 
@@ -477,12 +477,12 @@ export default function AddMovieAdult() {
                                                             value={BACK}
                                                             onChange={(e) => {
                                                                 const linkValue = e.target.value;
-                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
+                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg') || linkValue.endsWith('.png')) {
                                                                     setBACK(linkValue);
                                                                     setPOSTER(linkValue);
                                                                 } else {
-                                                                    setBACK('');
-                                                                    setPOSTER('');
+                                                                    setBACK(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/movieses/back/no-image.jpg`);
+                                                                    setPOSTER(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/movieses/poster/no-image.jpg`);
                                                                 }
                                                             }}
                                                         />
@@ -505,12 +505,12 @@ export default function AddMovieAdult() {
                                                             value={POSTER}
                                                             onChange={(e) => {
                                                                 const linkValue = e.target.value;
-                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
+                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg') || linkValue.endsWith('.png')) {
                                                                     setPOSTER(linkValue);
                                                                     setBACK(linkValue)
                                                                 } else {
-                                                                    setPOSTER('');
-                                                                    setBACK('');
+                                                                    setBACK(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/movieses/back/no-image.jpg`);
+                                                                    setPOSTER(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/movieses/poster/no-image.jpg`);
                                                                 }
                                                             }}
                                                         />

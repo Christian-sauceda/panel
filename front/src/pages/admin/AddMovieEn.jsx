@@ -613,13 +613,13 @@ export default function AddMovieEn() {
                                                 <img
                                                     alt="..."
                                                     src={`${BACK}`}
-                                                    style={{ minHeight: "300px", maxHeight: "300px", background: "#f3f4f6" }}
+                                                    style={{marginLeft:"10px", minHeight: "285px", maxHeight: "285px", minWidth:"410px", maxWidth:"410px",  background: "#f3f4f6" }}
 
                                                 />
                                                 <img
                                                     alt="..."
                                                     src={`${POSTER}`}
-                                                    style={{ minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
+                                                    style={{marginLeft:"10px", minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
                                                     className="eye absolute" />
                                             </div>
 
@@ -637,15 +637,17 @@ export default function AddMovieEn() {
                                                             id="back"
                                                             name="back"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Fondo de la Serie"
+                                                            placeholder="Fondo de la Película"
                                                             value={BACK}
                                                             maxLength={255}
                                                             onChange={(e) => {
                                                                 const linkValue = e.target.value;
-                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
+                                                                if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg') || linkValue.endsWith('.png')) {
                                                                     setBACK(linkValue);
+                                                                } else if (linkValue.includes('https://image.tmdb.org/t/p/w500null')) {
+                                                                    setBACK(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/movieses/back/no-image.jpg`);
                                                                 } else {
-                                                                    setBACK('');
+                                                                    setBACK(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/movieses/back/no-image.jpg`);
                                                                 }
                                                             }}
                                                         />
@@ -664,15 +666,19 @@ export default function AddMovieEn() {
                                                             id="front"
                                                             name="front"
                                                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                                            placeholder="Poster de la Serie"
+                                                            placeholder="Poster de la Película"
                                                             value={POSTER}
                                                             maxLength={255}
                                                             onChange={(e) => {
                                                                 const linkValue = e.target.value;
                                                                 if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
                                                                     setPOSTER(linkValue);
+                                                                }else if (linkValue.includes('https://image.tmdb.org/t/p/w500null')) {
+                                                                    setPOSTER(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/moviesen/poster/no-image.jpg`);
                                                                 } else {
-                                                                    setPOSTER('');
+                                                                    //images/imgs/movieses/back/no-image.jpg
+                                                                    setPOSTER(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/moviesen/poster/no-image.jpg`);
+                                                                    
                                                                 }
                                                             }}
                                                         />
@@ -683,7 +689,7 @@ export default function AddMovieEn() {
                                                         playing={true}
                                                         url={`${URL}`}
                                                         controls={true}
-                                                        width="95%"
+                                                        width="100%"
                                                         height="95%"
                                                     />
                                                 </div>

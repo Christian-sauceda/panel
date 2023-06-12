@@ -60,7 +60,7 @@ export default function AddSerieEs() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        if ([ COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO, COD_USER, TITLE, POSTER, URL, COD_FORMAT_VIDEO ].includes('')) {
+        if ([COD_AUDIO, COD_CATEGORIA, COD_CONTENIDO, COD_USER, TITLE, POSTER, URL, COD_FORMAT_VIDEO].includes('')) {
             setAlerta({
                 msg: "Todos los campos son obligatorios",
                 error: true
@@ -103,17 +103,17 @@ export default function AddSerieEs() {
             <main>
                 <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                     <BannerEvent />
-                    
+
 
                     <div className="sm:flex sm:justify-between sm:items-center mb-8">
-                        
+
                         <form
                             onSubmit={handleSubmit}
                         >
                             <div className="flex flex-wrap">
-                                <div className="w-full lg:w-8/12 px-4 pt-10">
+                                <div className="w-full lg:w-8/12 px-4 pt-4">
                                     <div className="relative min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
-                                        <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+                                        <div className="flex-auto px-4 lg:px-10 py-10 pt-8">
                                             <div className="flex flex-wrap pt-4">
 
                                                 <div className="w-full lg:w-12/12 px-4">
@@ -207,7 +207,7 @@ export default function AddSerieEs() {
                                                             {selectformat.map(format => (
                                                                 <option key={format.COD_FORMATO} value={format.COD_FORMATO}>{format.FORMATO}</option>
                                                             ))}
-                                                            
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -232,7 +232,7 @@ export default function AddSerieEs() {
                                                             {selectaudio.map(format => (
                                                                 <option key={format.COD_AUDIO} value={format.COD_AUDIO}>{format.AUDIO}</option>
                                                             ))}
-                                                            
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -241,13 +241,13 @@ export default function AddSerieEs() {
                                         </div>
                                     </div>
                                     {msg && <Alerta alerta={alerta} />}
-                            <div className="">
-                                <input type="submit"
-                                    value="añadir"
-                                    className="cla"
-                                    to="#"
-                                />
-                            </div>
+                                    <div className="">
+                                        <input type="submit"
+                                            value="añadir"
+                                            className="cla"
+                                            to="#"
+                                        />
+                                    </div>
                                 </div>
                                 <div className="w-full lg:w-4/12 px-4">
                                     <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
@@ -256,13 +256,13 @@ export default function AddSerieEs() {
                                                 <img
                                                     alt="..."
                                                     src={`${''}`}
-                                                    style={{ minHeight: "230px", maxHeight: "230px", background: "#e5e7eb" }}
+                                                    style={{ marginLeft: "10px", minHeight: "285px", maxHeight: "285px", minWidth: "410px", maxWidth: "410px", background: "#f3f4f6" }}
 
                                                 />
                                                 <img
                                                     alt="..."
                                                     src={`${POSTER}`}
-                                                    style={{ minHeight: "200px", margin: 0, minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
+                                                    style={{ marginLeft: "10px", minHeight: "200px", minWidth: "130px", maxHeight: "200px", maxWidth: "130px", background: "#e5e7eb" }}
                                                     className="eye absolute" />
                                             </div>
 
@@ -286,8 +286,10 @@ export default function AddSerieEs() {
                                                                 const linkValue = e.target.value;
                                                                 if (linkValue.endsWith('.jpg') || linkValue.endsWith('.jpeg')) {
                                                                     setPOSTER(linkValue);
+                                                                } else if (linkValue.includes('https://image.tmdb.org/t/p/w500null')) {
+                                                                    setPOSTER(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/serieses/poster/no-image.jpg`);
                                                                 } else {
-                                                                    setPOSTER('');
+                                                                    setPOSTER(`${import.meta.env.VITE_BACKEND_URL}/images/imgs/serieses/poster/no-image.jpg`);
                                                                 }
                                                             }}
                                                         />
@@ -298,8 +300,8 @@ export default function AddSerieEs() {
                                                         playing={true}
                                                         url={`${URL}`}
                                                         controls={true}
-                                                        width="95%"
-                                                        height="95%"
+                                                        width="100%"
+                                                        height="98%"
                                                     />
                                                 </div>
                                             </div>
@@ -309,9 +311,9 @@ export default function AddSerieEs() {
                             </div>
                         </form>
                     </div>
-                    
+
                 </div>
-                
+
             </main>
         </>
     );

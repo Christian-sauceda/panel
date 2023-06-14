@@ -92,7 +92,7 @@ export default function AddMovieEs() {
     const [SYNOPSIS, setSYNOPSIS] = useState("");
     const [alerta, setAlerta] = useState({});
     const [idioma, setIdioma] = useState("es-MX");
-
+    const [TITLE_LATIN, setTITLE_LATIN] = useState("");
     const llenarDatoCategoria = () => {
         (cateinfo.response.length > 0) ?
             setCODCATEGORY(`${cateinfo.response}`) :
@@ -123,7 +123,7 @@ export default function AddMovieEs() {
                 }
             }
 
-            const datos = { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO }
+            const datos = { CODAUDIO, CODQUALITY, CODCATEGORY, CODUSER, TITLE, BACK, POSTER, YEAR, CLASIF, DURATION, COUNTRY, CALIF, DIRECTOR, CAST, ASKPIN, CODFORMATVIDEO, URL, SYNOPSIS, COD_CONTENIDO, TITLE_LATIN }
             await clienteAxios.post(`/mtmovie/es`, datos, config)
             setAlerta({
                 msg: 'Película en Español Agregada Correctamente',
@@ -169,11 +169,11 @@ export default function AddMovieEs() {
                         runtime: response.data.Runtime.slice(0, -3),
                         country: response.data.Country,
                     })
+                    setTITLE_LATIN(response.data.Title)
                 })
                 .catch(err => console.log(err));
         }
     }, [TITLEEN, idioma, YEAR]);
-
 
     useEffect(() => {
         if (expediente.id) {

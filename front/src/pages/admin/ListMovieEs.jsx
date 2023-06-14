@@ -64,8 +64,15 @@ const AddCapSerieEs = () => {
             }
         },
         {
+            name: 'TITLE_LATIN',
+            label: 'Titulo en Español',
+            options: {
+                filter: true,
+            },
+        },
+        {
             name: 'TITLE',
-            label: 'Titulo',
+            label: 'Titulo en Ingles',
             options: {
                 filter: true,
             },
@@ -78,8 +85,8 @@ const AddCapSerieEs = () => {
             },
         },
         {
-            name: 'CALIDAD',
-            label: 'Calidad',
+            name: 'YEAR',
+            label: 'Año',
             options: {
                 filter: true,
             },

@@ -83,7 +83,7 @@ const AddCapSerieAdult = () => {
         },
         {
             name: "BACK",
-            label: "Poster",
+            label: "Background",
             options: {
                 filter: false,
                 sort: false,

@@ -109,15 +109,15 @@ const AddCapSerieAdult = () => {
             },
         },
         {
-            name: 'CONTENIDO',
-            label: 'Contenido',
+            name: 'YEAR',
+            label: 'Año',
             options: {
                 filter: true,
             },
         },
         {
-            name: 'CLASIFICATION',
-            label: 'Clasificacion',
+            name: 'CONTENIDO',
+            label: 'Contenido',
             options: {
                 filter: true,
             },

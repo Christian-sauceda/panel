@@ -97,15 +97,15 @@ const AddCapSerieEn = () => {
             },
         },
         {
-            name: 'CONTENIDO',
-            label: 'Contenido',
+            name: 'YEAR',
+            label: 'Año',
             options: {
                 filter: true,
             },
         },
         {
-            name: 'CALIDAD',
-            label: 'Calidad',
+            name: 'CONTENIDO',
+            label: 'Contenido',
             options: {
                 filter: true,
             },
